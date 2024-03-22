@@ -24,6 +24,7 @@ public class StartPlugins extends JavaPlugin {
 
     @Override
     public void onDisable(){
+        Bukkit.getScheduler().cancelTasks(this);
         this.getLogger().info("XiaojiuPluginOnDisable");
 
     }

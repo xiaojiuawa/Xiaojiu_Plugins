@@ -23,11 +23,14 @@ public class WaitTimeToRestart {
                         throw new RuntimeException(e);
                     }
                     switch (RestartTime){
-                        case 600:
+                        case 3600:
                             MessageHelper.SendMessageAllPlayer(ChatColor.LIGHT_PURPLE+"服务器将在一个小时后重启");
                             break;
-                        case 300:
+                        case 1800:
                             MessageHelper.SendMessageAllPlayer(ChatColor.LIGHT_PURPLE+"服务器将在30分钟后重启");
+                            break;
+                        case 600:
+                            MessageHelper.SendMessageAllPlayer(ChatColor.LIGHT_PURPLE+"服务器将在10分钟后重启");
                             break;
                         case 60:
                             MessageHelper.SendMessageAllPlayer(ChatColor.LIGHT_PURPLE+"服务器将在1分钟后重启");

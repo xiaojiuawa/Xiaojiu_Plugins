@@ -1,0 +1,55 @@
+package Xiaojiu.CommandExecutor;
+
+import Xiaojiu.RestartServer.RestartHelper;
+import Xiaojiu.RestartServer.WaitTimeToRestart;
+import org.bukkit.ChatColor;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandExecutor;
+import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
+
+import static Xiaojiu.tools.RestartTools.ProcessingTime;
+import static Xiaojiu.tools.RestartTools.isNumber;
+
+public class RestartServerCommand implements CommandExecutor {
+
+
+    @Override
+    public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
+        if (!(commandSender instanceof Player)){
+            return true;
+        }
+        Player player = (Player) commandSender;
+        if(!player.hasPermission("xiaojiu.restartServer.use")){
+            player.sendMessage(ChatColor.DARK_RED +"错误:你没有使用此命令的权限");
+            return true;
+        }
+        if (strings.length==0){
+            player.sendMessage(ChatColor.DARK_RED +"错误:未输入重启时间");
+            return true;
+        }
+        if (strings[0].equalsIgnoreCase("now")||strings[0].equals("现在")){
+            if (!player.hasPermission("xiaojiu.restartServer.now")){
+                player.sendMessage(ChatColor.DARK_RED +"错误:你没有立刻重启的权限");
+            }else {
+                RestartHelper.Done();
+            }
+            return true;
+        }
+        if(isNumber(strings[0])){
+            int num = Integer.parseInt(strings[0]);
+            WaitTimeToRestart.ReLoadServer(num);
+            player.sendMessage(ChatColor.DARK_PURPLE +"计划重启任务创建成功");
+            return true;
+        } else if (strings.length==2) {
+            int num = ProcessingTime(strings[0],Integer.parseInt(strings[1]));
+            WaitTimeToRestart.ReLoadServer(num);
+            player.sendMessage(ChatColor.DARK_PURPLE +"计划重启任务创建成功");
+            return true;
+        }
+
+
+        return false;
+    }
+
+}

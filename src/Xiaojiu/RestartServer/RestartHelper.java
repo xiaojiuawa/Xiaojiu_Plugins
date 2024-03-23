@@ -9,6 +9,13 @@ import java.util.Iterator;
 
 
 public class RestartHelper {
+    public static boolean isRestart =false;
+    public static boolean Restart(int num){
+        if(isRestart) return false;
+        isRestart=true;
+        WaitTimeToRestart.ReLoadServer(num);
+        return true;
+    }
     public static void KickAllPlayers(Collection<? extends Player> list){
         Iterator<? extends Player> iterator = list.stream().iterator();
         while (iterator.hasNext()){

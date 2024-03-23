@@ -38,12 +38,18 @@ public class RestartServerCommand implements CommandExecutor {
         }
         if(isNumber(strings[0])){
             int num = Integer.parseInt(strings[0]);
-            WaitTimeToRestart.ReLoadServer(num);
+            if(!RestartHelper.Restart(num)){
+                player.sendMessage(ChatColor.DARK_RED+"错误:已有计划重启任务");
+                return true;
+            }
             player.sendMessage(ChatColor.DARK_PURPLE +"计划重启任务创建成功");
             return true;
         } else if (strings.length==2) {
             int num = ProcessingTime(strings[0],Integer.parseInt(strings[1]));
-            WaitTimeToRestart.ReLoadServer(num);
+            if(!RestartHelper.Restart(num)){
+                player.sendMessage(ChatColor.DARK_RED+"错误:已有计划重启任务");
+                return true;
+            }
             player.sendMessage(ChatColor.DARK_PURPLE +"计划重启任务创建成功");
             return true;
         }

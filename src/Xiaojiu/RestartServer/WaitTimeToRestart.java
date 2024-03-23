@@ -4,14 +4,16 @@ import Xiaojiu.StartPlugins;
 import Xiaojiu.tools.MessageHelper;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.scheduler.BukkitTask;
 
 import static java.lang.Thread.sleep;
 
 
 public class WaitTimeToRestart {
+    public static BukkitTask task;
     public static void ReLoadServer(int RestartTime){
         int Restart = RestartTime;
-        Bukkit.getScheduler().runTaskAsynchronously(StartPlugins.getInstance(), new Runnable() {
+        task= Bukkit.getScheduler().runTaskAsynchronously(StartPlugins.getInstance(), new Runnable() {
             @Override
             public void run() {
                 int RestartTime = Restart;

@@ -7,26 +7,33 @@ import org.bukkit.entity.Player;
 import java.util.Collection;
 import java.util.Iterator;
 
-
 public class RestartHelper {
     public static boolean isRestart =false;
     public static boolean Restart(int num){
         if(isRestart) return false;
         isRestart=true;
-        WaitTimeToRestart.ReLoadServer(num);
+//        WaitTimeToRestart.ReLoadServer(num);
+//        return true;
+        RestartServerUseTimer.Restart(num);
         return true;
     }
+//    public static boolean cancel(){
+//        if (WaitTimeToRestart.task==null||!isRestart){
+////            System.out.println((WaitTimeToRestart.task==null)+""+isRestart);
+//            return false;
+//        }
+//        isRestart=false;
+//        WaitTimeToRestart.task.cancel();
+////        WaitTimeToRestart.task=null;
+//        return true;
+//
+//    }
     public static boolean cancel(){
-        if (WaitTimeToRestart.task==null||isRestart){
-            return false;
-        }
-        if(WaitTimeToRestart.task.isCancelled()){
-            return false;
-        }
+        RestartServerUseTimer.cancel();
         isRestart=false;
-        WaitTimeToRestart.task.cancel();
         return true;
     }
+
     public static void KickAllPlayers(Collection<? extends Player> list){
         Iterator<? extends Player> iterator = list.stream().iterator();
         while (iterator.hasNext()){

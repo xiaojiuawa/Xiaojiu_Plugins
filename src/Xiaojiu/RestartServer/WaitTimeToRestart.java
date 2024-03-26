@@ -6,6 +6,8 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.scheduler.BukkitTask;
 
+import java.util.Timer;
+
 import static java.lang.Thread.sleep;
 
 
@@ -13,7 +15,8 @@ public class WaitTimeToRestart {
     public static BukkitTask task;
     public static void ReLoadServer(int RestartTime){
         int Restart = RestartTime;
-        task= Bukkit.getScheduler().runTaskAsynchronously(StartPlugins.getInstance(), new Runnable() {
+
+        task = Bukkit.getScheduler().runTaskAsynchronously(StartPlugins.getInstance(), new Runnable() {
             @Override
             public void run() {
                 int RestartTime = Restart;

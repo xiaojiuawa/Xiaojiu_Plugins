@@ -2,15 +2,16 @@ package Xiaojiu.tools;
 
 public class RestartTools {
     public static int ProcessingTime(String unit,int number){
+        int num = 0;
         switch (unit){
             case "d":
-                number*=24*60*60;
+                num=number*24*60*60;
                 break;
             case "h":
-                number*=60*60;
+                num=number*60*60;
                 break;
         }
-        return number;
+        return num;
     }
     public static boolean isNumber(String str){
         try {

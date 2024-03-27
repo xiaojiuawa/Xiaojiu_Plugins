@@ -1,7 +1,9 @@
 package Xiaojiu.CommandExecutor;
 
 import Xiaojiu.RestartServer.RestartHelper;
+import Xiaojiu.RestartServer.RestartServerUseTimer;
 import Xiaojiu.RestartServer.WaitTimeToRestart;
+import Xiaojiu.tools.MessageHelper;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -31,6 +33,7 @@ public class RestartServerCommand implements CommandExecutor {
         if(strings[0].equalsIgnoreCase("cancel")||strings[0].equalsIgnoreCase("取消")){
             if(RestartHelper.cancel()){
                 player.sendMessage(ChatColor.DARK_PURPLE+"计划重启任务取消成功");
+                MessageHelper.SendMessageAllPlayer(ChatColor.LIGHT_PURPLE+"服务器重启任务已取消");
                 return true;
             }else{
                 player.sendMessage(ChatColor.RED+"错误:计划重启任务取消失败,无计划重启任务");
@@ -44,6 +47,20 @@ public class RestartServerCommand implements CommandExecutor {
                 RestartHelper.Done();
             }
             return true;
+        }
+        if (strings[0].equalsIgnoreCase("reset") || strings[0].equalsIgnoreCase("重设")){
+
+            if (isNumber(strings[1])){
+                RestartHelper.cancel();
+                RestartServerUseTimer.Restart(Integer.parseInt(strings[1]));
+                player.sendMessage(ChatColor.LIGHT_PURPLE+"服务器重启时间重设成功");
+                MessageHelper.SendMessageAllPlayer(ChatColor.LIGHT_PURPLE+"服务器重启时间已被重新设置为"+strings[1]+"秒");
+                return true;
+            }else {
+                player.sendMessage(ChatColor.RED+"请输入正确的时间");
+                return true;
+            }
+
         }
         if(isNumber(strings[0])){
             int num = Integer.parseInt(strings[0]);

@@ -30,9 +30,10 @@ public class RestartServerUseTimer {
         hashMap.put(3600,"服务器将在一个小时后重启");
     }
     public static void Restart(int time){
+        timer = new Timer();
         for (Map.Entry<Integer,String> entry:hashMap.entrySet()) {
             if (entry.getKey() > time) continue;
-            timer = new Timer();
+
             Date date = new Date();
             Calendar calendar = Calendar.getInstance();
             calendar.setTime(date);

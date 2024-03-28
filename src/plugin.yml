@@ -9,3 +9,7 @@
      aliases:
        - rest
        - rs
+   safeguard:
+     description: server maintain
+     aliases:
+       - sg

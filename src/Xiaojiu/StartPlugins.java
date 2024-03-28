@@ -2,7 +2,8 @@ package Xiaojiu;
 
 import Xiaojiu.CommandExecutor.RestartServerCommand;
 //import me.lucko.spark.bukkit.CommandMapUtil;
-import Xiaojiu.RestartServer.RestartServerUseTimer;
+import Xiaojiu.CommandExecutor.SafeGuardCommand;
+import Xiaojiu.tools.Until;
 import org.bukkit.Bukkit;
 import org.bukkit.command.PluginCommand;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -16,7 +17,8 @@ public class StartPlugins extends JavaPlugin {
         Instance = this;
         Bukkit.getPluginManager().registerEvents(new EventLoader(),this);
         getCommand("restartserver").setExecutor(new RestartServerCommand());
-        RestartServerUseTimer.Init();
+        getCommand("safeguard").setExecutor(new SafeGuardCommand());
+        Until.Init();
 //        Bukkit.getPluginCommand("restart").setExecutor(new RestartServerCommand());
     }
     public static StartPlugins getInstance(){

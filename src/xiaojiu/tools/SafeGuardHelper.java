@@ -1,7 +1,7 @@
-package Xiaojiu.tools;
+package xiaojiu.tools;
 
-import Xiaojiu.StartPlugins;
 import org.bukkit.Bukkit;
+import xiaojiu.StartPlugins;
 import org.bukkit.ChatColor;
 
 import java.util.*;
@@ -15,6 +15,17 @@ public class SafeGuardHelper {
     public static void SafeGuardEnd(){
         isSafeGuard=false;
 
+    }
+    public static void done(){
+        SafeGuardHelper.SafeGuard();
+        Until.KickAllPlayersUseNode("xiaojiu.safeguard.nokick","服务器维护,请等待服务器维护结束");
+//        Until.KickAllPlayers(StartPlugins.getInstance().getServer().getOnlinePlayers(),"服务器维护,请等待服务器维护结束");
+    }
+    public static boolean startSafeGuard(int num){
+        if (isSafeGuard) return false;
+        if (num==-1) done();
+        SafeGuard(num);
+        return true;
     }
     public static void SafeGuard(int time){
         timer=new Timer();
@@ -31,8 +42,7 @@ public class SafeGuardHelper {
                         Bukkit.getScheduler().runTask(StartPlugins.getInstance(), new Runnable() {
                             @Override
                             public void run() {
-                                SafeGuard();
-                                Until.KickAllPlayersUseNode("xiaojiu.safeguard.nokick","服务器维护,请耐心等待");
+                                done();
                             }
                         });
                     }else {
@@ -43,7 +53,7 @@ public class SafeGuardHelper {
             },calendar.getTime());
         }
     }
-    public static void Cancel(){
+    public static void cancel(){
         if (timer==null) return;
         timer.cancel();
         timer=null;

@@ -1,12 +1,11 @@
-package Xiaojiu.tools;
+package xiaojiu.tools;
 
-import Xiaojiu.StartPlugins;
+import xiaojiu.StartPlugins;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.Iterator;
 
 public class Until {
     public static HashMap<Integer,String> WaitMap =new HashMap<>();

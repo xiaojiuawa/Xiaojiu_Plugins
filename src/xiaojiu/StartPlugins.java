@@ -1,9 +1,9 @@
-package Xiaojiu;
+package xiaojiu;
 
-import Xiaojiu.CommandExecutor.RestartServerCommand;
+import xiaojiu.commandExecutor.RestartServerCommand;
 //import me.lucko.spark.bukkit.CommandMapUtil;
-import Xiaojiu.CommandExecutor.SafeGuardCommand;
-import Xiaojiu.tools.Until;
+import xiaojiu.commandExecutor.SafeGuardCommand;
+import xiaojiu.tools.Until;
 import org.bukkit.Bukkit;
 import org.bukkit.command.PluginCommand;
 import org.bukkit.plugin.java.JavaPlugin;

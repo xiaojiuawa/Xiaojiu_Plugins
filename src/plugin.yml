@@ -1,5 +1,5 @@
  name: XiaojiuTimeRecord
- main: Xiaojiu.StartPlugins
+ main: xiaojiu.StartPlugins
  version: 1
  author: Xiaojiu
 

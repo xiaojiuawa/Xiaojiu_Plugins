@@ -1,26 +1,20 @@
-package Xiaojiu.CommandExecutor;
+package xiaojiu.commandExecutor;
 
-import Xiaojiu.tools.MessageHelper;
-import Xiaojiu.tools.RestartTools;
+import xiaojiu.tools.MessageHelper;
+import xiaojiu.tools.RestartTools;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 
-import static Xiaojiu.tools.RestartTools.ProcessingTime;
-import static Xiaojiu.tools.RestartTools.isNumber;
+import static xiaojiu.tools.RestartTools.ProcessingTime;
+import static xiaojiu.tools.RestartTools.isNumber;
 
 public class RestartServerCommand implements CommandExecutor {
 
 
     @Override
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
-//        MessageHelper.SendMessageAllPlayer(commandSender.toString());
-//        commandSender.sendMessage("!");
-//        if (commandSender instanceof ColouredConsoleSender)
-//        if (!(commandSender instanceof Player)){
-//            return true;
-//        }
         if(!commandSender.hasPermission("xiaojiu.restartServer.use")){
             commandSender.sendMessage(ChatColor.DARK_RED +"错误:你没有使用此命令的权限");
             return true;
@@ -54,11 +48,10 @@ public class RestartServerCommand implements CommandExecutor {
                 RestartTools.RestartServerUseTimer.Restart(Integer.parseInt(strings[1]));
                 commandSender.sendMessage(ChatColor.LIGHT_PURPLE+"服务器重启时间重设成功");
                 MessageHelper.SendMessageAllPlayer(ChatColor.LIGHT_PURPLE+"服务器重启时间已被重新设置为"+strings[1]+"秒");
-                return true;
             }else {
                 commandSender.sendMessage(ChatColor.RED+"请输入正确的时间");
-                return true;
             }
+            return true;
 
         }
         if(isNumber(strings[0])){
@@ -71,6 +64,7 @@ public class RestartServerCommand implements CommandExecutor {
             return true;
         } else if (strings.length==2) {
             int num = ProcessingTime(strings[0],Integer.parseInt(strings[1]));
+            if (num==-1) return true;
             if(!RestartTools.Restart(num)){
                 commandSender.sendMessage(ChatColor.DARK_RED+"错误:已有计划重启任务");
                 return true;

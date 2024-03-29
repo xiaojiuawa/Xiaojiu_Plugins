@@ -1,6 +1,6 @@
-package Xiaojiu.tools;
+package xiaojiu.tools;
 
-import Xiaojiu.StartPlugins;
+import xiaojiu.StartPlugins;
 import org.bukkit.ChatColor;
 
 public class MessageHelper {

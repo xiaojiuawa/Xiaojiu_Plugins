@@ -1,6 +1,6 @@
-package Xiaojiu.tools;
+package xiaojiu.tools;
 
-import Xiaojiu.StartPlugins;
+import xiaojiu.StartPlugins;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 
@@ -10,7 +10,7 @@ public class RestartTools {
     public static boolean isRestart =false;
 
     public static int ProcessingTime(String unit, int number){
-        int num = 0;
+        int num = -1;
         switch (unit){
             case "d":
                 num=number*24*60*60;

@@ -1,5 +1,6 @@
 package xiaojiu;
 
+import xiaojiu.commandExecutor.CommonExecutorLoader;
 import xiaojiu.commandExecutor.RestartServerCommand;
 //import me.lucko.spark.bukkit.CommandMapUtil;
 import xiaojiu.commandExecutor.SafeGuardCommand;
@@ -16,8 +17,7 @@ public class StartPlugins extends JavaPlugin {
         this.getLogger().info("XiaojiuPluginOnEnable");
         Instance = this;
         Bukkit.getPluginManager().registerEvents(new EventLoader(),this);
-        getCommand("restartserver").setExecutor(new RestartServerCommand());
-        getCommand("safeguard").setExecutor(new SafeGuardCommand());
+        CommonExecutorLoader.Load(this);
         Until.Init();
 //        Bukkit.getPluginCommand("restart").setExecutor(new RestartServerCommand());
     }

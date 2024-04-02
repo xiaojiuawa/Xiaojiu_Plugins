@@ -13,3 +13,8 @@
      description: server maintain
      aliases:
        - sg
+   Limit:
+     description: Limit Player
+     aliases:
+       - Li
+       - li

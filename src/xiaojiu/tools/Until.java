@@ -9,6 +9,7 @@ import java.util.HashMap;
 
 public class Until {
     public static HashMap<Integer,String> WaitMap =new HashMap<>();
+    public static HashMap<Integer,String> SuggestMap = new HashMap<>();
     public static void Init(){
         WaitMap.put(0,"down");
         WaitMap.put(1,"服务器将在1秒后%s");
@@ -26,6 +27,18 @@ public class Until {
         WaitMap.put(120,"服务器将在2分钟后%s");
         WaitMap.put(1800,"服务器将在30分钟后%s");
         WaitMap.put(3600,"服务器将在一个小时后%s");
+        SuggestMap.put(0,"服务器投票%s已结束");
+        SuggestMap.put(5,"服务器投票%s已开始,投票将在5秒后结束");
+        SuggestMap.put(10,"服务器投票%s已开始,投票将在10秒后结束");
+        SuggestMap.put(20,"服务器投票%s已开始,投票将在20秒后结束");
+        SuggestMap.put(40,"服务器投票%s已开始,投票将在40秒后结束");
+        SuggestMap.put(60,"服务器投票%s已开始,投票将在60秒后结束");
+        SuggestMap.put(80,"服务器投票%s已开始,投票将在80秒后结束");
+        SuggestMap.put(100,"服务器投票%s已开始,投票将在100秒后结束");
+        SuggestMap.put(120,"服务器投票%s已开始,投票将在120秒后结束");
+
+
+
     }
 
     public static void KickAllPlayers(Collection<? extends Player> list, String message){

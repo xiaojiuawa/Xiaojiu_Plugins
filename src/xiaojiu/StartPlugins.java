@@ -4,6 +4,8 @@ import xiaojiu.commandExecutor.CommonExecutorLoader;
 import xiaojiu.commandExecutor.RestartServerCommand;
 //import me.lucko.spark.bukkit.CommandMapUtil;
 import xiaojiu.commandExecutor.SafeGuardCommand;
+import xiaojiu.task.TaskLoader;
+import xiaojiu.task.TpsTask;
 import xiaojiu.tools.Until;
 import org.bukkit.Bukkit;
 import org.bukkit.command.PluginCommand;
@@ -19,7 +21,7 @@ public class StartPlugins extends JavaPlugin {
         Bukkit.getPluginManager().registerEvents(new EventLoader(),this);
         CommonExecutorLoader.Load(this);
         Until.Init();
-//        Bukkit.getPluginCommand("restart").setExecutor(new RestartServerCommand());
+        TaskLoader.Start(this);
     }
     public static StartPlugins getInstance(){
         return Instance;

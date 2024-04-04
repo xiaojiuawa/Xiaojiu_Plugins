@@ -18,3 +18,7 @@
      aliases:
        - Li
        - li
+   suggest:
+    description: suggest
+    aliases:
+      - sug

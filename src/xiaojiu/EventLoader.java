@@ -23,4 +23,5 @@ public class EventLoader implements Listener {
             event.setKickMessage(ChatColor.LIGHT_PURPLE+LimitPlayerTools.GetKickMessage(event.getPlayer()));
         }
     }
+
 }

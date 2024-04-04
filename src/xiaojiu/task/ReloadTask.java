@@ -16,11 +16,13 @@ import java.util.*;
 public class ReloadTask {
     protected static Timer task = null;
     public static SuggestHelper suggestHelper = null;
+    public static boolean isSuggesting = false;
 
     public static void RunTask(JavaPlugin Instance) {
         task=new Timer();
         suggestHelper = new SuggestHelper();
         suggestHelper.isSuggesting=true;
+        isSuggesting=true;
         for (Map.Entry<Integer, String> entry: Until.SuggestMap.entrySet()){
             Date date =new Date();
             Calendar calendar = Calendar.getInstance();
@@ -64,6 +66,7 @@ public class ReloadTask {
             task.cancel();
             task=null;
             suggestHelper=null;
+            isSuggesting=false;
         }
 
     }

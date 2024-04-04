@@ -38,8 +38,8 @@ public class ReloadTask {
                             }else {
                                 MessageHelper.SendMessageAllPlayer(ChatColor.LIGHT_PURPLE+String.format(entry.getValue(),"重启"));
                                 MessageHelper.SendMessageAllPlayer(ChatColor.LIGHT_PURPLE+String.format("投票情况:同意人数%s人 拒绝人数%s人",
-                                        String.valueOf(suggestHelper.Approve.size()),
-                                        String.valueOf(suggestHelper.Refuse.size())));
+                                        suggestHelper.Approve.size(),
+                                        suggestHelper.Refuse.size()));
                                 MessageHelper.SendMessageAllPlayer(ChatColor.LIGHT_PURPLE+"使用/sug 同意 同意投票,使用/sug 拒绝 拒绝投票");
                             }
 

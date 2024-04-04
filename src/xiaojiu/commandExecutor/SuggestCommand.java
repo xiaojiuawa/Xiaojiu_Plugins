@@ -8,9 +8,6 @@ import org.bukkit.entity.Player;
 import xiaojiu.StartPlugins;
 import xiaojiu.task.ReloadTask;
 import xiaojiu.tools.MessageHelper;
-import xiaojiu.tools.SuggestHelper;
-
-import java.util.Map;
 
 public class SuggestCommand implements CommandExecutor {
     @Override
@@ -65,7 +62,7 @@ public class SuggestCommand implements CommandExecutor {
             if (strings[0].equalsIgnoreCase("cancel")||strings[0].equalsIgnoreCase("取消")){
                 if (commandSender.hasPermission("xiaojiu.ReloadTask.cancel")){
                     ReloadTask.cancel();
-                    MessageHelper.SendMessageAllPlayer(String.format("当前投票任务已被管理员%s取消",((Player)commandSender).getName()));
+                    MessageHelper.SendMessageAllPlayer(String.format("当前投票任务已被管理员%s取消", commandSender.getName()));
                 }
             }
             if (strings[0].equalsIgnoreCase("down")){

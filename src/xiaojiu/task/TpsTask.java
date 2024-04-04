@@ -7,13 +7,6 @@ import org.bukkit.scheduler.BukkitTask;
 import xiaojiu.StartPlugins;
 import xiaojiu.tools.MessageHelper;
 
-import java.util.Arrays;
-import java.util.Timer;
-import java.util.TimerTask;
-import java.util.concurrent.Future;
-
-import static org.bukkit.Bukkit.getScheduler;
-
 public class TpsTask {
     protected static BukkitTask task = null;
 

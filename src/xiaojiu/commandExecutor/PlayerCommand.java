@@ -1,6 +1,7 @@
 package xiaojiu.commandExecutor;
 
 import org.bukkit.ChatColor;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -29,10 +30,9 @@ public class PlayerCommand implements CommandExecutor {
             }
             if (strings[0].equalsIgnoreCase("del")||strings[0].equalsIgnoreCase("remove")||strings[0].equalsIgnoreCase("解除")){
                 if (strings[1]!=null){
-                    Player player1 = GetPlayer(strings[1]);
-                    if (player1!=null){
-                        String message= LimitPlayerTools.remove(player1);
-                        player.sendMessage(ChatColor.LIGHT_PURPLE+message);
+                    OfflinePlayer player1 = GetPlayerOffer(strings[1]);
+                    if (LimitPlayerTools.isPlayerIn(player1.getUniqueId())){
+                        commandSender.sendMessage(ChatColor.LIGHT_PURPLE+LimitPlayerTools.remove(player1));
                     }else {
                         player.sendMessage(ChatColor.LIGHT_PURPLE+"玩家"+strings[1]+"当前未在线或未在本子服");
                     }
@@ -53,5 +53,8 @@ public class PlayerCommand implements CommandExecutor {
     }
     public static Player GetPlayer(String PlayerName){
         return StartPlugins.getInstance().getServer().getPlayer(PlayerName);
+    }
+    public static OfflinePlayer GetPlayerOffer(String PlayerName){
+        return StartPlugins.getInstance().getServer().getOfflinePlayer(PlayerName);
     }
 }

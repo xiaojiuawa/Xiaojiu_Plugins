@@ -1,5 +1,6 @@
 package xiaojiu.tools;
 
+import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 
 
@@ -15,7 +16,7 @@ public class LimitPlayerTools {
         hashMap.put(player.getUniqueId(),message);
         return "限制列表添加玩家"+player.getName()+"成功";
     }
-    public static String remove(Player player){
+    public static String remove(OfflinePlayer player){
         if (hashMap.containsKey(player.getUniqueId())){
             hashMap.remove(player.getUniqueId());
             return "限制列表移除玩家"+player.getName()+"成功";

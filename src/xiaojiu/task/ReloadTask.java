@@ -13,14 +13,14 @@ import java.util.*;
 
 public class ReloadTask {
     protected static Timer task = null;
-    public static SuggestHelper suggestHelper = null;
+    public static SuggestHelper suggestHelper = new SuggestHelper();
     public static boolean isSuggesting = false;
 
-    public static void RunTask(JavaPlugin Instance) {
+    public static void RunTask(JavaPlugin Instance, UUID sponsor) {
         task = new Timer();
-        suggestHelper = new SuggestHelper();
         suggestHelper.isSuggesting = true;
         isSuggesting = true;
+        suggestHelper.sponsor = sponsor;
         for (Map.Entry<Integer, String> entry : Until.SuggestMap.entrySet()) {
             Date date = new Date();
             Calendar calendar = Calendar.getInstance();
@@ -36,11 +36,11 @@ public class ReloadTask {
                                 down();
 
                             } else {
-                                MessageHelper.SendMessageAllPlayer(ChatColor.LIGHT_PURPLE + String.format(entry.getValue(), "重启"));
-                                MessageHelper.SendMessageAllPlayer(ChatColor.LIGHT_PURPLE + String.format("投票情况:同意人数%s人 拒绝人数%s人",
+                                MessageHelper.SendMessageAllPlayer(MessageHelper.InitMessage(ChatColor.LIGHT_PURPLE + String.format(entry.getValue(), "重启")));
+                                MessageHelper.SendMessageAllPlayer(MessageHelper.InitMessage(ChatColor.LIGHT_PURPLE + String.format("投票情况:同意人数%s人 拒绝人数%s人",
                                         suggestHelper.Approve.size(),
-                                        suggestHelper.Refuse.size()));
-                                MessageHelper.SendMessageAllPlayer(ChatColor.LIGHT_PURPLE + "使用/sug 同意 同意投票,使用/sug 拒绝 拒绝投票");
+                                        suggestHelper.Refuse.size())));
+                                MessageHelper.SendMessageAllPlayer(MessageHelper.InitMessage(ChatColor.LIGHT_PURPLE + "使用/sug 同意 同意投票,使用/sug 拒绝 拒绝投票"));
                             }
 
 
@@ -53,12 +53,14 @@ public class ReloadTask {
     }
 
     public static void down() {
+        isSuggesting = false;
         if ((double) suggestHelper.Approve.size() / StartPlugins.getInstance().getServer().getOnlinePlayers().size() > 0.7) {
-            MessageHelper.SendMessageAllPlayer(ChatColor.LIGHT_PURPLE + "投票结束,服务器投票情况符合条件,即将进行重启");
+            MessageHelper.SendMessageAllPlayer(ChatColor.DARK_AQUA + "投票结束,服务器投票情况符合条件,即将进行重启");
             RestartTools.Restart(30);
         } else {
-            MessageHelper.SendMessageAllPlayer(ChatColor.LIGHT_PURPLE + "投票结束,服务器投票情况不符合条件(70%的在线玩家同意)");
+            MessageHelper.SendMessageAllPlayer(ChatColor.DARK_AQUA + "投票结束,服务器投票情况不符合条件(70%的在线玩家同意)");
         }
+        suggestHelper.SuggestEnd();
     }
 
     public static void cancel() {

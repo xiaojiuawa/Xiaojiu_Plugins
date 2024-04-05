@@ -11,8 +11,6 @@ import xiaojiu.task.TaskLoader;
 import xiaojiu.tools.LimitPlayerTools;
 import xiaojiu.tools.Until;
 
-import java.io.IOException;
-
 public class StartPlugins extends JavaPlugin {
     private static StartPlugins Instance;
     public static PluginCommand command;
@@ -38,10 +36,7 @@ public class StartPlugins extends JavaPlugin {
     public void onDisable() {
         Bukkit.getScheduler().cancelTasks(this);
         this.getLogger().info("XiaojiuPluginOnDisable");
-        try {
-            SaveConfig.Save();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        SaveConfig.Save();
+
     }
 }

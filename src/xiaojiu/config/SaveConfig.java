@@ -18,17 +18,22 @@ public class SaveConfig {
         plugin.saveResource("PlayerLimit.yml", false);
     }
 
-    public static void Save() throws IOException {
+    public static void Save() {
         SaveLimitPlayer();
     }
 
-    public static void SaveLimitPlayer() throws IOException {
+    public static void SaveLimitPlayer() {
         File file = new File(Instance.getDataFolder(), "PlayerLimit.yml");
         FileConfiguration LimitPlayer = YamlConfiguration.loadConfiguration(file);
         for (LimitPlayer player : LimitPlayerTools.list) {
             LimitPlayer.set(player.Name, player);
         }
-        LimitPlayer.save(file);
+        try {
+            LimitPlayer.save(file);
+        } catch (IOException exception) {
+            throw new RuntimeException(exception);
+        }
+
     }
 
 }

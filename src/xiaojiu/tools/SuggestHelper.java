@@ -8,6 +8,7 @@ public class SuggestHelper {
     public ArrayList<UUID> Approve;
     public ArrayList<UUID> Refuse;
     public boolean isSuggesting;
+    public UUID sponsor;
 
     public SuggestHelper() {
         Approve = new ArrayList<>();

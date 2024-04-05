@@ -10,20 +10,15 @@ import xiaojiu.StartPlugins;
 import xiaojiu.config.SaveConfig;
 import xiaojiu.tools.LimitPlayerTools;
 
-import java.io.IOException;
-
 public class PlayerCommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
         if (commandSender instanceof Player && strings.length != 0) {
             Player player = (Player) commandSender;
+
             if (strings[0].equalsIgnoreCase("save")) {
-                try {
-                    SaveConfig.Save();
-                    commandSender.sendMessage("save");
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
+                SaveConfig.Save();
+                commandSender.sendMessage("save");
             }
             if (strings[0].equalsIgnoreCase("add") || strings[0].equalsIgnoreCase("添加")) {
                 if (strings[1] != null) {

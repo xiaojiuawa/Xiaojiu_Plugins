@@ -1,0 +1,47 @@
+package xiaojiu.task;
+
+import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.entity.Player;
+import org.jetbrains.annotations.Nullable;
+import xiaojiu.StartPlugins;
+import xiaojiu.config.Savecfg.JTPlayer;
+
+import java.io.File;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.UUID;
+
+public class PlayerJoinTimeTask {
+    public static HashMap<UUID, JTPlayer> map = new HashMap<>();
+    public static File file = new File(StartPlugins.getInstance().getDataFolder(), "PlayerJoinTime.yml");
+    public static FileConfiguration configuration = YamlConfiguration.loadConfiguration(file);
+
+    public static void UpdatePlayer(Player player) {
+        UUID uuid = player.getUniqueId();
+        if (map.containsKey(uuid)) {
+            JTPlayer player2 = map.get(uuid);
+            player2.LastJoinTime = new Date();
+            map.replace(uuid, player2);
+        } else {
+            JTPlayer player2 = new JTPlayer(new Date(), uuid, player.getName());
+            map.put(player.getUniqueId(), player2);
+        }
+    }
+
+    public static @Nullable Date GetPlayerLastJoinTime(UUID uuid) {
+        if (!map.containsKey(uuid)) {
+            return null;
+        }
+        return map.get(uuid).LastJoinTime;
+    }
+
+    public static void ReadTime() {
+        for (String key : configuration.getKeys(false)) {
+//            System.out.println("1234");
+            JTPlayer player = (JTPlayer) configuration.get(key);
+            map.put(player.uuid, player);
+//            System.out.println(player.PlayerName+"1");
+        }
+    }
+}

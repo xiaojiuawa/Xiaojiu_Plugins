@@ -5,6 +5,7 @@ import org.bukkit.OfflinePlayer;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.craftbukkit.v1_12_R1.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 import xiaojiu.StartPlugins;
 import xiaojiu.config.SaveConfig;
@@ -13,9 +14,9 @@ import xiaojiu.tools.LimitPlayerTools;
 public class PlayerCommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
+
         if (commandSender instanceof Player && strings.length != 0) {
             Player player = (Player) commandSender;
-
             if (strings[0].equalsIgnoreCase("save")) {
                 SaveConfig.Save();
                 commandSender.sendMessage("save");

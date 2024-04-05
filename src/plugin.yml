@@ -22,3 +22,8 @@
     description: suggest
     aliases:
       - sug
+   playerTime:
+     description: Get Time
+     aliases:
+       - pt
+       - time

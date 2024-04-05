@@ -3,7 +3,9 @@ package xiaojiu;
 import org.bukkit.ChatColor;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerLoginEvent;
+import xiaojiu.task.PlayerJoinTimeTask;
 import xiaojiu.tools.LimitPlayerTools;
 import xiaojiu.tools.SafeGuardHelper;
 
@@ -25,4 +27,8 @@ public class EventLoader implements Listener {
         }
     }
 
+    @EventHandler
+    public void PlayerJoinEvent(PlayerJoinEvent event) {
+        PlayerJoinTimeTask.UpdatePlayer(event.getPlayer());
+    }
 }

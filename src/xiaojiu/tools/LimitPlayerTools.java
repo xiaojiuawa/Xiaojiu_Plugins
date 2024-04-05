@@ -4,7 +4,6 @@ import org.bukkit.OfflinePlayer;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
-import org.bukkit.plugin.java.JavaPlugin;
 import xiaojiu.StartPlugins;
 import xiaojiu.config.Savecfg.LimitPlayer;
 
@@ -20,9 +19,9 @@ public class LimitPlayerTools {
     public static File file = new File(StartPlugins.getInstance().getDataFolder(), "PlayerLimit.yml");
     public static FileConfiguration configuration = YamlConfiguration.loadConfiguration(file);
 
-    public static void ReadPlayers(JavaPlugin plugin) {
+    public static void ReadPlayers() {
         for (String key : configuration.getKeys(false)) {
-            System.out.print("1");
+//            System.out.print("1");
             LimitPlayer player = (LimitPlayer) configuration.get(key);
             UUID uuid = new UUID(player.mostSigBits, player.leastSigBits);
             String message = player.message;

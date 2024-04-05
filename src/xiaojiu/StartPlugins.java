@@ -5,10 +5,11 @@ import org.bukkit.command.PluginCommand;
 import org.bukkit.configuration.serialization.ConfigurationSerialization;
 import org.bukkit.plugin.java.JavaPlugin;
 import xiaojiu.commandExecutor.CommonExecutorLoader;
+import xiaojiu.config.LoadConfig;
 import xiaojiu.config.SaveConfig;
+import xiaojiu.config.Savecfg.JTPlayer;
 import xiaojiu.config.Savecfg.LimitPlayer;
 import xiaojiu.task.TaskLoader;
-import xiaojiu.tools.LimitPlayerTools;
 import xiaojiu.tools.Until;
 
 public class StartPlugins extends JavaPlugin {
@@ -24,8 +25,9 @@ public class StartPlugins extends JavaPlugin {
         Until.Init();
         TaskLoader.Start(this);
         ConfigurationSerialization.registerClass(LimitPlayer.class);
+        ConfigurationSerialization.registerClass(JTPlayer.class);
         SaveConfig.OnEnable(this);
-        LimitPlayerTools.ReadPlayers(this);
+        LoadConfig.ReadAllFile();
     }
 
     public static StartPlugins getInstance() {

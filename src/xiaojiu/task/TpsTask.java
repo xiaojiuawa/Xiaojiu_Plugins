@@ -26,7 +26,7 @@ public class TpsTask {
                     MessageHelper.SendMessageAllPlayer(ChatColor.WHITE + "[" + ChatColor.DARK_GREEN + "服务器流畅度分析" + ChatColor.WHITE + "]" + ChatColor.LIGHT_PURPLE + "服务器平均tps正常");
                 }
             }
-        }, 0, 600);
+        }, 0, 12000);
     }
 
     public static BukkitTask GetTask() {

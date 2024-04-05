@@ -11,19 +11,22 @@ import java.io.IOException;
 
 public class SaveConfig {
     public static JavaPlugin Instance;
-    public static void OnEnable(JavaPlugin plugin){
-        Instance=plugin;
+
+    public static void OnEnable(JavaPlugin plugin) {
+        Instance = plugin;
         plugin.saveDefaultConfig();
-        plugin.saveResource("PlayerLimit.yml",false);
+        plugin.saveResource("PlayerLimit.yml", false);
     }
+
     public static void Save() throws IOException {
         SaveLimitPlayer();
     }
+
     public static void SaveLimitPlayer() throws IOException {
-        File file = new File(Instance.getDataFolder(),"PlayerLimit.yml");
+        File file = new File(Instance.getDataFolder(), "PlayerLimit.yml");
         FileConfiguration LimitPlayer = YamlConfiguration.loadConfiguration(file);
-        for (LimitPlayer player: LimitPlayerTools.list){
-            LimitPlayer.set(player.Name,player);
+        for (LimitPlayer player : LimitPlayerTools.list) {
+            LimitPlayer.set(player.Name, player);
         }
         LimitPlayer.save(file);
     }

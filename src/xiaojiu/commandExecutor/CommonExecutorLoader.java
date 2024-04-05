@@ -7,6 +7,7 @@ public class CommonExecutorLoader {
         Instance.getCommand("restartserver").setExecutor(new RestartServerCommand());
         Instance.getCommand("safeguard").setExecutor(new SafeGuardCommand());
         Instance.getCommand("Limit").setExecutor(new PlayerCommand());
+        Instance.getCommand("Limit").setTabCompleter(new PlayerCommand());
         Instance.getCommand("suggest").setExecutor(new SuggestCommand());
         Instance.getCommand("playerTime").setExecutor(new PlayerTimeCommand());
     }

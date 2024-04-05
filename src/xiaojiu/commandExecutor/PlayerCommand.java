@@ -3,64 +3,110 @@ package xiaojiu.commandExecutor;
 import org.bukkit.ChatColor;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.command.Command;
-import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
-import org.bukkit.craftbukkit.v1_12_R1.entity.CraftPlayer;
+import org.bukkit.command.TabExecutor;
 import org.bukkit.entity.Player;
 import xiaojiu.StartPlugins;
 import xiaojiu.config.SaveConfig;
 import xiaojiu.tools.LimitPlayerTools;
+import xiaojiu.tools.MessageHelper;
+import xiaojiu.tools.Until;
 
-public class PlayerCommand implements CommandExecutor {
+import java.util.ArrayList;
+import java.util.List;
+
+public class PlayerCommand implements TabExecutor {
     @Override
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
-
-        if (commandSender instanceof Player && strings.length != 0) {
-            Player player = (Player) commandSender;
-            if (strings[0].equalsIgnoreCase("save")) {
-                SaveConfig.Save();
-                commandSender.sendMessage("save");
-            }
-            if (strings[0].equalsIgnoreCase("add") || strings[0].equalsIgnoreCase("添加")) {
-                if (strings[1] != null) {
-                    Player player1 = GetPlayer(strings[1]);
-                    if (player1 != null) {
-                        String message;
-                        if (strings[2].equalsIgnoreCase("true") || strings[2].equalsIgnoreCase("离线")) {
-                            message = LimitPlayerTools.add(IntegrateStr(strings), player1, true);
-                        } else {
-                            message = LimitPlayerTools.add(IntegrateStr(strings), player1, false);
+        if (strings.length != 0) {
+            if (strings[0].equalsIgnoreCase("save") || strings[0].equalsIgnoreCase("保存")) {
+                if (commandSender.hasPermission("xiaojiu.playerLimit.save")) {
+                    SaveConfig.SaveLimitPlayer();
+                    commandSender.sendMessage(MessageHelper.InitMessage(ChatColor.LIGHT_PURPLE + "玩家限制列表保存成功"));
+                } else {
+                    commandSender.sendMessage(MessageHelper.InitMessage(ChatColor.LIGHT_PURPLE + "你没有权限保存玩家限制列表"));
+                }
+            } else if (strings[0].equalsIgnoreCase("add") || strings[0].equalsIgnoreCase("添加")) {
+                if (commandSender.hasPermission("xiaojiu.playerLimit.add")) {
+                    if (!(strings.length < 2)) {
+                        Player player = GetPlayer(strings[1]);
+                        if (commandSender instanceof Player) {
+                            Player player1 = (Player) commandSender;
+                            if (player1.getUniqueId().equals(player.getUniqueId())) {
+                                commandSender.sendMessage(MessageHelper.InitMessage(ChatColor.LIGHT_PURPLE + "你不能添加自己进入限制列表"));
+                            }
                         }
-                        player.sendMessage(ChatColor.LIGHT_PURPLE + message);
+                        if (player != null) {
+                            String message;
+                            if (strings[2].equalsIgnoreCase("true") || strings[2].equalsIgnoreCase("离线")) {
+                                message = LimitPlayerTools.add(IntegrateStr(strings), player, true);
+                            } else if (strings[2].equalsIgnoreCase("false") || strings[2].equalsIgnoreCase("非离线")) {
+                                message = LimitPlayerTools.add(IntegrateStr(strings), player, false);
+                            } else {
+                                message = "请设置是否开启保存";
+                            }
+                            commandSender.sendMessage(MessageHelper.InitMessage(ChatColor.LIGHT_PURPLE + message));
+                        } else {
+                            commandSender.sendMessage(MessageHelper.InitMessage(ChatColor.LIGHT_PURPLE + "玩家" + strings[1] + "当前未在线或未在本子服"));
+                        }
                     } else {
-                        player.sendMessage(ChatColor.LIGHT_PURPLE + "玩家" + strings[1] + "当前未在线或未在本子服");
+                        commandSender.sendMessage(MessageHelper.InitMessage(ChatColor.LIGHT_PURPLE + "请输入想要添加的玩家名"));
                     }
+                } else {
+                    commandSender.sendMessage(MessageHelper.InitMessage(ChatColor.LIGHT_PURPLE + "你没有权限添加限制玩家"));
+                }
 
-                } else {
-                    player.sendMessage(ChatColor.LIGHT_PURPLE + "请输入需要添加的玩家名");
-                }
-            }
-            if (strings[0].equalsIgnoreCase("del") || strings[0].equalsIgnoreCase("remove") || strings[0].equalsIgnoreCase("解除")) {
-                if (strings[1] != null) {
-                    OfflinePlayer player1 = GetPlayerOffer(strings[1]);
-                    if (LimitPlayerTools.isPlayerIn(player1.getUniqueId())) {
-                        commandSender.sendMessage(ChatColor.LIGHT_PURPLE + LimitPlayerTools.remove(player1));
+            } else if (strings[0].equalsIgnoreCase("del") || strings[0].equalsIgnoreCase("remove") || strings[0].equalsIgnoreCase("删除")) {
+                if (commandSender.hasPermission("xiaojiu.PlayerLimit.remove")) {
+                    if (!(strings.length < 2)) {
+                        OfflinePlayer player = GetPlayerOffer(strings[1]);
+                        if (commandSender instanceof Player) {
+                            Player player1 = (Player) commandSender;
+                            if (player1.getUniqueId().equals(player.getUniqueId())) {
+                                commandSender.sendMessage(MessageHelper.InitMessage(ChatColor.LIGHT_PURPLE + "你不能把自己从限制列表中移除"));
+                            }
+                        }
+                        if (player != null) {
+                            if (LimitPlayerTools.isPlayerIn(player.getUniqueId())) {
+                                commandSender.sendMessage(MessageHelper.InitMessage(ChatColor.LIGHT_PURPLE + LimitPlayerTools.remove(player)));
+                            } else {
+                                commandSender.sendMessage(MessageHelper.InitMessage(ChatColor.LIGHT_PURPLE + "玩家" + strings[1] + "未在限制列表中"));
+                            }
+                        } else {
+                            commandSender.sendMessage(MessageHelper.InitMessage(ChatColor.LIGHT_PURPLE + "玩家" + strings[1] + "从未进入过本服务器或子服"));
+                        }
                     } else {
-                        player.sendMessage(ChatColor.LIGHT_PURPLE + "玩家" + strings[1] + "当前未在线或未在本子服");
+                        commandSender.sendMessage(MessageHelper.InitMessage(ChatColor.LIGHT_PURPLE + "请输入想要解除限制的玩家名"));
                     }
                 } else {
-                    player.sendMessage(ChatColor.LIGHT_PURPLE + "请输入想解除限制的玩家名");
+                    commandSender.sendMessage(MessageHelper.InitMessage(ChatColor.LIGHT_PURPLE + "你没有权限删除被限制的玩家"));
                 }
+
             }
             return true;
         }
         return false;
     }
 
+    @Override
+    public List<String> onTabComplete(CommandSender commandSender, Command command, String s, String[] strings) {
+        List<String> list = new ArrayList<>();
+        if (strings.length == 1) {
+            if (commandSender.hasPermission("xiaojiu.PlayerLimit.save")) list.add("保存");
+            if (commandSender.hasPermission("xiaojiu.PlayerLimit.add")) list.add("添加");
+            if (commandSender.hasPermission("xiaojiu.PlayerLimit.remove")) list.add("删除");
+        } else if (strings.length == 2) {
+            if (strings[1].equalsIgnoreCase("add") || strings[1].equalsIgnoreCase("添加")) {
+                list.addAll(Until.GetOnlinePlayerNames());
+            }
+        }
+        return list;
+    }
+
     public static String IntegrateStr(String[] strings) {
         StringBuilder ans = new StringBuilder();
         for (int i = 3; i < strings.length; i++) {
-            ans.append(strings[i] + ' ');
+            ans.append(strings[i]).append(' ');
         }
         return ans.toString();
     }
@@ -72,4 +118,6 @@ public class PlayerCommand implements CommandExecutor {
     public static OfflinePlayer GetPlayerOffer(String PlayerName) {
         return StartPlugins.getInstance().getServer().getOfflinePlayer(PlayerName);
     }
+
+
 }

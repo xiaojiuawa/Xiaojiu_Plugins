@@ -4,6 +4,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import xiaojiu.StartPlugins;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 
@@ -65,5 +66,13 @@ public class Until {
             if (player.hasPermission(node)) continue;
             player.kickPlayer(ChatColor.LIGHT_PURPLE + message);
         }
+    }
+
+    public static ArrayList<String> GetOnlinePlayerNames() {
+        ArrayList<String> list = new ArrayList<>();
+        for (Player player : StartPlugins.getInstance().getServer().getOnlinePlayers()) {
+            list.add(player.getName());
+        }
+        return list;
     }
 }

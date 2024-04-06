@@ -8,9 +8,7 @@ import xiaojiu.StartPlugins;
 import xiaojiu.config.Savecfg.JTPlayer;
 
 import java.io.File;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.UUID;
+import java.util.*;
 
 public class PlayerJoinTimeTask {
     public static HashMap<UUID, JTPlayer> map = new HashMap<>();
@@ -43,5 +41,15 @@ public class PlayerJoinTimeTask {
             map.put(player.uuid, player);
 //            System.out.println(player.PlayerName+"1");
         }
+    }
+
+    public static List<String> getRecordedPlayers(String exclude){
+        List<String> list = new ArrayList<>();
+        for (Map.Entry<UUID,JTPlayer> entry:map.entrySet()){
+            if (entry.getValue().PlayerName.toLowerCase().startsWith(exclude)){
+                list.add(entry.getValue().PlayerName);
+            }
+        }
+        return list;
     }
 }

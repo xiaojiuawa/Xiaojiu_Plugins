@@ -4,6 +4,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import xiaojiu.StartPlugins;
 
+import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -68,10 +69,11 @@ public class Until {
         }
     }
 
-    public static ArrayList<String> GetOnlinePlayerNames() {
+    public static ArrayList<String> GetOnlinePlayerNames(@Nullable String a) {
+        if (a==null) a="";
         ArrayList<String> list = new ArrayList<>();
         for (Player player : StartPlugins.getInstance().getServer().getOnlinePlayers()) {
-            list.add(player.getName());
+            if (player.getName().toLowerCase().startsWith(a.toLowerCase())) list.add(player.getName());
         }
         return list;
     }

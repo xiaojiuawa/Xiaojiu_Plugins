@@ -13,6 +13,7 @@ import xiaojiu.tools.MessageHelper;
 import xiaojiu.tools.Until;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class PlayerCommand implements TabExecutor {
@@ -91,13 +92,17 @@ public class PlayerCommand implements TabExecutor {
     @Override
     public List<String> onTabComplete(CommandSender commandSender, Command command, String s, String[] strings) {
         List<String> list = new ArrayList<>();
+        System.out.println(strings.length);
+        System.out.println(Arrays.toString(strings));
         if (strings.length == 1) {
-            if (commandSender.hasPermission("xiaojiu.PlayerLimit.save")) list.add("保存");
-            if (commandSender.hasPermission("xiaojiu.PlayerLimit.add")) list.add("添加");
-            if (commandSender.hasPermission("xiaojiu.PlayerLimit.remove")) list.add("删除");
+            if (commandSender.hasPermission("xiaojiu.PlayerLimit.save")&&("保存".startsWith(strings[0]))) list.add("保存");
+            if (commandSender.hasPermission("xiaojiu.PlayerLimit.add")&&("添加".startsWith(strings[0]))) list.add("添加");
+            if (commandSender.hasPermission("xiaojiu.PlayerLimit.remove")&&("删除".startsWith(strings[0]))) list.add("删除");
         } else if (strings.length == 2) {
-            if (strings[1].equalsIgnoreCase("add") || strings[1].equalsIgnoreCase("添加")) {
-                list.addAll(Until.GetOnlinePlayerNames());
+            if (commandSender.hasPermission("xiaojiu.PlayerLimit.add")&&strings[0].equalsIgnoreCase("add") || strings[0].equalsIgnoreCase("添加")) {
+                list.addAll(Until.GetOnlinePlayerNames(strings[1]));
+            } else if (commandSender.hasPermission("xiaojiu.PlayerLimit.remove")&&strings[0].equalsIgnoreCase("删除")||strings[0].equalsIgnoreCase("del")||strings[0].equalsIgnoreCase("remove")) {
+                list.addAll(LimitPlayerTools.GetAllPlayerName(strings[0]));
             }
         }
         return list;

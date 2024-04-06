@@ -4,6 +4,7 @@ import org.bukkit.configuration.serialization.ConfigurationSerializable;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 public class LimitPlayer implements ConfigurationSerializable {
     public long leastSigBits;
@@ -17,7 +18,12 @@ public class LimitPlayer implements ConfigurationSerializable {
         this.Name = name;
         this.message = message;
     }
-
+    public LimitPlayer(UUID uuid,String name,String message){
+        this.message=message;
+        this.mostSigBits= uuid.getMostSignificantBits();
+        this.leastSigBits= uuid.getLeastSignificantBits();
+        this.Name=name;
+    }
     @Override
     public Map<String, Object> serialize() {
         Map<String, Object> map = new HashMap<>();

@@ -18,12 +18,14 @@ public class LimitPlayer implements ConfigurationSerializable {
         this.Name = name;
         this.message = message;
     }
-    public LimitPlayer(UUID uuid,String name,String message){
-        this.message=message;
-        this.mostSigBits= uuid.getMostSignificantBits();
-        this.leastSigBits= uuid.getLeastSignificantBits();
-        this.Name=name;
+
+    public LimitPlayer(UUID uuid, String name, String message) {
+        this.message = message;
+        this.mostSigBits = uuid.getMostSignificantBits();
+        this.leastSigBits = uuid.getLeastSignificantBits();
+        this.Name = name;
     }
+
     @Override
     public Map<String, Object> serialize() {
         Map<String, Object> map = new HashMap<>();

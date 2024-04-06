@@ -70,7 +70,7 @@ public class Until {
     }
 
     public static ArrayList<String> GetOnlinePlayerNames(@Nullable String a) {
-        if (a==null) a="";
+        if (a == null) a = "";
         ArrayList<String> list = new ArrayList<>();
         for (Player player : StartPlugins.getInstance().getServer().getOnlinePlayers()) {
             if (player.getName().toLowerCase().startsWith(a.toLowerCase())) list.add(player.getName());

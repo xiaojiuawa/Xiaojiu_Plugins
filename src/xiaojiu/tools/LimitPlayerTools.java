@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.UUID;
 
 public class LimitPlayerTools {
-    public static HashMap<UUID,LimitPlayer> hashMap = new HashMap<>();
+    public static HashMap<UUID, LimitPlayer> hashMap = new HashMap<>();
     public static ArrayList<LimitPlayer> list = new ArrayList<>();
     public static File file = new File(StartPlugins.getInstance().getDataFolder(), "PlayerLimit.yml");
     public static FileConfiguration configuration = YamlConfiguration.loadConfiguration(file);
@@ -29,22 +29,24 @@ public class LimitPlayerTools {
             hashMap.put(uuid, player);
         }
     }
-    public static List<String> GetAllPlayerName(String Start){
+
+    public static List<String> GetAllPlayerName(String Start) {
         List<String> list1 = new ArrayList<>();
         hashMap.forEach((uuid, limitPlayer) -> {
-            if (limitPlayer.Name.toLowerCase().startsWith(Start.toLowerCase())){
+            if (limitPlayer.Name.toLowerCase().startsWith(Start.toLowerCase())) {
                 list1.add(limitPlayer.Name);
             }
         });
         return list1;
     }
+
     public static String add(String message, Player player, boolean addToOffer) {
         UUID uuid = player.getUniqueId();
-        LimitPlayer limitPlayer = new LimitPlayer(uuid,player.getName(),message);
+        LimitPlayer limitPlayer = new LimitPlayer(uuid, player.getName(), message);
         if (hashMap.containsKey(uuid)) {
             return "限制列表中已经有这位玩家了";
         }
-        hashMap.put(uuid,limitPlayer );
+        hashMap.put(uuid, limitPlayer);
         if (addToOffer) {
             list.add(limitPlayer);
         }

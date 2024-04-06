@@ -43,10 +43,10 @@ public class PlayerJoinTimeTask {
         }
     }
 
-    public static List<String> getRecordedPlayers(String exclude){
+    public static List<String> getRecordedPlayers(String exclude) {
         List<String> list = new ArrayList<>();
-        for (Map.Entry<UUID,JTPlayer> entry:map.entrySet()){
-            if (entry.getValue().PlayerName.toLowerCase().startsWith(exclude)){
+        for (Map.Entry<UUID, JTPlayer> entry : map.entrySet()) {
+            if (entry.getValue().PlayerName.toLowerCase().startsWith(exclude)) {
                 list.add(entry.getValue().PlayerName);
             }
         }

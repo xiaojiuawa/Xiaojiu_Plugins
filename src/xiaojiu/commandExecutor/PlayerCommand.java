@@ -95,13 +95,16 @@ public class PlayerCommand implements TabExecutor {
         System.out.println(strings.length);
         System.out.println(Arrays.toString(strings));
         if (strings.length == 1) {
-            if (commandSender.hasPermission("xiaojiu.PlayerLimit.save")&&("保存".startsWith(strings[0]))) list.add("保存");
-            if (commandSender.hasPermission("xiaojiu.PlayerLimit.add")&&("添加".startsWith(strings[0]))) list.add("添加");
-            if (commandSender.hasPermission("xiaojiu.PlayerLimit.remove")&&("删除".startsWith(strings[0]))) list.add("删除");
+            if (commandSender.hasPermission("xiaojiu.PlayerLimit.save") && ("保存".startsWith(strings[0])))
+                list.add("保存");
+            if (commandSender.hasPermission("xiaojiu.PlayerLimit.add") && ("添加".startsWith(strings[0])))
+                list.add("添加");
+            if (commandSender.hasPermission("xiaojiu.PlayerLimit.remove") && ("删除".startsWith(strings[0])))
+                list.add("删除");
         } else if (strings.length == 2) {
-            if (commandSender.hasPermission("xiaojiu.PlayerLimit.add")&&strings[0].equalsIgnoreCase("add") || strings[0].equalsIgnoreCase("添加")) {
+            if (commandSender.hasPermission("xiaojiu.PlayerLimit.add") && strings[0].equalsIgnoreCase("add") || strings[0].equalsIgnoreCase("添加")) {
                 list.addAll(Until.GetOnlinePlayerNames(strings[1]));
-            } else if (commandSender.hasPermission("xiaojiu.PlayerLimit.remove")&&strings[0].equalsIgnoreCase("删除")||strings[0].equalsIgnoreCase("del")||strings[0].equalsIgnoreCase("remove")) {
+            } else if (commandSender.hasPermission("xiaojiu.PlayerLimit.remove") && strings[0].equalsIgnoreCase("删除") || strings[0].equalsIgnoreCase("del") || strings[0].equalsIgnoreCase("remove")) {
                 list.addAll(LimitPlayerTools.GetAllPlayerName(strings[0]));
             }
         }

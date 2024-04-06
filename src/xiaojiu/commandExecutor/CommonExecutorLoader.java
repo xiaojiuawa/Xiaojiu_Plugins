@@ -8,6 +8,7 @@ public class CommonExecutorLoader {
     public static SafeGuardCommand safeGuardCommand = new SafeGuardCommand();
     public static SuggestCommand suggestCommand = new SuggestCommand();
     public static PlayerTimeCommand playerTimeCommand = new PlayerTimeCommand();
+
     public static void Load(StartPlugins Instance) {
         Instance.getCommand("restartserver").setExecutor(restartServerCommand);
         Instance.getCommand("safeguard").setExecutor(safeGuardCommand);

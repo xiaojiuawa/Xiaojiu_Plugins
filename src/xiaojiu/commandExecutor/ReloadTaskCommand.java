@@ -45,14 +45,14 @@ public class ReloadTaskCommand implements CommandExecutor {
                         commandSender.sendMessage(MessageHelper.InitMessage(ChatColor.LIGHT_PURPLE + "已拒绝投票"));
                     }
                 } else if (strings[0].equalsIgnoreCase("cancel") || strings[0].equalsIgnoreCase("取消")) {
-                    if (PermissionHelper.isHasPermission(commandSender,"ReloadTask","cancel") || ReloadTask.suggestHelper.sponsor.equals(((Player) commandSender).getUniqueId())) {
+                    if (PermissionHelper.isHasPermission(commandSender, "ReloadTask", "cancel") || ReloadTask.suggestHelper.sponsor.equals(((Player) commandSender).getUniqueId())) {
                         ReloadTask.cancel();
                         MessageHelper.SendMessageAllPlayer(MessageHelper.InitMessage(ChatColor.LIGHT_PURPLE + "当前投票任务已被玩家" + commandSender.getName() + "取消"));
                     } else {
                         commandSender.sendMessage(MessageHelper.InitMessage(ChatColor.RED + "你没有取消当前投票任务的权限"));
                     }
                 } else if (strings[0].equalsIgnoreCase("down")) {
-                    if (PermissionHelper.isHasPermission(commandSender,"ReloadTask","down")) {
+                    if (PermissionHelper.isHasPermission(commandSender, "ReloadTask", "down")) {
                         ReloadTask.down();
                         MessageHelper.SendMessageAllPlayer(MessageHelper.InitMessage(ChatColor.LIGHT_PURPLE + "当前投票任务已被管理员" + ChatColor.WHITE + commandSender.getName() + ChatColor.LIGHT_PURPLE + "立刻结束"));
                     } else {

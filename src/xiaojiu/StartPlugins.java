@@ -18,6 +18,7 @@ public class StartPlugins extends JavaPlugin {
     private static StartPlugins Instance;
     public static PluginCommand command;
     public static Logger logger;
+
     @Override
     public void onEnable() {
         this.getLogger().info("XiaojiuPluginOnEnable");

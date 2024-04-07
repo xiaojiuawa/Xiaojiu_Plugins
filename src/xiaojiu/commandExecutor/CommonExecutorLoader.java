@@ -1,10 +1,6 @@
 package xiaojiu.commandExecutor;
 
-import org.bukkit.command.CommandExecutor;
 import xiaojiu.StartPlugins;
-
-import java.util.HashMap;
-import java.util.Map;
 
 public class CommonExecutorLoader {
     public static PlayerCommand playerCommand = new PlayerCommand();

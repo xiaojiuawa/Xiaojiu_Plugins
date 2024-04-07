@@ -1,47 +1,47 @@
- name: XiaojiuTimeRecord
- main: xiaojiu.StartPlugins
- version: 1
- author: Xiaojiu
+name: XiaojiuTimeRecord
+main: xiaojiu.StartPlugins
+version: 1
+author: Xiaojiu
 
- commands:
-   restartserver:
-     description: Restart the server
-     aliases:
-       - rest
-       - rs
-   safeguard:
-     description: server maintain
-     aliases:
-       - sg
-   Limit:
-     description: Limit Player
-     aliases:
-       - Li
-       - li
-   suggest:
+commands:
+  restartserver:
+    description: Restart the server
+    aliases:
+      - rest
+      - rs
+  safeguard:
+    description: server maintain
+    aliases:
+      - sg
+  Limit:
+    description: Limit Player
+    aliases:
+      - Li
+      - li
+  suggest:
     description: suggest
     aliases:
       - sug
-   playerTime:
-     description: Get Time
-     aliases:
-       - pt
-       - time
- permissions:
+  playerTime:
+    description: Get Time
+    aliases:
+      - pt
+      - time
+permissions:
   xiaojiu:
-   default: true
-   children:
-     xiaojiu.PlayerLimit.add: op
-     xiaojiu.PlayerLimit.remove: op
-     xiaojiu.PlayerLimit.save: op
-     xiaojiu.PlayerTime.find: op
-     xiaojiu.SafeGuard.use: true
-     xiaojiu.SafeGuard.start: op
-     xiaojiu.SafeGuard.end: op
-#     xiaojiu.restart.ues: true
-     xiaojiu.restart.now: op
-     xiaojiu.restart.start: op
-     xiaojiu.restart.cancel: op
-     xiaojiu.restart.reset: op
-     xiaojiu.ReloadTask.cancel: op
-     xiaojiu.ReloadTask.down: op
+    default: true
+    children:
+      xiaojiu.PlayerLimit.add: op
+      xiaojiu.PlayerLimit.remove: op
+      xiaojiu.PlayerLimit.save: op
+      xiaojiu.PlayerTime.find: op
+      xiaojiu.SafeGuard.use: true
+      xiaojiu.SafeGuard.start: op
+      xiaojiu.SafeGuard.end: op
+      #     xiaojiu.restart.ues: true
+      xiaojiu.restart.now: op
+      xiaojiu.restart.start: op
+      xiaojiu.restart.cancel: op
+      xiaojiu.restart.reset: op
+      xiaojiu.ReloadTask.cancel: op
+      xiaojiu.ReloadTask.down: op

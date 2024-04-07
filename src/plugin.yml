@@ -29,12 +29,16 @@
        - time
  permissions:
   xiaojiu:
-   default: op
+   default: true
    children:
      xiaojiu.PlayerLimit.add: op
      xiaojiu.PlayerLimit.remove: op
      xiaojiu.PlayerLimit.save: op
      xiaojiu.PlayerTime.find: op
      xiaojiu.SafeGuard.use: true
+     xiaojiu.SafeGuard.start: op
+     xiaojiu.SafeGuard.end: op
      xiaojiu.restartServer.ues: true
      xiaojiu.restartServer.now: op
+     xiaojiu.ReloadTask.cancel: op
+     xiaojiu.ReloadTask.down: op

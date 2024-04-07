@@ -12,14 +12,17 @@ import xiaojiu.config.Savecfg.LimitPlayer;
 import xiaojiu.task.TaskLoader;
 import xiaojiu.tools.Until;
 
+import java.util.logging.Logger;
+
 public class StartPlugins extends JavaPlugin {
     private static StartPlugins Instance;
     public static PluginCommand command;
-
+    public static Logger logger;
     @Override
     public void onEnable() {
         this.getLogger().info("XiaojiuPluginOnEnable");
         Instance = this;
+        logger = this.getLogger();
         Bukkit.getPluginManager().registerEvents(new EventLoader(), this);
         CommonExecutorLoader.Load(this);
         Until.Init();

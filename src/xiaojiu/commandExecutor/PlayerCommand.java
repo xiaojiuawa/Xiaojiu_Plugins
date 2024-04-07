@@ -92,8 +92,8 @@ public class PlayerCommand implements TabExecutor {
     @Override
     public List<String> onTabComplete(CommandSender commandSender, Command command, String s, String[] strings) {
         List<String> list = new ArrayList<>();
-        System.out.println(strings.length);
-        System.out.println(Arrays.toString(strings));
+//        System.out.println(strings.length);
+//        System.out.println(Arrays.toString(strings));
         if (strings.length == 1) {
             if (commandSender.hasPermission("xiaojiu.PlayerLimit.save") && ("保存".startsWith(strings[0])))
                 list.add("保存");

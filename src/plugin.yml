@@ -38,7 +38,10 @@
      xiaojiu.SafeGuard.use: true
      xiaojiu.SafeGuard.start: op
      xiaojiu.SafeGuard.end: op
-     xiaojiu.restartServer.ues: true
-     xiaojiu.restartServer.now: op
+#     xiaojiu.restart.ues: true
+     xiaojiu.restart.now: op
+     xiaojiu.restart.start: op
+     xiaojiu.restart.cancel: op
+     xiaojiu.restart.reset: op
      xiaojiu.ReloadTask.cancel: op
      xiaojiu.ReloadTask.down: op

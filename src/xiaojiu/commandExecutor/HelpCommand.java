@@ -10,7 +10,7 @@ public class HelpCommand {
     }
     {
         setHelpMap("cancel",new HelpMap("rest","/xj rest cancel","xiaojiu.rest.cancel","通过这个命令取消重启服务器"));
-        setHelpMap("reset",new HelpMap("reset","/xj rest reset","xiaojiu.rest.reset [time]","通过这个指令重设服务器计划重启时间"));
+        setHelpMap("reset",new HelpMap("rest","/xj rest reset","xiaojiu.rest.reset [time]","通过这个指令重设服务器计划重启时间"));
         //todo
     }
     public class HelpMap{

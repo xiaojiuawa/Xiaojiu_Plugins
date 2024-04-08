@@ -4,14 +4,18 @@ import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.command.TabExecutor;
 import xiaojiu.tools.MessageHelper;
 import xiaojiu.tools.PermissionHelper;
 import xiaojiu.tools.RestartTools;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static xiaojiu.tools.RestartTools.ProcessingTime;
 import static xiaojiu.tools.RestartTools.isNumber;
 
-public class RestartServerCommand implements CommandExecutor {
+public class RestartServerCommand implements TabExecutor {
     public static String CommonNode = "restart";
 
     @Override
@@ -86,4 +90,15 @@ public class RestartServerCommand implements CommandExecutor {
 //        return false;
     }
 
+    @Override
+    public List<String> onTabComplete(CommandSender commandSender, Command command, String s, String[] strings) {
+        List<String> list = new ArrayList<>();
+        if (strings.length==1){
+            if (PermissionHelper.isHasPermissionNoLog(commandSender,CommonNode,"reset")&&"reset".startsWith(strings[0].toLowerCase())){
+                list.add("reset");
+            }
+            //todo
+        }
+        return null;
+    }
 }

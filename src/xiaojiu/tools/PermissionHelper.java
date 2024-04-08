@@ -25,6 +25,15 @@ public class PermissionHelper {
 
         }
     }
+    public static boolean isHasPermissionNoLog(CommandSender commandSender,String... nodes){
+        String PermissionNode = GetPermissionNode("xiaojiu",nodes);
+        if (commandSender.isOp()&&commandSender instanceof ConsoleCommandSender) return true;
+        if (commandSender instanceof Player){
+            Player player = (Player) commandSender;
+            return player.hasPermission(PermissionNode);
+        }
+        return false;
+    }
 
     public static String GetPermissionNode(String father, String... nodes) {
         StringBuilder result = new StringBuilder(father + ".");

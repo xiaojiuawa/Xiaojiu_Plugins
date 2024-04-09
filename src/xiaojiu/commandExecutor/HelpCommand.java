@@ -4,25 +4,14 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class HelpCommand {
-    public static Map<String,HelpMap> helpMap = new HashMap<>();
-    public static void setHelpMap(String common, HelpMap commons){
-        helpMap.put(common,commons);
+    public static Map<String,Map<String,HelpMap>> helpMap = new HashMap<>();
+    public static void HelpMapInit(){
+        PlayerCommand.InitMap();
+        helpMap.put("pl",PlayerCommand.PlayerCommandMap);
+        PlayerTimeCommand.InitMap();
+        helpMap.put("pt",PlayerTimeCommand.PlayerTimeMap);
+        ReloadTaskCommand.InitMap();
+        helpMap.put("sug",ReloadTaskCommand.ReloadTaskMap);
     }
-    {
-        setHelpMap("cancel",new HelpMap("rest","/xj rest cancel","xiaojiu.rest.cancel","通过这个命令取消重启服务器"));
-        setHelpMap("reset",new HelpMap("rest","/xj rest reset","xiaojiu.rest.reset [time]","通过这个指令重设服务器计划重启时间"));
-        //todo
-    }
-    public class HelpMap{
-        public HelpMap(String faster,String command,String permissionNode,String introduce){
-            this.faster=faster;
-            this.command=command;
-            this.PermissionNode=permissionNode;
-            this.introduce=introduce;
-        }
-        public String faster;
-        public String command;
-        public String PermissionNode;
-        public String introduce;
-    }
+
 }

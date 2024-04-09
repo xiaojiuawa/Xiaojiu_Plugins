@@ -77,4 +77,12 @@ public class Until {
         }
         return list;
     }
+
+    public static String IntegrateStr(String[] strings) {
+        StringBuilder ans = new StringBuilder();
+        for (int i = 3; i < strings.length; i++) {
+            ans.append(strings[i]).append(' ');
+        }
+        return ans.toString();
+    }
 }

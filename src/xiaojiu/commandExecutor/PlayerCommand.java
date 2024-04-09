@@ -6,17 +6,22 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabExecutor;
 import org.bukkit.entity.Player;
-import xiaojiu.StartPlugins;
 import xiaojiu.config.SaveConfig;
 import xiaojiu.tools.LimitPlayerTools;
 import xiaojiu.tools.MessageHelper;
+import xiaojiu.tools.PlayerTools;
 import xiaojiu.tools.Until;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 public class PlayerCommand implements TabExecutor {
+    public static Map<String,HelpMap> PlayerCommandMap = new HashMap<>();
+    public static String CommandNode = "pl";
+    public static void InitMap(){
+        PlayerCommandMap.put("save",new HelpMap(CommandNode,"/xj pl save","xiaojiu.playerLimit.save","通过这个方法立即保存玩家限制列表"));
+        PlayerCommandMap.put("add",new HelpMap(CommandNode,"/xj pl add true/false [玩家名]","xiaojiu.playerLimit.add","通过这个指令来添加一位玩家到达限制列表中 注:其中第二个参数填true则会启用保存，服务器关闭后仍有效，填false则禁用保存，服务器关闭后重置 "));
+        PlayerCommandMap.put("remove",new HelpMap(CommandNode,"xj pl remove [玩家名]","xiaojiu.playerLimit.remove","通过这个指令来解除对玩家的限制"));
+    }
     @Override
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
         if (strings.length != 0) {
@@ -30,7 +35,7 @@ public class PlayerCommand implements TabExecutor {
             } else if (strings[0].equalsIgnoreCase("add") || strings[0].equalsIgnoreCase("添加")) {
                 if (commandSender.hasPermission("xiaojiu.playerLimit.add")) {
                     if (!(strings.length < 2)) {
-                        Player player = GetPlayer(strings[1]);
+                        Player player = PlayerTools.GetPlayer(strings[1]);
                         if (commandSender instanceof Player) {
                             Player player1 = (Player) commandSender;
                             if (player1.getUniqueId().equals(player.getUniqueId())) {
@@ -40,9 +45,9 @@ public class PlayerCommand implements TabExecutor {
                         if (player != null) {
                             String message;
                             if (strings[2].equalsIgnoreCase("true") || strings[2].equalsIgnoreCase("离线")) {
-                                message = LimitPlayerTools.add(IntegrateStr(strings), player, true);
+                                message = LimitPlayerTools.add(Until.IntegrateStr(strings), player, true);
                             } else if (strings[2].equalsIgnoreCase("false") || strings[2].equalsIgnoreCase("非离线")) {
-                                message = LimitPlayerTools.add(IntegrateStr(strings), player, false);
+                                message = LimitPlayerTools.add(Until.IntegrateStr(strings), player, false);
                             } else {
                                 message = "请设置是否开启保存";
                             }
@@ -60,7 +65,7 @@ public class PlayerCommand implements TabExecutor {
             } else if (strings[0].equalsIgnoreCase("del") || strings[0].equalsIgnoreCase("remove") || strings[0].equalsIgnoreCase("删除")) {
                 if (commandSender.hasPermission("xiaojiu.PlayerLimit.remove")) {
                     if (!(strings.length < 2)) {
-                        OfflinePlayer player = GetPlayerOffer(strings[1]);
+                        OfflinePlayer player = PlayerTools.GetPlayerOffer(strings[1]);
                         if (commandSender instanceof Player) {
                             Player player1 = (Player) commandSender;
                             if (player1.getUniqueId().equals(player.getUniqueId())) {
@@ -95,12 +100,9 @@ public class PlayerCommand implements TabExecutor {
 //        System.out.println(strings.length);
 //        System.out.println(Arrays.toString(strings));
         if (strings.length == 1) {
-            if (commandSender.hasPermission("xiaojiu.PlayerLimit.save") && ("保存".startsWith(strings[0])))
-                list.add("保存");
-            if (commandSender.hasPermission("xiaojiu.PlayerLimit.add") && ("添加".startsWith(strings[0])))
-                list.add("添加");
-            if (commandSender.hasPermission("xiaojiu.PlayerLimit.remove") && ("删除".startsWith(strings[0])))
-                list.add("删除");
+            for (Map.Entry<String,HelpMap> entry:PlayerCommandMap.entrySet()){
+                if (commandSender.hasPermission(entry.getValue().PermissionNode)&&entry.getKey().startsWith(strings[0].toLowerCase())) list.add(entry.getKey());
+            }
         } else if (strings.length == 2) {
             if (commandSender.hasPermission("xiaojiu.PlayerLimit.add") && strings[0].equalsIgnoreCase("add") || strings[0].equalsIgnoreCase("添加")) {
                 list.addAll(Until.GetOnlinePlayerNames(strings[1]));
@@ -109,22 +111,6 @@ public class PlayerCommand implements TabExecutor {
             }
         }
         return list;
-    }
-
-    public static String IntegrateStr(String[] strings) {
-        StringBuilder ans = new StringBuilder();
-        for (int i = 3; i < strings.length; i++) {
-            ans.append(strings[i]).append(' ');
-        }
-        return ans.toString();
-    }
-
-    public static Player GetPlayer(String PlayerName) {
-        return StartPlugins.getInstance().getServer().getPlayer(PlayerName);
-    }
-
-    public static OfflinePlayer GetPlayerOffer(String PlayerName) {
-        return StartPlugins.getInstance().getServer().getOfflinePlayer(PlayerName);
     }
 
 

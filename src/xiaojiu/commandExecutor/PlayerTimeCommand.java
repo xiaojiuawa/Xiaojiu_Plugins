@@ -6,16 +6,21 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabExecutor;
 import xiaojiu.StartPlugins;
+import xiaojiu.config.SaveConfig;
 import xiaojiu.task.PlayerJoinTimeTask;
 import xiaojiu.tools.MessageHelper;
 import xiaojiu.tools.TimeHelper;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 public class PlayerTimeCommand implements TabExecutor {
+    public static Map<String,HelpMap> PlayerTimeMap = new HashMap<>();
+    public static String CommonNode  = "pt";
+    public static void InitMap(){
+        PlayerTimeMap.put("find",new HelpMap(CommonNode,"/xj pt find [玩家名]","xiaojiu.PlayerTime.find","通过这个查询玩家的上一次上线时间和时间差"));
+        PlayerTimeMap.put("save",new HelpMap(CommonNode,"xj pt save","xiaojiu.PlayerTime.save","通过这个立刻保存玩家上线时间"));
+    }
     @Override
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
         if (strings.length != 0) {
@@ -34,6 +39,13 @@ public class PlayerTimeCommand implements TabExecutor {
                 } else {
                     commandSender.sendMessage(MessageHelper.InitMessage(ChatColor.LIGHT_PURPLE + "你没有权限查询玩家上线时间"));
                 }
+            } else if (strings[0].equalsIgnoreCase("save")||strings[0].equalsIgnoreCase("保存")) {
+                if (commandSender.hasPermission("xiaojiu.PlayerTime.save")){
+                    SaveConfig.SavePlayerTime();
+                    commandSender.sendMessage(MessageHelper.InitMessage(ChatColor.LIGHT_PURPLE+"保存玩家上线时间成功"));
+                }else{
+                    commandSender.sendMessage(MessageHelper.InitMessage(ChatColor.RED+"你没有保存玩家上线时间的权限"));
+                }
             }
             return true;
         }
@@ -44,7 +56,9 @@ public class PlayerTimeCommand implements TabExecutor {
     public List<String> onTabComplete(CommandSender commandSender, Command command, String s, String[] strings) {
         List<String> list = new ArrayList<>();
         if (strings.length == 1) {
-            list.add("find");
+            for (Map.Entry<String,HelpMap> entry:PlayerTimeMap.entrySet()){
+                if (commandSender.hasPermission(entry.getValue().PermissionNode)&&entry.getKey().startsWith(strings[0].toLowerCase())) list.add(entry.getKey());
+            }
         } else if (strings.length == 2) {
             list.addAll(PlayerJoinTimeTask.getRecordedPlayers(strings[1]));
         }

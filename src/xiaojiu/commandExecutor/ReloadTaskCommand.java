@@ -4,13 +4,29 @@ import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.command.TabExecutor;
 import org.bukkit.entity.Player;
 import xiaojiu.StartPlugins;
 import xiaojiu.task.ReloadTask;
 import xiaojiu.tools.MessageHelper;
 import xiaojiu.tools.PermissionHelper;
 
-public class ReloadTaskCommand implements CommandExecutor {
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+public class ReloadTaskCommand implements TabExecutor {
+    public static Map<String,HelpMap> ReloadTaskMap = new HashMap<>();
+    public static String CommonNode = "sug";
+    public static void InitMap(){
+        ReloadTaskMap.put("start",new HelpMap(CommonNode,"/xj sug start","xiaojiu.ReloadTask.start","通过这个指令发起一次投票重启"));
+        ReloadTaskMap.put("revoke",new HelpMap(CommonNode,"/xj sug revoke","xiaojiu.ReloadTask.revoke","通过这个指令撤销你的投票"));
+        ReloadTaskMap.put("agree",new HelpMap(CommonNode,"/xj sug agree","xiaojiu.ReloadTask.agree","通过这个指令同意当前的投票任务"));
+        ReloadTaskMap.put("refuse",new HelpMap(CommonNode,"/xj sug refuse","xiaojiu.ReloadTask.refuse","通过这个指令拒绝当前的投票任务"));
+        ReloadTaskMap.put("cancel",new HelpMap(CommonNode,"/xj sug cancel","xiaojiu.ReloadTask.cancel","通过这个指令取消当前的投票任务"));
+        ReloadTaskMap.put("down",new HelpMap(CommonNode,"/xj sug down","xiaojiu.ReloadTask.down","通过这个指令立刻结束当前的投票任务，并进行结算"));
+    }
     @Override
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
         if (commandSender instanceof Player && strings.length != 0) {
@@ -65,5 +81,16 @@ public class ReloadTaskCommand implements CommandExecutor {
             return true;
         }
         return false;
+    }
+
+    @Override
+    public List<String> onTabComplete(CommandSender commandSender, Command command, String s, String[] strings) {
+        List<String> list = new ArrayList<>();
+        if (strings.length==1){
+            for (Map.Entry<String,HelpMap> entry:ReloadTaskMap.entrySet()){
+                if (commandSender.hasPermission(entry.getValue().PermissionNode)&&entry.getKey().startsWith(strings[0].toLowerCase())) list.add(entry.getKey());
+            }
+        }
+        return list;
     }
 }

@@ -74,7 +74,7 @@ public class ReloadTaskCommand implements TabExecutor {
                         commandSender.sendMessage(MessageHelper.InitMessage(ChatColor.RED+"你没有使用这个指令的权限"));
                     }
                 } else if (strings[0].equalsIgnoreCase("cancel") || strings[0].equalsIgnoreCase("取消")) {
-                    if (PermissionHelper.isHasPermission(commandSender, "ReloadTask", "cancel") || ReloadTask.suggestHelper.sponsor.equals(((Player) commandSender).getUniqueId())) {
+                    if (PermissionHelper.isHasPermission(commandSender, PermissionNode, "cancel") || ReloadTask.suggestHelper.sponsor.equals(((Player) commandSender).getUniqueId())) {
                         ReloadTask.cancel();
                         MessageHelper.SendMessageAllPlayer(MessageHelper.InitMessage(ChatColor.LIGHT_PURPLE + "当前投票任务已被玩家" + commandSender.getName() + "取消"));
                     } else {
@@ -90,6 +90,8 @@ public class ReloadTaskCommand implements TabExecutor {
                 } else {
                     commandSender.sendMessage(MessageHelper.InitMessage(ChatColor.LIGHT_PURPLE + "当前无投票任务进行"));
                 }
+            }else{
+
             }
             return true;
         }

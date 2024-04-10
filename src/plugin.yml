@@ -33,7 +33,7 @@ commands:
       - time
 permissions:
   xiaojiu:
-    default: op
+    default: false
     children:
       xiaojiu.PlayerLimit.help: true
       xiaojiu.PlayerLimit.add: true

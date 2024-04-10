@@ -5,6 +5,7 @@ import org.bukkit.Color;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabExecutor;
+import xiaojiu.tools.PermissionHelper;
 
 import java.util.HashMap;
 import java.util.List;
@@ -40,16 +41,17 @@ public class HelpCommand {
 //                commandSender.sendMessage(ChatColor.GOLD+String.valueOf(page*5)+" "+ i);
                 if (i>=page*5&&i<(page+1)*5){
                     HelpMap map1 = entry.getValue();
-
                     commandSender.sendMessage( ChatColor.GOLD+"命令名: "+entry.getKey());
                     commandSender.sendMessage(ChatColor.GOLD+"使用方法: "+map1.command);
                     commandSender.sendMessage(ChatColor.GOLD+"解释: "+map1.introduce);
+//                    commandSender.sendMessage(ChatColor.GOLD+"需要的权限节点"+map1.PermissionNode);
+//                    commandSender.sendMessage(ChatColor.GOLD+"我是否有权限:"+ (commandSender.hasPermission(map1.PermissionNode)|| commandSender.isOp()?"有":"无"));
                     commandSender.sendMessage(ChatColor.GOLD+"=====================================");
 
                 }
                 i++;
             }
-            commandSender.sendMessage(ChatColor.GOLD+"=========================");
+//            commandSender.sendMessage(ChatColor.GOLD+"=========================");
             commandSender.sendMessage(ChatColor.GOLD+"第"+ (page+1) +"页"+" "+"共"+((map.size() /5)+1)+"页");
         }
     }

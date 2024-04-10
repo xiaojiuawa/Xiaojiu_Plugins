@@ -29,24 +29,24 @@ commands:
       - time
 permissions:
   xiaojiu:
-    default: true
+    default: op
     children:
-      xiaojiu.PlayerLimit.add: op
-      xiaojiu.PlayerLimit.remove: op
-      xiaojiu.PlayerLimit.save: op
-      xiaojiu.PlayerTime.find: op
-      xiaojiu.PlayerTime.save: op
-      xiaojiu.SafeGuard.now: op
-      xiaojiu.SafeGuard.start: op
-      xiaojiu.SafeGuard.end: op
-      xiaojiu.SafeGuard.cancel: op
-      xiaojiu.restart.now: op
-      xiaojiu.restart.start: op
-      xiaojiu.restart.cancel: op
-      xiaojiu.restart.reset: op
-      xiaojiu.ReloadTask.cancel: op
-      xiaojiu.ReloadTask.down: op
-      xiaojiu.ReloadTask.start: true
-      xiaojiu.ReloadTask.revoke: true
-      xiaojiu.ReloadTask.agree: true
-      xiaojiu.ReloadTask.refuse: true
+      xiaojiu.PlayerLimit.add: true
+      xiaojiu.PlayerLimit.remove: true
+      xiaojiu.PlayerLimit.save: true
+      xiaojiu.PlayerTime.find: true
+      xiaojiu.PlayerTime.save: true
+      xiaojiu.SafeGuard.now: true
+      xiaojiu.SafeGuard.start: true
+      xiaojiu.SafeGuard.end: true
+      xiaojiu.SafeGuard.cancel: true
+      xiaojiu.restart.now: true
+      xiaojiu.restart.start: true
+      xiaojiu.restart.cancel: true
+      xiaojiu.restart.reset: true
+      xiaojiu.ReloadTask.cancel: true
+      xiaojiu.ReloadTask.down: true
+      xiaojiu.ReloadTask.start: false
+      xiaojiu.ReloadTask.revoke: false
+      xiaojiu.ReloadTask.agree: false
+      xiaojiu.ReloadTask.refuse: false

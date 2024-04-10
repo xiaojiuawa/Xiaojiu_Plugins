@@ -18,6 +18,7 @@ import java.util.Map;
 
 public class ReloadTaskCommand implements TabExecutor {
     public static Map<String,HelpMap> ReloadTaskMap = new HashMap<>();
+    public static String PermissionNode = "ReloadTask";
     public static String CommonNode = "sug";
     public static void InitMap(){
         ReloadTaskMap.put("start",new HelpMap(CommonNode,"/xj sug start","xiaojiu.ReloadTask.start","通过这个指令发起一次投票重启"));
@@ -38,27 +39,39 @@ public class ReloadTaskCommand implements TabExecutor {
                 }
             } else if (ReloadTask.isSuggesting) {
                 if (strings[0].equalsIgnoreCase("revoke") || strings[0].equalsIgnoreCase("撤销")) {
-                    if (!ReloadTask.suggestHelper.isSuggested(((Player) commandSender).getUniqueId())) {
-                        commandSender.sendMessage(MessageHelper.InitMessage(ChatColor.LIGHT_PURPLE + "你还没有投票"));
-                    } else {
-                        ReloadTask.suggestHelper.delSuggest(((Player) commandSender).getUniqueId());
-                        commandSender.sendMessage(MessageHelper.InitMessage(ChatColor.LIGHT_PURPLE + "撤销投票成功"));
+                    if (PermissionHelper.isHasPermission(commandSender,PermissionNode,"revoke")){
+                        if (!ReloadTask.suggestHelper.isSuggested(((Player) commandSender).getUniqueId())) {
+                            commandSender.sendMessage(MessageHelper.InitMessage(ChatColor.LIGHT_PURPLE + "你还没有投票"));
+                        } else {
+                            ReloadTask.suggestHelper.delSuggest(((Player) commandSender).getUniqueId());
+                            commandSender.sendMessage(MessageHelper.InitMessage(ChatColor.LIGHT_PURPLE + "撤销投票成功"));
+                        }
+                    }else {
+                        commandSender.sendMessage(MessageHelper.InitMessage(ChatColor.RED+"你没有使用这个指令的权限"));
                     }
                 } else if (strings[0].equalsIgnoreCase("agree") || strings[0].equalsIgnoreCase("同意")) {
-                    if (ReloadTask.suggestHelper.isSuggested(((Player) commandSender).getUniqueId())) {
-                        commandSender.sendMessage(MessageHelper.InitMessage(ChatColor.LIGHT_PURPLE + "你已经投票"));
-                        commandSender.sendMessage(MessageHelper.InitMessage(ChatColor.LIGHT_PURPLE + "请使用/sug revoke 或 /sug 撤销 撤销您的投票"));
-                    } else {
-                        ReloadTask.suggestHelper.Approve.add(((Player) commandSender).getUniqueId());
-                        commandSender.sendMessage(MessageHelper.InitMessage(ChatColor.LIGHT_PURPLE + "已同意投票"));
+                    if (PermissionHelper.isHasPermission(commandSender,PermissionNode,"agree")){
+                        if (ReloadTask.suggestHelper.isSuggested(((Player) commandSender).getUniqueId())) {
+                            commandSender.sendMessage(MessageHelper.InitMessage(ChatColor.LIGHT_PURPLE + "你已经投票"));
+                            commandSender.sendMessage(MessageHelper.InitMessage(ChatColor.LIGHT_PURPLE + "请使用/sug revoke 或 /sug 撤销 撤销您的投票"));
+                        } else {
+                            ReloadTask.suggestHelper.Approve.add(((Player) commandSender).getUniqueId());
+                            commandSender.sendMessage(MessageHelper.InitMessage(ChatColor.LIGHT_PURPLE + "已同意投票"));
+                        }
+                    }else {
+                        commandSender.sendMessage(ChatColor.RED+"你没有使用这个指令的权限");
                     }
                 } else if (strings[0].equalsIgnoreCase("refuse") || strings[0].equalsIgnoreCase("拒绝")) {
-                    if (ReloadTask.suggestHelper.isSuggested(((Player) commandSender).getUniqueId())) {
-                        commandSender.sendMessage(MessageHelper.InitMessage(ChatColor.LIGHT_PURPLE + "你已经投票"));
-                        commandSender.sendMessage(MessageHelper.InitMessage(ChatColor.LIGHT_PURPLE + "请使用/sug revoke 或 /sug 撤销 撤销您的投票"));
-                    } else {
-                        ReloadTask.suggestHelper.Refuse.add(((Player) commandSender).getUniqueId());
-                        commandSender.sendMessage(MessageHelper.InitMessage(ChatColor.LIGHT_PURPLE + "已拒绝投票"));
+                    if (PermissionHelper.isHasPermission(commandSender,PermissionNode,"refuse")){
+                        if (ReloadTask.suggestHelper.isSuggested(((Player) commandSender).getUniqueId())) {
+                            commandSender.sendMessage(MessageHelper.InitMessage(ChatColor.LIGHT_PURPLE + "你已经投票"));
+                            commandSender.sendMessage(MessageHelper.InitMessage(ChatColor.LIGHT_PURPLE + "请使用/sug revoke 或 /sug 撤销 撤销您的投票"));
+                        } else {
+                            ReloadTask.suggestHelper.Refuse.add(((Player) commandSender).getUniqueId());
+                            commandSender.sendMessage(MessageHelper.InitMessage(ChatColor.LIGHT_PURPLE + "已拒绝投票"));
+                        }
+                    }else {
+                        commandSender.sendMessage(MessageHelper.InitMessage(ChatColor.RED+"你没有使用这个指令的权限"));
                     }
                 } else if (strings[0].equalsIgnoreCase("cancel") || strings[0].equalsIgnoreCase("取消")) {
                     if (PermissionHelper.isHasPermission(commandSender, "ReloadTask", "cancel") || ReloadTask.suggestHelper.sponsor.equals(((Player) commandSender).getUniqueId())) {

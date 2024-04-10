@@ -35,12 +35,18 @@ permissions:
       xiaojiu.PlayerLimit.remove: op
       xiaojiu.PlayerLimit.save: op
       xiaojiu.PlayerTime.find: op
-      xiaojiu.safeguard.now: op
-      xiaojiu.safeguard.start: op
-      xiaojiu.safeguard.end: op
+      xiaojiu.PlayerTime.save: op
+      xiaojiu.SafeGuard.now: op
+      xiaojiu.SafeGuard.start: op
+      xiaojiu.SafeGuard.end: op
+      xiaojiu.SafeGuard.cancel: op
       xiaojiu.restart.now: op
       xiaojiu.restart.start: op
       xiaojiu.restart.cancel: op
       xiaojiu.restart.reset: op
       xiaojiu.ReloadTask.cancel: op
       xiaojiu.ReloadTask.down: op
+      xiaojiu.ReloadTask.start: true
+      xiaojiu.ReloadTask.revoke: true
+      xiaojiu.ReloadTask.agree: true
+      xiaojiu.ReloadTask.refuse: true

@@ -27,7 +27,10 @@ public class SafeGuardHelper {
 
     public static boolean startSafeGuard(int num) {
         if (isSafeGuard) return false;
-        if (num == -1) done();
+        if (num == -1) {
+            done();
+            return true;
+        }
         SafeGuard(num);
         return true;
     }

@@ -2,7 +2,6 @@ package xiaojiu.commandExecutor;
 
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
-import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabExecutor;
 import xiaojiu.tools.MessageHelper;
@@ -15,7 +14,7 @@ import java.util.List;
 import java.util.Map;
 
 import static xiaojiu.tools.RestartTools.ProcessingTime;
-import static xiaojiu.tools.RestartTools.isNumber;
+import static xiaojiu.tools.Until.isNumber;
 
 public class RestartServerCommand implements TabExecutor {
     public static String PermissionCommonNode = "restart";
@@ -23,7 +22,10 @@ public class RestartServerCommand implements TabExecutor {
     public static Map<String,HelpMap> RestartMap = new HashMap<>();
     public static void InitMap(){
         RestartMap.put("cancel",new HelpMap(CommonNode,"/xj rest cancel","xiaojiu.restart.cancel","通过这个指令取消当前的计划重启任务"));
-
+        RestartMap.put("now",new HelpMap(CommonNode,"/xj rest now","xiaojiu.restart.now","通过这个指令立刻执行重启"));
+        RestartMap.put("reset",new HelpMap(CommonNode,"/xj rest reset [时间]","xiaojiu.restart.reset","通过这个指令重新设置重启时间"));
+        RestartMap.put("",new HelpMap(CommonNode,"/xj rest [时间]","xiaojiu.restart.start","通过这个指令发起一个重启任务"));
+        RestartMap.put("m",new HelpMap(CommonNode,"/xj rest m/h/d [时间]","xiaojiu.restart.start","通过这个指令发起一个重启任务(使用重设时间单位)，其中m表示天,h表示小时,m表示分钟"));
     }
     @Override
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
@@ -101,11 +103,13 @@ public class RestartServerCommand implements TabExecutor {
     public List<String> onTabComplete(CommandSender commandSender, Command command, String s, String[] strings) {
         List<String> list = new ArrayList<>();
         if (strings.length==1){
-            if (PermissionHelper.isHasPermissionNoLog(commandSender,PermissionCommonNode,"reset")&&"reset".startsWith(strings[0].toLowerCase())){
-                list.add("reset");
+            for (Map.Entry<String,HelpMap> entry:RestartMap.entrySet()){
+                if (commandSender.hasPermission(entry.getValue().PermissionNode)&&entry.getKey().startsWith(strings[0].toLowerCase())){
+                    list.add(entry.getKey());
+                }
             }
-            //todo
+
         }
-        return null;
+        return list;
     }
 }

@@ -12,6 +12,10 @@ public class HelpCommand {
         helpMap.put("pt",PlayerTimeCommand.PlayerTimeMap);
         ReloadTaskCommand.InitMap();
         helpMap.put("sug",ReloadTaskCommand.ReloadTaskMap);
+        RestartServerCommand.InitMap();
+        helpMap.put("rest",RestartServerCommand.RestartMap);
+        SafeGuardCommand.InitMap();
+        helpMap.put("sg",SafeGuardCommand.SafeGuardMap);
     }
 
 }

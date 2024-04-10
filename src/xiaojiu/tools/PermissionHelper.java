@@ -40,6 +40,7 @@ public class PermissionHelper {
         for (String s : nodes) {
             result.append(s).append(".");
         }
-        return result.toString();
+        result.delete(result.length()-1,result.length());
+    return result.toString();
     }
 }

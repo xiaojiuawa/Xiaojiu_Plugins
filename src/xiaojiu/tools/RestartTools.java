@@ -18,17 +18,10 @@ public class RestartTools {
             case "h":
                 num = number * 60 * 60;
                 break;
+            case "m":
+                num = number*60;
         }
         return num;
-    }
-
-    public static boolean isNumber(String str) {
-        try {
-            Integer.parseInt(str);
-            return true;
-        } catch (Exception e) {
-            return false;
-        }
     }
 
     public static boolean Restart(int num) {

@@ -23,8 +23,8 @@ public class PlayerTimeCommand implements TabExecutor {
     }
     @Override
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
-        if (strings.length != 0) {
-            if (strings[0].equalsIgnoreCase("find") || strings[0].equalsIgnoreCase("查询")) {
+        if (strings.length > 0) {
+            if (strings[0].equalsIgnoreCase("find") || strings[0].equalsIgnoreCase("查询")&&strings.length==2) {
                 if (commandSender.hasPermission("xiaojiu.PlayerTime.find")) {
                     SimpleDateFormat format = new SimpleDateFormat("yyyy年MM月dd日 HH:mm:ss");
                     OfflinePlayer offlinePlayer = StartPlugins.getInstance().getServer().getOfflinePlayer(strings[1]);

@@ -18,8 +18,8 @@ public class PlayerTimeCommand implements TabExecutor {
     public static Map<String,HelpMap> PlayerTimeMap = new HashMap<>();
     public static String CommonNode  = "pt";
     public static void InitMap(){
-        PlayerTimeMap.put("find",new HelpMap(CommonNode,"/xj pt find [玩家名]","xiaojiu.PlayerTime.find","通过这个查询玩家的上一次上线时间和时间差"));
-        PlayerTimeMap.put("save",new HelpMap(CommonNode,"xj pt save","xiaojiu.PlayerTime.save","通过这个立刻保存玩家上线时间"));
+        PlayerTimeMap.put("find",new HelpMap(CommonNode,"/pt find [玩家名]","xiaojiu.PlayerTime.find","通过这个查询玩家的上一次上线时间和时间差"));
+        PlayerTimeMap.put("save",new HelpMap(CommonNode,"/pt save","xiaojiu.PlayerTime.save","通过这个立刻保存玩家上线时间"));
     }
     @Override
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {

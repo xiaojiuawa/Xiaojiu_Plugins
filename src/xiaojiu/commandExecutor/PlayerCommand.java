@@ -18,9 +18,9 @@ public class PlayerCommand implements TabExecutor {
     public static Map<String,HelpMap> PlayerCommandMap = new HashMap<>();
     public static String CommandNode = "pl";
     public static void InitMap(){
-        PlayerCommandMap.put("save",new HelpMap(CommandNode,"/xj pl save","xiaojiu.playerLimit.save","通过这个方法立即保存玩家限制列表"));
-        PlayerCommandMap.put("add",new HelpMap(CommandNode,"/xj pl add true/false [玩家名]","xiaojiu.playerLimit.add","通过这个指令来添加一位玩家到达限制列表中 注:其中第二个参数填true则会启用保存，服务器关闭后仍有效，填false则禁用保存，服务器关闭后重置 "));
-        PlayerCommandMap.put("remove",new HelpMap(CommandNode,"xj pl remove [玩家名]","xiaojiu.playerLimit.remove","通过这个指令来解除对玩家的限制"));
+        PlayerCommandMap.put("save",new HelpMap(CommandNode,"/pl save","xiaojiu.playerLimit.save","通过这个方法立即保存玩家限制列表"));
+        PlayerCommandMap.put("add",new HelpMap(CommandNode,"/pl add true/false [玩家名]","xiaojiu.playerLimit.add","通过这个指令来添加一位玩家到达限制列表中 注:其中第二个参数填true则会启用保存，服务器关闭后仍有效，填false则禁用保存，服务器关闭后重置 "));
+        PlayerCommandMap.put("remove",new HelpMap(CommandNode,"/pl remove [玩家名]","xiaojiu.playerLimit.remove","通过这个指令来解除对玩家的限制"));
     }
     @Override
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {

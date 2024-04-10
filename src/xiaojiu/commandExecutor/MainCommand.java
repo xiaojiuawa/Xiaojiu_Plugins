@@ -1,12 +1,15 @@
 package xiaojiu.commandExecutor;
 
+import jdk.nashorn.internal.runtime.arrays.ArrayIndex;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabExecutor;
+import scala.Array;
 import xiaojiu.tools.MessageHelper;
 import xiaojiu.tools.Until;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MainCommand implements TabExecutor {
@@ -14,7 +17,9 @@ public class MainCommand implements TabExecutor {
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
         if (strings.length>0){
             if (strings[0].equalsIgnoreCase("help")){
+                //帮助指令开始
                 if (strings.length==1){
+                    //主帮助信息
                     HelpCommand.SendHelps(commandSender,"",0);
                 } else if (strings.length>2&& Until.isNumber(strings[2])) {
                     if (strings[1].equalsIgnoreCase("玩家限制")) {
@@ -33,7 +38,7 @@ public class MainCommand implements TabExecutor {
                 } else if (strings.length==2) {
                     HelpCommand.SendHelps(commandSender,strings[1],1);
                 }
-
+                //帮助指令结束
             }
         }
         return false;

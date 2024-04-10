@@ -1,4 +1,4 @@
-name: XiaojiuTimeRecord
+name: Xiaojiu
 main: xiaojiu.StartPlugins
 version: 1
 author: Xiaojiu
@@ -33,7 +33,7 @@ commands:
       - time
 permissions:
   xiaojiu:
-    default: false
+    default: op
     children:
       xiaojiu.PlayerLimit.help: true
       xiaojiu.PlayerLimit.add: true

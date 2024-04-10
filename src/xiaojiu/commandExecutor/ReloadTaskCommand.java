@@ -21,21 +21,25 @@ public class ReloadTaskCommand implements TabExecutor {
     public static String PermissionNode = "ReloadTask";
     public static String CommonNode = "sug";
     public static void InitMap(){
-        ReloadTaskMap.put("start",new HelpMap(CommonNode,"/xj sug start","xiaojiu.ReloadTask.start","通过这个指令发起一次投票重启"));
-        ReloadTaskMap.put("revoke",new HelpMap(CommonNode,"/xj sug revoke","xiaojiu.ReloadTask.revoke","通过这个指令撤销你的投票"));
-        ReloadTaskMap.put("agree",new HelpMap(CommonNode,"/xj sug agree","xiaojiu.ReloadTask.agree","通过这个指令同意当前的投票任务"));
-        ReloadTaskMap.put("refuse",new HelpMap(CommonNode,"/xj sug refuse","xiaojiu.ReloadTask.refuse","通过这个指令拒绝当前的投票任务"));
-        ReloadTaskMap.put("cancel",new HelpMap(CommonNode,"/xj sug cancel","xiaojiu.ReloadTask.cancel","通过这个指令取消当前的投票任务"));
-        ReloadTaskMap.put("down",new HelpMap(CommonNode,"/xj sug down","xiaojiu.ReloadTask.down","通过这个指令立刻结束当前的投票任务，并进行结算"));
+        ReloadTaskMap.put("start",new HelpMap(CommonNode,"/sug start","xiaojiu.ReloadTask.start","通过这个指令发起一次投票重启"));
+        ReloadTaskMap.put("revoke",new HelpMap(CommonNode,"/sug revoke","xiaojiu.ReloadTask.revoke","通过这个指令撤销你的投票"));
+        ReloadTaskMap.put("agree",new HelpMap(CommonNode,"/sug agree","xiaojiu.ReloadTask.agree","通过这个指令同意当前的投票任务"));
+        ReloadTaskMap.put("refuse",new HelpMap(CommonNode,"/sug refuse","xiaojiu.ReloadTask.refuse","通过这个指令拒绝当前的投票任务"));
+        ReloadTaskMap.put("cancel",new HelpMap(CommonNode,"/sug cancel","xiaojiu.ReloadTask.cancel","通过这个指令取消当前的投票任务"));
+        ReloadTaskMap.put("down",new HelpMap(CommonNode,"/sug down","xiaojiu.ReloadTask.down","通过这个指令立刻结束当前的投票任务，并进行结算"));
     }
     @Override
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
         if (commandSender instanceof Player && strings.length != 0) {
             if (strings[0].equalsIgnoreCase("start")) {
-                if (ReloadTask.isSuggesting) {
-                    commandSender.sendMessage(MessageHelper.InitMessage(ChatColor.LIGHT_PURPLE + "已有投票任务存在,如果要取消,请使用/sug cancel 命令取消"));
-                } else {
-                    ReloadTask.RunTask(StartPlugins.getInstance(), ((Player) commandSender).getUniqueId());
+                if (PermissionHelper.isHasPermission(commandSender,PermissionNode,"start")){
+                    if (ReloadTask.isSuggesting) {
+                        commandSender.sendMessage(MessageHelper.InitMessage(ChatColor.LIGHT_PURPLE + "已有投票任务存在,如果要取消,请使用/sug cancel 命令取消"));
+                    } else {
+                        ReloadTask.RunTask(StartPlugins.getInstance(), ((Player) commandSender).getUniqueId());
+                    }
+                }else{
+                    commandSender.sendMessage(MessageHelper.InitMessage(ChatColor.RED+"你没有权限使用这个指令"));
                 }
             } else if (ReloadTask.isSuggesting) {
                 if (strings[0].equalsIgnoreCase("revoke") || strings[0].equalsIgnoreCase("撤销")) {
@@ -91,7 +95,7 @@ public class ReloadTaskCommand implements TabExecutor {
                     commandSender.sendMessage(MessageHelper.InitMessage(ChatColor.LIGHT_PURPLE + "当前无投票任务进行"));
                 }
             }else{
-
+                commandSender.sendMessage(MessageHelper.InitMessage(ChatColor.RED+"没有正在进行的投票任务"));
             }
             return true;
         }

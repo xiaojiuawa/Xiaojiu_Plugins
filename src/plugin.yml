@@ -4,6 +4,10 @@ version: 1
 author: Xiaojiu
 
 commands:
+  xiaojiu:
+    description: main command
+    aliases:
+      - xj
   restartserver:
     description: Restart the server
     aliases:
@@ -31,19 +35,24 @@ permissions:
   xiaojiu:
     default: op
     children:
+      xiaojiu.PlayerLimit.help: true
       xiaojiu.PlayerLimit.add: true
       xiaojiu.PlayerLimit.remove: true
       xiaojiu.PlayerLimit.save: true
+      xiaojiu.PlayerTime.help: true
       xiaojiu.PlayerTime.find: true
       xiaojiu.PlayerTime.save: true
+      xiaojiu.SafeGuard.help: true
       xiaojiu.SafeGuard.now: true
       xiaojiu.SafeGuard.start: true
       xiaojiu.SafeGuard.end: true
       xiaojiu.SafeGuard.cancel: true
+      xiaojiu.restart.help: true
       xiaojiu.restart.now: true
       xiaojiu.restart.start: true
       xiaojiu.restart.cancel: true
       xiaojiu.restart.reset: true
+      xiaojiu.ReloadTask.help: true
       xiaojiu.ReloadTask.cancel: true
       xiaojiu.ReloadTask.down: true
       xiaojiu.ReloadTask.start: false

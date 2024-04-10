@@ -5,6 +5,7 @@ import org.bukkit.command.PluginCommand;
 import org.bukkit.configuration.serialization.ConfigurationSerialization;
 import org.bukkit.plugin.java.JavaPlugin;
 import xiaojiu.commandExecutor.CommonExecutorLoader;
+import xiaojiu.commandExecutor.HelpCommand;
 import xiaojiu.config.LoadConfig;
 import xiaojiu.config.SaveConfig;
 import xiaojiu.config.Savecfg.JTPlayer;
@@ -32,6 +33,7 @@ public class StartPlugins extends JavaPlugin {
         ConfigurationSerialization.registerClass(JTPlayer.class);
         SaveConfig.OnEnable(this);
         LoadConfig.ReadAllFile();
+        HelpCommand.HelpMapInit();
     }
 
     public static StartPlugins getInstance() {

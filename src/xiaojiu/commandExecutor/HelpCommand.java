@@ -1,21 +1,56 @@
 package xiaojiu.commandExecutor;
 
+import org.bukkit.ChatColor;
+import org.bukkit.Color;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandSender;
+import org.bukkit.command.TabExecutor;
+
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class HelpCommand {
     public static Map<String,Map<String,HelpMap>> helpMap = new HashMap<>();
     public static void HelpMapInit(){
         PlayerCommand.InitMap();
-        helpMap.put("pl",PlayerCommand.PlayerCommandMap);
+        helpMap.put("玩家限制",PlayerCommand.PlayerCommandMap);
         PlayerTimeCommand.InitMap();
-        helpMap.put("pt",PlayerTimeCommand.PlayerTimeMap);
+        helpMap.put("玩家上线时间",PlayerTimeCommand.PlayerTimeMap);
         ReloadTaskCommand.InitMap();
-        helpMap.put("sug",ReloadTaskCommand.ReloadTaskMap);
+        helpMap.put("投票重启",ReloadTaskCommand.ReloadTaskMap);
         RestartServerCommand.InitMap();
-        helpMap.put("rest",RestartServerCommand.RestartMap);
+        helpMap.put("重启主模块",RestartServerCommand.RestartMap);
         SafeGuardCommand.InitMap();
-        helpMap.put("sg",SafeGuardCommand.SafeGuardMap);
+        helpMap.put("服务器维护命令",SafeGuardCommand.SafeGuardMap);
     }
+    public static void SendHelps(CommandSender commandSender,String command,int page){
+        commandSender.sendMessage(ChatColor.GOLD+"xiaojiu 命令帮助");
+        if (page==0&&command.equalsIgnoreCase("")){
+            commandSender.sendMessage(ChatColor.GOLD+"帮助总列表");
+            helpMap.forEach((string, helpmap) -> {
+                commandSender.sendMessage(ChatColor.GOLD+string);
+            });
+        }else{
+            Map<String,HelpMap> map = helpMap.get(command);
+//            if (page==0) page=1;
+            page--;
+            int i=0;
+            for (Map.Entry<String,HelpMap> entry:map.entrySet()){
+//                commandSender.sendMessage(ChatColor.GOLD+String.valueOf(page*5)+" "+ i);
+                if (i>=page*5&&i<(page+1)*5){
+                    HelpMap map1 = entry.getValue();
 
+                    commandSender.sendMessage( ChatColor.GOLD+"命令名: "+entry.getKey());
+                    commandSender.sendMessage(ChatColor.GOLD+"使用方法: "+map1.command);
+                    commandSender.sendMessage(ChatColor.GOLD+"解释: "+map1.introduce);
+                    commandSender.sendMessage(ChatColor.GOLD+"=====================================");
+
+                }
+                i++;
+            }
+            commandSender.sendMessage(ChatColor.GOLD+"=========================");
+            commandSender.sendMessage(ChatColor.GOLD+"第"+ (page+1) +"页"+" "+"共"+((map.size() /5)+1)+"页");
+        }
+    }
 }

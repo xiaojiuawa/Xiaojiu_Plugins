@@ -4,6 +4,8 @@ import org.bukkit.Bukkit;
 import org.bukkit.command.PluginCommand;
 import org.bukkit.configuration.serialization.ConfigurationSerialization;
 import org.bukkit.plugin.java.JavaPlugin;
+import xiaojiu.Log.EventListener;
+import xiaojiu.Log.mysql.BasicSQL;
 import xiaojiu.commandExecutor.CommonExecutorLoader;
 import xiaojiu.commandExecutor.HelpCommand;
 import xiaojiu.config.LoadConfig;
@@ -26,6 +28,7 @@ public class StartPlugins extends JavaPlugin {
         Instance = this;
         logger = this.getLogger();
         Bukkit.getPluginManager().registerEvents(new EventLoader(), this);
+        Bukkit.getPluginManager().registerEvents(new EventListener(),this);
         CommonExecutorLoader.Load(this);
         Until.Init();
         TaskLoader.Start(this);
@@ -34,6 +37,7 @@ public class StartPlugins extends JavaPlugin {
         SaveConfig.OnEnable(this);
         LoadConfig.ReadAllFile();
         HelpCommand.HelpMapInit();
+        BasicSQL.Init();
     }
 
     public static StartPlugins getInstance() {

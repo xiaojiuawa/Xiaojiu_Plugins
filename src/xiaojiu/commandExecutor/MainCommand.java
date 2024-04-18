@@ -46,6 +46,12 @@ public class MainCommand implements TabExecutor {
 
     @Override
     public List<String> onTabComplete(CommandSender commandSender, Command command, String s, String[] strings) {
-        return null;
+        List<String> list = new ArrayList<>();
+        if (strings.length==1){
+            HelpCommand.helpMap.forEach((string, helpMapMap) -> {
+                if (string.startsWith(strings[0].toLowerCase())) list.add(string);
+            });
+        }
+        return list;
     }
 }

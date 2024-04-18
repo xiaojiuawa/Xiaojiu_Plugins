@@ -47,7 +47,6 @@ public class HelpCommand {
 //                    commandSender.sendMessage(ChatColor.GOLD+"需要的权限节点"+map1.PermissionNode);
 //                    commandSender.sendMessage(ChatColor.GOLD+"我是否有权限:"+ (commandSender.hasPermission(map1.PermissionNode)|| commandSender.isOp()?"有":"无"));
                     commandSender.sendMessage(ChatColor.GOLD+"=====================================");
-
                 }
                 i++;
             }

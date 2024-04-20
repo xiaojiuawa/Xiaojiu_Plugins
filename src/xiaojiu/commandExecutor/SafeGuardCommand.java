@@ -18,22 +18,22 @@ public class SafeGuardCommand implements TabExecutor {
     public static String CommonNode = "sg";
     public static Map<String,HelpMap> SafeGuardMap = new HashMap<>();
     public static void InitMap(){
-        SafeGuardMap.put("now",new HelpMap(CommonNode,"/sg now","xiaojiu.SafeGuard.now","通过这个指令立即开始进行服务器维护"));
-        SafeGuardMap.put("cancel",new HelpMap(CommonNode,"/sg cancel","xiaojiu.SafeGuard.cancel","通过这个指令来取消计划服务器维护"));
-        SafeGuardMap.put("end",new HelpMap(CommonNode,"/sg end","xiaojiu.SafeGuard.end","通过这个指令结束服务器的维护"));
-        SafeGuardMap.put("",new HelpMap(CommonNode,"/sg [时间]","xiaojiu.SafeGuard.start","通过这个指令发起一个维护任务"));
-        SafeGuardMap.put("m",new HelpMap(CommonNode,"/sg m/h/d [时间]","xiaojiu.SafeGuard.start","通过这个指令发起一个维护任务(使用重设时间单位)，其中m表示天,h表示小时,m表示分钟"));
+        SafeGuardMap.put("now",new HelpMap(CommonNode,"/sg now","xiaojiu.op.SafeGuard.now","通过这个指令立即开始进行服务器维护"));
+        SafeGuardMap.put("cancel",new HelpMap(CommonNode,"/sg cancel","xiaojiu.op.SafeGuard.cancel","通过这个指令来取消计划服务器维护"));
+        SafeGuardMap.put("end",new HelpMap(CommonNode,"/sg end","xiaojiu.op.SafeGuard.end","通过这个指令结束服务器的维护"));
+        SafeGuardMap.put("",new HelpMap(CommonNode,"/sg [时间]","xiaojiu.op.SafeGuard.start","通过这个指令发起一个维护任务"));
+        SafeGuardMap.put("m",new HelpMap(CommonNode,"/sg m/h/d [时间]","xiaojiu.op.SafeGuard.start","通过这个指令发起一个维护任务(使用重设时间单位)，其中m表示天,h表示小时,m表示分钟"));
     }
     @Override
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
         if (strings.length>0) {
             if (strings[0].equalsIgnoreCase("now") || strings[0].equalsIgnoreCase("现在")) {
-                if (PermissionHelper.isHasPermission(commandSender, PermissionNode, "now")) {
+                if (PermissionHelper.isHasPermission(commandSender, "op",PermissionNode, "now")) {
                     SafeGuardHelper.done();
                     commandSender.sendMessage(MessageHelper.InitMessage(ChatColor.LIGHT_PURPLE + "服务器维护状态设置成功"));
                 }
             } else if (strings[0].equalsIgnoreCase("cancel") || strings[0].equalsIgnoreCase("解除")) {
-                if (PermissionHelper.isHasPermission(commandSender, PermissionNode, "cancel")) {
+                if (PermissionHelper.isHasPermission(commandSender, "op",PermissionNode, "cancel")) {
                     if (SafeGuardHelper.timer == null) {
                         commandSender.sendMessage(MessageHelper.InitMessage(ChatColor.LIGHT_PURPLE + "服务器没有计划维护任务"));
                     } else {
@@ -44,7 +44,7 @@ public class SafeGuardCommand implements TabExecutor {
                     commandSender.sendMessage(MessageHelper.InitMessage("你没有权限取消服务器计划维护任务"));
                 }
             } else if (strings[0].equalsIgnoreCase("end") || strings[0].equalsIgnoreCase("结束")) {
-                if (PermissionHelper.isHasPermission(commandSender, PermissionNode, "end")) {
+                if (PermissionHelper.isHasPermission(commandSender, "op",PermissionNode, "end")) {
                     if (SafeGuardHelper.isSafeGuard) {
                         SafeGuardHelper.SafeGuard();
                         commandSender.sendMessage(MessageHelper.InitMessage(ChatColor.LIGHT_PURPLE + "服务器维护状态结束成功"));
@@ -55,7 +55,7 @@ public class SafeGuardCommand implements TabExecutor {
                     commandSender.sendMessage(MessageHelper.InitMessage(ChatColor.RED + "你没有结束服务器维护的权限"));
                 }
             } else if (Until.isNumber(strings[0])) {
-                if (PermissionHelper.isHasPermission(commandSender, PermissionNode, "start")) {
+                if (PermissionHelper.isHasPermission(commandSender, "op",PermissionNode, "start")) {
                     if (SafeGuardHelper.isSafeGuard) {
                         commandSender.sendMessage(MessageHelper.InitMessage(ChatColor.LIGHT_PURPLE + "服务器已经在维护状态了"));
                     } else {

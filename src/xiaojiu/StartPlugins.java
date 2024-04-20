@@ -24,7 +24,6 @@ public class StartPlugins extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        this.getLogger().info("XiaojiuPluginOnEnable");
         Instance = this;
         logger = this.getLogger();
         Bukkit.getPluginManager().registerEvents(new EventLoader(), this);
@@ -38,6 +37,7 @@ public class StartPlugins extends JavaPlugin {
         LoadConfig.ReadAllFile();
         HelpCommand.HelpMapInit();
         BasicSQL.Init();
+        this.getLogger().info("XiaojiuPluginOnEnable");
     }
 
     public static StartPlugins getInstance() {

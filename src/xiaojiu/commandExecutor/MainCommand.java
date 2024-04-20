@@ -7,12 +7,23 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabExecutor;
 import scala.Array;
 import xiaojiu.tools.MessageHelper;
+import xiaojiu.tools.PermissionHelper;
 import xiaojiu.tools.Until;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class MainCommand implements TabExecutor {
+    public static String CommonNode = "xiaojiu";
+
+    public static Map<String,Map<String,HelpMap>> helpMap = new HashMap<>();
+    public static void InitMap(){
+        Map<String,HelpMap> temp = new HashMap<>();
+        // help命令
+        temp.put("help",new HelpMap(CommonNode,"/xj help [命令大节点] [页面(默认为1)]","xiaojiu.main.help.use","通过这个指令查看命令帮助 当你输入这个指令后，会有一个总列表出现，这时再输入总列表当作页码即可"));
+    }
     @Override
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
         if (strings.length>0){
@@ -39,6 +50,8 @@ public class MainCommand implements TabExecutor {
                     HelpCommand.SendHelps(commandSender,strings[1],1);
                 }
                 //帮助指令结束
+            }else if(strings[0].equalsIgnoreCase("v")||strings[0].equalsIgnoreCase("隐身")){
+                if (PermissionHelper.isHasPermission(commandSender,""));
             }
         }
         return false;

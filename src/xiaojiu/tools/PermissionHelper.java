@@ -8,7 +8,13 @@ import xiaojiu.StartPlugins;
 
 public class PermissionHelper {
     public static boolean isHasPermission(CommandSender commandSender, String... node) {
-        String PermissionNode = GetPermissionNode("xiaojiu", node);
+        String PermissionNode;
+        if (!node[0].startsWith("xiaojiu")){
+            PermissionNode = GetPermissionNode("xiaojiu",node);
+        }else{
+            PermissionNode = GetPermissionNode("",node);
+        }
+//        String PermissionNode = GetPermissionNode("xiaojiu", node);
         if (commandSender.isOp() && commandSender instanceof ConsoleCommandSender) return true;
         if (commandSender instanceof Player) {
             Player player = (Player) commandSender;
@@ -26,7 +32,13 @@ public class PermissionHelper {
         }
     }
     public static boolean isHasPermissionNoLog(CommandSender commandSender,String... nodes){
-        String PermissionNode = GetPermissionNode("xiaojiu",nodes);
+        String PermissionNode;
+        if (!nodes[0].startsWith("xiaojiu")){
+            PermissionNode = GetPermissionNode("xiaojiu",nodes);
+        }else{
+            PermissionNode = GetPermissionNode("",nodes);
+        }
+//        String PermissionNode = GetPermissionNode("xiaojiu",nodes);
         if (commandSender.isOp()&&commandSender instanceof ConsoleCommandSender) return true;
         if (commandSender instanceof Player){
             Player player = (Player) commandSender;
@@ -36,7 +48,12 @@ public class PermissionHelper {
     }
 
     public static String GetPermissionNode(String father, String... nodes) {
-        StringBuilder result = new StringBuilder(father + ".");
+        StringBuilder result;
+        if (father.equalsIgnoreCase("")){
+            result = new StringBuilder();
+        }else{
+            result = new StringBuilder(father + ".");
+        }
         for (String s : nodes) {
             result.append(s).append(".");
         }

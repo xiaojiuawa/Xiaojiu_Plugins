@@ -14,6 +14,8 @@ import java.util.Map;
 public class HelpCommand {
     public static Map<String,Map<String,HelpMap>> helpMap = new HashMap<>();
     public static void HelpMapInit(){
+        MainCommand.InitMap();
+        helpMap.putAll(MainCommand.helpMap);
         PlayerCommand.InitMap();
         helpMap.put("玩家限制",PlayerCommand.PlayerCommandMap);
         PlayerTimeCommand.InitMap();
@@ -24,6 +26,7 @@ public class HelpCommand {
         helpMap.put("重启主模块",RestartServerCommand.RestartMap);
         SafeGuardCommand.InitMap();
         helpMap.put("服务器维护命令",SafeGuardCommand.SafeGuardMap);
+
     }
     public static void SendHelps(CommandSender commandSender,String command,int page){
         commandSender.sendMessage(ChatColor.GOLD+"xiaojiu 命令帮助");
@@ -44,8 +47,8 @@ public class HelpCommand {
                     commandSender.sendMessage( ChatColor.GOLD+"命令名: "+entry.getKey());
                     commandSender.sendMessage(ChatColor.GOLD+"使用方法: "+map1.command);
                     commandSender.sendMessage(ChatColor.GOLD+"解释: "+map1.introduce);
-//                    commandSender.sendMessage(ChatColor.GOLD+"需要的权限节点"+map1.PermissionNode);
-//                    commandSender.sendMessage(ChatColor.GOLD+"我是否有权限:"+ (commandSender.hasPermission(map1.PermissionNode)|| commandSender.isOp()?"有":"无"));
+                    commandSender.sendMessage(ChatColor.GOLD+"需要的权限节点"+map1.PermissionNode);
+                    commandSender.sendMessage(ChatColor.GOLD+"我是否有权限:"+ (commandSender.hasPermission(map1.PermissionNode)|| commandSender.isOp()?"有":"无"));
                     commandSender.sendMessage(ChatColor.GOLD+"=====================================");
                 }
                 i++;

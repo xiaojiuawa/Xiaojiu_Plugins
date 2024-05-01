@@ -4,22 +4,23 @@ import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabExecutor;
+import xiaojiu.Handles.Help.HelpMap;
 import xiaojiu.tools.MessageHelper;
 import xiaojiu.tools.PermissionHelper;
-import xiaojiu.tools.RestartTools;
+import xiaojiu.Handles.Restart.RestartTools;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static xiaojiu.tools.RestartTools.ProcessingTime;
-import static xiaojiu.tools.Until.isNumber;
+import static xiaojiu.Handles.Restart.RestartTools.ProcessingTime;
+import static xiaojiu.tools.Utils.isNumber;
 
 public class RestartServerCommand implements TabExecutor {
     public static String PermissionCommonNode = "restart";
     public static String CommonNode = "rest";
-    public static Map<String,HelpMap> RestartMap = new HashMap<>();
+    public static Map<String, HelpMap> RestartMap = new HashMap<>();
     public static void InitMap(){
         RestartMap.put("cancel",new HelpMap(CommonNode,"/rest cancel","xiaojiu.op.restart.cancel","通过这个指令取消当前的计划重启任务"));
         RestartMap.put("now",new HelpMap(CommonNode,"/rest now","xiaojiu.op.restart.now","通过这个指令立刻执行重启"));

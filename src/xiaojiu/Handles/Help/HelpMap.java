@@ -1,4 +1,4 @@
-package xiaojiu.commandExecutor;
+package xiaojiu.Handles.Help;
 
 public class HelpMap{
     public HelpMap(String faster,String command,String permissionNode,String introduce){

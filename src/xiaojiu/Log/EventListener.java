@@ -7,7 +7,7 @@ import java.sql.*;
 public class EventListener implements Listener {
     @EventHandler
     public void BlockBreakEvent(BlockBreakEvent event) throws SQLException {
-        Connection con = DriverManager.getConnection("1","2","3");
+//        Connection con = DriverManager.getConnection("1","2","3");
         System.out.println(event.getBlock().toString());
         System.out.println(event.getBlock().getType().name());
         System.out.println(event.getBlock().getState().toString());

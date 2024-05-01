@@ -55,10 +55,14 @@ permissions:
 #      xiaojiu.op.ReloadTask.help: true
       xiaojiu.op.ReloadTask.cancel: true
       xiaojiu.op.ReloadTask.down: true
+      xiaojiu.op.vanish.use: true
+      xiaojiu.op.vanish.use.otherPlayer: true
+      xiaojiu.op.vanish.use.self: true
 #      xiaojiu.op.ReloadTask.start: false
 #      xiaojiu.op.ReloadTask.revoke: false
 #      xiaojiu.op.ReloadTask.agree: false
 #      xiaojiu.op.ReloadTask.refuse: false
+
   xiaojiu.normal:
     default: true
     children:

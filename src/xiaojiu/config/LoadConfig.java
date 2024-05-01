@@ -6,7 +6,7 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import xiaojiu.Log.mysql.BasicSQL;
 import xiaojiu.StartPlugins;
 import xiaojiu.task.PlayerJoinTimeTask;
-import xiaojiu.tools.LimitPlayerTools;
+import xiaojiu.Handles.LimitPlayer.LimitPlayerTools;
 
 import java.io.File;
 

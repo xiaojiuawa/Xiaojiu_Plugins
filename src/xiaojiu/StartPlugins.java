@@ -4,16 +4,15 @@ import org.bukkit.Bukkit;
 import org.bukkit.command.PluginCommand;
 import org.bukkit.configuration.serialization.ConfigurationSerialization;
 import org.bukkit.plugin.java.JavaPlugin;
-import xiaojiu.Log.EventListener;
 import xiaojiu.Log.mysql.BasicSQL;
 import xiaojiu.commandExecutor.CommonExecutorLoader;
-import xiaojiu.commandExecutor.HelpCommand;
+import xiaojiu.Handles.Help.HelpCommand;
 import xiaojiu.config.LoadConfig;
 import xiaojiu.config.SaveConfig;
 import xiaojiu.config.Savecfg.JTPlayer;
 import xiaojiu.config.Savecfg.LimitPlayer;
 import xiaojiu.task.TaskLoader;
-import xiaojiu.tools.Until;
+import xiaojiu.tools.Utils;
 
 import java.util.logging.Logger;
 
@@ -27,9 +26,9 @@ public class StartPlugins extends JavaPlugin {
         Instance = this;
         logger = this.getLogger();
         Bukkit.getPluginManager().registerEvents(new EventLoader(), this);
-        Bukkit.getPluginManager().registerEvents(new EventListener(),this);
+//        Bukkit.getPluginManager().registerEvents(new EventListener(),this);
         CommonExecutorLoader.Load(this);
-        Until.Init();
+        Utils.Init();
         TaskLoader.Start(this);
         ConfigurationSerialization.registerClass(LimitPlayer.class);
         ConfigurationSerialization.registerClass(JTPlayer.class);

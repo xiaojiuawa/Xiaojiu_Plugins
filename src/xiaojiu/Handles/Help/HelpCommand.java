@@ -1,18 +1,15 @@
-package xiaojiu.commandExecutor;
+package xiaojiu.Handles.Help;
 
 import org.bukkit.ChatColor;
-import org.bukkit.Color;
-import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
-import org.bukkit.command.TabExecutor;
-import xiaojiu.tools.PermissionHelper;
+import xiaojiu.Handles.Help.HelpMap;
+import xiaojiu.commandExecutor.*;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class HelpCommand {
-    public static Map<String,Map<String,HelpMap>> helpMap = new HashMap<>();
+    public static Map<String,Map<String, HelpMap>> helpMap = new HashMap<>();
     public static void HelpMapInit(){
         MainCommand.InitMap();
         helpMap.putAll(MainCommand.helpMap);

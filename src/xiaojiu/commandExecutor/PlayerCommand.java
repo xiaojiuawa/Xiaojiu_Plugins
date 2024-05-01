@@ -6,13 +6,16 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabExecutor;
 import org.bukkit.entity.Player;
+import xiaojiu.Handles.Help.HelpMap;
+import xiaojiu.Handles.LimitPlayer.LimitPlayerTools;
+import xiaojiu.Handles.PlayerTime.PlayerTools;
 import xiaojiu.config.SaveConfig;
 import xiaojiu.tools.*;
 
 import java.util.*;
 
 public class PlayerCommand implements TabExecutor {
-    public static Map<String,HelpMap> PlayerCommandMap = new HashMap<>();
+    public static Map<String, HelpMap> PlayerCommandMap = new HashMap<>();
     public static String CommandNode = "pl";
     public static String PermissionNode = "PlayerLimit";
     public static void InitMap(){
@@ -43,9 +46,9 @@ public class PlayerCommand implements TabExecutor {
                         if (player != null) {
                             String message;
                             if (strings[2].equalsIgnoreCase("true") || strings[2].equalsIgnoreCase("离线")) {
-                                message = LimitPlayerTools.add(Until.IntegrateStr(strings), player, true);
+                                message = LimitPlayerTools.add(Utils.IntegrateStr(strings), player, true);
                             } else if (strings[2].equalsIgnoreCase("false") || strings[2].equalsIgnoreCase("非离线")) {
-                                message = LimitPlayerTools.add(Until.IntegrateStr(strings), player, false);
+                                message = LimitPlayerTools.add(Utils.IntegrateStr(strings), player, false);
                             } else {
                                 message = "请设置是否开启保存";
                             }
@@ -103,7 +106,7 @@ public class PlayerCommand implements TabExecutor {
             }
         } else if (strings.length == 2) {
             if (commandSender.hasPermission("xiaojiu.op.PlayerLimit.add") && strings[0].equalsIgnoreCase("add") || strings[0].equalsIgnoreCase("添加")) {
-                list.addAll(Until.GetOnlinePlayerNames(strings[1]));
+                list.addAll(Utils.GetOnlinePlayerNames(strings[1]));
             } else if (commandSender.hasPermission("xiaojiu.op.PlayerLimit.remove") && strings[0].equalsIgnoreCase("删除") || strings[0].equalsIgnoreCase("del") || strings[0].equalsIgnoreCase("remove")) {
                 list.addAll(LimitPlayerTools.GetAllPlayerName(strings[0]));
             }

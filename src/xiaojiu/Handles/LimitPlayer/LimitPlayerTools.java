@@ -1,4 +1,4 @@
-package xiaojiu.tools;
+package xiaojiu.Handles.LimitPlayer;
 
 import org.bukkit.OfflinePlayer;
 import org.bukkit.configuration.file.FileConfiguration;

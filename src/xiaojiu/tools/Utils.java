@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 
-public class Until {
+public class Utils {
     public static HashMap<Integer, String> WaitMap = new HashMap<>();
     public static HashMap<Integer, String> SuggestMap = new HashMap<>();
 

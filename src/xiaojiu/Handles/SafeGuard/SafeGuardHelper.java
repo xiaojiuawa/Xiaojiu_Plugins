@@ -1,8 +1,10 @@
-package xiaojiu.tools;
+package xiaojiu.Handles.SafeGuard;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import xiaojiu.StartPlugins;
+import xiaojiu.tools.MessageHelper;
+import xiaojiu.tools.Utils;
 
 import java.util.*;
 
@@ -21,7 +23,7 @@ public class SafeGuardHelper {
 
     public static void done() {
         SafeGuardHelper.SafeGuard();
-        Until.KickAllPlayersUseNode("xiaojiu.safeguard.nokick", "服务器维护,请等待服务器维护结束");
+        Utils.KickAllPlayersUseNode("xiaojiu.safeguard.nokick", "服务器维护,请等待服务器维护结束");
 //        Until.KickAllPlayers(StartPlugins.getInstance().getServer().getOnlinePlayers(),"服务器维护,请等待服务器维护结束");
     }
 
@@ -37,7 +39,7 @@ public class SafeGuardHelper {
 
     public static void SafeGuard(int time) {
         timer = new Timer();
-        for (Map.Entry<Integer, String> entry : Until.WaitMap.entrySet()) {
+        for (Map.Entry<Integer, String> entry : Utils.WaitMap.entrySet()) {
             if (entry.getKey() > time) continue;
             Date date = new Date();
             Calendar calendar = Calendar.getInstance();

@@ -2,10 +2,10 @@ package xiaojiu.commandExecutor;
 
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
-import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabExecutor;
 import org.bukkit.entity.Player;
+import xiaojiu.Handles.Help.HelpMap;
 import xiaojiu.StartPlugins;
 import xiaojiu.task.ReloadTask;
 import xiaojiu.tools.MessageHelper;
@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.Map;
 
 public class ReloadTaskCommand implements TabExecutor {
-    public static Map<String,HelpMap> ReloadTaskMap = new HashMap<>();
+    public static Map<String, HelpMap> ReloadTaskMap = new HashMap<>();
     public static String PermissionNode = "ReloadTask";
     public static String CommonNode = "sug";
     public static void InitMap(){

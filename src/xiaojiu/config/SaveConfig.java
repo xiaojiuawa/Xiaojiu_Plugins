@@ -6,7 +6,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import xiaojiu.config.Savecfg.JTPlayer;
 import xiaojiu.config.Savecfg.LimitPlayer;
 import xiaojiu.task.PlayerJoinTimeTask;
-import xiaojiu.tools.LimitPlayerTools;
+import xiaojiu.Handles.LimitPlayer.LimitPlayerTools;
 
 import java.io.File;
 import java.io.IOException;

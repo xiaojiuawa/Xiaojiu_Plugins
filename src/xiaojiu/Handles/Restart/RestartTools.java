@@ -1,8 +1,10 @@
-package xiaojiu.tools;
+package xiaojiu.Handles.Restart;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import xiaojiu.StartPlugins;
+import xiaojiu.tools.MessageHelper;
+import xiaojiu.tools.Utils;
 
 import java.util.*;
 
@@ -42,7 +44,7 @@ public class RestartTools {
     }
 
     public static void Done() {
-        Until.KickAllPlayers(StartPlugins.getInstance().getServer().getOnlinePlayers(), "服务器重启，请耐心等待");
+        Utils.KickAllPlayers(StartPlugins.getInstance().getServer().getOnlinePlayers(), "服务器重启，请耐心等待");
         ShutdownServer();
     }
 
@@ -51,7 +53,7 @@ public class RestartTools {
 
         public static void Restart(int time) {
             timer = new Timer();
-            for (Map.Entry<Integer, String> entry : Until.WaitMap.entrySet()) {
+            for (Map.Entry<Integer, String> entry : Utils.WaitMap.entrySet()) {
                 if (entry.getKey() > time) continue;
                 Date date = new Date();
                 Calendar calendar = Calendar.getInstance();

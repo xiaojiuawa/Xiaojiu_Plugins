@@ -49,7 +49,11 @@ public class MainCommand implements TabExecutor {
                 //帮助指令结束
             }else if(strings[0].equalsIgnoreCase("v")||strings[0].equalsIgnoreCase("隐身")||strings[0].equalsIgnoreCase("vanish")){
                 //隐身指令开始
-                VanishCommand.onCommand(commandSender, command, s, Arrays.copyOfRange(strings,2,strings.length));
+//                for (String string : strings) {
+//                    commandSender.sendMessage(strings);
+//                }
+//                commandSender.sendMessage(Arrays.copyOfRange(strings,1,strings.length));
+                VanishCommand.onCommand(commandSender, command, s, Arrays.copyOfRange(strings,1,strings.length));
             }
         }
         return true;

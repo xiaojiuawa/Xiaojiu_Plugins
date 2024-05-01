@@ -27,9 +27,13 @@ public class VanishCommand {
     public static boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
         if (commandSender instanceof Player){
             Player player = ((Player) commandSender);
-            if (strings.length>0){
+            if (strings.length==1){
                 if (!strings[0].equalsIgnoreCase(player.getName())){
                     player = StartPlugins.getInstance().getServer().getPlayer(strings[0]);
+                    if (player==null){
+                        commandSender.sendMessage(MessageHelper.InitMessage(ChatColor.LIGHT_PURPLE+"玩家"+ChatColor.WHITE+strings[0]+ChatColor.LIGHT_PURPLE+"不在线或不在本子服"));
+                        return true;
+                    }else
                     if (PermissionHelper.isHasPermission(commandSender,"op",PermissionNode,"otherPlayer")){
                         Vanish.VanishPlayer(player,!Vanish.VanishPlayers.contains(player.getUniqueId()));
                         if (Vanish.VanishPlayers.contains(player.getUniqueId())){
@@ -40,6 +44,8 @@ public class VanishCommand {
                             commandSender.sendMessage(MessageHelper.InitMessage(ChatColor.LIGHT_PURPLE+"玩家"+player.getName()+"的隐身状态已经成功关闭"));
                         }
 
+                    }else{
+                        commandSender.sendMessage(MessageHelper.InitMessage(ChatColor.RED+"你没有使用这个指令的权限"));
                     }
                 }else{
                     if (PermissionHelper.isHasPermission(commandSender,"op",PermissionNode,"self")){
@@ -49,9 +55,11 @@ public class VanishCommand {
                         }else{
                             player.sendMessage(MessageHelper.InitMessage(ChatColor.LIGHT_PURPLE+"隐身已经成功关闭"));
                         }
+                    }else{
+                        commandSender.sendMessage(MessageHelper.InitMessage(ChatColor.RED+"你没有使用这个指令的权限"));
                     }
                 }
-            } else {
+            } else if (strings.length==0){
                 if (PermissionHelper.isHasPermission(commandSender,"op",PermissionNode,"self")){
                     Vanish.VanishPlayer(player,!Vanish.VanishPlayers.contains(player.getUniqueId()));
                     if (Vanish.VanishPlayers.contains(player.getUniqueId())){
@@ -59,6 +67,8 @@ public class VanishCommand {
                     }else{
                         player.sendMessage(MessageHelper.InitMessage(ChatColor.LIGHT_PURPLE+"隐身已经成功关闭"));
                     }
+                }else{
+                    commandSender.sendMessage(MessageHelper.InitMessage(ChatColor.RED+"你没有使用这个指令的权限"));
                 }
             }
         }

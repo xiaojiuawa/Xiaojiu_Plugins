@@ -36,6 +36,18 @@ public class Vanish {
         }
         return true;
     }
+    public static void hideNewPlayer(Player player){
+        getVanishedPlayers().forEach(player1 -> {
+            player.hidePlayer(StartPlugins.getInstance(),player1);
+        });
+    }
+    public static List<Player> getVanishedPlayers(){
+        List<Player> list = new ArrayList<>();
+        VanishPlayers.forEach(uuid -> {
+            list.add(StartPlugins.getInstance().getServer().getPlayer(uuid));
+        });
+        return list;
+    }
 //    public static boolean VanishPlayer(UUID uuid,boolean mode){
 //        if (VanishPlayers.contains(uuid)&&mode || !VanishPlayers.contains(uuid)&&!mode) return false;
 //        if (mode){

@@ -3,10 +3,10 @@ package xiaojiu.task;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.plugin.java.JavaPlugin;
-import xiaojiu.StartPlugins;
-import xiaojiu.tools.MessageHelper;
 import xiaojiu.Handles.Restart.RestartTools;
 import xiaojiu.Handles.Suggest.SuggestHelper;
+import xiaojiu.StartPlugins;
+import xiaojiu.tools.MessageHelper;
 import xiaojiu.tools.Utils;
 
 import java.util.*;
@@ -16,11 +16,11 @@ public class ReloadTask {
     public static SuggestHelper suggestHelper = new SuggestHelper();
     public static boolean isSuggesting = false;
 
-    public static void RunTask(JavaPlugin Instance, UUID sponsor) {
+    public static void RunTask(JavaPlugin Instance, UUID initiator) {
         task = new Timer();
         suggestHelper.isSuggesting = true;
         isSuggesting = true;
-        suggestHelper.sponsor = sponsor;
+        suggestHelper.sponsor = initiator;
         for (Map.Entry<Integer, String> entry : Utils.SuggestMap.entrySet()) {
             Date date = new Date();
             Calendar calendar = Calendar.getInstance();

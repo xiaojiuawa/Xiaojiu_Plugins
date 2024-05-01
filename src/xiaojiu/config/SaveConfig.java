@@ -3,10 +3,10 @@ package xiaojiu.config;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
+import xiaojiu.Handles.LimitPlayer.LimitPlayerTools;
 import xiaojiu.config.Savecfg.JTPlayer;
 import xiaojiu.config.Savecfg.LimitPlayer;
 import xiaojiu.task.PlayerJoinTimeTask;
-import xiaojiu.Handles.LimitPlayer.LimitPlayerTools;
 
 import java.io.File;
 import java.io.IOException;

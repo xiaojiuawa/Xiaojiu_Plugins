@@ -9,6 +9,7 @@ public class CommonExecutorLoader {
     public static ReloadTaskCommand reloadTaskCommand = new ReloadTaskCommand();
     public static PlayerTimeCommand playerTimeCommand = new PlayerTimeCommand();
     public static MainCommand mainCommand = new MainCommand();
+
     public static void Load(StartPlugins Instance) {
         Instance.getCommand("xiaojiu").setExecutor(mainCommand);
         Instance.getCommand("restartserver").setExecutor(restartServerCommand);

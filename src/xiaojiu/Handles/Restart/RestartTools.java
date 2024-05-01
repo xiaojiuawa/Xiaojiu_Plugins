@@ -21,7 +21,7 @@ public class RestartTools {
                 num = number * 60 * 60;
                 break;
             case "m":
-                num = number*60;
+                num = number * 60;
         }
         return num;
     }

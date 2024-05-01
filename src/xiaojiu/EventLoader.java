@@ -5,10 +5,10 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerLoginEvent;
-import xiaojiu.Handles.Vanish.Vanish;
-import xiaojiu.task.PlayerJoinTimeTask;
 import xiaojiu.Handles.LimitPlayer.LimitPlayerTools;
 import xiaojiu.Handles.SafeGuard.SafeGuardHelper;
+import xiaojiu.Handles.Vanish.Vanish;
+import xiaojiu.task.PlayerJoinTimeTask;
 
 public class EventLoader implements Listener {
     public EventLoader() {

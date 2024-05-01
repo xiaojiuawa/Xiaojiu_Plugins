@@ -9,9 +9,11 @@ public class BasicSQL {
     public static String user;
     public static String password;
     public static String url;
+
     public static Connection GetConnection() throws SQLException {
         return DriverManager.getConnection(url, user, password);
     }
+
     public static void InitSQL() throws SQLException {
         Connection connection = GetConnection();
         Statement statement = connection.createStatement();
@@ -20,7 +22,8 @@ public class BasicSQL {
         statement.close();
         connection.close();
     }
-    public static void Init(){
+
+    public static void Init() {
         try {
             InitSQL();
         } catch (SQLException e) {

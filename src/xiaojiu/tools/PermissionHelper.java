@@ -9,10 +9,10 @@ import xiaojiu.StartPlugins;
 public class PermissionHelper {
     public static boolean isHasPermission(CommandSender commandSender, String... node) {
         String PermissionNode;
-        if (!node[0].startsWith("xiaojiu")){
-            PermissionNode = GetPermissionNode("xiaojiu",node);
-        }else{
-            PermissionNode = GetPermissionNode("",node);
+        if (!node[0].startsWith("xiaojiu")) {
+            PermissionNode = GetPermissionNode("xiaojiu", node);
+        } else {
+            PermissionNode = GetPermissionNode("", node);
         }
 //        String PermissionNode = GetPermissionNode("xiaojiu", node);
         if (commandSender.isOp() && commandSender instanceof ConsoleCommandSender) return true;
@@ -31,16 +31,17 @@ public class PermissionHelper {
 
         }
     }
-    public static boolean isHasPermissionNoLog(CommandSender commandSender,String... nodes){
+
+    public static boolean isHasPermissionNoLog(CommandSender commandSender, String... nodes) {
         String PermissionNode;
-        if (!nodes[0].startsWith("xiaojiu")){
-            PermissionNode = GetPermissionNode("xiaojiu",nodes);
-        }else{
-            PermissionNode = GetPermissionNode("",nodes);
+        if (!nodes[0].startsWith("xiaojiu")) {
+            PermissionNode = GetPermissionNode("xiaojiu", nodes);
+        } else {
+            PermissionNode = GetPermissionNode("", nodes);
         }
 //        String PermissionNode = GetPermissionNode("xiaojiu",nodes);
-        if (commandSender.isOp()&&commandSender instanceof ConsoleCommandSender) return true;
-        if (commandSender instanceof Player){
+        if (commandSender.isOp() && commandSender instanceof ConsoleCommandSender) return true;
+        if (commandSender instanceof Player) {
             Player player = (Player) commandSender;
             return player.hasPermission(PermissionNode);
         }
@@ -49,15 +50,15 @@ public class PermissionHelper {
 
     public static String GetPermissionNode(String father, String... nodes) {
         StringBuilder result;
-        if (father.equalsIgnoreCase("")){
+        if (father.equalsIgnoreCase("")) {
             result = new StringBuilder();
-        }else{
+        } else {
             result = new StringBuilder(father + ".");
         }
         for (String s : nodes) {
             result.append(s).append(".");
         }
-        result.delete(result.length()-1,result.length());
-    return result.toString();
+        result.delete(result.length() - 1, result.length());
+        return result.toString();
     }
 }

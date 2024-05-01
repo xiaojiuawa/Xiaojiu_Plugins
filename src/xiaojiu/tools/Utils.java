@@ -12,6 +12,7 @@ import java.util.HashMap;
 public class Utils {
     public static HashMap<Integer, String> WaitMap = new HashMap<>();
     public static HashMap<Integer, String> SuggestMap = new HashMap<>();
+    public static HashMap<Integer, String> VanishMap = new HashMap<>();
 
     public static void Init() {
         WaitMap.put(0, "down");
@@ -39,7 +40,11 @@ public class Utils {
         SuggestMap.put(80, "服务器投票%s已开始,投票将在80秒后结束");
         SuggestMap.put(100, "服务器投票%s已开始,投票将在100秒后结束");
         SuggestMap.put(120, "服务器投票%s已开始,投票将在120秒后结束");
-
+        VanishMap.put(0, "%s已经结束");
+        VanishMap.put(5, "%s将在5秒后结束");
+        VanishMap.put(10, "%s将在10秒后结束");
+        VanishMap.put(60, "%s将在1分钟后结束");
+        VanishMap.put(120, "%s将在2分钟后结束");
 
     }
 

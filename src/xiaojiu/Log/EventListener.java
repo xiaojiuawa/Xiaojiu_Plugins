@@ -3,7 +3,9 @@ package xiaojiu.Log;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
-import java.sql.*;
+
+import java.sql.SQLException;
+
 public class EventListener implements Listener {
     @EventHandler
     public void BlockBreakEvent(BlockBreakEvent event) throws SQLException {

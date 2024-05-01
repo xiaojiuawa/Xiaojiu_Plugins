@@ -10,31 +10,38 @@ import xiaojiu.Handles.Help.HelpMap;
 import xiaojiu.Handles.LimitPlayer.LimitPlayerTools;
 import xiaojiu.Handles.PlayerTime.PlayerTools;
 import xiaojiu.config.SaveConfig;
-import xiaojiu.tools.*;
+import xiaojiu.tools.MessageHelper;
+import xiaojiu.tools.PermissionHelper;
+import xiaojiu.tools.Utils;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class PlayerCommand implements TabExecutor {
     public static Map<String, HelpMap> PlayerCommandMap = new HashMap<>();
     public static String CommandNode = "pl";
     public static String PermissionNode = "PlayerLimit";
-    public static void InitMap(){
-        PlayerCommandMap.put("save",new HelpMap(CommandNode,"/pl save","xiaojiu.op.PlayerLimit.save","通过这个方法立即保存玩家限制列表"));
-        PlayerCommandMap.put("add",new HelpMap(CommandNode,"/pl add true/false [玩家名]","xiaojiu.op.PlayerLimit.add","通过这个指令来添加一位玩家到达限制列表中 注:其中第二个参数填true则会启用保存，服务器关闭后仍有效，填false则禁用保存，服务器关闭后重置 "));
-        PlayerCommandMap.put("remove",new HelpMap(CommandNode,"/pl remove [玩家名]","xiaojiu.op.PlayerLimit.remove","通过这个指令来解除对玩家的限制"));
+
+    public static void InitMap() {
+        PlayerCommandMap.put("save", new HelpMap(CommandNode, "/pl save", "xiaojiu.op.PlayerLimit.save", "通过这个方法立即保存玩家限制列表"));
+        PlayerCommandMap.put("add", new HelpMap(CommandNode, "/pl add true/false [玩家名]", "xiaojiu.op.PlayerLimit.add", "通过这个指令来添加一位玩家到达限制列表中 注:其中第二个参数填true则会启用保存，服务器关闭后仍有效，填false则禁用保存，服务器关闭后重置 "));
+        PlayerCommandMap.put("remove", new HelpMap(CommandNode, "/pl remove [玩家名]", "xiaojiu.op.PlayerLimit.remove", "通过这个指令来解除对玩家的限制"));
     }
+
     @Override
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
         if (strings.length != 0) {
             if (strings[0].equalsIgnoreCase("save") || strings[0].equalsIgnoreCase("保存")) {
-                if (PermissionHelper.isHasPermission(commandSender,"op",PermissionNode,"save")) {
+                if (PermissionHelper.isHasPermission(commandSender, "op", PermissionNode, "save")) {
                     SaveConfig.SaveLimitPlayer();
                     commandSender.sendMessage(MessageHelper.InitMessage(ChatColor.LIGHT_PURPLE + "玩家限制列表保存成功"));
                 } else {
                     commandSender.sendMessage(MessageHelper.InitMessage(ChatColor.LIGHT_PURPLE + "你没有权限保存玩家限制列表"));
                 }
             } else if (strings[0].equalsIgnoreCase("add") || strings[0].equalsIgnoreCase("添加")) {
-                if (PermissionHelper.isHasPermission(commandSender,"op",PermissionNode,"add")) {
+                if (PermissionHelper.isHasPermission(commandSender, "op", PermissionNode, "add")) {
                     if (!(strings.length < 2)) {
                         Player player = PlayerTools.GetPlayer(strings[1]);
                         if (commandSender instanceof Player) {
@@ -64,7 +71,7 @@ public class PlayerCommand implements TabExecutor {
                 }
 
             } else if (strings[0].equalsIgnoreCase("del") || strings[0].equalsIgnoreCase("remove") || strings[0].equalsIgnoreCase("删除")) {
-                if (PermissionHelper.isHasPermission(commandSender,"op",PermissionNode,"remove")) {
+                if (PermissionHelper.isHasPermission(commandSender, "op", PermissionNode, "remove")) {
                     if (!(strings.length < 2)) {
                         OfflinePlayer player = PlayerTools.GetPlayerOffer(strings[1]);
                         if (commandSender instanceof Player) {
@@ -101,8 +108,9 @@ public class PlayerCommand implements TabExecutor {
 //        System.out.println(strings.length);
 //        System.out.println(Arrays.toString(strings));
         if (strings.length == 1) {
-            for (Map.Entry<String,HelpMap> entry:PlayerCommandMap.entrySet()){
-                if (commandSender.hasPermission(entry.getValue().PermissionNode)&&entry.getKey().startsWith(strings[0].toLowerCase())) list.add(entry.getKey());
+            for (Map.Entry<String, HelpMap> entry : PlayerCommandMap.entrySet()) {
+                if (commandSender.hasPermission(entry.getValue().PermissionNode) && entry.getKey().startsWith(strings[0].toLowerCase()))
+                    list.add(entry.getKey());
             }
         } else if (strings.length == 2) {
             if (commandSender.hasPermission("xiaojiu.op.PlayerLimit.add") && strings[0].equalsIgnoreCase("add") || strings[0].equalsIgnoreCase("添加")) {

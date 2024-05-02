@@ -1,5 +1,6 @@
 package xiaojiu.Handles.Vanish;
 
+import org.bukkit.craftbukkit.v1_12_R1.CraftServer;
 import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
@@ -20,6 +21,11 @@ public class Vanish {
             if (player.hasPermission("xiaojiu.op.vanish.effect")) {
                 player.addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY, Integer.MAX_VALUE, 1, false));
             }
+            player.setPlayerListName("");
+            player.getPlayer().getPlayer().getPlayer().getPlayer();
+//            CraftServer server = (CraftServer) player.getServer();
+//            server.getHandle();
+//            player.saveData();
             StartPlugins.getInstance().getServer().getOnlinePlayers().forEach(player2 -> {
                 if (!player2.hasPermission("xiaojiu.op.vanish.see")) {
                     player2.hidePlayer(StartPlugins.getInstance(), player);
@@ -30,25 +36,20 @@ public class Vanish {
             if (player.hasPermission("xiaojiu.op.vanish.effect")) {
                 player.removePotionEffect(PotionEffectType.INVISIBILITY);
             }
-            StartPlugins.getInstance().getServer().getOnlinePlayers().forEach(player1 -> {
-                player1.showPlayer(StartPlugins.getInstance(), player);
-            });
+            player.setPlayerListName(player.getName());
+            StartPlugins.getInstance().getServer().getOnlinePlayers().forEach(player1 -> player1.showPlayer(StartPlugins.getInstance(), player));
 
         }
         return true;
     }
 
     public static void hideNewPlayer(Player player) {
-        getVanishedPlayers().forEach(player1 -> {
-            player.hidePlayer(StartPlugins.getInstance(), player1);
-        });
+        getVanishedPlayers().forEach(player1 -> player.hidePlayer(StartPlugins.getInstance(), player1));
     }
 
     public static List<Player> getVanishedPlayers() {
         List<Player> list = new ArrayList<>();
-        VanishPlayers.forEach(uuid -> {
-            list.add(StartPlugins.getInstance().getServer().getPlayer(uuid));
-        });
+        VanishPlayers.forEach(uuid -> list.add(StartPlugins.getInstance().getServer().getPlayer(uuid)));
         return list;
     }
 //    public static boolean VanishPlayer(UUID uuid,boolean mode){

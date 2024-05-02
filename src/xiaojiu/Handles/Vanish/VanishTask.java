@@ -16,6 +16,7 @@ public class VanishTask {
 
     public static void AddPlayerVanishTime(JavaPlugin Instance, Player player, int Time) {
         UUID uuid = player.getUniqueId();
+        Vanish.VanishPlayer(player,true);
         Utils.VanishMap.forEach((integer, string) -> {
             Calendar calendar = Calendar.getInstance();
             Date date = new Date();
@@ -24,15 +25,12 @@ public class VanishTask {
             timer.schedule(new TimerTask() {
                 @Override
                 public void run() {
-                    if (Vanish.VanishPlayers.contains(uuid)) return;
+                    if (!Vanish.VanishPlayers.contains(uuid)||integer>Time) return;
                     Player player1 = StartPlugins.getInstance().getServer().getPlayer(uuid);
                     if (integer == 0) {
-                        Bukkit.getScheduler().runTask(Instance, new Runnable() {
-                            @Override
-                            public void run() {
-                                player1.sendMessage(MessageHelper.InitMessage(ChatColor.LIGHT_PURPLE + "你的隐身时间已到，隐身状态已切换为关闭"));
-                                Vanish.VanishPlayer(player1, false);
-                            }
+                        Bukkit.getScheduler().runTask(Instance, () -> {
+                            player1.sendMessage(MessageHelper.InitMessage(ChatColor.LIGHT_PURPLE + "你的隐身时间已到，隐身状态已切换为关闭"));
+                            Vanish.VanishPlayer(player1, false);
                         });
                     } else {
                         player1.sendMessage(MessageHelper.InitMessage(ChatColor.LIGHT_PURPLE + String.format(string, "隐身")));

@@ -8,6 +8,7 @@ import xiaojiu.Handles.Help.HelpMap;
 import xiaojiu.Handles.Vanish.Vanish;
 import xiaojiu.Handles.Vanish.VanishTask;
 import xiaojiu.StartPlugins;
+import xiaojiu.api.XiaojiuCommandExecutor;
 import xiaojiu.tools.MessageHelper;
 import xiaojiu.tools.PermissionHelper;
 
@@ -16,17 +17,34 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class VanishCommand {
+public class VanishCommand implements XiaojiuCommandExecutor {
     public static String PermissionNode = "vanish";
     public static String CommandNode = "vanish";
     public static Map<String, HelpMap> vanishMap = new HashMap<>();
 
-    public static void InitMap() {
+    @Override
+    public void InitMap() {
         vanishMap.put("", new HelpMap(CommandNode, "/xj v [时间]", "xiaojiu.op.vanish.use.self", "使用这个指令可以将你自己的影身状态设置为开启，时间为选填选项"));
         vanishMap.put(" ", new HelpMap(CommandNode, "/xj v [玩家名] [时间]", "xiaojiu.op.vanish.use.otherPlayer", "使用这个指令将其他玩家的隐身状态设置为开启"));
     }
 
-    public static boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
+    @Override
+    public Map<String, HelpMap> GetHelpMap() {
+        return null;
+    }
+
+    @Override
+    public String GetPermissionNode() {
+        return null;
+    }
+
+    @Override
+    public String GetCommandNode() {
+        return null;
+    }
+
+    @Override
+    public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
         if (commandSender instanceof Player) {
             Player player = ((Player) commandSender);
             if (strings.length == 2) {
@@ -100,7 +118,8 @@ public class VanishCommand {
         return true;
     }
 
-    public static List<String> onTabComplete(CommandSender commandSender, Command command, String s, String[] strings) {
+    @Override
+    public List<String> onTabComplete(CommandSender commandSender, Command command, String s, String[] strings) {
         List<String> list = new ArrayList<>();
         if (strings.length == 1) {
             StartPlugins.getInstance().getServer().getOnlinePlayers().forEach(player -> list.add(player.getName()));

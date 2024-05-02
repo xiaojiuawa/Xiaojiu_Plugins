@@ -63,12 +63,7 @@ public class RestartTools {
                     @Override
                     public void run() {
                         if (entry.getValue().equalsIgnoreCase("down")) {
-                            Bukkit.getScheduler().runTask(StartPlugins.getInstance(), new Runnable() {
-                                @Override
-                                public void run() {
-                                    Done();
-                                }
-                            });
+                            Bukkit.getScheduler().runTask(StartPlugins.getInstance(), RestartTools::Done);
                             //                        RestartHelper.Done();
                         } else {
                             MessageHelper.SendMessageAllPlayer(ChatColor.LIGHT_PURPLE + String.format(entry.getValue(), "重启"));

@@ -8,6 +8,7 @@ import org.bukkit.command.TabExecutor;
 import xiaojiu.Handles.Help.HelpMap;
 import xiaojiu.Handles.Restart.TimeHelper;
 import xiaojiu.StartPlugins;
+import xiaojiu.api.XiaojiuCommandExecutor;
 import xiaojiu.config.SaveConfig;
 import xiaojiu.task.PlayerJoinTimeTask;
 import xiaojiu.tools.MessageHelper;
@@ -16,14 +17,30 @@ import xiaojiu.tools.PermissionHelper;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
-public class PlayerTimeCommand implements TabExecutor {
+public class PlayerTimeCommand implements XiaojiuCommandExecutor {
     public static Map<String, HelpMap> PlayerTimeMap = new HashMap<>();
-    public static String CommonNode = "pt";
+    public static String CommonNode = "playerTime";
     public static String PermissionNode = "PlayerTime";
 
-    public static void InitMap() {
+    @Override
+    public void InitMap() {
         PlayerTimeMap.put("find", new HelpMap(CommonNode, "/pt find [玩家名]", "xiaojiu.op.PlayerTime.find", "通过这个查询玩家的上一次上线时间和时间差"));
         PlayerTimeMap.put("save", new HelpMap(CommonNode, "/pt save", "xiaojiu.op.PlayerTime.save", "通过这个立刻保存玩家上线时间"));
+    }
+
+    @Override
+    public Map<String, HelpMap> GetHelpMap() {
+        return PlayerTimeMap;
+    }
+
+    @Override
+    public String GetPermissionNode() {
+        return PermissionNode;
+    }
+
+    @Override
+    public String GetCommandNode() {
+        return CommonNode;
     }
 
     @Override

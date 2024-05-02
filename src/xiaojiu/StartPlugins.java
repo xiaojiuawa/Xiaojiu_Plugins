@@ -35,7 +35,8 @@ public class StartPlugins extends JavaPlugin {
         SaveConfig.OnEnable(this);
         LoadConfig.ReadAllFile();
         HelpCommand.HelpMapInit();
-        BasicSQL.Init();
+//        BasicSQL.Init();
+
         this.getLogger().info("XiaojiuPluginOnEnable");
     }
 

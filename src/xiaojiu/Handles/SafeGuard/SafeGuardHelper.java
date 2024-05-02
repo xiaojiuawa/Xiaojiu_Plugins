@@ -49,12 +49,7 @@ public class SafeGuardHelper {
                 @Override
                 public void run() {
                     if (entry.getValue().equalsIgnoreCase("down")) {
-                        Bukkit.getScheduler().runTask(StartPlugins.getInstance(), new Runnable() {
-                            @Override
-                            public void run() {
-                                done();
-                            }
-                        });
+                        Bukkit.getScheduler().runTask(StartPlugins.getInstance(), SafeGuardHelper::done);
                     } else {
                         MessageHelper.SendMessageAllPlayer(ChatColor.LIGHT_PURPLE + String.format(entry.getValue(), "维护"));
                     }

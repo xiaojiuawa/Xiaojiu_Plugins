@@ -6,6 +6,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabExecutor;
 import xiaojiu.Handles.Help.HelpMap;
 import xiaojiu.Handles.Restart.RestartTools;
+import xiaojiu.api.XiaojiuCommandExecutor;
 import xiaojiu.tools.MessageHelper;
 import xiaojiu.tools.PermissionHelper;
 
@@ -17,17 +18,33 @@ import java.util.Map;
 import static xiaojiu.Handles.Restart.RestartTools.ProcessingTime;
 import static xiaojiu.tools.Utils.isNumber;
 
-public class RestartServerCommand implements TabExecutor {
+public class RestartServerCommand implements XiaojiuCommandExecutor {
     public static String PermissionCommonNode = "restart";
-    public static String CommonNode = "rest";
+    public static String CommonNode = "restartserver";
     public static Map<String, HelpMap> RestartMap = new HashMap<>();
 
-    public static void InitMap() {
+    @Override
+    public void InitMap() {
         RestartMap.put("cancel", new HelpMap(CommonNode, "/rest cancel", "xiaojiu.op.restart.cancel", "通过这个指令取消当前的计划重启任务"));
         RestartMap.put("now", new HelpMap(CommonNode, "/rest now", "xiaojiu.op.restart.now", "通过这个指令立刻执行重启"));
         RestartMap.put("reset", new HelpMap(CommonNode, "/rest reset [时间]", "xiaojiu.op.restart.reset", "通过这个指令重新设置重启时间"));
         RestartMap.put("", new HelpMap(CommonNode, "/rest [时间]", "xiaojiu.op.restart.start", "通过这个指令发起一个重启任务"));
         RestartMap.put("m", new HelpMap(CommonNode, "/rest m/h/d [时间]", "xiaojiu.op.restart.start", "通过这个指令发起一个重启任务(使用重设时间单位)，其中m表示天,h表示小时,m表示分钟"));
+    }
+
+    @Override
+    public Map<String, HelpMap> GetHelpMap() {
+        return RestartMap;
+    }
+
+    @Override
+    public String GetPermissionNode() {
+        return PermissionCommonNode;
+    }
+
+    @Override
+    public String GetCommandNode() {
+        return CommonNode;
     }
 
     @Override

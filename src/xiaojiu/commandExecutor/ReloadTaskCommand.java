@@ -7,6 +7,7 @@ import org.bukkit.command.TabExecutor;
 import org.bukkit.entity.Player;
 import xiaojiu.Handles.Help.HelpMap;
 import xiaojiu.StartPlugins;
+import xiaojiu.api.XiaojiuCommandExecutor;
 import xiaojiu.task.ReloadTask;
 import xiaojiu.tools.MessageHelper;
 import xiaojiu.tools.PermissionHelper;
@@ -16,18 +17,34 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class ReloadTaskCommand implements TabExecutor {
+public class ReloadTaskCommand implements XiaojiuCommandExecutor {
     public static Map<String, HelpMap> ReloadTaskMap = new HashMap<>();
     public static String PermissionNode = "ReloadTask";
-    public static String CommonNode = "sug";
+    public static String CommonNode = "suggest";
 
-    public static void InitMap() {
+    @Override
+    public void InitMap() {
         ReloadTaskMap.put("start", new HelpMap(CommonNode, "/sug start", "xiaojiu.normal.ReloadTask.start", "通过这个指令发起一次投票重启"));
         ReloadTaskMap.put("revoke", new HelpMap(CommonNode, "/sug revoke", "xiaojiu.normal.ReloadTask.revoke", "通过这个指令撤销你的投票"));
         ReloadTaskMap.put("agree", new HelpMap(CommonNode, "/sug agree", "xiaojiu.normal.ReloadTask.agree", "通过这个指令同意当前的投票任务"));
         ReloadTaskMap.put("refuse", new HelpMap(CommonNode, "/sug refuse", "xiaojiu.normal.ReloadTask.refuse", "通过这个指令拒绝当前的投票任务"));
         ReloadTaskMap.put("cancel", new HelpMap(CommonNode, "/sug cancel", "xiaojiu.op.ReloadTask.cancel", "通过这个指令取消当前的投票任务"));
         ReloadTaskMap.put("down", new HelpMap(CommonNode, "/sug down", "xiaojiu.op.ReloadTask.down", "通过这个指令立刻结束当前的投票任务，并进行结算"));
+    }
+
+    @Override
+    public Map<String, HelpMap> GetHelpMap() {
+        return ReloadTaskMap;
+    }
+
+    @Override
+    public String GetPermissionNode() {
+        return PermissionNode;
+    }
+
+    @Override
+    public String GetCommandNode() {
+        return CommonNode;
     }
 
     @Override

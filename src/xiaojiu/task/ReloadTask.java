@@ -29,22 +29,19 @@ public class ReloadTask {
             task.schedule(new TimerTask() {
                 @Override
                 public void run() {
-                    Bukkit.getScheduler().runTask(Instance, new Runnable() {
-                        @Override
-                        public void run() {
-                            if (entry.getKey() == 0) {
-                                down();
+                    Bukkit.getScheduler().runTask(Instance, () -> {
+                        if (entry.getKey() == 0) {
+                            down();
 
-                            } else {
-                                MessageHelper.SendMessageAllPlayer(MessageHelper.InitMessage(ChatColor.LIGHT_PURPLE + String.format(entry.getValue(), "重启")));
-                                MessageHelper.SendMessageAllPlayer(MessageHelper.InitMessage(ChatColor.LIGHT_PURPLE + String.format("投票情况:同意人数%s人 拒绝人数%s人",
-                                        suggestHelper.Approve.size(),
-                                        suggestHelper.Refuse.size())));
-                                MessageHelper.SendMessageAllPlayer(MessageHelper.InitMessage(ChatColor.LIGHT_PURPLE + "使用/sug 同意 同意投票,使用/sug 拒绝 拒绝投票"));
-                            }
-
-
+                        } else {
+                            MessageHelper.SendMessageAllPlayer(MessageHelper.InitMessage(ChatColor.LIGHT_PURPLE + String.format(entry.getValue(), "重启")));
+                            MessageHelper.SendMessageAllPlayer(MessageHelper.InitMessage(ChatColor.LIGHT_PURPLE + String.format("投票情况:同意人数%s人 拒绝人数%s人",
+                                    suggestHelper.Approve.size(),
+                                    suggestHelper.Refuse.size())));
+                            MessageHelper.SendMessageAllPlayer(MessageHelper.InitMessage(ChatColor.LIGHT_PURPLE + "使用/sug 同意 同意投票,使用/sug 拒绝 拒绝投票"));
                         }
+
+
                     });
                 }
             }, calendar.getTime());

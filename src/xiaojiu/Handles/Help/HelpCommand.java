@@ -1,6 +1,7 @@
 package xiaojiu.Handles.Help;
 
 import org.bukkit.ChatColor;
+import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import xiaojiu.commandExecutor.*;
 
@@ -11,19 +12,19 @@ public class HelpCommand {
     public static Map<String, Map<String, HelpMap>> helpMap = new HashMap<>();
 
     public static void HelpMapInit() {
-        MainCommand.InitMap();
+        CommonExecutorLoader.GetCommandMap().forEach((string, xiaojiuCommandExecutor) -> xiaojiuCommandExecutor.InitMap());
         helpMap.putAll(MainCommand.helpMap);
-        PlayerCommand.InitMap();
+//        CommonExecutorLoader.playerCommand.InitMap();
         helpMap.put("玩家限制", PlayerCommand.PlayerCommandMap);
-        PlayerTimeCommand.InitMap();
+//        PlayerTimeCommand.InitMap();
         helpMap.put("玩家上线时间", PlayerTimeCommand.PlayerTimeMap);
-        ReloadTaskCommand.InitMap();
+//        ReloadTaskCommand.InitMap();
         helpMap.put("投票重启", ReloadTaskCommand.ReloadTaskMap);
-        RestartServerCommand.InitMap();
+//        RestartServerCommand.InitMap();
         helpMap.put("重启主模块", RestartServerCommand.RestartMap);
-        SafeGuardCommand.InitMap();
+//        SafeGuardCommand.InitMap();
         helpMap.put("服务器维护命令", SafeGuardCommand.SafeGuardMap);
-        VanishCommand.InitMap();
+//        VanishCommand.InitMap();
         helpMap.put("隐身", VanishCommand.vanishMap);
     }
 
@@ -31,9 +32,7 @@ public class HelpCommand {
         commandSender.sendMessage(ChatColor.GOLD + "xiaojiu 命令帮助");
         if (page == 0 && command.equalsIgnoreCase("")) {
             commandSender.sendMessage(ChatColor.GOLD + "帮助总列表");
-            helpMap.forEach((string, helpmap) -> {
-                commandSender.sendMessage(ChatColor.GOLD + string);
-            });
+            helpMap.forEach((string, helpmap) -> commandSender.sendMessage(ChatColor.GOLD + string));
         } else {
             Map<String, HelpMap> map = helpMap.get(command);
 //            if (page==0) page=1;

@@ -9,6 +9,7 @@ import org.bukkit.entity.Player;
 import xiaojiu.Handles.Help.HelpMap;
 import xiaojiu.Handles.LimitPlayer.LimitPlayerTools;
 import xiaojiu.Handles.PlayerTime.PlayerTools;
+import xiaojiu.api.XiaojiuCommandExecutor;
 import xiaojiu.config.SaveConfig;
 import xiaojiu.tools.MessageHelper;
 import xiaojiu.tools.PermissionHelper;
@@ -19,15 +20,31 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class PlayerCommand implements TabExecutor {
+public class PlayerCommand implements XiaojiuCommandExecutor {
     public static Map<String, HelpMap> PlayerCommandMap = new HashMap<>();
-    public static String CommandNode = "pl";
+    public static String CommandNode = "Limit";
     public static String PermissionNode = "PlayerLimit";
 
-    public static void InitMap() {
+    @Override
+    public void InitMap() {
         PlayerCommandMap.put("save", new HelpMap(CommandNode, "/pl save", "xiaojiu.op.PlayerLimit.save", "通过这个方法立即保存玩家限制列表"));
         PlayerCommandMap.put("add", new HelpMap(CommandNode, "/pl add true/false [玩家名]", "xiaojiu.op.PlayerLimit.add", "通过这个指令来添加一位玩家到达限制列表中 注:其中第二个参数填true则会启用保存，服务器关闭后仍有效，填false则禁用保存，服务器关闭后重置 "));
         PlayerCommandMap.put("remove", new HelpMap(CommandNode, "/pl remove [玩家名]", "xiaojiu.op.PlayerLimit.remove", "通过这个指令来解除对玩家的限制"));
+    }
+
+    @Override
+    public Map<String, HelpMap> GetHelpMap() {
+        return PlayerCommandMap;
+    }
+
+    @Override
+    public String GetPermissionNode() {
+        return PermissionNode;
+    }
+
+    @Override
+    public String GetCommandNode() {
+        return CommandNode;
     }
 
     @Override

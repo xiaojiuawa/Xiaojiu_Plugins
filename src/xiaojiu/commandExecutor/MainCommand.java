@@ -6,21 +6,38 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabExecutor;
 import xiaojiu.Handles.Help.HelpCommand;
 import xiaojiu.Handles.Help.HelpMap;
+import xiaojiu.api.XiaojiuCommandExecutor;
 import xiaojiu.tools.MessageHelper;
 import xiaojiu.tools.Utils;
 
 import java.util.*;
 
-public class MainCommand implements TabExecutor {
+public class MainCommand implements XiaojiuCommandExecutor {
     public static String CommonNode = "xiaojiu";
 
     public static Map<String, Map<String, HelpMap>> helpMap = new HashMap<>();
 
-    public static void InitMap() {
+    @Override
+    public void InitMap() {
         Map<String, HelpMap> MainHelpMap = new HashMap<>();
         // help命令
         MainHelpMap.put("help", new HelpMap(CommonNode, "/xj help [命令大节点] [页面(默认为1)]", "xiaojiu.main.help.use", "通过这个指令查看命令帮助 当你输入这个指令后，会有一个总列表出现，这时再输入总列表当作页码即可"));
 //        MainHelpMap.put("")
+    }
+
+    @Override
+    public Map<String, HelpMap> GetHelpMap() {
+        return null;
+    }
+
+    @Override
+    public String GetPermissionNode() {
+        return null;
+    }
+
+    @Override
+    public String GetCommandNode() {
+        return CommonNode;
     }
 
     @Override
@@ -55,7 +72,7 @@ public class MainCommand implements TabExecutor {
 //                    commandSender.sendMessage(strings);
 //                }
 //                commandSender.sendMessage(Arrays.copyOfRange(strings,1,strings.length));
-                VanishCommand.onCommand(commandSender, command, s, Arrays.copyOfRange(strings, 1, strings.length));
+                CommonExecutorLoader.GetCommandMap().get("vanish").onCommand(commandSender, command, s, Arrays.copyOfRange(strings, 1, strings.length));
             }
         }
         return true;
@@ -69,7 +86,8 @@ public class MainCommand implements TabExecutor {
                 if (string.startsWith(strings[0].toLowerCase())) list.add(string);
             });
         } else if (strings[0].equalsIgnoreCase("v")) {
-            list.addAll(VanishCommand.onTabComplete(commandSender, command, s, Arrays.copyOfRange(strings, 1, strings.length)));
+            CommonExecutorLoader.GetCommandMap().get("vanish").onTabComplete(commandSender, command, s, Arrays.copyOfRange(strings, 1, strings.length));
+//            list.addAll(VanishCommand.onTabComplete(commandSender, command, s, Arrays.copyOfRange(strings, 1, strings.length)));
         }
         return list;
     }

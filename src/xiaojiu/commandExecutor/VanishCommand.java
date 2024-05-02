@@ -30,17 +30,17 @@ public class VanishCommand implements XiaojiuCommandExecutor {
 
     @Override
     public Map<String, HelpMap> GetHelpMap() {
-        return null;
+        return vanishMap;
     }
 
     @Override
     public String GetPermissionNode() {
-        return null;
+        return PermissionNode;
     }
 
     @Override
     public String GetCommandNode() {
-        return null;
+        return CommandNode;
     }
 
     @Override

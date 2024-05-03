@@ -1,7 +1,7 @@
 package xiaojiu.api;
 
 import org.bukkit.command.TabExecutor;
-import xiaojiu.Handles.Help.HelpMap;
+import xiaojiu.Handles.Help.HelpMapHandler;
 
 import java.util.Map;
 

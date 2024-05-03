@@ -4,10 +4,11 @@ import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import xiaojiu.Handles.Help.HelpMap;
+import xiaojiu.Handles.Help.HelpMapHandler;
 import xiaojiu.Handles.Vanish.Vanish;
 import xiaojiu.Handles.Vanish.VanishTask;
 import xiaojiu.StartPlugins;
+import xiaojiu.api.HelpMap;
 import xiaojiu.api.XiaojiuCommandExecutor;
 import xiaojiu.tools.MessageHelper;
 import xiaojiu.tools.PermissionHelper;
@@ -24,8 +25,8 @@ public class VanishCommand implements XiaojiuCommandExecutor {
 
     @Override
     public void InitMap() {
-        vanishMap.put("", new HelpMap(CommandNode, "/xj v [时间]", "xiaojiu.op.vanish.use.self", "使用这个指令可以将你自己的影身状态设置为开启，时间为选填选项"));
-        vanishMap.put(" ", new HelpMap(CommandNode, "/xj v [玩家名] [时间]", "xiaojiu.op.vanish.use.otherPlayer", "使用这个指令将其他玩家的隐身状态设置为开启"));
+        vanishMap.put("", new HelpMapHandler(CommandNode, "/xj v [时间]", "xiaojiu.op.vanish.use.self", "使用这个指令可以将你自己的影身状态设置为开启，时间为选填选项"));
+        vanishMap.put(" ", new HelpMapHandler(CommandNode, "/xj v [玩家名] [时间]", "xiaojiu.op.vanish.use.otherPlayer", "使用这个指令将其他玩家的隐身状态设置为开启"));
     }
 
     @Override

@@ -3,10 +3,10 @@ package xiaojiu.commandExecutor;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
-import org.bukkit.command.TabExecutor;
 import org.bukkit.entity.Player;
-import xiaojiu.Handles.Help.HelpMap;
+import xiaojiu.Handles.Help.HelpMapHandler;
 import xiaojiu.StartPlugins;
+import xiaojiu.api.HelpMap;
 import xiaojiu.api.XiaojiuCommandExecutor;
 import xiaojiu.task.ReloadTask;
 import xiaojiu.tools.MessageHelper;
@@ -24,12 +24,12 @@ public class ReloadTaskCommand implements XiaojiuCommandExecutor {
 
     @Override
     public void InitMap() {
-        ReloadTaskMap.put("start", new HelpMap(CommonNode, "/sug start", "xiaojiu.normal.ReloadTask.start", "通过这个指令发起一次投票重启"));
-        ReloadTaskMap.put("revoke", new HelpMap(CommonNode, "/sug revoke", "xiaojiu.normal.ReloadTask.revoke", "通过这个指令撤销你的投票"));
-        ReloadTaskMap.put("agree", new HelpMap(CommonNode, "/sug agree", "xiaojiu.normal.ReloadTask.agree", "通过这个指令同意当前的投票任务"));
-        ReloadTaskMap.put("refuse", new HelpMap(CommonNode, "/sug refuse", "xiaojiu.normal.ReloadTask.refuse", "通过这个指令拒绝当前的投票任务"));
-        ReloadTaskMap.put("cancel", new HelpMap(CommonNode, "/sug cancel", "xiaojiu.op.ReloadTask.cancel", "通过这个指令取消当前的投票任务"));
-        ReloadTaskMap.put("down", new HelpMap(CommonNode, "/sug down", "xiaojiu.op.ReloadTask.down", "通过这个指令立刻结束当前的投票任务，并进行结算"));
+        ReloadTaskMap.put("start", new HelpMapHandler(CommonNode, "/sug start", "xiaojiu.normal.ReloadTask.start", "通过这个指令发起一次投票重启"));
+        ReloadTaskMap.put("revoke", new HelpMapHandler(CommonNode, "/sug revoke", "xiaojiu.normal.ReloadTask.revoke", "通过这个指令撤销你的投票"));
+        ReloadTaskMap.put("agree", new HelpMapHandler(CommonNode, "/sug agree", "xiaojiu.normal.ReloadTask.agree", "通过这个指令同意当前的投票任务"));
+        ReloadTaskMap.put("refuse", new HelpMapHandler(CommonNode, "/sug refuse", "xiaojiu.normal.ReloadTask.refuse", "通过这个指令拒绝当前的投票任务"));
+        ReloadTaskMap.put("cancel", new HelpMapHandler(CommonNode, "/sug cancel", "xiaojiu.op.ReloadTask.cancel", "通过这个指令取消当前的投票任务"));
+        ReloadTaskMap.put("down", new HelpMapHandler(CommonNode, "/sug down", "xiaojiu.op.ReloadTask.down", "通过这个指令立刻结束当前的投票任务，并进行结算"));
     }
 
     @Override
@@ -126,7 +126,7 @@ public class ReloadTaskCommand implements XiaojiuCommandExecutor {
         List<String> list = new ArrayList<>();
         if (strings.length == 1) {
             for (Map.Entry<String, HelpMap> entry : ReloadTaskMap.entrySet()) {
-                if (commandSender.hasPermission(entry.getValue().PermissionNode) && entry.getKey().startsWith(strings[0].toLowerCase()))
+                if (commandSender.hasPermission(entry.getValue().getPermissionNode()) && entry.getKey().startsWith(strings[0].toLowerCase()))
                     list.add(entry.getKey());
             }
         }

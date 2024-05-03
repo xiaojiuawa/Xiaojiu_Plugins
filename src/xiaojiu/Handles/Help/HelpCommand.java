@@ -1,8 +1,8 @@
 package xiaojiu.Handles.Help;
 
 import org.bukkit.ChatColor;
-import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import xiaojiu.api.HelpMap;
 import xiaojiu.commandExecutor.*;
 
 import java.util.HashMap;
@@ -43,10 +43,10 @@ public class HelpCommand {
                 if (i >= page * 5 && i < (page + 1) * 5) {
                     HelpMap map1 = entry.getValue();
                     commandSender.sendMessage(ChatColor.GOLD + "命令名: " + entry.getKey());
-                    commandSender.sendMessage(ChatColor.GOLD + "使用方法: " + map1.command);
-                    commandSender.sendMessage(ChatColor.GOLD + "解释: " + map1.introduce);
-                    commandSender.sendMessage(ChatColor.GOLD + "需要的权限节点" + map1.PermissionNode);
-                    commandSender.sendMessage(ChatColor.GOLD + "我是否有权限:" + (commandSender.hasPermission(map1.PermissionNode) || commandSender.isOp() ? "有" : "无"));
+                    commandSender.sendMessage(ChatColor.GOLD + "使用方法: " + map1.getCommand());
+                    commandSender.sendMessage(ChatColor.GOLD + "解释: " + map1.getIntroduce());
+                    commandSender.sendMessage(ChatColor.GOLD + "需要的权限节点" + map1.getPermissionNode());
+                    commandSender.sendMessage(ChatColor.GOLD + "我是否有权限:" + (commandSender.hasPermission(map1.getPermissionNode()) || commandSender.isOp() ? "有" : "无"));
                     commandSender.sendMessage(ChatColor.GOLD + "=====================================");
                 }
                 i++;

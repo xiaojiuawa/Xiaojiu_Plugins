@@ -3,10 +3,10 @@ package xiaojiu.commandExecutor;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
-import org.bukkit.command.TabExecutor;
-import xiaojiu.Handles.Help.HelpMap;
+import xiaojiu.Handles.Help.HelpMapHandler;
 import xiaojiu.Handles.Restart.RestartTools;
 import xiaojiu.Handles.SafeGuard.SafeGuardHelper;
+import xiaojiu.api.HelpMap;
 import xiaojiu.api.XiaojiuCommandExecutor;
 import xiaojiu.tools.MessageHelper;
 import xiaojiu.tools.PermissionHelper;
@@ -24,11 +24,11 @@ public class SafeGuardCommand implements XiaojiuCommandExecutor {
 
     @Override
     public void InitMap() {
-        SafeGuardMap.put("now", new HelpMap(CommandNode, "/sg now", "xiaojiu.op.SafeGuard.now", "通过这个指令立即开始进行服务器维护"));
-        SafeGuardMap.put("cancel", new HelpMap(CommandNode, "/sg cancel", "xiaojiu.op.SafeGuard.cancel", "通过这个指令来取消计划服务器维护"));
-        SafeGuardMap.put("end", new HelpMap(CommandNode, "/sg end", "xiaojiu.op.SafeGuard.end", "通过这个指令结束服务器的维护"));
-        SafeGuardMap.put("", new HelpMap(CommandNode, "/sg [时间]", "xiaojiu.op.SafeGuard.start", "通过这个指令发起一个维护任务"));
-        SafeGuardMap.put("m", new HelpMap(CommandNode, "/sg m/h/d [时间]", "xiaojiu.op.SafeGuard.start", "通过这个指令发起一个维护任务(使用重设时间单位)，其中m表示天,h表示小时,m表示分钟"));
+        SafeGuardMap.put("now", new HelpMapHandler(CommandNode, "/sg now", "xiaojiu.op.SafeGuard.now", "通过这个指令立即开始进行服务器维护"));
+        SafeGuardMap.put("cancel", new HelpMapHandler(CommandNode, "/sg cancel", "xiaojiu.op.SafeGuard.cancel", "通过这个指令来取消计划服务器维护"));
+        SafeGuardMap.put("end", new HelpMapHandler(CommandNode, "/sg end", "xiaojiu.op.SafeGuard.end", "通过这个指令结束服务器的维护"));
+        SafeGuardMap.put("", new HelpMapHandler(CommandNode, "/sg [时间]", "xiaojiu.op.SafeGuard.start", "通过这个指令发起一个维护任务"));
+        SafeGuardMap.put("m", new HelpMapHandler(CommandNode, "/sg m/h/d [时间]", "xiaojiu.op.SafeGuard.start", "通过这个指令发起一个维护任务(使用重设时间单位)，其中m表示天,h表示小时,m表示分钟"));
     }
 
     @Override
@@ -107,7 +107,7 @@ public class SafeGuardCommand implements XiaojiuCommandExecutor {
         List<String> list = new ArrayList<>();
         if (strings.length == 1) {
             for (Map.Entry<String, HelpMap> entry : SafeGuardMap.entrySet()) {
-                if (commandSender.hasPermission(entry.getValue().PermissionNode) && entry.getKey().startsWith(strings[0].toLowerCase())) {
+                if (commandSender.hasPermission(entry.getValue().getPermissionNode()) && entry.getKey().startsWith(strings[0].toLowerCase())) {
                     list.add(entry.getKey());
                 }
             }

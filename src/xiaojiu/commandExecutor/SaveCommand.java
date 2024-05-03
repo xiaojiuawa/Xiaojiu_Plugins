@@ -2,7 +2,8 @@ package xiaojiu.commandExecutor;
 
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
-import xiaojiu.Handles.Help.HelpMap;
+import xiaojiu.Handles.Help.HelpMapHandler;
+import xiaojiu.api.HelpMap;
 import xiaojiu.api.XiaojiuCommandExecutor;
 
 import java.util.List;

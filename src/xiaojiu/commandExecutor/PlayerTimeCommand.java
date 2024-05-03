@@ -4,10 +4,10 @@ import org.bukkit.ChatColor;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
-import org.bukkit.command.TabExecutor;
-import xiaojiu.Handles.Help.HelpMap;
+import xiaojiu.Handles.Help.HelpMapHandler;
 import xiaojiu.Handles.Restart.TimeHelper;
 import xiaojiu.StartPlugins;
+import xiaojiu.api.HelpMap;
 import xiaojiu.api.XiaojiuCommandExecutor;
 import xiaojiu.config.SaveConfig;
 import xiaojiu.task.PlayerJoinTimeTask;
@@ -24,8 +24,8 @@ public class PlayerTimeCommand implements XiaojiuCommandExecutor {
 
     @Override
     public void InitMap() {
-        PlayerTimeMap.put("find", new HelpMap(CommonNode, "/pt find [玩家名]", "xiaojiu.op.PlayerTime.find", "通过这个查询玩家的上一次上线时间和时间差"));
-        PlayerTimeMap.put("save", new HelpMap(CommonNode, "/pt save", "xiaojiu.op.PlayerTime.save", "通过这个立刻保存玩家上线时间"));
+        PlayerTimeMap.put("find", new HelpMapHandler(CommonNode, "/pt find [玩家名]", "xiaojiu.op.PlayerTime.find", "通过这个查询玩家的上一次上线时间和时间差"));
+        PlayerTimeMap.put("save", new HelpMapHandler(CommonNode, "/pt save", "xiaojiu.op.PlayerTime.save", "通过这个立刻保存玩家上线时间"));
     }
 
     @Override
@@ -79,7 +79,7 @@ public class PlayerTimeCommand implements XiaojiuCommandExecutor {
         List<String> list = new ArrayList<>();
         if (strings.length == 1) {
             for (Map.Entry<String, HelpMap> entry : PlayerTimeMap.entrySet()) {
-                if (commandSender.hasPermission(entry.getValue().PermissionNode) && entry.getKey().startsWith(strings[0].toLowerCase()))
+                if (commandSender.hasPermission(entry.getValue().getPermissionNode()) && entry.getKey().startsWith(strings[0].toLowerCase()))
                     list.add(entry.getKey());
             }
         } else if (strings.length == 2) {

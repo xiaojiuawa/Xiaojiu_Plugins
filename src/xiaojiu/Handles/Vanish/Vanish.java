@@ -9,6 +9,7 @@ import xiaojiu.StartPlugins;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import java.util.function.LongToIntFunction;
 
 public class Vanish {
     public static List<UUID> VanishPlayers = new ArrayList<>();

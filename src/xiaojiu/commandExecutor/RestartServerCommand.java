@@ -3,9 +3,9 @@ package xiaojiu.commandExecutor;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
-import org.bukkit.command.TabExecutor;
-import xiaojiu.Handles.Help.HelpMap;
+import xiaojiu.Handles.Help.HelpMapHandler;
 import xiaojiu.Handles.Restart.RestartTools;
+import xiaojiu.api.HelpMap;
 import xiaojiu.api.XiaojiuCommandExecutor;
 import xiaojiu.tools.MessageHelper;
 import xiaojiu.tools.PermissionHelper;
@@ -25,11 +25,11 @@ public class RestartServerCommand implements XiaojiuCommandExecutor {
 
     @Override
     public void InitMap() {
-        RestartMap.put("cancel", new HelpMap(CommonNode, "/rest cancel", "xiaojiu.op.restart.cancel", "通过这个指令取消当前的计划重启任务"));
-        RestartMap.put("now", new HelpMap(CommonNode, "/rest now", "xiaojiu.op.restart.now", "通过这个指令立刻执行重启"));
-        RestartMap.put("reset", new HelpMap(CommonNode, "/rest reset [时间]", "xiaojiu.op.restart.reset", "通过这个指令重新设置重启时间"));
-        RestartMap.put("", new HelpMap(CommonNode, "/rest [时间]", "xiaojiu.op.restart.start", "通过这个指令发起一个重启任务"));
-        RestartMap.put("m", new HelpMap(CommonNode, "/rest m/h/d [时间]", "xiaojiu.op.restart.start", "通过这个指令发起一个重启任务(使用重设时间单位)，其中m表示天,h表示小时,m表示分钟"));
+        RestartMap.put("cancel", new HelpMapHandler(CommonNode, "/rest cancel", "xiaojiu.op.restart.cancel", "通过这个指令取消当前的计划重启任务"));
+        RestartMap.put("now", new HelpMapHandler(CommonNode, "/rest now", "xiaojiu.op.restart.now", "通过这个指令立刻执行重启"));
+        RestartMap.put("reset", new HelpMapHandler(CommonNode, "/rest reset [时间]", "xiaojiu.op.restart.reset", "通过这个指令重新设置重启时间"));
+        RestartMap.put("", new HelpMapHandler(CommonNode, "/rest [时间]", "xiaojiu.op.restart.start", "通过这个指令发起一个重启任务"));
+        RestartMap.put("m", new HelpMapHandler(CommonNode, "/rest m/h/d [时间]", "xiaojiu.op.restart.start", "通过这个指令发起一个重启任务(使用重设时间单位)，其中m表示天,h表示小时,m表示分钟"));
     }
 
     @Override
@@ -124,7 +124,7 @@ public class RestartServerCommand implements XiaojiuCommandExecutor {
         List<String> list = new ArrayList<>();
         if (strings.length == 1) {
             for (Map.Entry<String, HelpMap> entry : RestartMap.entrySet()) {
-                if (commandSender.hasPermission(entry.getValue().PermissionNode) && entry.getKey().startsWith(strings[0].toLowerCase())) {
+                if (commandSender.hasPermission(entry.getValue().getPermissionNode()) && entry.getKey().startsWith(strings[0].toLowerCase())) {
                     list.add(entry.getKey());
                 }
             }

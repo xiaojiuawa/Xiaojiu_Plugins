@@ -65,7 +65,7 @@ public class MainCommand implements XiaojiuCommandExecutor {
                     }
                 } else if (strings.length == 2) {
                     HelpCommand.SendHelps(commandSender, strings[1], 1);
-                }
+                }//todo 由于help命令展示更改，估计这个也得重写
                 //帮助指令结束
             } else if (strings[0].equalsIgnoreCase("v") || strings[0].equalsIgnoreCase("隐身") || strings[0].equalsIgnoreCase("vanish")) {
                 //隐身指令开始

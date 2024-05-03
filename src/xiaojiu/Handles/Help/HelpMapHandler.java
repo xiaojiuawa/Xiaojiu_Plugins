@@ -1,6 +1,7 @@
 package xiaojiu.Handles.Help;
 
 import xiaojiu.api.HelpMap;
+import xiaojiu.api.XiaojiuCommandExecutor;
 
 public class HelpMapHandler implements HelpMap {
     public HelpMapHandler(String faster, String command, String permissionNode, String introduce) {
@@ -9,7 +10,12 @@ public class HelpMapHandler implements HelpMap {
         this.PermissionNode = permissionNode;
         this.introduce = introduce;
     }
-
+//    public HelpMapHandler(XiaojiuCommandExecutor executor,String command ,String permissionNode,String introduce){
+//        this.faster = executor.GetCommandNode();
+//        this.command = command;
+//        this.introduce= introduce;
+//        this.PermissionNode=permissionNode;
+//    }
     public String faster;
     public String command;
     public String PermissionNode;

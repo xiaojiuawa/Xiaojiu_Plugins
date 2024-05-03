@@ -15,6 +15,7 @@ import java.util.*;
 public class MainCommand implements XiaojiuCommandExecutor {
     public static String CommonNode = "xiaojiu";
 
+    public static String PermissionNode = "xiaojiu";
     public static Map<String, Map<String, HelpMap>> helpMap = new HashMap<>();
 
     @Override
@@ -81,13 +82,17 @@ public class MainCommand implements XiaojiuCommandExecutor {
     @Override
     public List<String> onTabComplete(CommandSender commandSender, Command command, String s, String[] strings) {
         List<String> list = new ArrayList<>();
-        if (strings.length == 1) {
-            HelpCommand.helpMap.forEach((string, helpMapMap) -> {
-                if (string.startsWith(strings[0].toLowerCase())) list.add(string);
-            });
-        } else if (strings[0].equalsIgnoreCase("v")) {
-            CommonExecutorLoader.GetCommandMap().get("vanish").onTabComplete(commandSender, command, s, Arrays.copyOfRange(strings, 1, strings.length));
+//        System.out.println(strings.length);
+//        if (strings.length<2) return list;
+        if (strings.length==2&&strings[0].equalsIgnoreCase("v")) {
+            System.out.println(1);
+            list.addAll(CommonExecutorLoader.GetCommandMap().get("vanish").onTabComplete(commandSender, command, s, Arrays.copyOfRange(strings, 0, strings.length)));
+            return list;
 //            list.addAll(VanishCommand.onTabComplete(commandSender, command, s, Arrays.copyOfRange(strings, 1, strings.length)));
+        }else if (strings.length == 2) {
+            HelpCommand.helpMap.forEach((string, helpMapMap) -> {
+                if (string.startsWith(strings[1].toLowerCase())) list.add(string);
+            });
         }
         return list;
     }

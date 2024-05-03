@@ -62,6 +62,16 @@ permissions:
 #      xiaojiu.op.ReloadTask.revoke: false
 #      xiaojiu.op.ReloadTask.agree: false
 #      xiaojiu.op.ReloadTask.refuse: false
+#      xiaojiu.op.save.use: true
+      xiaojiu.op.save.task: true
+      xiaojiu.op.save.config: true
+      xiaojiu.op.save.world: true
+      xiaojiu.op.save.player: true
+      xiaojiu.op.save.all: true
+      xiaojiu.op.save.cancel: true
+      xiaojiu.op.save.now: true
+
+#      xiaojiu.op.save.create.
 
   xiaojiu.normal:
     default: true

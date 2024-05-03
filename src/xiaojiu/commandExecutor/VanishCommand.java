@@ -123,7 +123,10 @@ public class VanishCommand implements XiaojiuCommandExecutor {
     public List<String> onTabComplete(CommandSender commandSender, Command command, String s, String[] strings) {
         List<String> list = new ArrayList<>();
         if (strings.length == 1) {
-            StartPlugins.getInstance().getServer().getOnlinePlayers().forEach(player -> list.add(player.getName()));
+            for (Player player : StartPlugins.getInstance().getServer().getOnlinePlayers()) {
+                if (player.getName().toLowerCase().startsWith(strings[0].toLowerCase()))
+                    list.add(player.getName());
+            }
         }
         return list;
     }

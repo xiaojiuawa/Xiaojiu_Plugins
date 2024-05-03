@@ -5,6 +5,7 @@ import org.bukkit.command.PluginCommand;
 import org.bukkit.configuration.serialization.ConfigurationSerialization;
 import org.bukkit.plugin.java.JavaPlugin;
 import xiaojiu.Handles.Help.HelpCommand;
+import xiaojiu.Handles.Vanish.Vanish;
 import xiaojiu.Log.mysql.BasicSQL;
 import xiaojiu.commandExecutor.CommonExecutorLoader;
 import xiaojiu.config.LoadConfig;
@@ -49,6 +50,6 @@ public class StartPlugins extends JavaPlugin {
         Bukkit.getScheduler().cancelTasks(this);
         this.getLogger().info("XiaojiuPluginOnDisable");
         SaveConfig.Save();
-
+        Vanish.OffVanish();
     }
 }

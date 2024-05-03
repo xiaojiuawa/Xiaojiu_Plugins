@@ -53,6 +53,12 @@ public class Vanish {
         VanishPlayers.forEach(uuid -> list.add(StartPlugins.getInstance().getServer().getPlayer(uuid)));
         return list;
     }
+    public static void OffVanish(){
+        VanishPlayers.forEach(uuid -> {
+            Player player= StartPlugins.getInstance().getServer().getPlayer(uuid);
+            VanishPlayer(player,false);
+        });
+    }
 //    public static boolean VanishPlayer(UUID uuid,boolean mode){
 //        if (VanishPlayers.contains(uuid)&&mode || !VanishPlayers.contains(uuid)&&!mode) return false;
 //        if (mode){

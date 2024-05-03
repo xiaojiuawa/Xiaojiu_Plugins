@@ -10,4 +10,5 @@ public interface XiaojiuCommandExecutor extends TabExecutor {
     Map<String, HelpMap> GetHelpMap();
     String GetPermissionNode();
     String GetCommandNode();
+    //todo 添加isHasPermission函数
 }

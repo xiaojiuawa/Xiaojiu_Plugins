@@ -4,9 +4,11 @@ import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import xiaojiu.Handles.Help.HelpCommandHandle;
+import xiaojiu.Handles.Help.HelpMapHandler;
 import xiaojiu.api.HelpMap;
 import xiaojiu.api.XiaojiuCommandExecutor;
 import xiaojiu.tools.MessageHelper;
+import xiaojiu.tools.PermissionHelper;
 import xiaojiu.tools.Utils;
 
 import java.util.HashMap;
@@ -20,9 +22,9 @@ public class HelpCommand implements XiaojiuCommandExecutor {
     public static String PermissionNode = "help";
 
     public static String CommandNode  ="help";
-
     @Override
     public void InitMap() {
+        helpMap.put("help", new HelpMapHandler(CommandNode, "/xj help [命令大节点] [页面(默认为1)]", "xiaojiu.normal.help.use", "通过这个指令查看命令帮助 当你输入这个指令后，会有一个总列表出现，这时再输入总列表当作页码即可"));
 
     }
 
@@ -43,15 +45,18 @@ public class HelpCommand implements XiaojiuCommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
-        if (strings.length>=1){
-            if (strings.length==1) HelpCommandHandle.SendHelps(commandSender, "", 0);
-            if (strings.length>2&& Utils.isNumber(strings[1])){
+        if(!PermissionHelper.isHasPermission(commandSender,false,CommandNode,"use")){
+            MessageHelper.SendNoPermissionMessage(commandSender);
+            return true;
+        }
+        if (strings.length==0){
+            HelpCommandHandle.SendHelps(commandSender, "", 0);
+        }else {
+            if (strings.length>1&& Utils.isNumber(strings[1])){
                 HelpCommandHandle.SendHelps(commandSender, strings[0], Integer.parseInt(strings[1]));
-            }else if (strings.length==2){
+            }else if (strings.length==1){
                 HelpCommandHandle.SendHelps(commandSender,strings[0],1);
             }
-        }else{
-            commandSender.sendMessage(MessageHelper.InitMessage(ChatColor.LIGHT_PURPLE+"请输入正确的命令参数"));
         }
         return true;
     }

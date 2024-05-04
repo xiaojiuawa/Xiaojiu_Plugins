@@ -37,8 +37,18 @@ public class HelpCommandHandle {
             commandSender.sendMessage(ChatColor.GOLD + "帮助总列表");
             helpMap.forEach((string, helpmap) -> commandSender.sendMessage(ChatColor.GOLD + string));
         } else {
-            Map<String, HelpMap> map = helpMap.get(command);
+            Map<String,HelpMap> getMap = helpMap.get(command);
+            Map<String, HelpMap> map = new HashMap<>();
 //            if (page==0) page=1;
+            if (commandSender.hasPermission("xiaojiu.op.help.high")){
+                map=getMap;
+            }else{
+                for (Map.Entry<String, HelpMap> entry : getMap.entrySet()) {
+                    if(commandSender.hasPermission(entry.getValue().getPermissionNode())){
+                        map.put(entry.getKey(),entry.getValue());
+                    }
+                }
+            }
             page--;
             int i = 0;
             for (Map.Entry<String, HelpMap> entry : map.entrySet()) {
@@ -48,8 +58,10 @@ public class HelpCommandHandle {
                     commandSender.sendMessage(ChatColor.GOLD + "命令名: " + entry.getKey());
                     commandSender.sendMessage(ChatColor.GOLD + "使用方法: " + map1.getCommand());
                     commandSender.sendMessage(ChatColor.GOLD + "解释: " + map1.getIntroduce());
-                    commandSender.sendMessage(ChatColor.GOLD + "需要的权限节点" + map1.getPermissionNode());
-                    commandSender.sendMessage(ChatColor.GOLD + "我是否有权限:" + (commandSender.hasPermission(map1.getPermissionNode()) || commandSender.isOp() ? "有" : "无"));
+                    if (commandSender.hasPermission("xiaojiu.op.help.high")){
+                        commandSender.sendMessage(ChatColor.GOLD + "需要的权限节点" + map1.getPermissionNode());
+                        commandSender.sendMessage(ChatColor.GOLD + "我是否有权限:" + (commandSender.hasPermission(map1.getPermissionNode()) || commandSender.isOp() ? "有" : "无"));
+                    }
                     commandSender.sendMessage(ChatColor.GOLD + "=====================================");
                 }
                 i++;

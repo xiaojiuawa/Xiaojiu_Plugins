@@ -14,6 +14,7 @@ import xiaojiu.config.Savecfg.LimitPlayer;
 import xiaojiu.task.TaskLoader;
 import xiaojiu.tools.Utils;
 
+import java.util.Date;
 import java.util.logging.Logger;
 
 public class StartPlugins extends JavaPlugin {
@@ -23,6 +24,7 @@ public class StartPlugins extends JavaPlugin {
 
     @Override
     public void onEnable() {
+        long startData = System.currentTimeMillis();
         Instance = this;
         logger = this.getLogger();
         Bukkit.getPluginManager().registerEvents(new EventLoader(), this);
@@ -38,6 +40,8 @@ public class StartPlugins extends JavaPlugin {
 //        BasicSQL.Init();
 
         this.getLogger().info("XiaojiuPluginOnEnable");
+        long endDate= System.currentTimeMillis();
+        logger.info("xiaojiuPlugin启动完毕，用时"+ (endDate - startData)+"MS");
     }
 
     public static StartPlugins getInstance() {

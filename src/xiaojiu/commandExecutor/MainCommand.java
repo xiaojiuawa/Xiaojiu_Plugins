@@ -1,14 +1,10 @@
 package xiaojiu.commandExecutor;
 
-import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
-import xiaojiu.Handles.Help.HelpCommandHandle;
 import xiaojiu.Handles.Help.HelpMapHandler;
 import xiaojiu.api.HelpMap;
 import xiaojiu.api.XiaojiuCommandExecutor;
-import xiaojiu.tools.MessageHelper;
-import xiaojiu.tools.Utils;
 
 import java.util.*;
 
@@ -20,10 +16,10 @@ public class MainCommand implements XiaojiuCommandExecutor {
 
     @Override
     public void InitMap() {
-        Map<String, HelpMap> MainHelpMap = new HashMap<>();
+        Map<String, HelpMap> MainMap = new HashMap<>();
         // help命令
-        MainHelpMap.put("help", new HelpMapHandler(CommonNode, "/xj help [命令大节点] [页面(默认为1)]", "xiaojiu.main.help.use", "通过这个指令查看命令帮助 当你输入这个指令后，会有一个总列表出现，这时再输入总列表当作页码即可"));
-//        MainHelpMap.put("")
+        MainMap.put("help", new HelpMapHandler(CommonNode, "/xj help [命令大节点] [页面(默认为1)]", "xiaojiu.main.help.use", "通过这个指令查看命令帮助 当你输入这个指令后，会有一个总列表出现，这时再输入总列表当作页码即可"));
+//        MainMap.put("")
     }
 
     @Override

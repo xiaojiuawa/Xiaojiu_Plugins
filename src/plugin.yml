@@ -70,7 +70,7 @@ permissions:
       xiaojiu.op.save.all: true
       xiaojiu.op.save.cancel: true
       xiaojiu.op.save.now: true
-
+      xiaojiu.op.help.high: true
 #      xiaojiu.op.save.create.
 
   xiaojiu.normal:
@@ -87,3 +87,4 @@ permissions:
       xiaojiu.normal.ReloadTask.revoke: true
       xiaojiu.normal.ReloadTask.agree: true
       xiaojiu.normal.ReloadTask.refuse: true
+      xiaojiu.normal.help.use: true

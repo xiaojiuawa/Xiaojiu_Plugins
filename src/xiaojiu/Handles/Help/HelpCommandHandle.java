@@ -4,7 +4,6 @@ import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import xiaojiu.api.HelpMap;
 import xiaojiu.commandExecutor.*;
-import xiaojiu.tools.MessageHelper;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -40,10 +39,6 @@ public class HelpCommandHandle {
         } else {
             Map<String,HelpMap> getMap = helpMap.get(command);
             Map<String, HelpMap> map = new HashMap<>();
-            if (getMap==null){
-                commandSender.sendMessage(MessageHelper.InitMessage(ChatColor.LIGHT_PURPLE+"请输入有效的命令节点"));
-                return;
-            }
 //            if (page==0) page=1;
             if (commandSender.hasPermission("xiaojiu.op.help.high")){
                 map=getMap;

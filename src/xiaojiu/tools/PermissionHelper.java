@@ -33,7 +33,7 @@ public class PermissionHelper {
 
         }
     }
-    //todo 去除项目中所有关于这个方法的调用
+//
     public static boolean isHasPermission(CommandSender commandSender,boolean isOp,String CommandNode,String... nodes){
         String PermissionNode;
         PermissionNode=GetPermissionNode(MainCommand.CommonNode,isOp,CommandNode,nodes);

@@ -47,7 +47,7 @@ public class PlayerTimeCommand implements XiaojiuCommandExecutor {
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
         if (strings.length > 0) {
             if (strings[0].equalsIgnoreCase("find") || strings[0].equalsIgnoreCase("查询") && strings.length == 2) {
-                if (PermissionHelper.isHasPermission(commandSender, "op", PermissionNode, "find")) {
+                if (PermissionHelper.isHasPermission(commandSender, true, PermissionNode, "find")) {
                     SimpleDateFormat format = new SimpleDateFormat("yyyy年MM月dd日 HH:mm:ss");
                     OfflinePlayer offlinePlayer = StartPlugins.getInstance().getServer().getOfflinePlayer(strings[1]);
                     Date date = PlayerJoinTimeTask.GetPlayerLastJoinTime(offlinePlayer.getUniqueId());
@@ -62,7 +62,7 @@ public class PlayerTimeCommand implements XiaojiuCommandExecutor {
                     commandSender.sendMessage(MessageHelper.InitMessage(ChatColor.LIGHT_PURPLE + "你没有权限查询玩家上线时间"));
                 }
             } else if (strings[0].equalsIgnoreCase("save") || strings[0].equalsIgnoreCase("保存")) {
-                if (PermissionHelper.isHasPermission(commandSender, "op", PermissionNode, "save")) {
+                if (PermissionHelper.isHasPermission(commandSender, true, PermissionNode, "save")) {
                     SaveConfig.SavePlayerTime();
                     commandSender.sendMessage(MessageHelper.InitMessage(ChatColor.LIGHT_PURPLE + "保存玩家上线时间成功"));
                 } else {

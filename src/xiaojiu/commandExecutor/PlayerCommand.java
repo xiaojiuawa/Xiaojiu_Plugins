@@ -51,14 +51,14 @@ public class PlayerCommand implements XiaojiuCommandExecutor {
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
         if (strings.length != 0) {
             if (strings[0].equalsIgnoreCase("save") || strings[0].equalsIgnoreCase("保存")) {
-                if (PermissionHelper.isHasPermission(commandSender, "op", PermissionNode, "save")) {
+                if (PermissionHelper.isHasPermission(commandSender,true,PermissionNode,"save")) {
                     SaveConfig.SaveLimitPlayer();
                     commandSender.sendMessage(MessageHelper.InitMessage(ChatColor.LIGHT_PURPLE + "玩家限制列表保存成功"));
                 } else {
                     commandSender.sendMessage(MessageHelper.InitMessage(ChatColor.LIGHT_PURPLE + "你没有权限保存玩家限制列表"));
                 }
             } else if (strings[0].equalsIgnoreCase("add") || strings[0].equalsIgnoreCase("添加")) {
-                if (PermissionHelper.isHasPermission(commandSender, "op", PermissionNode, "add")) {
+                if (PermissionHelper.isHasPermission(commandSender, true, PermissionNode, "add")) {
                     if (!(strings.length < 2)) {
                         Player player = PlayerTools.GetPlayer(strings[1]);
                         if (commandSender instanceof Player) {
@@ -88,7 +88,7 @@ public class PlayerCommand implements XiaojiuCommandExecutor {
                 }
 
             } else if (strings[0].equalsIgnoreCase("del") || strings[0].equalsIgnoreCase("remove") || strings[0].equalsIgnoreCase("删除")) {
-                if (PermissionHelper.isHasPermission(commandSender, "op", PermissionNode, "remove")) {
+                if (PermissionHelper.isHasPermission(commandSender, true, PermissionNode, "remove")) {
                     if (!(strings.length < 2)) {
                         OfflinePlayer player = PlayerTools.GetPlayerOffer(strings[1]);
                         if (commandSender instanceof Player) {

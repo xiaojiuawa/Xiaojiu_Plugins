@@ -53,7 +53,7 @@ public class RestartServerCommand implements XiaojiuCommandExecutor {
             commandSender.sendMessage(MessageHelper.InitMessage(ChatColor.LIGHT_PURPLE + "请输入完整参数"));
             return true;
         } else if (strings[0].equalsIgnoreCase("cancel")) {
-            if (PermissionHelper.isHasPermission(commandSender, "op", PermissionCommonNode, "cancel")) {
+            if (PermissionHelper.isHasPermission(commandSender, true, PermissionCommonNode, "cancel")) {
                 if (RestartTools.isRestart) {
                     RestartTools.cancel();
                     MessageHelper.SendMessageAllPlayer(MessageHelper.InitMessage(ChatColor.LIGHT_PURPLE + "服务器计划重启任务已被管理员" + ChatColor.WHITE + commandSender.getName() + ChatColor.LIGHT_PURPLE + "取消"));
@@ -64,7 +64,7 @@ public class RestartServerCommand implements XiaojiuCommandExecutor {
                 commandSender.sendMessage(MessageHelper.InitMessage(ChatColor.RED + "你没有权限执行这个指令"));
             }
         } else if (strings[0].equalsIgnoreCase("now")) {
-            if (PermissionHelper.isHasPermission(commandSender, "op", PermissionCommonNode, "now")) {
+            if (PermissionHelper.isHasPermission(commandSender, true, PermissionCommonNode, "now")) {
                 if (RestartTools.isRestart) {
                     RestartTools.Done();
                 } else {
@@ -74,7 +74,7 @@ public class RestartServerCommand implements XiaojiuCommandExecutor {
                 commandSender.sendMessage(MessageHelper.InitMessage(ChatColor.RED + "你没有权限执行这个指令"));
             }
         } else if (strings[0].equalsIgnoreCase("reset")) {
-            if (PermissionHelper.isHasPermission(commandSender, "op", PermissionCommonNode, "reset")) {
+            if (PermissionHelper.isHasPermission(commandSender, true, PermissionCommonNode, "reset")) {
                 if (RestartTools.isRestart) {
                     RestartTools.cancel();
                     RestartTools.Restart(Integer.parseInt(strings[1]));
@@ -87,7 +87,7 @@ public class RestartServerCommand implements XiaojiuCommandExecutor {
             }
         } else if (isNumber(strings[0])) {
             int num = Integer.parseInt(strings[0]);
-            if (PermissionHelper.isHasPermission(commandSender, "op", PermissionCommonNode, "start")) {
+            if (PermissionHelper.isHasPermission(commandSender, true, PermissionCommonNode, "start")) {
                 if (!RestartTools.isRestart) {
                     RestartTools.Restart(num);
                     commandSender.sendMessage(MessageHelper.InitMessage(ChatColor.LIGHT_PURPLE + "计划重启任务创建成功"));
@@ -99,7 +99,7 @@ public class RestartServerCommand implements XiaojiuCommandExecutor {
             }
         } else if (strings.length == 2) {
             int num = ProcessingTime(strings[0], Integer.parseInt(strings[1]));
-            if (PermissionHelper.isHasPermission(commandSender, "op", PermissionCommonNode, "start")) {
+            if (PermissionHelper.isHasPermission(commandSender, true, PermissionCommonNode, "start")) {
                 if (!RestartTools.isRestart) {
                     if (num == -1) {
                         commandSender.sendMessage(MessageHelper.InitMessage(ChatColor.LIGHT_PURPLE + "参数错误"));

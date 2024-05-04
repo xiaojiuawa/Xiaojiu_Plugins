@@ -3,7 +3,7 @@ package xiaojiu.commandExecutor;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
-import xiaojiu.Handles.Help.HelpCommand;
+import xiaojiu.Handles.Help.HelpCommandHandle;
 import xiaojiu.Handles.Help.HelpMapHandler;
 import xiaojiu.api.HelpMap;
 import xiaojiu.api.XiaojiuCommandExecutor;
@@ -43,29 +43,11 @@ public class MainCommand implements XiaojiuCommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
-        if (strings.length > 0) {
+        if (strings.length >= 1) {
             if (strings[0].equalsIgnoreCase("help")) {
                 //帮助指令开始
-                if (strings.length == 1) {
-                    //主帮助信息
-                    HelpCommand.SendHelps(commandSender, "", 0);
-                } else if (strings.length > 2 && Utils.isNumber(strings[2])) {
-                    if (strings[1].equalsIgnoreCase("玩家限制")) {
-                        HelpCommand.SendHelps(commandSender, strings[1], Integer.parseInt(strings[2]));
-                    } else if (strings[1].equalsIgnoreCase("玩家上线时间")) {
-                        HelpCommand.SendHelps(commandSender, strings[1], Integer.parseInt(strings[2]));
-                    } else if (strings[1].equalsIgnoreCase("投票重启")) {
-                        HelpCommand.SendHelps(commandSender, strings[1], Integer.parseInt(strings[2]));
-                    } else if (strings[1].equalsIgnoreCase("重启主模块")) {
-                        HelpCommand.SendHelps(commandSender, strings[1], Integer.parseInt(strings[2]));
-                    } else if (strings[1].equalsIgnoreCase("服务器维护命令")) {
-                        HelpCommand.SendHelps(commandSender, strings[1], Integer.parseInt(strings[2]));
-                    } else {
-                        commandSender.sendMessage(MessageHelper.InitMessage(ChatColor.RED + "请输入正确的命令"));
-                    }
-                } else if (strings.length == 2) {
-                    HelpCommand.SendHelps(commandSender, strings[1], 1);
-                }//todo 由于help命令展示更改，估计这个也得重写
+                CommonExecutorLoader.GetCommandMap().get("help").onCommand(commandSender, command, s, Arrays.copyOfRange(strings,1,strings.length));
+                }
                 //帮助指令结束
             } else if (strings[0].equalsIgnoreCase("v") || strings[0].equalsIgnoreCase("隐身") || strings[0].equalsIgnoreCase("vanish")) {
                 //隐身指令开始
@@ -75,24 +57,22 @@ public class MainCommand implements XiaojiuCommandExecutor {
 //                commandSender.sendMessage(Arrays.copyOfRange(strings,1,strings.length));
                 CommonExecutorLoader.GetCommandMap().get("vanish").onCommand(commandSender, command, s, Arrays.copyOfRange(strings, 1, strings.length));
             }
-        }
         return true;
     }
 
     @Override
     public List<String> onTabComplete(CommandSender commandSender, Command command, String s, String[] strings) {
-        List<String> list = new ArrayList<>();
-//        System.out.println(strings.length);
-//        if (strings.length<2) return list;
-        if (strings.length==2&&strings[0].equalsIgnoreCase("v")) {
-            System.out.println(1);
-            list.addAll(CommonExecutorLoader.GetCommandMap().get("vanish").onTabComplete(commandSender, command, s, Arrays.copyOfRange(strings, 0, strings.length)));
-            return list;
-//            list.addAll(VanishCommand.onTabComplete(commandSender, command, s, Arrays.copyOfRange(strings, 1, strings.length)));
-        }else if (strings.length == 2) {
-            HelpCommand.helpMap.forEach((string, helpMapMap) -> {
-                if (string.startsWith(strings[1].toLowerCase())) list.add(string);
+        List<String> list=new ArrayList<>();
+        if (strings.length==1){
+            CommonExecutorLoader.GetCommandMap().forEach((string, executor) -> {
+                if (strings[0].toLowerCase().startsWith(string)){
+                    list.add(string);
+                }
             });
+        } else if (strings.length==2) {
+            XiaojiuCommandExecutor executor = CommonExecutorLoader.GetCommandMap().get(strings[0]);
+            list.addAll(executor.onTabComplete(commandSender, command, s, Arrays.copyOfRange(strings,0,strings.length)));
+//            list.addAll(CommonExecutorLoader.GetCommandMap().get(strings[0]).onTabComplete(commandSender, command, s, Arrays.copyOfRange(strings,0,strings.length)));
         }
         return list;
     }

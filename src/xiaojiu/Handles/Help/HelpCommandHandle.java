@@ -8,7 +8,7 @@ import xiaojiu.commandExecutor.*;
 import java.util.HashMap;
 import java.util.Map;
 
-public class HelpCommand {
+public class HelpCommandHandle {
     public static Map<String, Map<String, HelpMap>> helpMap = new HashMap<>();
 
     public static void HelpMapInit() {

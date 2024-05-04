@@ -50,7 +50,7 @@ public class VanishCommand implements XiaojiuCommandExecutor {
             Player player = ((Player) commandSender);
             if (strings.length == 2) {
                 if (!strings[0].equalsIgnoreCase(commandSender.getName())) {
-                    if (PermissionHelper.isHasPermission(commandSender, "op", PermissionNode, "otherPlayer")) {
+                    if (PermissionHelper.isHasPermission(commandSender, true, PermissionNode, "otherPlayer")) {
                         Player player1 = StartPlugins.getInstance().getServer().getPlayer(strings[0]);
                         if (player1 == null) {
                             commandSender.sendMessage(MessageHelper.InitMessage(ChatColor.LIGHT_PURPLE + "玩家" + strings[0] + "未在线或者未在本子服"));
@@ -63,7 +63,7 @@ public class VanishCommand implements XiaojiuCommandExecutor {
                         commandSender.sendMessage(MessageHelper.InitMessage(ChatColor.RED + "你没有权限使用这个指令"));
                     }
                 } else {
-                    if (PermissionHelper.isHasPermission(commandSender, "op", PermissionNode, "self")) {
+                    if (PermissionHelper.isHasPermission(commandSender, true, PermissionNode, "self")) {
                         VanishTask.AddPlayerVanishTime(StartPlugins.getInstance(), player, Integer.parseInt(strings[1]));
                         player.sendMessage(MessageHelper.InitMessage(ChatColor.LIGHT_PURPLE + "隐身已经成功开启 时长为:" + strings[1] + "秒"));
                     } else {
@@ -77,7 +77,7 @@ public class VanishCommand implements XiaojiuCommandExecutor {
                     if (player == null) {
                         commandSender.sendMessage(MessageHelper.InitMessage(ChatColor.LIGHT_PURPLE + "玩家" + ChatColor.WHITE + strings[0] + ChatColor.LIGHT_PURPLE + "不在线或不在本子服"));
                         return true;
-                    } else if (PermissionHelper.isHasPermission(commandSender, "op", PermissionNode, "otherPlayer")) {
+                    } else if (PermissionHelper.isHasPermission(commandSender, true, PermissionNode, "otherPlayer")) {
                         Vanish.VanishPlayer(player, !Vanish.VanishPlayers.contains(player.getUniqueId()));
                         if (Vanish.VanishPlayers.contains(player.getUniqueId())) {
                             player.sendMessage(MessageHelper.InitMessage(ChatColor.LIGHT_PURPLE + "玩家" + commandSender.getName() + "已将你隐身状态设置为开启 时长为:永久"));
@@ -91,7 +91,7 @@ public class VanishCommand implements XiaojiuCommandExecutor {
                         commandSender.sendMessage(MessageHelper.InitMessage(ChatColor.RED + "你没有使用这个指令的权限"));
                     }
                 } else {
-                    if (PermissionHelper.isHasPermission(commandSender, "op", PermissionNode, "self")) {
+                    if (PermissionHelper.isHasPermission(commandSender, true, PermissionNode, "self")) {
                         Vanish.VanishPlayer(player, !Vanish.VanishPlayers.contains(player.getUniqueId()));
                         if (Vanish.VanishPlayers.contains(player.getUniqueId())) {
                             player.sendMessage(MessageHelper.InitMessage(ChatColor.LIGHT_PURPLE + "隐身已经成功开启 时长为:永久"));
@@ -103,7 +103,7 @@ public class VanishCommand implements XiaojiuCommandExecutor {
                     }
                 }
             } else if (strings.length == 0) {
-                if (PermissionHelper.isHasPermission(commandSender, "op", PermissionNode, "self")) {
+                if (PermissionHelper.isHasPermission(commandSender, true, PermissionNode, "self")) {
                     Vanish.VanishPlayer(player, !Vanish.VanishPlayers.contains(player.getUniqueId()));
                     if (Vanish.VanishPlayers.contains(player.getUniqueId())) {
                         player.sendMessage(MessageHelper.InitMessage(ChatColor.LIGHT_PURPLE + "隐身已经成功开启 时长为:永久"));

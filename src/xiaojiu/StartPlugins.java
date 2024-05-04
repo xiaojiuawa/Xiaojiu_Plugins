@@ -4,9 +4,8 @@ import org.bukkit.Bukkit;
 import org.bukkit.command.PluginCommand;
 import org.bukkit.configuration.serialization.ConfigurationSerialization;
 import org.bukkit.plugin.java.JavaPlugin;
-import xiaojiu.Handles.Help.HelpCommand;
+import xiaojiu.Handles.Help.HelpCommandHandle;
 import xiaojiu.Handles.Vanish.Vanish;
-import xiaojiu.Log.mysql.BasicSQL;
 import xiaojiu.commandExecutor.CommonExecutorLoader;
 import xiaojiu.config.LoadConfig;
 import xiaojiu.config.SaveConfig;
@@ -35,7 +34,7 @@ public class StartPlugins extends JavaPlugin {
         ConfigurationSerialization.registerClass(JTPlayer.class);
         SaveConfig.OnEnable(this);
         LoadConfig.ReadAllFile();
-        HelpCommand.HelpMapInit();
+        HelpCommandHandle.HelpMapInit();
 //        BasicSQL.Init();
 
         this.getLogger().info("XiaojiuPluginOnEnable");

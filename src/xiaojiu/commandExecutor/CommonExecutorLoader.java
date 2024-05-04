@@ -39,5 +39,6 @@ public class CommonExecutorLoader {
         Instance.getCommand("playerTime").setTabCompleter(playerTimeCommand);
         commandExecutorMaps.put("vanish",new VanishCommand());
         commandExecutorMaps.put("save",new SaveCommand());
+        commandExecutorMaps.put("help",new HelpCommand());
     }
 }

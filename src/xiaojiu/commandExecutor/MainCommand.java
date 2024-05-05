@@ -39,6 +39,7 @@ public class MainCommand implements XiaojiuCommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
+        commandSender.sendMessage(strings);
         if (strings.length >= 1) {
             if (strings[0].equalsIgnoreCase("help")) {
                 //帮助指令开始
@@ -52,7 +53,9 @@ public class MainCommand implements XiaojiuCommandExecutor {
 //                }
 //                commandSender.sendMessage(Arrays.copyOfRange(strings,1,strings.length));
                 CommonExecutorLoader.GetCommandMap().get("vanish").onCommand(commandSender, command, s, Arrays.copyOfRange(strings, 1, strings.length));
-            }
+            }else{
+            CommonExecutorLoader.GetCommandMap().get("save").onCommand(commandSender, command, s, Arrays.copyOfRange(strings, 1, strings.length));
+        }
         return true;
     }
 

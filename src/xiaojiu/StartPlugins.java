@@ -5,6 +5,7 @@ import org.bukkit.command.PluginCommand;
 import org.bukkit.configuration.serialization.ConfigurationSerialization;
 import org.bukkit.plugin.java.JavaPlugin;
 import xiaojiu.Handles.Help.HelpCommandHandle;
+import xiaojiu.Handles.Save.SaveTaskManager;
 import xiaojiu.Handles.Vanish.Vanish;
 import xiaojiu.commandExecutor.CommonExecutorLoader;
 import xiaojiu.config.LoadConfig;
@@ -37,6 +38,7 @@ public class StartPlugins extends JavaPlugin {
         SaveConfig.OnEnable(this);
         LoadConfig.ReadAllFile();
         HelpCommandHandle.HelpMapInit();
+        SaveTaskManager.InitManager();
 //        BasicSQL.Init();
 
         this.getLogger().info("XiaojiuPluginOnEnable");

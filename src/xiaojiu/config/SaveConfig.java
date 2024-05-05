@@ -20,7 +20,6 @@ public class SaveConfig {
         Instance = plugin;
         plugin.saveDefaultConfig();
     }
-
     public static void Save() {
         SaveLimitPlayer();
         SavePlayerTime();

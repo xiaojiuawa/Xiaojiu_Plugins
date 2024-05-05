@@ -10,23 +10,27 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public abstract class BasicSaveHandles extends TimerTask implements XiaojiuTask {
-//    public abstract String Name;
-    public Timer timer = new Timer(this.GetName());
+    protected final Timer timer = new Timer(this.GetName());
+    protected boolean tasking=false;
+    protected boolean canAsynchronously=false;
     @Override
     public void Cancel() {
         this.cancel();
     }
 
     @Override
-    public void delayRunTaskAsynchronously(int time) {
+    public void delayRunTaskAsynchronously(long time) {
+        if (!canAsynchronously) return;
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(new Date());
-        calendar.add(Calendar.SECOND,time);
+        calendar.add(Calendar.SECOND,(int) time);
         this.timer.schedule(this,calendar.getTime());
     }
 
     @Override
     public void RunTaskTimerDelayAsynchronously(long time, int delay) {
+        if (!canAsynchronously) return;
+        this.tasking=true;
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(new Date());
         calendar.add(Calendar.SECOND,delay);
@@ -35,7 +39,9 @@ public abstract class BasicSaveHandles extends TimerTask implements XiaojiuTask 
 
     @Override
     public void RunTaskTimerAsynchronously(long time) {
-        this.timer.schedule(this,time);
+        if (!canAsynchronously) return;
+        this.tasking=true;
+        this.timer.schedule(this,0,time);
     }
 
     @Override
@@ -45,16 +51,28 @@ public abstract class BasicSaveHandles extends TimerTask implements XiaojiuTask 
 
     @Override
     public void RunTaskTimer(long time) {
+        this.tasking=true;
         Bukkit.getScheduler().runTaskTimer(StartPlugins.getInstance(),this,0,time);
     }
 
     @Override
     public void RunTaskTimerDelay(long time, int delay) {
+        this.tasking=true;
         Bukkit.getScheduler().runTaskTimer(StartPlugins.getInstance(),this, delay,time);
     }
 
     @Override
     public Timer GetTimer() {
         return this.timer;
+    }
+
+    @Override
+    public boolean isTasking() {
+        return tasking;
+    }
+
+    @Override
+    public boolean canAsynchronously() {
+        return this.canAsynchronously;
     }
 }

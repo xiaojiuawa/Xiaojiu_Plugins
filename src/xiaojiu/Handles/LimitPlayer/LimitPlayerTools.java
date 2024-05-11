@@ -20,6 +20,7 @@ public class LimitPlayerTools {
     public static File file = new File(StartPlugins.getInstance().getDataFolder(), "PlayerLimit.yml");
     public static FileConfiguration configuration = YamlConfiguration.loadConfiguration(file);
 
+    @Deprecated
     public static void ReadPlayers() {
         for (String key : configuration.getKeys(false)) {
 //            System.out.print("1");

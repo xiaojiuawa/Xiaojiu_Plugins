@@ -4,10 +4,7 @@ package xiaojiu.config.Savecfg;
 
 import org.bukkit.configuration.serialization.ConfigurationSerializable;
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 public class JTPlayer implements ConfigurationSerializable {
     public Date LastJoinTime;
@@ -39,5 +36,18 @@ public class JTPlayer implements ConfigurationSerializable {
         UUID uuid1 = new UUID((long) map.get("mostSigBits"), (long) map.get("leastSigBits"));
         date.setTime((long) map.get("Date"));
         return new JTPlayer(date, uuid1, (String) map.get("name"));
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        JTPlayer player = (JTPlayer) o;
+        return leastSigBits == player.leastSigBits && mostSigBits == player.mostSigBits && Objects.equals(LastJoinTime, player.LastJoinTime) && Objects.equals(uuid, player.uuid) && Objects.equals(PlayerName, player.PlayerName);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(LastJoinTime, uuid, PlayerName, leastSigBits, mostSigBits);
     }
 }

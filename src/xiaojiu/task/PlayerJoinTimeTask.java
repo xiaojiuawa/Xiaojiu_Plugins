@@ -34,6 +34,7 @@ public class PlayerJoinTimeTask {
         return map.get(uuid).LastJoinTime;
     }
 
+    @Deprecated
     public static void ReadTime() {
         for (String key : configuration.getKeys(false)) {
 //            System.out.println("1234");

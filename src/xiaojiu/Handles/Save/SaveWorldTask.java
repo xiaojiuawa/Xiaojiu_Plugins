@@ -3,49 +3,38 @@ package xiaojiu.Handles.Save;
 import net.minecraftforge.event.world.WorldEvent;
 import org.bukkit.Bukkit;
 import org.bukkit.World;
+import org.bukkit.entity.Player;
+import org.bukkit.plugin.java.JavaPlugin;
 import xiaojiu.StartPlugins;
 import xiaojiu.tools.MessageHelper;
 
-import java.util.Timer;
-import java.util.TimerTask;
+import java.util.*;
 
 public class SaveWorldTask extends BasicSaveHandles {
-    private static final String Name="world";
-    public SaveWorldTask(){
+    public SaveWorldTask(int taskid, JavaPlugin plugin, Player player, String... args){
+        super(taskid, plugin,player, args);
         this.canAsynchronously=true;
+        this.name="World";
     }
     @Override
     public void run() {
-        StartPlugins.getInstance().getServer().getWorlds().forEach(World::save);
-        MessageHelper.SendMessageAllPlayer("1");
-    }
+        if (args.length!=0){
+            List<String> list = new ArrayList<>();
+            for (String arg : args) {
+                World world = this.plugin.getServer().getWorld(arg);
+                if (world==null){
+                    list.add(arg);
+                }else{
+                    world.save();
+                }
 
-    @Override
-    public void specialParametersTask(String parameter, boolean isAsynchronously, long time, long delay) {
-        if (isAsynchronously && !this.canAsynchronously) return;
-        if (isAsynchronously){
-            this.timer.schedule(new TimerTask() {
-                @Override
-                public void run() {
-                    World world = StartPlugins.getInstance().getServer().getWorld(parameter);
-                    if (world==null) return;
-                    world.save();
-                }
-            },delay*1000,time*1000);
-        }else{
-            Bukkit.getScheduler().runTaskTimer(StartPlugins.getInstance(), new Runnable() {
-                @Override
-                public void run() {
-                    World world = StartPlugins.getInstance().getServer().getWorld(parameter);
-                    if (world==null) return;
-                    world.save();
-                }
-            },delay*1000,time*1000);
+            }
+            if (!list.isEmpty()){
+                this.player.sendMessage(MessageHelper.InitMessage("世界:"+Arrays.toString(list.toArray()) +"未找到"));
+            }
         }
+        this.plugin.getServer().getWorlds().forEach(World::save);
+//        MessageHelper.SendMessageAllPlayer("1");
     }
 
-    @Override
-    public String GetName() {
-        return Name;
-    }
 }

@@ -8,6 +8,7 @@ import xiaojiu.Handles.Help.HelpCommandHandle;
 import xiaojiu.Handles.Save.SaveTaskManager;
 import xiaojiu.Handles.Vanish.Vanish;
 import xiaojiu.commandExecutor.CommonExecutorLoader;
+import xiaojiu.config.ConfigManager;
 import xiaojiu.config.LoadConfig;
 import xiaojiu.config.SaveConfig;
 import xiaojiu.config.Savecfg.JTPlayer;
@@ -15,11 +16,11 @@ import xiaojiu.config.Savecfg.LimitPlayer;
 import xiaojiu.task.TaskLoader;
 import xiaojiu.tools.Utils;
 
-import java.util.Date;
+import javax.rmi.CORBA.Util;
 import java.util.logging.Logger;
 
 public class StartPlugins extends JavaPlugin {
-    private static StartPlugins Instance;
+    private static JavaPlugin Instance;
     public static PluginCommand command;
     public static Logger logger;
 
@@ -28,25 +29,13 @@ public class StartPlugins extends JavaPlugin {
         long startData = System.currentTimeMillis();
         Instance = this;
         logger = this.getLogger();
-        Bukkit.getPluginManager().registerEvents(new EventLoader(), this);
-//        Bukkit.getPluginManager().registerEvents(new EventListener(),this);
-        CommonExecutorLoader.Load(this);
-        Utils.Init();
-        TaskLoader.Start(this);
-        ConfigurationSerialization.registerClass(LimitPlayer.class);
-        ConfigurationSerialization.registerClass(JTPlayer.class);
-        SaveConfig.OnEnable(this);
-        LoadConfig.ReadAllFile();
-        HelpCommandHandle.HelpMapInit();
-        SaveTaskManager.InitManager();
-//        BasicSQL.Init();
-
+        this.Init();
         this.getLogger().info("XiaojiuPluginOnEnable");
         long endDate= System.currentTimeMillis();
         logger.info("xiaojiuPlugin启动完毕，用时"+ (endDate - startData)+"MS");
     }
 
-    public static StartPlugins getInstance() {
+    public static JavaPlugin getInstance() {
         return Instance;
     }
 
@@ -54,7 +43,21 @@ public class StartPlugins extends JavaPlugin {
     public void onDisable() {
         Bukkit.getScheduler().cancelTasks(this);
         this.getLogger().info("XiaojiuPluginOnDisable");
-        SaveConfig.Save();
+        ConfigManager.SaveConfig();
+//        SaveConfig.Save();
         Vanish.OffVanish();
+    }
+    public void Init(){
+        Bukkit.getPluginManager().registerEvents(new EventLoader(), this);
+        //Init event Listener 注册事件监听器
+        Utils.Init();
+        //Init Utils 初始化库
+        CommonExecutorLoader.Load(this);
+        HelpCommandHandle.HelpMapInit();
+        //初始化命令
+        ConfigManager.InitManager(this);
+        //读取配置文件
+
+
     }
 }

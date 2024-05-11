@@ -4,6 +4,7 @@ import org.bukkit.configuration.serialization.ConfigurationSerializable;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 import java.util.UUID;
 
 public class LimitPlayer implements ConfigurationSerializable {
@@ -38,5 +39,18 @@ public class LimitPlayer implements ConfigurationSerializable {
 
     public static LimitPlayer deserialize(Map<String, Object> map) {
         return new LimitPlayer((Long) map.get("leastSigBits"), (long) map.get("mostSigBits"), (String) map.get("name"), (String) map.get("message"));
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        LimitPlayer that = (LimitPlayer) o;
+        return leastSigBits == that.leastSigBits && mostSigBits == that.mostSigBits && Objects.equals(Name, that.Name) && Objects.equals(message, that.message);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(leastSigBits, mostSigBits, Name, message);
     }
 }

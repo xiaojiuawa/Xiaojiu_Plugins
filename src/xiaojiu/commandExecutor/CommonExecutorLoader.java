@@ -1,6 +1,6 @@
 package xiaojiu.commandExecutor;
 
-import xiaojiu.StartPlugins;
+import org.bukkit.plugin.java.JavaPlugin;
 import xiaojiu.api.XiaojiuCommandExecutor;
 
 
@@ -19,7 +19,7 @@ public class CommonExecutorLoader {
     public static Map<String,XiaojiuCommandExecutor> GetCommandMap(){
         return commandExecutorMaps;
     }
-    public static void Load(StartPlugins Instance) {
+    public static void Load(JavaPlugin Instance) {
         CommonExecutorLoader.commandExecutorMaps.put(mainCommand.GetCommandNode(),mainCommand);
         Instance.getCommand("xiaojiu").setExecutor(mainCommand);
         CommonExecutorLoader.commandExecutorMaps.put(restartServerCommand.GetCommandNode(), restartServerCommand);
@@ -40,5 +40,10 @@ public class CommonExecutorLoader {
         commandExecutorMaps.put("vanish",new VanishCommand());
         commandExecutorMaps.put("save",new SaveCommand());
         commandExecutorMaps.put("help",new HelpCommand());
+        commandExecutorMaps.put("no",new NoCommandCMD());
+    }
+    public static XiaojiuCommandExecutor GetExecutor(String name){
+        if (!commandExecutorMaps.containsKey(name)) return commandExecutorMaps.get("no");
+        return commandExecutorMaps.get(name);
     }
 }

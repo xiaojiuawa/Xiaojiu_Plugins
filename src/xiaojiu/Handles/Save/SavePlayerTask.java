@@ -2,47 +2,40 @@ package xiaojiu.Handles.Save;
 
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
+import org.bukkit.plugin.java.JavaPlugin;
 import xiaojiu.StartPlugins;
+import xiaojiu.tools.MessageHelper;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.TimerTask;
 
 public class SavePlayerTask extends BasicSaveHandles{
-    private static final String Name="Player";
-    public SavePlayerTask(){
+    public SavePlayerTask(int taskid, JavaPlugin plugin,Player player,String... args){
+        super(taskid, plugin,player, args);
         this.canAsynchronously=true;
+        this.name="Player";
     }
     @Override
     public void run() {
-        StartPlugins.getInstance().getServer().getOnlinePlayers().forEach(Player::saveData);
-    }
-
-    @Override
-    public void specialParametersTask(String parameter, boolean isAsynchronously, long time, long delay) {
-        if (isAsynchronously && !this.canAsynchronously) return;
-        if (isAsynchronously){
-            this.timer.schedule(new TimerTask() {
-                @Override
-                public void run() {
-                    Player player = StartPlugins.getInstance().getServer().getPlayer(parameter);
-                    if (player==null) return;
-                    player.saveData();
+//        MessageHelper.SendMessageAllPlayer("1");
+        if (args.length!=0){
+            List<String> list = new ArrayList<>();
+            for (String arg : args) {
+                Player player2 =  plugin.getServer().getPlayer(arg);
+                if (player2==null){
+                    list.add(arg);
+                }else{
+                    player2.saveData();
                 }
-            },delay*1000,time*1000);
+            }
+            if (!list.isEmpty()){
+                this.player.sendMessage(MessageHelper.InitMessage(Arrays.toString(list.toArray())+"未在线或未在本子服"));
+            }
         }else{
-            Bukkit.getScheduler().runTaskTimer(StartPlugins.getInstance(), new Runnable() {
-                @Override
-                public void run() {
-                    Player player = StartPlugins.getInstance().getServer().getPlayer(parameter);
-                    if (player==null) return;
-                    player.saveData();
-                }
-            },delay*1000,time*1000);
+            plugin.getServer().getOnlinePlayers().forEach(Player::saveData);
         }
 
-    }
-
-    @Override
-    public String GetName() {
-        return Name;
     }
 }

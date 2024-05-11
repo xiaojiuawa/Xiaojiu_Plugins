@@ -10,6 +10,7 @@ import xiaojiu.Handles.LimitPlayer.LimitPlayerTools;
 import xiaojiu.Handles.PlayerTime.PlayerTools;
 import xiaojiu.api.HelpMap;
 import xiaojiu.api.XiaojiuCommandExecutor;
+import xiaojiu.config.ConfigManager;
 import xiaojiu.config.SaveConfig;
 import xiaojiu.tools.MessageHelper;
 import xiaojiu.tools.PermissionHelper;
@@ -52,7 +53,8 @@ public class PlayerCommand implements XiaojiuCommandExecutor {
         if (strings.length != 0) {
             if (strings[0].equalsIgnoreCase("save") || strings[0].equalsIgnoreCase("保存")) {
                 if (PermissionHelper.isHasPermission(commandSender,true,PermissionNode,"save")) {
-                    SaveConfig.SaveLimitPlayer();
+                    ConfigManager.getConfigMap().get("LimitPlayer").Save();
+//                    SaveConfig.SaveLimitPlayer();
                     commandSender.sendMessage(MessageHelper.InitMessage(ChatColor.LIGHT_PURPLE + "玩家限制列表保存成功"));
                 } else {
                     commandSender.sendMessage(MessageHelper.InitMessage(ChatColor.LIGHT_PURPLE + "你没有权限保存玩家限制列表"));

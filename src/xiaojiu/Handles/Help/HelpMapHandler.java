@@ -3,6 +3,8 @@ package xiaojiu.Handles.Help;
 import xiaojiu.api.HelpMap;
 import xiaojiu.api.XiaojiuCommandExecutor;
 
+import java.util.Objects;
+
 public class HelpMapHandler implements HelpMap {
     public HelpMapHandler(String faster, String command, String permissionNode, String introduce) {
         this.faster = faster;
@@ -38,5 +40,18 @@ public class HelpMapHandler implements HelpMap {
     @Override
     public String getIntroduce() {
         return introduce;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        HelpMapHandler that = (HelpMapHandler) o;
+        return Objects.equals(faster, that.faster) && Objects.equals(getCommand(), that.getCommand()) && Objects.equals(getPermissionNode(), that.getPermissionNode()) && Objects.equals(getIntroduce(), that.getIntroduce());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(faster, getCommand(), getPermissionNode(), getIntroduce());
     }
 }

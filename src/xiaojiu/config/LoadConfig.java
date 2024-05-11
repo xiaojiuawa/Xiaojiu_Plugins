@@ -10,6 +10,7 @@ import xiaojiu.task.PlayerJoinTimeTask;
 
 import java.io.File;
 
+@Deprecated
 public class LoadConfig {
     public static void ReadAllFile() {
         LimitPlayerTools.ReadPlayers();

@@ -46,13 +46,14 @@ public class SaveCommand implements XiaojiuCommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
-        commandSender.sendMessage("1");
+//        commandSender.sendMessage("1");
         if (strings.length<1){
             commandSender.sendMessage(MessageHelper.InitMessage(ChatColor.LIGHT_PURPLE+"请输入正确的命令格式"));
             return true;
         }
         boolean Asynchronously= strings[1] != null && Boolean.getBoolean(strings[1]);
-        XiaojiuTask task = SaveTaskManager.GetTask(strings[0]);
+        XiaojiuTask task = SaveTaskManager.getInstance().GetTask(Integer.parseInt(strings[0]));
+        //拿到task对象
         if (task==null){
             commandSender.sendMessage(MessageHelper.InitMessage(ChatColor.LIGHT_PURPLE+"没有这个任务名称"));
             return true;
@@ -60,8 +61,9 @@ public class SaveCommand implements XiaojiuCommandExecutor {
         if (Asynchronously && !task.canAsynchronously()){
             commandSender.sendMessage(MessageHelper.InitMessage(ChatColor.RED+"错误：这个任务不支持异步"));
         }
-        if (Asynchronously) task.RunTaskTimerAsynchronously(0);
-        else task.RunTaskTimer(0);
+        commandSender.sendMessage(Asynchronously?"true":"false");
+//        if (Asynchronously) task.RunTaskTimerAsynchronously(0);
+//        else task.RunTaskTimer(0);
         //todo
         return false;
     }

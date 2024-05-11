@@ -39,22 +39,15 @@ public class MainCommand implements XiaojiuCommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
-        commandSender.sendMessage(strings);
+//        commandSender.sendMessage(strings);
         if (strings.length >= 1) {
-            if (strings[0].equalsIgnoreCase("help")) {
-                //帮助指令开始
-                CommonExecutorLoader.GetCommandMap().get("help").onCommand(commandSender, command, s, Arrays.copyOfRange(strings,1,strings.length));
-                }
-                //帮助指令结束
-            } else if (strings[0].equalsIgnoreCase("v") || strings[0].equalsIgnoreCase("隐身") || strings[0].equalsIgnoreCase("vanish")) {
-                //隐身指令开始
-//                for (String string : strings) {
-//                    commandSender.sendMessage(strings);
-//                }
-//                commandSender.sendMessage(Arrays.copyOfRange(strings,1,strings.length));
-                CommonExecutorLoader.GetCommandMap().get("vanish").onCommand(commandSender, command, s, Arrays.copyOfRange(strings, 1, strings.length));
-            }else{
-            CommonExecutorLoader.GetCommandMap().get("save").onCommand(commandSender, command, s, Arrays.copyOfRange(strings, 1, strings.length));
+            if (strings[0].equalsIgnoreCase("help")||strings[0].equalsIgnoreCase("h")){
+                CommonExecutorLoader.GetExecutor("help").onCommand(commandSender, command, s, Arrays.copyOfRange(strings,1,strings.length));
+            } else if (strings[0].equalsIgnoreCase("vanish")||strings[0].equalsIgnoreCase("v")) {
+                CommonExecutorLoader.GetExecutor("vanish").onCommand(commandSender, command, s, Arrays.copyOfRange(strings,1,strings.length));
+            } else {
+                CommonExecutorLoader.GetExecutor(strings[0]).onCommand(commandSender, command, s, Arrays.copyOfRange(strings,1,strings.length));
+            }
         }
         return true;
     }

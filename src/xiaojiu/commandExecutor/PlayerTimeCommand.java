@@ -6,9 +6,11 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import xiaojiu.Handles.Help.HelpMapHandler;
 import xiaojiu.Handles.Restart.TimeHelper;
+import xiaojiu.Handles.Save.SaveTaskManager;
 import xiaojiu.StartPlugins;
 import xiaojiu.api.HelpMap;
 import xiaojiu.api.XiaojiuCommandExecutor;
+import xiaojiu.config.ConfigManager;
 import xiaojiu.config.SaveConfig;
 import xiaojiu.task.PlayerJoinTimeTask;
 import xiaojiu.tools.MessageHelper;
@@ -63,7 +65,8 @@ public class PlayerTimeCommand implements XiaojiuCommandExecutor {
                 }
             } else if (strings[0].equalsIgnoreCase("save") || strings[0].equalsIgnoreCase("保存")) {
                 if (PermissionHelper.isHasPermission(commandSender, true, PermissionNode, "save")) {
-                    SaveConfig.SavePlayerTime();
+                    ConfigManager.getConfigMap().get("PlayerTime").Save();
+//                    SaveConfig.SavePlayerTime();
                     commandSender.sendMessage(MessageHelper.InitMessage(ChatColor.LIGHT_PURPLE + "保存玩家上线时间成功"));
                 } else {
                     commandSender.sendMessage(MessageHelper.InitMessage(ChatColor.RED + "你没有保存玩家上线时间的权限"));

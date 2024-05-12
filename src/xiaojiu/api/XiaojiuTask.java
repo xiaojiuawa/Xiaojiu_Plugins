@@ -7,7 +7,10 @@ public interface XiaojiuTask extends Runnable {
     void Cancel();
     void RunTaskAsynchronously(long time,int delay);
     void RunTask(long time,long delay);
-    String GetName();
-    Timer GetTimer();
+    int getDelay();
+    int getTimerTime();
+    String getName();
+    Timer getTimer();
     boolean canAsynchronously();
+    boolean isAsynchronouslyTask();
 }

@@ -7,6 +7,7 @@ import xiaojiu.config.Savecfg.JTPlayer;
 import xiaojiu.config.Savecfg.LimitPlayer;
 import xiaojiu.config.Saver.LimitPlayerConfig;
 import xiaojiu.config.Saver.PlayerTimeConfig;
+import xiaojiu.config.Saver.SaveTaskConfig;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -22,7 +23,7 @@ public class ConfigManager {
     public static void InitMap(){
         configMap.put("LimitPlayer",new LimitPlayerConfig());
         configMap.put("PlayerTime",new PlayerTimeConfig());
-
+        configMap.put("SaveTask",new SaveTaskConfig());
     }
 
     public static void LoadConfig(){

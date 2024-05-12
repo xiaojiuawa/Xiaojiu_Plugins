@@ -12,9 +12,9 @@ import java.util.*;
 
 public class SaveWorldTask extends BasicSaveHandles {
     public SaveWorldTask(int taskid, JavaPlugin plugin, Player player, String... args){
-        super(taskid, plugin,player, args);
+        super(taskid, plugin,player,"world", args);
         this.canAsynchronously=true;
-        this.name="World";
+//        this.name="World";
     }
     @Override
     public void run() {

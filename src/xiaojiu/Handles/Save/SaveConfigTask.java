@@ -14,24 +14,30 @@ import java.util.TimerTask;
 public class SaveConfigTask extends BasicSaveHandles{
 
     public SaveConfigTask(int taskid, JavaPlugin plugin, Player player, String... args) {
-        super(taskid, plugin,player, args);
-        this.name="config";
+        super(taskid, plugin,player,"config", args);
+//        this.name="config";
         this.canAsynchronously=true;
 
     }
 
     @Override
     public void run() {
-        for (String arg : args) {
-            if (ConfigManager.getConfigMap().containsKey(arg)){
-                ConfigManager.getConfigMap().get(arg).Save();
-            }else{
-                ConfigManager.getConfigMap().forEach((string, xiaojiuConfig) -> {
-                    xiaojiuConfig.Save();
-                });
+        if (args.length!=0){
+            for (String arg : args) {
+                if (ConfigManager.getConfigMap().containsKey(arg)){
+                    ConfigManager.getConfigMap().get(arg).Save();
+                }else{
+                    ConfigManager.getConfigMap().forEach((string, xiaojiuConfig) -> {
+                        xiaojiuConfig.Save();
+                    });
+                }
             }
+        }else{
+            ConfigManager.SaveConfig();
         }
-        SaveConfig.Save();
+
+
+//        SaveConfig.Save();
     }
 
 }

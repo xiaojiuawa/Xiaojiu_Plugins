@@ -22,8 +22,9 @@ public class Vanish {
             if (player.hasPermission("xiaojiu.op.vanish.effect")) {
                 player.addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY, Integer.MAX_VALUE, 1, false));
             }
-            player.setPlayerListName("");
+//            player.setPlayerListName("");
             player.getPlayer().getPlayer().getPlayer().getPlayer();
+            player.setDisplayName("");
 //            CraftServer server = (CraftServer) player.getServer();
 //            server.getHandle();
 //            player.saveData();
@@ -37,6 +38,7 @@ public class Vanish {
             if (player.hasPermission("xiaojiu.op.vanish.effect")) {
                 player.removePotionEffect(PotionEffectType.INVISIBILITY);
             }
+            player.setDisplayName(player.getName());
             player.setPlayerListName(player.getName());
             StartPlugins.getInstance().getServer().getOnlinePlayers().forEach(player1 -> player1.showPlayer(StartPlugins.getInstance(), player));
 

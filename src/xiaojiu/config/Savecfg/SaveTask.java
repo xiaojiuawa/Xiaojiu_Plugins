@@ -1,0 +1,79 @@
+package xiaojiu.config.Savecfg;
+
+import org.bukkit.OfflinePlayer;
+import org.bukkit.configuration.serialization.ConfigurationSerializable;
+import org.bukkit.entity.Player;
+import xiaojiu.StartPlugins;
+
+import java.util.*;
+
+public class SaveTask implements ConfigurationSerializable {
+    private final String name;
+    private final int timer;
+    private final int delay;
+    private final UUID playerUUID;
+    private final String[] args;
+    private final OfflinePlayer player;
+    public SaveTask(String name, int timer, int delay, UUID playerUUID,String[] args) {
+        this.name=name;
+        this.timer=timer;
+        this.delay=delay;
+        this.playerUUID=playerUUID;
+        this.args=args;
+        this.player= StartPlugins.getInstance().getServer().getOfflinePlayer(playerUUID);
+    }
+
+    public OfflinePlayer getPlayer() {
+        return player;
+    }
+
+    public int getDelay() {
+        return delay;
+    }
+
+    public int getTimer() {
+        return timer;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public UUID getPlayerUUID() {
+        return playerUUID;
+    }
+
+    public String[] getArgs() {
+        return args;
+    }
+
+    @Override
+    public Map<String, Object> serialize() {
+        Map<String,Object> map = new HashMap<>();
+        map.put("name",name);
+        map.put("delay",delay);
+        map.put("timer",timer);
+        map.put("UUID",playerUUID);
+        map.put("args",args);
+        return map;
+    }
+
+    public static SaveTask deserialize(Map<String, Object> map) {
+        return new SaveTask((String) map.get("name"),(int)map.get("timer"),(int)map.get("delay"),(UUID)map.get("UUID"),(String[]) map.get("args"));
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        SaveTask saveTask = (SaveTask) o;
+        return timer == saveTask.timer && delay == saveTask.delay && Objects.equals(name, saveTask.name) && Objects.equals(playerUUID, saveTask.playerUUID) && Arrays.equals(args, saveTask.args) && Objects.equals(player, saveTask.player);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = Objects.hash(name, timer, delay, playerUUID, player);
+        result = 31 * result + Arrays.hashCode(args);
+        return result;
+    }
+}

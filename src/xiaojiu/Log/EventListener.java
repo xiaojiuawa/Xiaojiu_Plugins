@@ -5,7 +5,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 
 import java.sql.SQLException;
-
+@Deprecated
 public class EventListener implements Listener {
     @EventHandler
     public void BlockBreakEvent(BlockBreakEvent event) throws SQLException {

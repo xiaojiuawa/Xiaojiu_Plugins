@@ -12,6 +12,8 @@ import xiaojiu.task.PlayerJoinTimeTask;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.function.Supplier;
 
 public class SaveTaskConfig implements XiaojiuConfig {
     @Override
@@ -38,9 +40,12 @@ public class SaveTaskConfig implements XiaojiuConfig {
 
     @Override
     public void Load() {
+        StartPlugins.logger.info("123434");
         FileConfiguration configuration = YamlConfiguration.loadConfiguration(new File(StartPlugins.getInstance().getDataFolder(), "SaveTask.yml"));
-        configuration.getKeys(false).forEach(key -> {
+        System.out.println(Arrays.toString(configuration.getKeys(false).toArray()));
+        for (String key : configuration.getKeys(false)) {
             SaveTask task = (SaveTask) configuration.get(key);
+            StartPlugins.logger.info(key);
             BasicSaveHandles task2 = SaveTaskManager.getInstance().NewTaskInstance(SaveTaskManager.getInstance().GetTaskName(task.getName()),StartPlugins.getInstance(), task.getPlayer(), task.getArgs() );
             if (SaveTaskManager.getInstance().isTasked(task2)) return;
             if (task.isAsynchronously()){
@@ -50,6 +55,7 @@ public class SaveTaskConfig implements XiaojiuConfig {
             }
             SaveTaskManager.getInstance().addTask(task2);
             SaveTaskManager.getInstance().addRecordTask(task2);
-        });
+        }
     }
+
 }

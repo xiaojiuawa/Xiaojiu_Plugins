@@ -38,7 +38,7 @@ public class LimitPlayer implements ConfigurationSerializable {
     }
 
     public static LimitPlayer deserialize(Map<String, Object> map) {
-        return new LimitPlayer((Long) map.get("leastSigBits"), (long) map.get("mostSigBits"), (String) map.get("name"), (String) map.get("message"));
+        return new LimitPlayer((long) map.get("leastSigBits"), (long) map.get("mostSigBits"), (String) map.get("name"), (String) map.get("message"));
     }
 
     @Override

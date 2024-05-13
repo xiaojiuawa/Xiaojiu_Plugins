@@ -5,6 +5,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import xiaojiu.api.XiaojiuConfig;
 import xiaojiu.config.Savecfg.JTPlayer;
 import xiaojiu.config.Savecfg.LimitPlayer;
+import xiaojiu.config.Savecfg.SaveTask;
 import xiaojiu.config.Saver.LimitPlayerConfig;
 import xiaojiu.config.Saver.PlayerTimeConfig;
 import xiaojiu.config.Saver.SaveTaskConfig;
@@ -17,6 +18,7 @@ public class ConfigManager {
     public static void InitManager(JavaPlugin plugin){
         ConfigurationSerialization.registerClass(LimitPlayer.class);
         ConfigurationSerialization.registerClass(JTPlayer.class);
+        ConfigurationSerialization.registerClass(SaveTask.class);
         InitMap();
         LoadConfig();
     }

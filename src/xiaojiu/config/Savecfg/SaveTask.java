@@ -59,16 +59,26 @@ public class SaveTask implements ConfigurationSerializable {
         map.put("name",name);
         map.put("delay",delay);
         map.put("timer",timer);
-        map.put("UUID",playerUUID);
+        map.put("leastSigBits", playerUUID.getLeastSignificantBits());
+        map.put("mostSigBits", playerUUID.getMostSignificantBits());
+//        map.put("UUID",playerUUID);
         map.put("Asynchronously",Asynchronously);
         map.put("args",args);
         return map;
     }
 
-    public static SaveTask deserialize(Map<String, Object> map) {
-        return new SaveTask((String) map.get("name"),(int)map.get("timer"),(int)map.get("delay"),(UUID)map.get("UUID"),(boolean) map.get("Asynchronously"),(String[]) map.get("args"));
-    }
+//    public static SaveTask deserialization(Map<String, Object> map) {
+//        return new SaveTask((String) map.get("name"),(int)map.get("timer"),(int)map.get("delay"),new UUID((long)map.get("mostSigBits"),(long)map.get("leastSigBits")),(boolean) map.get("Asynchronously"),(String[]) map.get("args"));
+//    }
+    public static SaveTask deserialize(Map<String,Object> map){
+        List<String> list =(List<String>) map.get("args");
+        String[] args = new String[list.size()+1];
+        for (int i = 0; i < list.size(); i++) {
+            args[i]=list.get(i);
+        }
 
+        return new SaveTask((String) map.get("name"),(int)map.get("timer"),(int)map.get("delay"),new UUID((long)map.get("mostSigBits"),(long)map.get("leastSigBits")),(boolean) map.get("Asynchronously"),args);
+    }
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

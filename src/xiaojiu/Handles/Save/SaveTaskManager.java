@@ -16,7 +16,7 @@ public class SaveTaskManager{
     public static SaveTaskManager getInstance(){
         return manager;
     }
-    protected final ArrayList<BasicSaveHandles> taskList = new ArrayList<>();
+    protected final List<BasicSaveHandles> taskList = new ArrayList<>();
     protected final Map<String,String[]> TaskNameMap = new HashMap<>();
 
     private final List<SaveTask> saveList = new ArrayList<>();
@@ -27,6 +27,9 @@ public class SaveTaskManager{
     }
     public boolean isTasked(BasicSaveHandles task){
         return taskList.contains(task);
+    }
+    public List<BasicSaveHandles> getTaskList(){
+        return taskList;
     }
     public void addTask(BasicSaveHandles task){
         taskList.add(task);
@@ -44,7 +47,7 @@ public class SaveTaskManager{
     }
     public BasicSaveHandles GetTask(int taskid){
         if (taskid>taskList.size()) return null;
-        return taskList.get(taskid);
+        return taskList.get(taskid-1);
     }
 
     public String GetTaskName(String name){

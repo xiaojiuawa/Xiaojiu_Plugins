@@ -9,11 +9,13 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import xiaojiu.Handles.Help.HelpMapHandler;
 import xiaojiu.Handles.Save.BasicSaveHandles;
+import xiaojiu.Handles.Save.SaveCmdHelper;
 import xiaojiu.Handles.Save.SaveTaskManager;
 import xiaojiu.StartPlugins;
 import xiaojiu.api.HelpMap;
 import xiaojiu.api.XiaojiuCommandExecutor;
 import xiaojiu.tools.MessageHelper;
+import xiaojiu.tools.Utils;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -55,7 +57,7 @@ public class SaveCommand implements XiaojiuCommandExecutor {
         // [是否新建] [任务名] [是否异步] [是否记录] [延迟执行] [时间间隔] [参数....]
         //     0        1        2     3          4          5         6
 //        commandSender.sendMessage("1");
-        if (strings.length<5){
+        if (strings.length<1){
             commandSender.sendMessage(MessageHelper.InitMessage(ChatColor.LIGHT_PURPLE+"请输入正确的命令格式"));
             return true;
         }
@@ -89,7 +91,21 @@ public class SaveCommand implements XiaojiuCommandExecutor {
             if (Record){
                 SaveTaskManager.getInstance().addRecordTask(Instance);
             }
-            player.sendMessage(MessageHelper.InitMessage(ChatColor.DARK_GREEN+"任务创建成功"+"任务id"+Instance.getTaskid()));
+            player.sendMessage(MessageHelper.InitMessage(ChatColor.DARK_GREEN+"任务创建成功"+"任务id:"+Instance.getTaskid()));
+        }
+        if (strings[0].equalsIgnoreCase("show")){
+            if (SaveTaskManager.getInstance().getTaskList().isEmpty()) player.sendMessage(MessageHelper.InitMessage(ChatColor.LIGHT_PURPLE+"目前无任务进行"));
+            if (strings.length>2){
+                if (Utils.isNumber(strings[1])){
+                    BasicSaveHandles task = SaveTaskManager.getInstance().GetTask(Integer.parseInt(strings[1]));
+                    SaveCmdHelper.ShowTaskInfo(task,player);
+                }
+            } else{
+                SaveTaskManager.getInstance().getTaskList().forEach(task ->{
+                    SaveCmdHelper.ShowTaskInfo(task,player);
+                    player.sendMessage(ChatColor.GOLD+"=========我是分隔符=========");
+                });
+            }
         }
 //        if (Asynchronously) task.RunTaskTimerAsynchronously(0);
 //        else task.RunTaskTimer(0);

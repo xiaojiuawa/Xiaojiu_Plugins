@@ -9,6 +9,7 @@ import xiaojiu.task.PlayerJoinTimeTask;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Map;
 import java.util.UUID;
 
@@ -36,6 +37,7 @@ public class PlayerTimeConfig implements XiaojiuConfig {
     @Override
     public void Load() {
         FileConfiguration configuration = YamlConfiguration.loadConfiguration(new File(StartPlugins.getInstance().getDataFolder(), "PlayerJoinTime.yml"));
+//        System.out.println(Arrays.toString(configuration.getKeys(false).toArray()));
         configuration.getKeys(false).forEach(key -> {
             JTPlayer player = (JTPlayer) configuration.get(key);
             PlayerJoinTimeTask.map.put(player.uuid,player);

@@ -87,7 +87,7 @@ public class SaveCommand implements XiaojiuCommandExecutor {
                 Instance.RunTask(timer,delay);
             }
             if (Record){
-                //todo
+                SaveTaskManager.getInstance().addRecordTask(Instance);
             }
             player.sendMessage(MessageHelper.InitMessage(ChatColor.DARK_GREEN+"任务创建成功"+"任务id"+Instance.getTaskid()));
         }

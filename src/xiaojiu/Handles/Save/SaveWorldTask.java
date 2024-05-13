@@ -2,6 +2,7 @@ package xiaojiu.Handles.Save;
 
 import net.minecraftforge.event.world.WorldEvent;
 import org.bukkit.Bukkit;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -11,7 +12,7 @@ import xiaojiu.tools.MessageHelper;
 import java.util.*;
 
 public class SaveWorldTask extends BasicSaveHandles {
-    public SaveWorldTask(int taskid, JavaPlugin plugin, Player player, String... args){
+    public SaveWorldTask(int taskid, JavaPlugin plugin, OfflinePlayer player, String... args){
         super(taskid, plugin,player,"world", args);
         this.canAsynchronously=true;
 //        this.name="World";
@@ -30,7 +31,7 @@ public class SaveWorldTask extends BasicSaveHandles {
 
             }
             if (!list.isEmpty()){
-                this.player.sendMessage(MessageHelper.InitMessage("世界:"+Arrays.toString(list.toArray()) +"未找到"));
+//                this.player.sendMessage(MessageHelper.InitMessage("世界:"+Arrays.toString(list.toArray()) +"未找到"));
             }
         }
         this.plugin.getServer().getWorlds().forEach(World::save);

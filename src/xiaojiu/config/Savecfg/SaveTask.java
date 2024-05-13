@@ -14,17 +14,23 @@ public class SaveTask implements ConfigurationSerializable {
     private final UUID playerUUID;
     private final String[] args;
     private final OfflinePlayer player;
-    public SaveTask(String name, int timer, int delay, UUID playerUUID,String[] args) {
+    private boolean Asynchronously=false;
+    public SaveTask(String name, int timer, int delay, UUID playerUUID,boolean isAsynchronously,String[] args) {
         this.name=name;
         this.timer=timer;
         this.delay=delay;
         this.playerUUID=playerUUID;
         this.args=args;
+        this.Asynchronously=isAsynchronously;
         this.player= StartPlugins.getInstance().getServer().getOfflinePlayer(playerUUID);
     }
 
     public OfflinePlayer getPlayer() {
         return player;
+    }
+
+    public boolean isAsynchronously() {
+        return Asynchronously;
     }
 
     public int getDelay() {
@@ -54,12 +60,13 @@ public class SaveTask implements ConfigurationSerializable {
         map.put("delay",delay);
         map.put("timer",timer);
         map.put("UUID",playerUUID);
+        map.put("Asynchronously",Asynchronously);
         map.put("args",args);
         return map;
     }
 
     public static SaveTask deserialize(Map<String, Object> map) {
-        return new SaveTask((String) map.get("name"),(int)map.get("timer"),(int)map.get("delay"),(UUID)map.get("UUID"),(String[]) map.get("args"));
+        return new SaveTask((String) map.get("name"),(int)map.get("timer"),(int)map.get("delay"),(UUID)map.get("UUID"),(boolean) map.get("Asynchronously"),(String[]) map.get("args"));
     }
 
     @Override

@@ -1,5 +1,6 @@
 package xiaojiu.Handles.Save;
 
+import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 import xiaojiu.config.Savecfg.SaveTask;
@@ -11,7 +12,7 @@ import java.util.List;
 import java.util.Map;
 
 public class SaveTaskManager{
-    public static SaveTaskManager manager = new SaveTaskManager();
+    private static final SaveTaskManager manager = new SaveTaskManager();
     public static SaveTaskManager getInstance(){
         return manager;
     }
@@ -24,6 +25,9 @@ public class SaveTaskManager{
         addTaskName("SavePlayerTask","Player","player");
         addTaskName("SaveWorldTask","World","world");
     }
+    public boolean isTasked(BasicSaveHandles task){
+        return taskList.contains(task);
+    }
     public void addTask(BasicSaveHandles task){
         taskList.add(task);
     }
@@ -33,7 +37,7 @@ public class SaveTaskManager{
     }
 
     public void addRecordTask(BasicSaveHandles task){
-        saveList.add(new SaveTask(task.getName(),task.getTimerTime(),task.getDelay(),task.getPlayer().getUniqueId(),task.getArgs()));
+        saveList.add(new SaveTask(task.getName(),task.getTimerTime(),task.getDelay(),task.getPlayer().getUniqueId(),task.isAsynchronouslyTask(),task.getArgs()));
     }
     public void addTaskName(String name,String... names ){
         this.TaskNameMap.put(name,names);
@@ -52,7 +56,7 @@ public class SaveTaskManager{
         return null;
     }
 
-    public BasicSaveHandles NewTaskInstance(String taskName, JavaPlugin plugin, Player player, String... args){
+    public BasicSaveHandles NewTaskInstance(String taskName, JavaPlugin plugin, OfflinePlayer player, String... args){
         try{
             return (BasicSaveHandles) Class.forName("xiaojiu.Handles.Save."+taskName).getConstructors()[0].newInstance(this.taskList.size()+1,plugin,player,args);
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | InvocationTargetException e) {

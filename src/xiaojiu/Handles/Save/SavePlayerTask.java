@@ -1,6 +1,7 @@
 package xiaojiu.Handles.Save;
 
 import org.bukkit.Bukkit;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 import xiaojiu.StartPlugins;
@@ -12,7 +13,7 @@ import java.util.List;
 import java.util.TimerTask;
 
 public class SavePlayerTask extends BasicSaveHandles{
-    public SavePlayerTask(int taskid, JavaPlugin plugin,Player player,String... args){
+    public SavePlayerTask(int taskid, JavaPlugin plugin, OfflinePlayer player, String... args){
         super(taskid, plugin,player,"player", args);
         this.canAsynchronously=true;
 //        this.name="Player";
@@ -32,7 +33,7 @@ public class SavePlayerTask extends BasicSaveHandles{
                 }
             }
             if (!list.isEmpty()){
-                this.player.sendMessage(MessageHelper.InitMessage(Arrays.toString(list.toArray())+"未在线或未在本子服"));
+//                this.player.sendMessage(MessageHelper.InitMessage(Arrays.toString(list.toArray())+"未在线或未在本子服"));
             }
         }else{
             plugin.getServer().getOnlinePlayers().forEach(player1 -> {

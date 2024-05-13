@@ -1,6 +1,7 @@
 package xiaojiu.Handles.Save;
 
 import org.bukkit.Bukkit;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitTask;
@@ -21,9 +22,11 @@ public abstract class BasicSaveHandles extends TimerTask implements XiaojiuTask,
     protected boolean Asynchronously = false;
     protected String[] args;
     protected JavaPlugin plugin;
-    protected Player player;
+    protected UUID playerUUID;
     protected BukkitTask task;
-    public BasicSaveHandles(int taskid,JavaPlugin plugin,Player player,String taskName,String... args){
+    protected OfflinePlayer player;
+    public BasicSaveHandles(int taskid, JavaPlugin plugin, OfflinePlayer player, String taskName, String... args){
+        this.playerUUID=player.getUniqueId();
         this.player=player;
         this.name=taskName;
         this.taskid=taskid;
@@ -125,7 +128,12 @@ public abstract class BasicSaveHandles extends TimerTask implements XiaojiuTask,
     }
 
     @Override
-    public Player getPlayer() {
+    public UUID getPlayerUUID() {
+        return playerUUID;
+    }
+
+    @Override
+    public OfflinePlayer getPlayer() {
         return player;
     }
 

@@ -23,18 +23,22 @@ public class SaveConfigTask extends BasicSaveHandles{
 
     @Override
     public void run() {
-        if (args.length!=0){
-            for (String arg : args) {
-                if (ConfigManager.getConfigMap().containsKey(arg)){
-                    ConfigManager.getConfigMap().get(arg).Save();
-                }else{
-                    ConfigManager.getConfigMap().forEach((string, xiaojiuConfig) -> {
-                        xiaojiuConfig.Save();
-                    });
-                }
+        if (!StartPlugins.isIsInitEd()) {
+            if (isAsynchronouslyTask()) return;
+            try {
+                Thread.sleep(10000);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
             }
-        }else{
-            ConfigManager.SaveConfig();
+        }
+        for (String arg : args) {
+            if (ConfigManager.getConfigMap().containsKey(arg)) {
+                ConfigManager.getConfigMap().get(arg).Save();
+            } else {
+                ConfigManager.getConfigMap().forEach((string, xiaojiuConfig) -> {
+                    xiaojiuConfig.Save();
+                });
+            }
         }
 
 

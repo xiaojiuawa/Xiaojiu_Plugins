@@ -72,10 +72,18 @@ public class SaveTask implements ConfigurationSerializable {
 //    }
     public static SaveTask deserialize(Map<String,Object> map){
         List<String> list =(List<String>) map.get("args");
-        String[] args = new String[list.size()+1];
-        for (int i = 0; i < list.size(); i++) {
-            args[i]=list.get(i);
+        String[] args;
+        if (list==null){
+            args=new String[0];
+        }else{
+            args = new String[list.size()+1];
+            for (int i = 0; i < list.size(); i++) {
+                args[i]=list.get(i);
+            }
         }
+
+
+//        if (args[0]==null|| args[0].isEmpty()) args=null;
 
         return new SaveTask((String) map.get("name"),(int)map.get("timer"),(int)map.get("delay"),new UUID((long)map.get("mostSigBits"),(long)map.get("leastSigBits")),(boolean) map.get("Asynchronously"),args);
     }

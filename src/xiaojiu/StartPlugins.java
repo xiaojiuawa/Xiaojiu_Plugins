@@ -23,7 +23,7 @@ public class StartPlugins extends JavaPlugin {
     private static JavaPlugin Instance;
     public static PluginCommand command;
     public static Logger logger;
-
+    private static boolean isInitEd = false;
     @Override
     public void onEnable() {
         long startData = System.currentTimeMillis();
@@ -33,14 +33,20 @@ public class StartPlugins extends JavaPlugin {
         this.getLogger().info("XiaojiuPluginOnEnable");
         long endDate= System.currentTimeMillis();
         logger.info("xiaojiuPlugin启动完毕，用时"+ (endDate - startData)+"MS");
+        isInitEd=true;
     }
 
     public static JavaPlugin getInstance() {
         return Instance;
     }
 
+    public static boolean isIsInitEd() {
+        return isInitEd;
+    }
+
     @Override
     public void onDisable() {
+        isInitEd=false;
         Bukkit.getScheduler().cancelTasks(this);
         this.getLogger().info("XiaojiuPluginOnDisable");
         ConfigManager.SaveConfig();

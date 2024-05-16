@@ -1,18 +1,11 @@
 package xiaojiu.Handles.Help;
 
 import xiaojiu.api.HelpMap;
-import xiaojiu.api.XiaojiuCommandExecutor;
 
 import java.util.Objects;
 
 public class HelpMapHandler implements HelpMap {
-    public HelpMapHandler(String faster, String command, String permissionNode, String introduce) {
-        this.faster = faster;
-        this.command = command;
-        this.PermissionNode = permissionNode;
-        this.introduce = introduce;
-    }
-//    public HelpMapHandler(XiaojiuCommandExecutor executor,String command ,String permissionNode,String introduce){
+    //    public HelpMapHandler(XiaojiuCommandExecutor executor,String command ,String permissionNode,String introduce){
 //        this.faster = executor.GetCommandNode();
 //        this.command = command;
 //        this.introduce= introduce;
@@ -22,6 +15,13 @@ public class HelpMapHandler implements HelpMap {
     public String command;
     public String PermissionNode;
     public String introduce;
+    public HelpMapHandler(String faster, String command, String permissionNode, String introduce) {
+        this.faster = faster;
+        this.command = command;
+        this.PermissionNode = permissionNode;
+        this.introduce = introduce;
+    }
+
     @Override
     public String getFather() {
         return faster;

@@ -33,10 +33,11 @@ public class PermissionHelper {
 
         }
     }
-//
-    public static boolean isHasPermission(CommandSender commandSender,boolean isOp,String CommandNode,String... nodes){
+
+    //
+    public static boolean isHasPermission(CommandSender commandSender, boolean isOp, String CommandNode, String... nodes) {
         String PermissionNode;
-        PermissionNode=GetPermissionNode(MainCommand.CommonNode,isOp,CommandNode,nodes);
+        PermissionNode = GetPermissionNode(MainCommand.CommonNode, isOp, CommandNode, nodes);
         if (commandSender.isOp() && commandSender instanceof ConsoleCommandSender) return true;
         if (commandSender instanceof Player) {
             Player player = (Player) commandSender;
@@ -53,6 +54,7 @@ public class PermissionHelper {
 
         }
     }
+
     public static boolean isHasPermissionNoLog(CommandSender commandSender, String... nodes) {
         String PermissionNode;
         if (!nodes[0].startsWith("xiaojiu")) {
@@ -68,6 +70,7 @@ public class PermissionHelper {
         }
         return false;
     }
+
     @Deprecated
     public static String GetPermissionNode(String father, String... nodes) {
         StringBuilder result;
@@ -83,8 +86,8 @@ public class PermissionHelper {
         return result.toString();
     }
 
-    public static String GetPermissionNode(String father,boolean isOP,String CommandNode,String... nodes){
-        StringBuilder result= new StringBuilder();
+    public static String GetPermissionNode(String father, boolean isOP, String CommandNode, String... nodes) {
+        StringBuilder result = new StringBuilder();
         result.append(father).append(".").append(isOP ? "op" : "normal").append(".").append(CommandNode);
         for (String node : nodes) {
             result.append(".").append(node);

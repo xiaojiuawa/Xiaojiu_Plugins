@@ -15,67 +15,78 @@ public abstract class BasicSaveHandles extends TimerTask implements XiaojiuTask,
     protected int taskid;
     protected Timer timer;
     protected String name;
-    protected int delay=-1;
-    protected int timerTime=-1;
-    protected boolean tasking=false;
-    protected boolean canAsynchronously=false;
+    protected int delay = -1;
+    protected int timerTime = -1;
+    protected boolean tasking = false;
+    protected boolean canAsynchronously = false;
     protected boolean Asynchronously = false;
     protected String[] args;
     protected JavaPlugin plugin;
     protected UUID playerUUID;
     protected BukkitTask task;
     protected OfflinePlayer player;
-    public BasicSaveHandles(int taskid, JavaPlugin plugin, OfflinePlayer player, String taskName, String... args){
-        this.playerUUID=player.getUniqueId();
-        this.player=player;
-        this.name=taskName;
-        this.taskid=taskid;
-        if (taskid==-1) return;
-        this.timer=new Timer(this.getName()+taskid);
-        this.args=args;
-        this.plugin=plugin;
+
+    public BasicSaveHandles(int taskid, JavaPlugin plugin, OfflinePlayer player, String taskName, String... args) {
+        this.playerUUID = player.getUniqueId();
+        this.player = player;
+        this.name = taskName;
+        this.taskid = taskid;
+        if (taskid == -1) return;
+        this.timer = new Timer(this.getName() + taskid);
+        this.args = args;
+        this.plugin = plugin;
     }
+
     @Override
     public void Cancel() {
         if (!tasking) return;
         if (!Asynchronously) {
             task.cancel();
-        }else{
+        } else {
             this.cancel();
         }
 
     }
-    public int getTaskid(){
+
+    public int getTaskid() {
         return this.taskid;
     }
+
+    protected void ReRunTask(int delay, int time) {
+        this.cancel();
+        this.task = null;
+
+    }
+
     @Override
     public void RunTaskAsynchronously(long time, int delay) {
-        if (!canAsynchronously||tasking) return;
-        this.tasking=true;
-        this.Asynchronously=true;
-        this.timerTime=(int)time;
-        this.delay=delay;
+        if (!canAsynchronously || tasking) return;
+        this.tasking = true;
+        this.Asynchronously = true;
+        this.timerTime = (int) time;
+        this.delay = delay;
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(new Date());
-        calendar.add(Calendar.SECOND,delay);
-        if (time==0){
-            this.timer.schedule(this,calendar.getTime());
+        calendar.add(Calendar.SECOND, delay);
+        if (time == 0) {
+            this.timer.schedule(this, calendar.getTime());
             return;
         }
-        this.timer.schedule(this,calendar.getTime(),time*1000);
+        this.timer.schedule(this, calendar.getTime(), time * 1000);
     }
+
     @Override
     public void RunTask(long time, long delay) {
         if (tasking) return;
-        this.tasking=true;
-        this.Asynchronously=false;
-        this.timerTime=(int)time;
-        this.delay= (int) delay;
-        if (time==0){
-            task= Bukkit.getScheduler().runTaskLater(plugin,this,delay);
+        this.tasking = true;
+        this.Asynchronously = false;
+        this.timerTime = (int) time;
+        this.delay = (int) delay;
+        if (time == 0) {
+            task = Bukkit.getScheduler().runTaskLater(plugin, this, delay);
             return;
         }
-        task= Bukkit.getScheduler().runTaskTimer(StartPlugins.getInstance(),this, delay,time);
+        task = Bukkit.getScheduler().runTaskTimer(StartPlugins.getInstance(), this, delay * 20, time * 20);
     }
 
     @Override
@@ -113,6 +124,16 @@ public abstract class BasicSaveHandles extends TimerTask implements XiaojiuTask,
     }
 
     @Override
+    public UUID getPlayerUUID() {
+        return playerUUID;
+    }
+
+    @Override
+    public OfflinePlayer getPlayer() {
+        return player;
+    }
+
+    @Override
     public void setPlayer(UUID uuid) {
         //任务发起者不允许重设
     }
@@ -125,16 +146,6 @@ public abstract class BasicSaveHandles extends TimerTask implements XiaojiuTask,
     @Override
     public void setPlayer(Player player) {
         //任务发起者不允许重设
-    }
-
-    @Override
-    public UUID getPlayerUUID() {
-        return playerUUID;
-    }
-
-    @Override
-    public OfflinePlayer getPlayer() {
-        return player;
     }
 
     @Override

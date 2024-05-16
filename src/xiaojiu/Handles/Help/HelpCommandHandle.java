@@ -3,7 +3,7 @@ package xiaojiu.Handles.Help;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import xiaojiu.api.HelpMap;
-import xiaojiu.commandExecutor.*;
+import xiaojiu.commandExecutor.CommonExecutorLoader;
 import xiaojiu.tools.MessageHelper;
 
 import java.util.HashMap;
@@ -13,10 +13,10 @@ public class HelpCommandHandle {
     public static Map<String, Map<String, HelpMap>> helpMap = new HashMap<>();
 
     public static void HelpMapInit() {
-        CommonExecutorLoader.GetCommandMap().forEach((string, xiaojiuCommandExecutor) ->{
+        CommonExecutorLoader.GetCommandMap().forEach((string, xiaojiuCommandExecutor) -> {
             xiaojiuCommandExecutor.InitMap();
             helpMap.put(xiaojiuCommandExecutor.GetCommandNode(), xiaojiuCommandExecutor.GetHelpMap());
-        } );
+        });
 //        helpMap.putAll(MainCommand.helpMap);
 ////        CommonExecutorLoader.playerCommand.InitMap();
 //        helpMap.put("玩家限制", PlayerCommand.PlayerCommandMap);
@@ -38,20 +38,20 @@ public class HelpCommandHandle {
             commandSender.sendMessage(ChatColor.GOLD + "帮助总列表");
             helpMap.forEach((string, helpmap) -> commandSender.sendMessage(ChatColor.GOLD + string));
         } else {
-            if (helpMap.containsKey(command)){
-                commandSender.sendMessage(MessageHelper.InitMessage(ChatColor.LIGHT_PURPLE+"请输入正确的命令节点"));
+            if (helpMap.containsKey(command)) {
+                commandSender.sendMessage(MessageHelper.InitMessage(ChatColor.LIGHT_PURPLE + "请输入正确的命令节点"));
                 return;
             }
 
-            Map<String,HelpMap> getMap = helpMap.get(command);
+            Map<String, HelpMap> getMap = helpMap.get(command);
             Map<String, HelpMap> map = new HashMap<>();
 //            if (page==0) page=1;
-            if (commandSender.hasPermission("xiaojiu.op.help.high")){
-                map=getMap;
-            }else{
+            if (commandSender.hasPermission("xiaojiu.op.help.high")) {
+                map = getMap;
+            } else {
                 for (Map.Entry<String, HelpMap> entry : getMap.entrySet()) {
-                    if(commandSender.hasPermission(entry.getValue().getPermissionNode())){
-                        map.put(entry.getKey(),entry.getValue());
+                    if (commandSender.hasPermission(entry.getValue().getPermissionNode())) {
+                        map.put(entry.getKey(), entry.getValue());
                     }
                 }
             }
@@ -64,7 +64,7 @@ public class HelpCommandHandle {
                     commandSender.sendMessage(ChatColor.GOLD + "命令名: " + entry.getKey());
                     commandSender.sendMessage(ChatColor.GOLD + "使用方法: " + map1.getCommand());
                     commandSender.sendMessage(ChatColor.GOLD + "解释: " + map1.getIntroduce());
-                    if (commandSender.hasPermission("xiaojiu.op.help.high")){
+                    if (commandSender.hasPermission("xiaojiu.op.help.high")) {
                         commandSender.sendMessage(ChatColor.GOLD + "需要的权限节点" + map1.getPermissionNode());
                         commandSender.sendMessage(ChatColor.GOLD + "我是否有权限:" + (commandSender.hasPermission(map1.getPermissionNode()) || commandSender.isOp() ? "有" : "无"));
                     }

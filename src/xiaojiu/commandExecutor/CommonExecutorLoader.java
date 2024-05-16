@@ -3,7 +3,6 @@ package xiaojiu.commandExecutor;
 import org.bukkit.plugin.java.JavaPlugin;
 import xiaojiu.api.XiaojiuCommandExecutor;
 
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -16,11 +15,12 @@ public class CommonExecutorLoader {
     public static PlayerTimeCommand playerTimeCommand = new PlayerTimeCommand();
     public static MainCommand mainCommand = new MainCommand();
 
-    public static Map<String,XiaojiuCommandExecutor> GetCommandMap(){
+    public static Map<String, XiaojiuCommandExecutor> GetCommandMap() {
         return commandExecutorMaps;
     }
+
     public static void Load(JavaPlugin Instance) {
-        CommonExecutorLoader.commandExecutorMaps.put(mainCommand.GetCommandNode(),mainCommand);
+        CommonExecutorLoader.commandExecutorMaps.put(mainCommand.GetCommandNode(), mainCommand);
         Instance.getCommand("xiaojiu").setExecutor(mainCommand);
         CommonExecutorLoader.commandExecutorMaps.put(restartServerCommand.GetCommandNode(), restartServerCommand);
         Instance.getCommand("restartserver").setExecutor(restartServerCommand);
@@ -37,12 +37,13 @@ public class CommonExecutorLoader {
         commandExecutorMaps.put(playerTimeCommand.GetCommandNode(), playerTimeCommand);
         Instance.getCommand("playerTime").setExecutor(playerTimeCommand);
         Instance.getCommand("playerTime").setTabCompleter(playerTimeCommand);
-        commandExecutorMaps.put("vanish",new VanishCommand());
-        commandExecutorMaps.put("save",new SaveCommand());
-        commandExecutorMaps.put("help",new HelpCommand());
-        commandExecutorMaps.put("no",new NoCommandCMD());
+        commandExecutorMaps.put("vanish", new VanishCommand());
+        commandExecutorMaps.put("save", new SaveCommand());
+        commandExecutorMaps.put("help", new HelpCommand());
+        commandExecutorMaps.put("no", new NoCommandCMD());
     }
-    public static XiaojiuCommandExecutor GetExecutor(String name){
+
+    public static XiaojiuCommandExecutor GetExecutor(String name) {
         if (!commandExecutorMaps.containsKey(name)) return commandExecutorMaps.get("no");
         return commandExecutorMaps.get(name);
     }

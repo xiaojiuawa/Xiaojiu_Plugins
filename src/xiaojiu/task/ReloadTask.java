@@ -12,9 +12,9 @@ import xiaojiu.tools.Utils;
 import java.util.*;
 
 public class ReloadTask {
-    protected static Timer task = null;
     public static SuggestHelper suggestHelper = new SuggestHelper();
     public static boolean isSuggesting = false;
+    protected static Timer task = null;
 
     public static void RunTask(JavaPlugin Instance, UUID initiator) {
         task = new Timer();

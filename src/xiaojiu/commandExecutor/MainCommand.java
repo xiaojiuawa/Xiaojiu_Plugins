@@ -41,12 +41,12 @@ public class MainCommand implements XiaojiuCommandExecutor {
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
 //        commandSender.sendMessage(strings);
         if (strings.length >= 1) {
-            if (strings[0].equalsIgnoreCase("help")||strings[0].equalsIgnoreCase("h")){
-                CommonExecutorLoader.GetExecutor("help").onCommand(commandSender, command, s, Arrays.copyOfRange(strings,1,strings.length));
-            } else if (strings[0].equalsIgnoreCase("vanish")||strings[0].equalsIgnoreCase("v")) {
-                CommonExecutorLoader.GetExecutor("vanish").onCommand(commandSender, command, s, Arrays.copyOfRange(strings,1,strings.length));
+            if (strings[0].equalsIgnoreCase("help") || strings[0].equalsIgnoreCase("h")) {
+                CommonExecutorLoader.GetExecutor("help").onCommand(commandSender, command, s, Arrays.copyOfRange(strings, 1, strings.length));
+            } else if (strings[0].equalsIgnoreCase("vanish") || strings[0].equalsIgnoreCase("v")) {
+                CommonExecutorLoader.GetExecutor("vanish").onCommand(commandSender, command, s, Arrays.copyOfRange(strings, 1, strings.length));
             } else {
-                CommonExecutorLoader.GetExecutor(strings[0]).onCommand(commandSender, command, s, Arrays.copyOfRange(strings,1,strings.length));
+                CommonExecutorLoader.GetExecutor(strings[0]).onCommand(commandSender, command, s, Arrays.copyOfRange(strings, 1, strings.length));
             }
         }
         return true;
@@ -54,16 +54,16 @@ public class MainCommand implements XiaojiuCommandExecutor {
 
     @Override
     public List<String> onTabComplete(CommandSender commandSender, Command command, String s, String[] strings) {
-        List<String> list=new ArrayList<>();
-        if (strings.length==1){
+        List<String> list = new ArrayList<>();
+        if (strings.length == 1) {
             CommonExecutorLoader.GetCommandMap().forEach((string, executor) -> {
-                if (strings[0].toLowerCase().startsWith(string)){
+                if (strings[0].toLowerCase().startsWith(string)) {
                     list.add(string);
                 }
             });
-        } else if (strings.length==2) {
+        } else if (strings.length == 2) {
             XiaojiuCommandExecutor executor = CommonExecutorLoader.GetCommandMap().get(strings[0]);
-            list.addAll(executor.onTabComplete(commandSender, command, s, Arrays.copyOfRange(strings,0,strings.length)));
+            list.addAll(executor.onTabComplete(commandSender, command, s, Arrays.copyOfRange(strings, 0, strings.length)));
 //            list.addAll(CommonExecutorLoader.GetCommandMap().get(strings[0]).onTabComplete(commandSender, command, s, Arrays.copyOfRange(strings,0,strings.length)));
         }
         return list;

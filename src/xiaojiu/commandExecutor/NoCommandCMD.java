@@ -33,7 +33,7 @@ public class NoCommandCMD implements XiaojiuCommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
-        commandSender.sendMessage(MessageHelper.InitMessage(ChatColor.RED+"指令名输入错误"));
+        commandSender.sendMessage(MessageHelper.InitMessage(ChatColor.RED + "指令名输入错误"));
         return true;
     }
 

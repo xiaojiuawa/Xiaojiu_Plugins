@@ -1,7 +1,6 @@
 package xiaojiu.Handles.Save;
 
 import org.bukkit.OfflinePlayer;
-import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 import xiaojiu.config.Savecfg.SaveTask;
 
@@ -11,27 +10,31 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class SaveTaskManager{
+public class SaveTaskManager {
     private static final SaveTaskManager manager = new SaveTaskManager();
-    public static SaveTaskManager getInstance(){
+    protected final List<BasicSaveHandles> taskList = new ArrayList<>();
+    protected final Map<String, String[]> TaskNameMap = new HashMap<>();
+    private final List<SaveTask> saveList = new ArrayList<>();
+
+    public SaveTaskManager() {
+        addTaskName("SaveConfigTask", "Config", "config");
+        addTaskName("SavePlayerTask", "Player", "player");
+        addTaskName("SaveWorldTask", "World", "world");
+    }
+
+    public static SaveTaskManager getInstance() {
         return manager;
     }
-    protected final List<BasicSaveHandles> taskList = new ArrayList<>();
-    protected final Map<String,String[]> TaskNameMap = new HashMap<>();
 
-    private final List<SaveTask> saveList = new ArrayList<>();
-    public SaveTaskManager(){
-        addTaskName("SaveConfigTask","Config","config");
-        addTaskName("SavePlayerTask","Player","player");
-        addTaskName("SaveWorldTask","World","world");
-    }
-    public boolean isTasked(BasicSaveHandles task){
+    public boolean isTasked(BasicSaveHandles task) {
         return taskList.contains(task);
     }
-    public List<BasicSaveHandles> getTaskList(){
+
+    public List<BasicSaveHandles> getTaskList() {
         return taskList;
     }
-    public void addTask(BasicSaveHandles task){
+
+    public void addTask(BasicSaveHandles task) {
         taskList.add(task);
     }
 
@@ -39,30 +42,33 @@ public class SaveTaskManager{
         return saveList;
     }
 
-    public void addRecordTask(BasicSaveHandles task){
-        saveList.add(new SaveTask(task.getName(),task.getTimerTime(),task.getDelay(),task.getPlayer().getUniqueId(),task.isAsynchronouslyTask(),task.getArgs()));
-    }
-    public void addTaskName(String name,String... names ){
-        this.TaskNameMap.put(name,names);
-    }
-    public BasicSaveHandles GetTask(int taskid){
-        if (taskid>taskList.size()) return null;
-        return taskList.get(taskid-1);
+    public void addRecordTask(BasicSaveHandles task) {
+        saveList.add(new SaveTask(task.getName(), task.getTimerTime(), task.getDelay(), task.getPlayer().getUniqueId(), task.isAsynchronouslyTask(), task.getArgs()));
     }
 
-    public String GetTaskName(String name){
+    public void addTaskName(String name, String... names) {
+        this.TaskNameMap.put(name, names);
+    }
+
+    public BasicSaveHandles GetTask(int taskid) {
+        if (taskid > taskList.size()) return null;
+        return taskList.get(taskid - 1);
+    }
+
+    public String GetTaskName(String name) {
         for (Map.Entry<String, String[]> entry : TaskNameMap.entrySet()) {
             for (String string : entry.getValue()) {
-                if (name.contains(string)||name.equalsIgnoreCase(entry.getKey())) return entry.getKey();
+                if (name.contains(string) || name.equalsIgnoreCase(entry.getKey())) return entry.getKey();
             }
         }
         return null;
     }
 
-    public BasicSaveHandles NewTaskInstance(String taskName, JavaPlugin plugin, OfflinePlayer player, String... args){
-        try{
-            return (BasicSaveHandles) Class.forName("xiaojiu.Handles.Save."+taskName).getConstructors()[0].newInstance(this.taskList.size()+1,plugin,player,args);
-        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | InvocationTargetException e) {
+    public BasicSaveHandles NewTaskInstance(String taskName, JavaPlugin plugin, OfflinePlayer player, String... args) {
+        try {
+            return (BasicSaveHandles) Class.forName("xiaojiu.Handles.Save." + taskName).getConstructors()[0].newInstance(this.taskList.size() + 1, plugin, player, args);
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException |
+                 InvocationTargetException e) {
             return null;
         }
 

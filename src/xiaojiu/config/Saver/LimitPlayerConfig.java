@@ -39,7 +39,7 @@ public class LimitPlayerConfig implements XiaojiuConfig {
         configuration.getKeys(false).forEach(key -> {
             LimitPlayer player = (LimitPlayer) configuration.get(key);
             UUID uuid = new UUID(player.mostSigBits, player.leastSigBits);
-            LimitPlayerTools.hashMap.put(uuid,player);
+            LimitPlayerTools.hashMap.put(uuid, player);
 
         });
     }

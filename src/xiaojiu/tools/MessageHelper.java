@@ -9,9 +9,11 @@ public class MessageHelper {
     public static int SendMessageAllPlayer(String message) {
         return StartPlugins.getInstance().getServer().broadcastMessage(message);
     }
-    public static void SendNoPermissionMessage(CommandSender commandSender){
-        commandSender.sendMessage(MessageHelper.InitMessage(ChatColor.RED+"你没有权限使用这个指令"));
+
+    public static void SendNoPermissionMessage(CommandSender commandSender) {
+        commandSender.sendMessage(MessageHelper.InitMessage(ChatColor.RED + "你没有权限使用这个指令"));
     }
+
     public static String InitMessage(String message) {
         return ChatColor.WHITE + "[" + ChatColor.AQUA + "系统提醒" + ChatColor.WHITE + "]" + message;
     }

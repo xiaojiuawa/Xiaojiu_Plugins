@@ -1,6 +1,5 @@
 package xiaojiu.Handles.Vanish;
 
-import org.bukkit.craftbukkit.v1_12_R1.CraftServer;
 import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
@@ -9,7 +8,6 @@ import xiaojiu.StartPlugins;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-import java.util.function.LongToIntFunction;
 
 public class Vanish {
     public static List<UUID> VanishPlayers = new ArrayList<>();
@@ -55,10 +53,11 @@ public class Vanish {
         VanishPlayers.forEach(uuid -> list.add(StartPlugins.getInstance().getServer().getPlayer(uuid)));
         return list;
     }
-    public static void OffVanish(){
+
+    public static void OffVanish() {
         VanishPlayers.forEach(uuid -> {
-            Player player= StartPlugins.getInstance().getServer().getPlayer(uuid);
-            VanishPlayer(player,false);
+            Player player = StartPlugins.getInstance().getServer().getPlayer(uuid);
+            VanishPlayer(player, false);
         });
     }
 //    public static boolean VanishPlayer(UUID uuid,boolean mode){

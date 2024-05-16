@@ -27,6 +27,10 @@ public class LimitPlayer implements ConfigurationSerializable {
         this.Name = name;
     }
 
+    public static LimitPlayer deserialize(Map<String, Object> map) {
+        return new LimitPlayer((long) map.get("leastSigBits"), (long) map.get("mostSigBits"), (String) map.get("name"), (String) map.get("message"));
+    }
+
     @Override
     public Map<String, Object> serialize() {
         Map<String, Object> map = new HashMap<>();
@@ -35,10 +39,6 @@ public class LimitPlayer implements ConfigurationSerializable {
         map.put("name", Name);
         map.put("message", message);
         return map;
-    }
-
-    public static LimitPlayer deserialize(Map<String, Object> map) {
-        return new LimitPlayer((long) map.get("leastSigBits"), (long) map.get("mostSigBits"), (String) map.get("name"), (String) map.get("message"));
     }
 
     @Override

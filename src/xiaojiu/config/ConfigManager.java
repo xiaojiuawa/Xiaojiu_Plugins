@@ -15,26 +15,28 @@ import java.util.Map;
 
 public class ConfigManager {
     private static final Map<String, XiaojiuConfig> configMap = new HashMap<>();
-    public static void InitManager(JavaPlugin plugin){
+
+    public static void InitManager(JavaPlugin plugin) {
         ConfigurationSerialization.registerClass(LimitPlayer.class);
         ConfigurationSerialization.registerClass(JTPlayer.class);
         ConfigurationSerialization.registerClass(SaveTask.class);
         InitMap();
         LoadConfig();
     }
-    public static void InitMap(){
-        configMap.put("LimitPlayer",new LimitPlayerConfig());
-        configMap.put("PlayerTime",new PlayerTimeConfig());
-        configMap.put("SaveTask",new SaveTaskConfig());
+
+    public static void InitMap() {
+        configMap.put("LimitPlayer", new LimitPlayerConfig());
+        configMap.put("PlayerTime", new PlayerTimeConfig());
+        configMap.put("SaveTask", new SaveTaskConfig());
     }
 
-    public static void LoadConfig(){
+    public static void LoadConfig() {
         configMap.forEach((string, xiaojiuConfig) -> {
             xiaojiuConfig.Load();
         });
     }
 
-    public static void SaveConfig(){
+    public static void SaveConfig() {
         configMap.forEach((string, xiaojiuConfig) -> {
             xiaojiuConfig.Save();
         });

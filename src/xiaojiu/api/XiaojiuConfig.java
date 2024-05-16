@@ -2,7 +2,9 @@ package xiaojiu.api;
 
 public interface XiaojiuConfig {
     void Save();
-//    XiaojiuConfigSaver GetInstance();
+
+    //    XiaojiuConfigSaver GetInstance();
     void ReLoad();
+
     void Load();
 }

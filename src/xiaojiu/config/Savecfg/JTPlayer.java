@@ -21,6 +21,13 @@ public class JTPlayer implements ConfigurationSerializable {
         this.mostSigBits = uuid.getMostSignificantBits();
     }
 
+    public static JTPlayer deserialize(Map<String, Object> map) {
+        Date date = new Date();
+        UUID uuid1 = new UUID((long) map.get("mostSigBits"), (long) map.get("leastSigBits"));
+        date.setTime((long) map.get("Date"));
+        return new JTPlayer(date, uuid1, (String) map.get("name"));
+    }
+
     @Override
     public Map<String, Object> serialize() {
         Map<String, Object> map = new HashMap<>();
@@ -29,13 +36,6 @@ public class JTPlayer implements ConfigurationSerializable {
         map.put("mostSigBits", mostSigBits);
         map.put("name", PlayerName);
         return map;
-    }
-
-    public static JTPlayer deserialize(Map<String, Object> map) {
-        Date date = new Date();
-        UUID uuid1 = new UUID((long) map.get("mostSigBits"), (long) map.get("leastSigBits"));
-        date.setTime((long) map.get("Date"));
-        return new JTPlayer(date, uuid1, (String) map.get("name"));
     }
 
     @Override

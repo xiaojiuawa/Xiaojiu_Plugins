@@ -14,6 +14,7 @@ public class EventLoader implements Listener {
     public EventLoader() {
 
     }
+
     @EventHandler
     public void PlayerLoginEvent(PlayerLoginEvent event) {
         if (SafeGuardHelper.isSafeGuard) {

@@ -16,7 +16,7 @@ public class VanishTask {
 
     public static void AddPlayerVanishTime(JavaPlugin Instance, Player player, int Time) {
         UUID uuid = player.getUniqueId();
-        Vanish.VanishPlayer(player,true);
+        Vanish.VanishPlayer(player, true);
         Utils.VanishMap.forEach((integer, string) -> {
             Calendar calendar = Calendar.getInstance();
             Date date = new Date();
@@ -25,7 +25,7 @@ public class VanishTask {
             timer.schedule(new TimerTask() {
                 @Override
                 public void run() {
-                    if (!Vanish.VanishPlayers.contains(uuid)||integer>Time) return;
+                    if (!Vanish.VanishPlayers.contains(uuid) || integer > Time) return;
                     Player player1 = StartPlugins.getInstance().getServer().getPlayer(uuid);
                     if (integer == 0) {
                         Bukkit.getScheduler().runTask(Instance, () -> {

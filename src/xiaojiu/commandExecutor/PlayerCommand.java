@@ -11,7 +11,6 @@ import xiaojiu.Handles.PlayerTime.PlayerTools;
 import xiaojiu.api.HelpMap;
 import xiaojiu.api.XiaojiuCommandExecutor;
 import xiaojiu.config.ConfigManager;
-import xiaojiu.config.SaveConfig;
 import xiaojiu.tools.MessageHelper;
 import xiaojiu.tools.PermissionHelper;
 import xiaojiu.tools.Utils;
@@ -52,7 +51,7 @@ public class PlayerCommand implements XiaojiuCommandExecutor {
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
         if (strings.length != 0) {
             if (strings[0].equalsIgnoreCase("save") || strings[0].equalsIgnoreCase("保存")) {
-                if (PermissionHelper.isHasPermission(commandSender,true,PermissionNode,"save")) {
+                if (PermissionHelper.isHasPermission(commandSender, true, PermissionNode, "save")) {
                     ConfigManager.getConfigMap().get("LimitPlayer").Save();
 //                    SaveConfig.SaveLimitPlayer();
                     commandSender.sendMessage(MessageHelper.InitMessage(ChatColor.LIGHT_PURPLE + "玩家限制列表保存成功"));

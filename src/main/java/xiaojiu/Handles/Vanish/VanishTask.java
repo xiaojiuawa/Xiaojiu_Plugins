@@ -12,7 +12,7 @@ import java.util.*;
 
 public class VanishTask {
 
-    public static Timer timer = new Timer();
+    public static final Timer timer = new Timer();
 
     public static void AddPlayerVanishTime(JavaPlugin Instance, Player player, int Time) {
         UUID uuid = player.getUniqueId();

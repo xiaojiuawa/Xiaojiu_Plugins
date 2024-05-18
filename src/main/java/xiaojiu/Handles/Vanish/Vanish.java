@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.UUID;
 
 public class Vanish {
-    public static List<UUID> VanishPlayers = new ArrayList<>();
+    public static final List<UUID> VanishPlayers = new ArrayList<>();
 
     public static boolean VanishPlayer(Player player, boolean mode) {
         UUID uuid = player.getUniqueId();

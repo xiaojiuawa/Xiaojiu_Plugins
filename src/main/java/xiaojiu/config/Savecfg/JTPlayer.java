@@ -8,10 +8,10 @@ import java.util.*;
 
 public class JTPlayer implements ConfigurationSerializable {
     public Date LastJoinTime;
-    public UUID uuid;
-    public String PlayerName;
-    public long leastSigBits;
-    public long mostSigBits;
+    public final UUID uuid;
+    public final String PlayerName;
+    public final long leastSigBits;
+    public final long mostSigBits;
 
     public JTPlayer(Date lastJoinTime, UUID uuid, String playerName) {
         this.LastJoinTime = lastJoinTime;

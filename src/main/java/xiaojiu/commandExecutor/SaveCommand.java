@@ -21,11 +21,11 @@ import java.util.Map;
 
 public class SaveCommand implements XiaojiuCommandExecutor {
 
-    public static Map<String, HelpMap> SaveMap = new HashMap<>();
+    public static final Map<String, HelpMap> SaveMap = new HashMap<>();
 
-    public static String PermissionNode = "save";
+    public static final String PermissionNode = "save";
 
-    public static String CommandNode = "save";
+    public static final String CommandNode = "save";
 
     @Override
     public void InitMap() {

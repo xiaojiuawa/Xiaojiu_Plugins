@@ -18,9 +18,9 @@ import java.util.List;
 import java.util.Map;
 
 public class ReloadTaskCommand implements XiaojiuCommandExecutor {
-    public static Map<String, HelpMap> ReloadTaskMap = new HashMap<>();
-    public static String PermissionNode = "ReloadTask";
-    public static String CommonNode = "suggest";
+    public static final Map<String, HelpMap> ReloadTaskMap = new HashMap<>();
+    public static final String PermissionNode = "ReloadTask";
+    public static final String CommonNode = "suggest";
 
     @Override
     public void InitMap() {

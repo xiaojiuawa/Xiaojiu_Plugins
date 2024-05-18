@@ -9,9 +9,9 @@ import java.util.Collection;
 import java.util.HashMap;
 
 public class Utils {
-    public static HashMap<Integer, String> WaitMap = new HashMap<>();
-    public static HashMap<Integer, String> SuggestMap = new HashMap<>();
-    public static HashMap<Integer, String> VanishMap = new HashMap<>();
+    public static final HashMap<Integer, String> WaitMap = new HashMap<>();
+    public static final HashMap<Integer, String> SuggestMap = new HashMap<>();
+    public static final HashMap<Integer, String> VanishMap = new HashMap<>();
 
     public static void Init() {
         WaitMap.put(0, "down");

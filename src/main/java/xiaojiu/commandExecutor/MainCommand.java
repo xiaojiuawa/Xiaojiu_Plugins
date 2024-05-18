@@ -9,7 +9,7 @@ import xiaojiu.api.XiaojiuCommandExecutor;
 import java.util.*;
 
 public class MainCommand implements XiaojiuCommandExecutor {
-    public static String CommonNode = "xiaojiu";
+    public static final String CommonNode = "xiaojiu";
 
     public static String PermissionNode = "xiaojiu";
     public static Map<String, Map<String, HelpMap>> helpMap = new HashMap<>();

@@ -10,7 +10,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class HelpCommandHandle {
-    public static Map<String, Map<String, HelpMap>> helpMap = new HashMap<>();
+    public static final Map<String, Map<String, HelpMap>> helpMap = new HashMap<>();
 
     public static void HelpMapInit() {
         CommonExecutorLoader.GetCommandMap().forEach((string, xiaojiuCommandExecutor) -> {

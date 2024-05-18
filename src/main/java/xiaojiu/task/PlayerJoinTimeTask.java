@@ -10,9 +10,9 @@ import java.io.File;
 import java.util.*;
 
 public class PlayerJoinTimeTask {
-    public static HashMap<UUID, JTPlayer> map = new HashMap<>();
-    public static File file = new File(Xiaojiu.getInstance().getDataFolder(), "PlayerJoinTime.yml");
-    public static FileConfiguration configuration = YamlConfiguration.loadConfiguration(file);
+    public static final HashMap<UUID, JTPlayer> map = new HashMap<>();
+    public static final File file = new File(Xiaojiu.getInstance().getDataFolder(), "PlayerJoinTime.yml");
+    public static final FileConfiguration configuration = YamlConfiguration.loadConfiguration(file);
 
     public static void UpdatePlayer(Player player) {
         UUID uuid = player.getUniqueId();

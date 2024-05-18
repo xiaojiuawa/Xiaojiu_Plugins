@@ -19,9 +19,9 @@ import java.util.List;
 import java.util.Map;
 
 public class VanishCommand implements XiaojiuCommandExecutor {
-    public static String PermissionNode = "vanish";
-    public static String CommandNode = "vanish";
-    public static Map<String, HelpMap> vanishMap = new HashMap<>();
+    public static final String PermissionNode = "vanish";
+    public static final String CommandNode = "vanish";
+    public static final Map<String, HelpMap> vanishMap = new HashMap<>();
 
     @Override
     public void InitMap() {

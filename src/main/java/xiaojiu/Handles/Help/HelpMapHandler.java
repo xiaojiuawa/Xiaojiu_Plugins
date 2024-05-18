@@ -11,10 +11,10 @@ public class HelpMapHandler implements HelpMap {
 //        this.introduce= introduce;
 //        this.PermissionNode=permissionNode;
 //    }
-    public String faster;
-    public String command;
-    public String PermissionNode;
-    public String introduce;
+    public final String faster;
+    public final String command;
+    public final String PermissionNode;
+    public final String introduce;
     public HelpMapHandler(String faster, String command, String permissionNode, String introduce) {
         this.faster = faster;
         this.command = command;

@@ -12,9 +12,9 @@ import xiaojiu.api.XiaojiuTask;
 import java.util.*;
 
 public abstract class BasicSaveHandles extends TimerTask implements XiaojiuTask, XiaojiuPlayer {
-    protected int taskid;
+    protected final int taskid;
     protected Timer timer;
-    protected String name;
+    protected final String name;
     protected int delay = -1;
     protected int timerTime = -1;
     protected boolean tasking = false;
@@ -22,9 +22,9 @@ public abstract class BasicSaveHandles extends TimerTask implements XiaojiuTask,
     protected boolean Asynchronously = false;
     protected String[] args;
     protected JavaPlugin plugin;
-    protected UUID playerUUID;
+    protected final UUID playerUUID;
     protected BukkitTask task;
-    protected OfflinePlayer player;
+    protected final OfflinePlayer player;
 
     public BasicSaveHandles(int taskid, JavaPlugin plugin, OfflinePlayer player, String taskName, String... args) {
         this.playerUUID = player.getUniqueId();

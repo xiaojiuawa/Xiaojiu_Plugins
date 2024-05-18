@@ -15,10 +15,10 @@ import java.util.List;
 import java.util.UUID;
 
 public class LimitPlayerTools {
-    public static HashMap<UUID, LimitPlayer> hashMap = new HashMap<>();
-    public static ArrayList<LimitPlayer> list = new ArrayList<>();
-    public static File file = new File(Xiaojiu.getInstance().getDataFolder(), "PlayerLimit.yml");
-    public static FileConfiguration configuration = YamlConfiguration.loadConfiguration(file);
+    public static final HashMap<UUID, LimitPlayer> hashMap = new HashMap<>();
+    public static final ArrayList<LimitPlayer> list = new ArrayList<>();
+    public static final File file = new File(Xiaojiu.getInstance().getDataFolder(), "PlayerLimit.yml");
+    public static final FileConfiguration configuration = YamlConfiguration.loadConfiguration(file);
 
     @Deprecated
     public static void ReadPlayers() {

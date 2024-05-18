@@ -18,9 +18,9 @@ import java.util.List;
 import java.util.Map;
 
 public class SafeGuardCommand implements XiaojiuCommandExecutor {
-    public static String PermissionNode = "safeguard";
-    public static String CommandNode = "safeguard";
-    public static Map<String, HelpMap> SafeGuardMap = new HashMap<>();
+    public static final String PermissionNode = "safeguard";
+    public static final String CommandNode = "safeguard";
+    public static final Map<String, HelpMap> SafeGuardMap = new HashMap<>();
 
     @Override
     public void InitMap() {

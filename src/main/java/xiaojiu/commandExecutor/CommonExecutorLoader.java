@@ -7,13 +7,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class CommonExecutorLoader {
-    public static Map<String, XiaojiuCommandExecutor> commandExecutorMaps = new HashMap<>();
-    public static PlayerCommand playerCommand = new PlayerCommand();
-    public static RestartServerCommand restartServerCommand = new RestartServerCommand();
-    public static SafeGuardCommand safeGuardCommand = new SafeGuardCommand();
-    public static ReloadTaskCommand reloadTaskCommand = new ReloadTaskCommand();
-    public static PlayerTimeCommand playerTimeCommand = new PlayerTimeCommand();
-    public static MainCommand mainCommand = new MainCommand();
+    public static final Map<String, XiaojiuCommandExecutor> commandExecutorMaps = new HashMap<>();
+    public static final PlayerCommand playerCommand = new PlayerCommand();
+    public static final RestartServerCommand restartServerCommand = new RestartServerCommand();
+    public static final SafeGuardCommand safeGuardCommand = new SafeGuardCommand();
+    public static final ReloadTaskCommand reloadTaskCommand = new ReloadTaskCommand();
+    public static final PlayerTimeCommand playerTimeCommand = new PlayerTimeCommand();
+    public static final MainCommand mainCommand = new MainCommand();
 
     public static Map<String, XiaojiuCommandExecutor> GetCommandMap() {
         return commandExecutorMaps;

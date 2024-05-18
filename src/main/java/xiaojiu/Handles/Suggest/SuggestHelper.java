@@ -5,8 +5,8 @@ import java.util.ArrayList;
 import java.util.UUID;
 
 public class SuggestHelper {
-    public ArrayList<UUID> Approve;
-    public ArrayList<UUID> Refuse;
+    public final ArrayList<UUID> Approve;
+    public final ArrayList<UUID> Refuse;
     public boolean isSuggesting;
     public UUID sponsor;
 

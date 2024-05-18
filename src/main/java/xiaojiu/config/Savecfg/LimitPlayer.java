@@ -8,10 +8,10 @@ import java.util.Objects;
 import java.util.UUID;
 
 public class LimitPlayer implements ConfigurationSerializable {
-    public long leastSigBits;
-    public long mostSigBits;
-    public String Name;
-    public String message;
+    public final long leastSigBits;
+    public final long mostSigBits;
+    public final String Name;
+    public final String message;
 
     public LimitPlayer(long leastSigBits, long mostSigBits, String name, String message) {
         this.leastSigBits = leastSigBits;

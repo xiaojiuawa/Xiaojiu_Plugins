@@ -16,11 +16,11 @@ import java.util.Map;
 
 public class HelpCommand implements XiaojiuCommandExecutor {
 
-    public static Map<String, HelpMap> helpMap = new HashMap<>();
+    public static final Map<String, HelpMap> helpMap = new HashMap<>();
 
-    public static String PermissionNode = "help";
+    public static final String PermissionNode = "help";
 
-    public static String CommandNode = "help";
+    public static final String CommandNode = "help";
 
     @Override
     public void InitMap() {

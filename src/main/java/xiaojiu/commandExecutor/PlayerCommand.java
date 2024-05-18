@@ -21,9 +21,9 @@ import java.util.List;
 import java.util.Map;
 
 public class PlayerCommand implements XiaojiuCommandExecutor {
-    public static Map<String, HelpMap> PlayerCommandMap = new HashMap<>();
-    public static String CommandNode = "Limit";
-    public static String PermissionNode = "PlayerLimit";
+    public static final Map<String, HelpMap> PlayerCommandMap = new HashMap<>();
+    public static final String CommandNode = "Limit";
+    public static final String PermissionNode = "PlayerLimit";
 
     @Override
     public void InitMap() {

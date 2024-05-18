@@ -19,9 +19,9 @@ import static xiaojiu.Handles.Restart.RestartTools.ProcessingTime;
 import static xiaojiu.tools.Utils.isNumber;
 
 public class RestartServerCommand implements XiaojiuCommandExecutor {
-    public static String PermissionCommonNode = "restart";
-    public static String CommonNode = "restartserver";
-    public static Map<String, HelpMap> RestartMap = new HashMap<>();
+    public static final String PermissionCommonNode = "restart";
+    public static final String CommonNode = "restartserver";
+    public static final Map<String, HelpMap> RestartMap = new HashMap<>();
 
     @Override
     public void InitMap() {

@@ -18,9 +18,9 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class PlayerTimeCommand implements XiaojiuCommandExecutor {
-    public static Map<String, HelpMap> PlayerTimeMap = new HashMap<>();
-    public static String CommonNode = "playerTime";
-    public static String PermissionNode = "PlayerTime";
+    public static final Map<String, HelpMap> PlayerTimeMap = new HashMap<>();
+    public static final String CommonNode = "playerTime";
+    public static final String PermissionNode = "PlayerTime";
 
     @Override
     public void InitMap() {

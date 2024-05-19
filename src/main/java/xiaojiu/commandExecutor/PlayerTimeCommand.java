@@ -10,7 +10,7 @@ import xiaojiu.Xiaojiu;
 import xiaojiu.api.HelpMap;
 import xiaojiu.api.XiaojiuCommandExecutor;
 import xiaojiu.config.ConfigManager;
-import xiaojiu.task.PlayerJoinTimeTask;
+import xiaojiu.Handles.PlayerTime.PlayerJoinTimeTool;
 import xiaojiu.tools.MessageHelper;
 import xiaojiu.tools.PermissionHelper;
 
@@ -50,7 +50,7 @@ public class PlayerTimeCommand implements XiaojiuCommandExecutor {
                 if (PermissionHelper.isHasPermission(commandSender, true, PermissionNode, "find")) {
                     SimpleDateFormat format = new SimpleDateFormat("yyyy年MM月dd日 HH:mm:ss");
                     OfflinePlayer offlinePlayer = Xiaojiu.getInstance().getServer().getOfflinePlayer(strings[1]);
-                    Date date = PlayerJoinTimeTask.GetPlayerLastJoinTime(offlinePlayer.getUniqueId());
+                    Date date = PlayerJoinTimeTool.GetPlayerLastJoinTime(offlinePlayer.getUniqueId());
                     if (date != null) {
                         String time = format.format(date);
                         commandSender.sendMessage(MessageHelper.InitMessage(ChatColor.WHITE + "玩家" + strings[1] + "上次上线的时间为" + time));
@@ -85,7 +85,7 @@ public class PlayerTimeCommand implements XiaojiuCommandExecutor {
             }
         } else if (strings.length == 2) {
             if (strings[1].equalsIgnoreCase("find") && commandSender.hasPermission("xiaojiu.op.PlayerTime.find"))
-                list.addAll(PlayerJoinTimeTask.getRecordedPlayers(strings[1]));
+                list.addAll(PlayerJoinTimeTool.getRecordedPlayers(strings[1]));
 
         }
         return list;

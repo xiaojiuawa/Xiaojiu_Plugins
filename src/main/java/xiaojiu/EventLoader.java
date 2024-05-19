@@ -8,7 +8,7 @@ import org.bukkit.event.player.PlayerLoginEvent;
 import xiaojiu.Handles.LimitPlayer.LimitPlayerTools;
 import xiaojiu.Handles.SafeGuard.SafeGuardHelper;
 import xiaojiu.Handles.Vanish.Vanish;
-import xiaojiu.task.PlayerJoinTimeTask;
+import xiaojiu.Handles.PlayerTime.PlayerJoinTimeTool;
 
 public class EventLoader implements Listener {
     public EventLoader() {
@@ -30,7 +30,7 @@ public class EventLoader implements Listener {
 
     @EventHandler
     public void PlayerJoinEvent(PlayerJoinEvent event) {
-        PlayerJoinTimeTask.UpdatePlayer(event.getPlayer());
+        PlayerJoinTimeTool.UpdatePlayer(event.getPlayer());
         Vanish.hideNewPlayer(event.getPlayer());
     }
 }

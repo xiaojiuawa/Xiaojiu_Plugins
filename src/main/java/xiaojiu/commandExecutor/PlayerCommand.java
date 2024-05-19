@@ -64,7 +64,7 @@ public class PlayerCommand implements XiaojiuCommandExecutor {
                         Player player = PlayerTools.GetPlayer(strings[1]);
                         if (commandSender instanceof Player) {
                             Player player1 = (Player) commandSender;
-                            if (player1.getUniqueId().equals(player.getUniqueId())) {
+                            if (player1.equals(player)) {
                                 commandSender.sendMessage(MessageHelper.InitMessage(ChatColor.LIGHT_PURPLE + "你不能添加自己进入限制列表"));
                             }
                         }
@@ -116,6 +116,8 @@ public class PlayerCommand implements XiaojiuCommandExecutor {
 
             }
             return true;
+        }else {
+            commandSender.sendMessage(MessageHelper.InitMessage(ChatColor.RED+"请输入正确的指令参数"));
         }
         return false;
     }

@@ -1,4 +1,4 @@
-package xiaojiu.task;
+package xiaojiu.Handles.PlayerTime;
 
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -9,7 +9,7 @@ import xiaojiu.config.Savecfg.JTPlayer;
 import java.io.File;
 import java.util.*;
 
-public class PlayerJoinTimeTask {
+public class PlayerJoinTimeTool {
     public static final HashMap<UUID, JTPlayer> map = new HashMap<>();
     public static final File file = new File(Xiaojiu.getInstance().getDataFolder(), "PlayerJoinTime.yml");
     public static final FileConfiguration configuration = YamlConfiguration.loadConfiguration(file);

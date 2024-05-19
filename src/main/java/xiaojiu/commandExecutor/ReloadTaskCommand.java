@@ -8,7 +8,7 @@ import xiaojiu.Handles.Help.HelpMapHandler;
 import xiaojiu.Xiaojiu;
 import xiaojiu.api.HelpMap;
 import xiaojiu.api.XiaojiuCommandExecutor;
-import xiaojiu.task.ReloadTask;
+import xiaojiu.Handles.Restart.ReloadTask;
 import xiaojiu.tools.MessageHelper;
 import xiaojiu.tools.PermissionHelper;
 

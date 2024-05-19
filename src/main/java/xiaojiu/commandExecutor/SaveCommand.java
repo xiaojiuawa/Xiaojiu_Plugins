@@ -14,10 +14,7 @@ import xiaojiu.api.XiaojiuCommandExecutor;
 import xiaojiu.tools.MessageHelper;
 import xiaojiu.tools.Utils;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class SaveCommand implements XiaojiuCommandExecutor {
 
@@ -114,7 +111,26 @@ public class SaveCommand implements XiaojiuCommandExecutor {
 
     @Override
     public List<String> onTabComplete(CommandSender commandSender, Command command, String s, String[] strings) {
-        //todo
-        return null;
+        List<String> list = new ArrayList<>();
+        if(strings.length==1){
+            this.GetHelpMap().forEach((string, helpMap) -> {
+                if (string.startsWith(strings[0].toLowerCase())&&!string.equalsIgnoreCase("task")) list.add(string);
+                
+            });
+        } else if (strings.length==2||strings.length==3) {
+            list.addAll(addTrueFalse(strings[strings.length - 1]));
+        }
+//
+        return list;
+    }
+    private List<String> addTrueFalse(String s){
+        List<String> list=new ArrayList<>();
+        if ("true".startsWith(s.toLowerCase())){
+            list.add("true");
+        }
+        if ("false".startsWith(s.toLowerCase())){
+            list.add("false");
+        }
+        return list;
     }
 }

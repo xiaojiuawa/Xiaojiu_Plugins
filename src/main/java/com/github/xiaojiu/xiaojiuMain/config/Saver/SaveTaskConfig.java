@@ -43,7 +43,7 @@ public class SaveTaskConfig implements XiaojiuConfig {
             SaveTask task = (SaveTask) configuration.get(key);
 //            StartPlugins.logger.info(key);
             Xiaojiu.logger.info(task.getName());
-            BasicSaveHandles task2 = SaveTaskManager.getInstance().NewTaskInstance(SaveTaskManager.getInstance().GetTaskName(task.getName()), Xiaojiu.getInstance(), task.getPlayer(), task.getArgs());
+            BasicSaveHandles task2 = SaveTaskManager.getInstance().newTaskInstance(SaveTaskManager.getInstance().getTaskName(task.getName()), Xiaojiu.getInstance(), task.getPlayer(), task.getArgs());
             if (SaveTaskManager.getInstance().isTasked(task2)) return;
             if (task.isAsynchronously()) {
                 task2.RunTaskAsynchronously(task.getTimer(), task.getDelay());

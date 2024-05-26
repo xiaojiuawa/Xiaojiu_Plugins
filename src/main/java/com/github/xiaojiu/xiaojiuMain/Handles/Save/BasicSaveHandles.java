@@ -16,6 +16,8 @@ public abstract class BasicSaveHandles extends TimerTask implements XiaojiuTask,
     protected final int taskid;
     protected Timer timer;
     protected final String name;
+    protected String describeName;
+    protected String describe;
     protected int delay = -1;
     protected int timerTime = -1;
     protected boolean tasking = false;
@@ -58,13 +60,15 @@ public abstract class BasicSaveHandles extends TimerTask implements XiaojiuTask,
     }
     @Override
     public void Cancel() {
+        Bukkit.getScheduler().runTaskAsynchronously(plugin, this::CanCel);
+    }
+    private void CanCel(){
         if (!tasking) return;
         if (!Asynchronously) {
             task.cancel();
         } else {
             this.cancel();
         }
-
     }
 
     public int getTaskid() {
@@ -108,6 +112,26 @@ public abstract class BasicSaveHandles extends TimerTask implements XiaojiuTask,
             return;
         }
         task = Bukkit.getScheduler().runTaskTimer(Xiaojiu.getInstance(), this, delay * 20, time * 20);
+    }
+
+    @Override
+    public void setDescribe(String describe) {
+        this.describe=describe;
+    }
+
+    @Override
+    public String getDescribe() {
+        return describe;
+    }
+
+    @Override
+    public String getDescribeName() {
+        return describeName;
+    }
+
+    @Override
+    public void setDescribeName(String describeName) {
+        this.describeName = describeName;
     }
 
     @Override

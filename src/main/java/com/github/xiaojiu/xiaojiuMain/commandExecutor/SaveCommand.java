@@ -1,6 +1,7 @@
 package com.github.xiaojiu.xiaojiuMain.commandExecutor;
 
 import org.bukkit.ChatColor;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -50,7 +51,7 @@ public class SaveCommand implements XiaojiuCommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
-        // [是否新建] [任务名] [是否异步] [是否记录] [延迟执行] [时间间隔] [参数....]
+        // [是否新建] [任务名] [是否异步] [是否记录] [延迟执行] [时间间隔]    [参数....]
         //     0        1        2     3          4          5         6
 //        commandSender.sendMessage("1");
         try {
@@ -78,7 +79,7 @@ public class SaveCommand implements XiaojiuCommandExecutor {
                 int delay;
                 int timer;
                 try {
-                    taskName = manager.GetTaskName(strings[1]);
+                    taskName = manager.getTaskName(strings[1]);
                     Asynchronously = strings[2].equalsIgnoreCase("true");
                     Record = strings[3].equalsIgnoreCase("true");
                     delay = Integer.parseInt(strings[4]);
@@ -88,7 +89,7 @@ public class SaveCommand implements XiaojiuCommandExecutor {
                     throw new parametersExceptions(Utils.getMessageCompletion("Command","parametersException"));
                 }
 
-                BasicSaveHandles Instance = manager.NewTaskInstance(taskName, Xiaojiu.getInstance(), player, taskArgs);
+                BasicSaveHandles Instance = manager.newTaskInstance(taskName, Xiaojiu.getInstance(), player, taskArgs);
                 manager.addTask(Instance);
                 if (Asynchronously) {
                     Instance.RunTaskAsynchronously(timer, delay);
@@ -104,7 +105,7 @@ public class SaveCommand implements XiaojiuCommandExecutor {
                     player.sendMessage(MessageHelper.InitMessage(ChatColor.LIGHT_PURPLE + "目前无任务进行"));
                 if (strings.length > 2) {
                     if (Utils.isNumber(strings[1])) {
-                        BasicSaveHandles task = SaveTaskManager.getInstance().GetTask(Integer.parseInt(strings[1]));
+                        BasicSaveHandles task = SaveTaskManager.getInstance().getTask(Integer.parseInt(strings[1]));
                         SaveCmdHelper.ShowTaskInfo(task, player);
                     }
                 } else {
@@ -114,7 +115,35 @@ public class SaveCommand implements XiaojiuCommandExecutor {
                     });
                 }
             } else if (strings[0].equalsIgnoreCase("cancel")) {
-                //xj save cancel taskid/taskPlayer/
+                //xj save cancel taskid/taskPlayer/taskName
+                BasicSaveHandles task=null;
+                try{
+                    if (Utils.isNumber(strings[1])){
+                        task = SaveTaskManager.getInstance().getTask(Integer.parseInt(strings[1]));
+                    }else{
+                        OfflinePlayer player1 = Xiaojiu.getInstance().getServer().getOfflinePlayer(strings[1]);
+                        if (player1!=null){
+                            for (BasicSaveHandles basicSaveHandles : SaveTaskManager.getInstance().getTaskList()) {
+                                if (basicSaveHandles.getPlayer().equals(player1)){
+                                    task=basicSaveHandles;
+                                    break;
+                                }
+                            }
+                        }else{
+                            for (BasicSaveHandles basicSaveHandles : SaveTaskManager.getInstance().getTaskList()) {
+                                if (basicSaveHandles.getDescribe().equals(strings[1])){
+                                    task=basicSaveHandles;
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                }catch (Exception e){
+                    throw new parametersExceptions(Utils.getMessageCompletion("Command", "taskGetFail"));
+                }
+                if (task==null) throw new parametersExceptions(Utils.getMessageCompletion("Command","taskGetFail"));
+                task.cancel();
+                commandSender.sendMessage(MessageHelper.InitMessage(ChatColor.LIGHT_PURPLE+"任务取消成功"));
                 //todo
             }
         }catch (Exception exception){

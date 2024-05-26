@@ -50,12 +50,12 @@ public class SaveTaskManager {
         this.TaskNameMap.put(name, names);
     }
 
-    public BasicSaveHandles GetTask(int taskid) {
+    public BasicSaveHandles getTask(int taskid) {
         if (taskid > taskList.size()) return null;
         return taskList.get(taskid - 1);
     }
 
-    public String GetTaskName(String name) {
+    public String getTaskName(String name) {
         for (Map.Entry<String, String[]> entry : TaskNameMap.entrySet()) {
             for (String string : entry.getValue()) {
                 if (name.contains(string) || name.equalsIgnoreCase(entry.getKey())) return entry.getKey();
@@ -64,7 +64,7 @@ public class SaveTaskManager {
         return null;
     }
 
-    public BasicSaveHandles NewTaskInstance(String taskName, JavaPlugin plugin, OfflinePlayer player, String... args) {
+    public BasicSaveHandles newTaskInstance(String taskName, JavaPlugin plugin, OfflinePlayer player, String... args) {
         try {
             return (BasicSaveHandles) Class.forName("com.github.xiaojiu.xiaojiuMain.Handles.Save." + taskName).getConstructors()[0].newInstance(this.taskList.size() + 1, plugin, player, args);
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException |

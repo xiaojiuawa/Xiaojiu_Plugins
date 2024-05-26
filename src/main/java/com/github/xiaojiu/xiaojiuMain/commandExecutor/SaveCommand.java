@@ -85,7 +85,7 @@ public class SaveCommand implements XiaojiuCommandExecutor {
                     timer = Integer.parseInt(strings[5]);
                 } catch (RuntimeException exception) {
 //                    exception.getCause()
-                    throw new parametersExceptions("无法获取参数");
+                    throw new parametersExceptions(Utils.getMessageCompletion("Command","parametersException"));
                 }
 
                 BasicSaveHandles Instance = manager.NewTaskInstance(taskName, Xiaojiu.getInstance(), player, taskArgs);
@@ -115,21 +115,18 @@ public class SaveCommand implements XiaojiuCommandExecutor {
                 }
             } else if (strings[0].equalsIgnoreCase("cancel")) {
                 //xj save cancel taskid/taskPlayer/
-                String arg = strings[1];
-                if (Xiaojiu.getInstance().getServer().getOfflinePlayer(arg)!=null){
-
-                }
+                //todo
             }
         }catch (Exception exception){
-            commandSender.sendMessage("以下为堆栈追踪分析，请截图发给服主");
+            //命令执行失败处理
+            commandSender.sendMessage(Utils.getMessageCompletion("Command","FailException"));
             commandSender.sendMessage(Arrays.toString(exception.getStackTrace()));
 //            commandSender.sendMessage(String.valueOf(exceptions.getStackTrace()[0]));
-            commandSender.sendMessage("命令执行失败");
+            commandSender.sendMessage(Utils.getMessageCompletion("Command","Fail"));
             commandSender.sendMessage(exception.getMessage());
         }
 
-//        if (Asynchronously) task.RunTaskTimerAsynchronously(0);
-//        else task.RunTaskTimer(0);
+
         //todo
         return false;
     }

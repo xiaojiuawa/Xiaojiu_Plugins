@@ -98,4 +98,20 @@ public class Utils {
             return false;
         }
     }
+    public static String getMessage(String node){
+        return Xiaojiu.getMessage().getMessage(node);
+    }
+    public static String getMessageCompletion(String... nodes){
+        StringBuilder builder = new StringBuilder();
+        if (!nodes[0].equalsIgnoreCase("message")){
+            builder.append("message.");
+        }
+        for (String node : nodes) {
+            builder.append(node);
+            builder.append(".");
+        }
+        builder.delete(builder.length()-1, builder.length());
+        return getMessage(builder.toString());
+    }
+//    public static String getMessageNode(String )
 }

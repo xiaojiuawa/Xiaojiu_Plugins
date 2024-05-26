@@ -1,8 +1,9 @@
 name: Xiaojiu
-main: xiaojiu.Xiaojiu
+main: com.github.xiaojiu.xiaojiuMain.Xiaojiu
 version: 1
 author: Xiaojiu
-
+depend:
+  - xiaojiuCore
 commands:
   xiaojiu:
     description: main command

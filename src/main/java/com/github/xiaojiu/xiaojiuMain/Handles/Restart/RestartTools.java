@@ -44,7 +44,7 @@ public class RestartTools {
     }
 
     public static void Done() {
-        Utils.KickAllPlayers(Xiaojiu.getInstance().getServer().getOnlinePlayers(), "服务器重启，请耐心等待");
+        Utils.KickAllPlayers(Xiaojiu.getInstance().getServer().getOnlinePlayers(), Utils.getMessageCompletion("Reload","Kick"));
         ShutdownServer();
     }
 

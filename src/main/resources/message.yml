@@ -1,4 +1,18 @@
+# !!!重要提醒 message文件中的所有 %s请不要更改，其他地方可以更改
+# !!!重要提醒 message文件中的所有 %s请不要更改，其他地方可以更改
+# !!!重要提醒 message文件中的所有 %s请不要更改，其他地方可以更改
 message.Command.parametersException: "无法获取参数"
 message.Command.FailException: "指令执行错误,以下为错误信息，请截图发给服主"
 message.Command.Fail: "命令执行失败"
 message.Command.taskGetFail: "任务获取失败"
+message.Reload.Kick: "服务器重启，请耐心等待"
+message.WaitMap.message: "服务器将在%s秒后%s"        #第一个%s表示时间 第二个表示项目名
+message.SuggestMap.down: "服务器投票%s已结束"        #%s表示项目名
+message.SuggestMap.message: "服务器投票%s已开始,投票将在%s秒后结束" #第一个%s表示项目名 第二个表示时间
+message.VanishMap.down: "%s已经结束"         #%s表示项目名
+message.VanishMap.message: "%s将在%s秒后结束" #第一个%s表示项目名 第二个表示时间
+# LimitPlayer 中如果没有特殊著名，则%s代表玩家名
+message.LimitPlayer.add.have: "限制列表中已经有这位玩家了"
+message.LimitPlayer.add.success: "限制列表中添加玩家 %s 成功"
+message.LimitPlayer.del.success: "限制列表中删除玩家 %s 成功"
+message.LimitPlayer.del.notFind: "限制列表中无玩家 %s"

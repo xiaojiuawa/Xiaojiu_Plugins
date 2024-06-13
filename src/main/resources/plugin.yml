@@ -1,9 +1,9 @@
 name: Xiaojiu
-main: com.github.xiaojiu.xiaojiuMain.Xiaojiu
+main: com.github.xiaojiu.Xiaojiu
 version: 1
 author: Xiaojiu
 depend:
-  - xiaojiuCore
+  - YHCode
 commands:
   xiaojiu:
     description: main command
@@ -40,6 +40,7 @@ permissions:
       xiaojiu.op.PlayerLimit.add: true
       xiaojiu.op.PlayerLimit.remove: true
       xiaojiu.op.PlayerLimit.save: true
+      xiaojiu.op.PlayerLimit.delSelf: true
 #      xiaojiu.PlayerTime.help: true
       xiaojiu.op.PlayerTime.find: true
       xiaojiu.op.PlayerTime.save: true

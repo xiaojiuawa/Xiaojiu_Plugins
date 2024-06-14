@@ -86,7 +86,7 @@ public class SaveCommand implements XiaojiuCommandExecutor {
                     timer = Integer.parseInt(strings[5]);
                 } catch (RuntimeException exception) {
 //                    exception.getCause()
-                    throw new parametersExceptions(Utils.getMessageCompletion("Command","parametersException"));
+                    throw new parametersExceptions(Utils.getMessageCompletion("Command.parametersException"));
                 }
 
                 BasicSaveHandles Instance = manager.newTaskInstance(taskName, Xiaojiu.getInstance(), player, taskArgs);
@@ -139,19 +139,19 @@ public class SaveCommand implements XiaojiuCommandExecutor {
                         }
                     }
                 }catch (Exception e){
-                    throw new parametersExceptions(Utils.getMessageCompletion("Command", "taskGetFail"));
+                    throw new parametersExceptions(Utils.getMessageCompletion("Command.taskGetFail"));
                 }
-                if (task==null) throw new parametersExceptions(Utils.getMessageCompletion("Command","taskGetFail"));
+                if (task==null) throw new parametersExceptions(Utils.getMessageCompletion("Command.taskGetFail"));
                 task.cancel();
                 commandSender.sendMessage(MessageHelper.InitMessage(ChatColor.LIGHT_PURPLE+"任务取消成功"));
                 //todo
             }
         }catch (Exception exception){
             //命令执行失败处理
-            commandSender.sendMessage(Utils.getMessageCompletion("Command","FailException"));
+            commandSender.sendMessage(Utils.getMessageCompletion("Command.FailException"));
             commandSender.sendMessage(Arrays.toString(exception.getStackTrace()));
 //            commandSender.sendMessage(String.valueOf(exceptions.getStackTrace()[0]));
-            commandSender.sendMessage(Utils.getMessageCompletion("Command","Fail"));
+            commandSender.sendMessage(Utils.getMessageCompletion("Command.Fail"));
             commandSender.sendMessage(exception.getMessage());
         }
 

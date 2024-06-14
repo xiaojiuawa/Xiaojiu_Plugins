@@ -123,6 +123,7 @@ public class Utils {
         }
         return getMessage(node);
     }
+    @Deprecated
     public static String getMessageCompletion(String... nodes){
         StringBuilder builder = new StringBuilder();
         if (!nodes[0].equalsIgnoreCase("message")){

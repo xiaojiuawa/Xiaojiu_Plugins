@@ -1,9 +1,9 @@
 package com.github.xiaojiu.Handles.Vanish;
 
+import com.github.xiaojiu.Xiaojiu;
 import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
-import com.github.xiaojiu.Xiaojiu;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,7 +1,7 @@
 package com.github.xiaojiu.commandExecutor;
 
-import org.bukkit.plugin.java.JavaPlugin;
 import com.github.xiaojiu.api.XiaojiuCommandExecutor;
+import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.HashMap;
 import java.util.Map;

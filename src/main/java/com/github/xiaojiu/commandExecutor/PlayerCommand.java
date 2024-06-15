@@ -1,10 +1,5 @@
 package com.github.xiaojiu.commandExecutor;
 
-import org.bukkit.ChatColor;
-import org.bukkit.OfflinePlayer;
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Player;
 import com.github.xiaojiu.Handles.Help.HelpMapHandler;
 import com.github.xiaojiu.Handles.PlayerLimit.PlayerLimitTools;
 import com.github.xiaojiu.Handles.PlayerTime.PlayerTools;
@@ -14,6 +9,11 @@ import com.github.xiaojiu.config.ConfigManager;
 import com.github.xiaojiu.tools.MessageHelper;
 import com.github.xiaojiu.tools.PermissionHelper;
 import com.github.xiaojiu.tools.Utils;
+import org.bukkit.ChatColor;
+import org.bukkit.OfflinePlayer;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -54,7 +54,7 @@ public class PlayerCommand implements XiaojiuCommandExecutor {
                 if (PermissionHelper.isHasPermission(commandSender, true, PermissionNode, "save")) {
                     ConfigManager.getConfigMap().get("LimitPlayer").Save();
 //                    SaveConfig.SaveLimitPlayer();
-                    commandSender.sendMessage(MessageHelper.InitMessage(ChatColor.LIGHT_PURPLE +Utils.getMessageCompletion("LimitPlayer.save.success")));
+                    commandSender.sendMessage(MessageHelper.InitMessage(ChatColor.LIGHT_PURPLE + Utils.getMessageCompletion("LimitPlayer.save.success")));
                 } else {
                     commandSender.sendMessage(MessageHelper.InitMessage(ChatColor.LIGHT_PURPLE + Utils.getMessageCompletion("LimitPlayer.save.noPermission")));
                 }
@@ -94,7 +94,7 @@ public class PlayerCommand implements XiaojiuCommandExecutor {
                         OfflinePlayer player = PlayerTools.GetPlayerOffer(strings[1]);
                         if (commandSender instanceof Player) {
                             Player player1 = (Player) commandSender;
-                            if (player1.getUniqueId().equals(player.getUniqueId())&&player1.hasPermission("xiaojiu.op.PlayerLimit.delSelf")) {
+                            if (player1.getUniqueId().equals(player.getUniqueId()) && player1.hasPermission("xiaojiu.op.PlayerLimit.delSelf")) {
                                 commandSender.sendMessage(MessageHelper.InitMessage(ChatColor.LIGHT_PURPLE + Utils.getMessageCompletion("PlayerLimit.del.self")));
                             }
                         }
@@ -102,10 +102,10 @@ public class PlayerCommand implements XiaojiuCommandExecutor {
                             if (PlayerLimitTools.isPlayerIn(player.getUniqueId())) {
                                 commandSender.sendMessage(MessageHelper.InitMessage(ChatColor.LIGHT_PURPLE + PlayerLimitTools.remove(player)));
                             } else {
-                                commandSender.sendMessage(MessageHelper.InitMessage(ChatColor.LIGHT_PURPLE + String.format(Utils.getMessageCompletion("PlayerLimit.del.notFind"),player.getName())));
+                                commandSender.sendMessage(MessageHelper.InitMessage(ChatColor.LIGHT_PURPLE + String.format(Utils.getMessageCompletion("PlayerLimit.del.notFind"), player.getName())));
                             }
                         } else {
-                            commandSender.sendMessage(MessageHelper.InitMessage(ChatColor.LIGHT_PURPLE +String.format( Utils.getMessageCompletion("PlayerLimit.del.noOnline"),strings[1])));
+                            commandSender.sendMessage(MessageHelper.InitMessage(ChatColor.LIGHT_PURPLE + String.format(Utils.getMessageCompletion("PlayerLimit.del.noOnline"), strings[1])));
                         }
                     } else {
                         commandSender.sendMessage(MessageHelper.InitMessage(ChatColor.LIGHT_PURPLE + Utils.getMessageCompletion("PlayerLimit.del.noName")));
@@ -116,8 +116,8 @@ public class PlayerCommand implements XiaojiuCommandExecutor {
 
             }
             return true;
-        }else {
-            commandSender.sendMessage(MessageHelper.InitMessage(ChatColor.RED+Utils.getMessageCompletion("PlayerLimit.noCommand")));
+        } else {
+            commandSender.sendMessage(MessageHelper.InitMessage(ChatColor.RED + Utils.getMessageCompletion("PlayerLimit.noCommand")));
         }
         return false;
     }

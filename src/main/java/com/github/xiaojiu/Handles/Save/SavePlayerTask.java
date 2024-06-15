@@ -17,7 +17,7 @@ public class SavePlayerTask extends BasicSaveHandles {
     @Override
     public void run() {
 //        MessageHelper.SendMessageAllPlayer("1");
-        if (args == null || args.length == 0 || args[0]==null || args[0].isEmpty()) {
+        if (args == null || args.length == 0 || args[0] == null || args[0].isEmpty()) {
             plugin.getServer().getOnlinePlayers().forEach(player1 -> {
                 player1.saveData();
 //                Xiaojiu.logger.info("玩家" + player1.getName() + "数据保存完毕");

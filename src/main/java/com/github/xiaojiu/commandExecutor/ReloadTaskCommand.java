@@ -1,17 +1,17 @@
 package com.github.xiaojiu.commandExecutor;
 
+import com.github.xiaojiu.Handles.Help.HelpMapHandler;
+import com.github.xiaojiu.Handles.Restart.ReloadTask;
+import com.github.xiaojiu.Xiaojiu;
+import com.github.xiaojiu.api.HelpMap;
+import com.github.xiaojiu.api.XiaojiuCommandExecutor;
+import com.github.xiaojiu.tools.MessageHelper;
+import com.github.xiaojiu.tools.PermissionHelper;
 import com.github.xiaojiu.tools.Utils;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import com.github.xiaojiu.Handles.Help.HelpMapHandler;
-import com.github.xiaojiu.Xiaojiu;
-import com.github.xiaojiu.api.HelpMap;
-import com.github.xiaojiu.api.XiaojiuCommandExecutor;
-import com.github.xiaojiu.Handles.Restart.ReloadTask;
-import com.github.xiaojiu.tools.MessageHelper;
-import com.github.xiaojiu.tools.PermissionHelper;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -100,14 +100,14 @@ public class ReloadTaskCommand implements XiaojiuCommandExecutor {
                 } else if (strings[0].equalsIgnoreCase("cancel") || strings[0].equalsIgnoreCase("取消")) {
                     if (PermissionHelper.isHasPermission(commandSender, true, PermissionNode, "cancel") || ReloadTask.suggestHelper.sponsor.equals(((Player) commandSender).getUniqueId())) {
                         ReloadTask.cancel();
-                        MessageHelper.SendMessageAllPlayer(MessageHelper.InitMessage(ChatColor.LIGHT_PURPLE + String.format(Utils.getMessageCompletion("ReloadTask.cancel.success"),ChatColor.WHITE + commandSender.getName() + ChatColor.LIGHT_PURPLE)));
+                        MessageHelper.SendMessageAllPlayer(MessageHelper.InitMessage(ChatColor.LIGHT_PURPLE + String.format(Utils.getMessageCompletion("ReloadTask.cancel.success"), ChatColor.WHITE + commandSender.getName() + ChatColor.LIGHT_PURPLE)));
                     } else {
                         commandSender.sendMessage(MessageHelper.InitMessage(ChatColor.RED + Utils.getMessageCompletion("ReloadTask.cancel.noPermission")));
                     }
                 } else if (strings[0].equalsIgnoreCase("down")) {
                     if (PermissionHelper.isHasPermission(commandSender, true, "ReloadTask", "down")) {
                         ReloadTask.down();
-                        MessageHelper.SendMessageAllPlayer(MessageHelper.InitMessage(ChatColor.LIGHT_PURPLE + String.format(Utils.getMessageCompletion("ReloadTask.down.success"),ChatColor.WHITE + commandSender.getName() + ChatColor.LIGHT_PURPLE)));
+                        MessageHelper.SendMessageAllPlayer(MessageHelper.InitMessage(ChatColor.LIGHT_PURPLE + String.format(Utils.getMessageCompletion("ReloadTask.down.success"), ChatColor.WHITE + commandSender.getName() + ChatColor.LIGHT_PURPLE)));
                     } else {
                         commandSender.sendMessage(MessageHelper.InitMessage(ChatColor.RED + Utils.getMessageCompletion("ReloadTask.down.noPermission")));
                     }

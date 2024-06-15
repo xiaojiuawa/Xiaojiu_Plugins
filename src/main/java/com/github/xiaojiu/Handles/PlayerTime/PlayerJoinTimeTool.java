@@ -1,10 +1,10 @@
 package com.github.xiaojiu.Handles.PlayerTime;
 
+import com.github.xiaojiu.Xiaojiu;
+import com.github.xiaojiu.config.Savecfg.JTPlayer;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
-import com.github.xiaojiu.Xiaojiu;
-import com.github.xiaojiu.config.Savecfg.JTPlayer;
 
 import java.io.File;
 import java.util.*;
@@ -26,7 +26,7 @@ public class PlayerJoinTimeTool {
         }
     }
 
-    public static  Date GetPlayerLastJoinTime(UUID uuid) {
+    public static Date GetPlayerLastJoinTime(UUID uuid) {
         if (!map.containsKey(uuid)) {
             return null;
         }

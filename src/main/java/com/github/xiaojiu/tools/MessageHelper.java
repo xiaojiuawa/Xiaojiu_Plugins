@@ -1,8 +1,8 @@
 package com.github.xiaojiu.tools;
 
+import com.github.xiaojiu.Xiaojiu;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
-import com.github.xiaojiu.Xiaojiu;
 
 public class MessageHelper {
     //    public

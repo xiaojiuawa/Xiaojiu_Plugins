@@ -1,10 +1,10 @@
 package com.github.xiaojiu.Handles.SafeGuard;
 
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import com.github.xiaojiu.Xiaojiu;
 import com.github.xiaojiu.tools.MessageHelper;
 import com.github.xiaojiu.tools.Utils;
+import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 
 import java.util.*;
 

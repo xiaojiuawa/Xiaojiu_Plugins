@@ -1,10 +1,10 @@
 package com.github.xiaojiu.Handles.Save;
 
 
-import org.bukkit.OfflinePlayer;
-import org.bukkit.plugin.java.JavaPlugin;
 import com.github.xiaojiu.Xiaojiu;
 import com.github.xiaojiu.config.ConfigManager;
+import org.bukkit.OfflinePlayer;
+import org.bukkit.plugin.java.JavaPlugin;
 
 public class SaveConfigTask extends BasicSaveHandles {
 
@@ -29,7 +29,7 @@ public class SaveConfigTask extends BasicSaveHandles {
                     throw new RuntimeException(e);
                 }
             }
-            if (args == null || args.length == 0 || args[0]==null || args[0].isEmpty()) {
+            if (args == null || args.length == 0 || args[0] == null || args[0].isEmpty()) {
                 ConfigManager.SaveConfig();
             } else {
                 for (String arg : args) {

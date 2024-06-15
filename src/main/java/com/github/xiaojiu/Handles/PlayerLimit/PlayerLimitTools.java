@@ -1,12 +1,12 @@
 package com.github.xiaojiu.Handles.PlayerLimit;
 
+import com.github.xiaojiu.Xiaojiu;
+import com.github.xiaojiu.config.Savecfg.LimitPlayer;
 import com.github.xiaojiu.tools.Utils;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
-import com.github.xiaojiu.Xiaojiu;
-import com.github.xiaojiu.config.Savecfg.LimitPlayer;
 
 import java.io.File;
 import java.io.IOException;
@@ -52,7 +52,7 @@ public class PlayerLimitTools {
         if (addToOffer) {
             list.add(limitPlayer);
         }
-        return String.format(Utils.getMessageCompletion("PlayerLimit.add.success"),player.getName());
+        return String.format(Utils.getMessageCompletion("PlayerLimit.add.success"), player.getName());
 //        return "限制列表添加玩家" + player.getName() + "成功";
     }
 
@@ -68,10 +68,10 @@ public class PlayerLimitTools {
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
-            return String.format(Utils.getMessageCompletion("PlayerLimit.del.success"),player.getName());
+            return String.format(Utils.getMessageCompletion("PlayerLimit.del.success"), player.getName());
 //            return "限制列表移除玩家" + player.getName() + "成功";
         }
-        return String.format(Utils.getMessageCompletion("PlayerLimit.del.notFind"),player.getName());
+        return String.format(Utils.getMessageCompletion("PlayerLimit.del.notFind"), player.getName());
 //        return "限制列表无玩家" + player.getName();
 
     }

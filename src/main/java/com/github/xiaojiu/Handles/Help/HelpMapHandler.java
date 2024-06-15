@@ -15,6 +15,7 @@ public class HelpMapHandler implements HelpMap {
     public final String command;
     public final String PermissionNode;
     public final String introduce;
+
     public HelpMapHandler(String faster, String command, String permissionNode, String introduce) {
         this.faster = faster;
         this.command = command;

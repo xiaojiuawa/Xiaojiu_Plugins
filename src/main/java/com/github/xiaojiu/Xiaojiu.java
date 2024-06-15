@@ -1,14 +1,14 @@
 package com.github.xiaojiu;
 
-import com.github.xiaojiu.message.Message;
-import org.bukkit.Bukkit;
-import org.bukkit.command.PluginCommand;
-import org.bukkit.plugin.java.JavaPlugin;
 import com.github.xiaojiu.Handles.Help.HelpCommandHandle;
 import com.github.xiaojiu.Handles.Vanish.Vanish;
 import com.github.xiaojiu.commandExecutor.CommonExecutorLoader;
 import com.github.xiaojiu.config.ConfigManager;
+import com.github.xiaojiu.message.Message;
 import com.github.xiaojiu.tools.Utils;
+import org.bukkit.Bukkit;
+import org.bukkit.command.PluginCommand;
+import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.logging.Logger;
 
@@ -17,6 +17,7 @@ public final class Xiaojiu extends JavaPlugin {
     public static Logger logger;
     private static JavaPlugin Instance;
     private static boolean isInitEd = false;
+    private static Message message;
 
     public static JavaPlugin getInstance() {
         return Instance;
@@ -25,12 +26,15 @@ public final class Xiaojiu extends JavaPlugin {
     public static boolean isIsInitEd() {
         return isInitEd;
     }
-    private static Message message;
+
+    public static Message getMessage() {
+        return message;
+    }
 
     @Override
     public void onEnable() {
         long startData = System.currentTimeMillis();
-        message=new Message(this);
+        message = new Message(this);
         Instance = this;
         logger = this.getLogger();
         this.Init();
@@ -61,9 +65,5 @@ public final class Xiaojiu extends JavaPlugin {
         //初始化命令
         ConfigManager.InitManager(this);
         //读取配置文件
-    }
-
-    public static Message getMessage() {
-        return message;
     }
 }

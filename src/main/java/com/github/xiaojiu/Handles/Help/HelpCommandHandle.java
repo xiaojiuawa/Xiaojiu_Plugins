@@ -1,10 +1,10 @@
 package com.github.xiaojiu.Handles.Help;
 
-import org.bukkit.ChatColor;
-import org.bukkit.command.CommandSender;
 import com.github.xiaojiu.api.HelpMap;
 import com.github.xiaojiu.commandExecutor.CommonExecutorLoader;
 import com.github.xiaojiu.tools.MessageHelper;
+import org.bukkit.ChatColor;
+import org.bukkit.command.CommandSender;
 
 import java.util.HashMap;
 import java.util.Map;

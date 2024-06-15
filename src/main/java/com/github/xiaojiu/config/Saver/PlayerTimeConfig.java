@@ -1,12 +1,12 @@
 package com.github.xiaojiu.config.Saver;
 
+import com.github.xiaojiu.Handles.PlayerTime.PlayerJoinTimeTool;
+import com.github.xiaojiu.Xiaojiu;
+import com.github.xiaojiu.api.XiaojiuConfig;
 import com.github.xiaojiu.config.Savecfg.JTPlayer;
 import com.yuhai.util.UtilsBukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
-import com.github.xiaojiu.Xiaojiu;
-import com.github.xiaojiu.api.XiaojiuConfig;
-import com.github.xiaojiu.Handles.PlayerTime.PlayerJoinTimeTool;
 
 import java.io.File;
 import java.io.IOException;
@@ -36,7 +36,7 @@ public class PlayerTimeConfig implements XiaojiuConfig {
 
     @Override
     public void Load() {
-        FileConfiguration configuration = UtilsBukkit.getConfig(Xiaojiu.getInstance(),"PlayerJoinTime.yml");
+        FileConfiguration configuration = UtilsBukkit.getConfig(Xiaojiu.getInstance(), "PlayerJoinTime.yml");
 //        System.out.println(Arrays.toString(configuration.getKeys(false).toArray()));
         configuration.getKeys(false).forEach(key -> {
             JTPlayer player = (JTPlayer) configuration.get(key);

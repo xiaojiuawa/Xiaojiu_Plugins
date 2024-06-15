@@ -7,11 +7,11 @@ import org.bukkit.configuration.serialization.ConfigurationSerializable;
 import java.util.*;
 
 public class JTPlayer implements ConfigurationSerializable {
-    public Date LastJoinTime;
     public final UUID uuid;
     public final String PlayerName;
     public final long leastSigBits;
     public final long mostSigBits;
+    public Date LastJoinTime;
 
     public JTPlayer(Date lastJoinTime, UUID uuid, String playerName) {
         this.LastJoinTime = lastJoinTime;

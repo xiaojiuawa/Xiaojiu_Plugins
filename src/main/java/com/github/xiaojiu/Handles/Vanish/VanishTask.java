@@ -1,12 +1,12 @@
 package com.github.xiaojiu.Handles.Vanish;
 
+import com.github.xiaojiu.Xiaojiu;
+import com.github.xiaojiu.tools.MessageHelper;
+import com.github.xiaojiu.tools.Utils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
-import com.github.xiaojiu.Xiaojiu;
-import com.github.xiaojiu.tools.MessageHelper;
-import com.github.xiaojiu.tools.Utils;
 
 import java.util.*;
 

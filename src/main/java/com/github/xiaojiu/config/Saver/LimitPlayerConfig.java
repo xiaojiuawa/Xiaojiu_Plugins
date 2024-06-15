@@ -1,13 +1,12 @@
 package com.github.xiaojiu.config.Saver;
 
-import com.github.xiaojiu.config.Savecfg.LimitPlayer;
-import com.github.xiaojiu.tools.Utils;
-import com.yuhai.util.UtilsBukkit;
-import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.configuration.file.YamlConfiguration;
 import com.github.xiaojiu.Handles.PlayerLimit.PlayerLimitTools;
 import com.github.xiaojiu.Xiaojiu;
 import com.github.xiaojiu.api.XiaojiuConfig;
+import com.github.xiaojiu.config.Savecfg.LimitPlayer;
+import com.yuhai.util.UtilsBukkit;
+import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.configuration.file.YamlConfiguration;
 
 import java.io.File;
 import java.io.IOException;
@@ -37,7 +36,7 @@ public class LimitPlayerConfig implements XiaojiuConfig {
 
     @Override
     public void Load() {
-        FileConfiguration configuration = UtilsBukkit.getConfig(Xiaojiu.getInstance(),"PlayerLimit.yml");
+        FileConfiguration configuration = UtilsBukkit.getConfig(Xiaojiu.getInstance(), "PlayerLimit.yml");
         configuration.getKeys(false).forEach(key -> {
             LimitPlayer player = (LimitPlayer) configuration.get(key);
             UUID uuid = new UUID(player.mostSigBits, player.leastSigBits);

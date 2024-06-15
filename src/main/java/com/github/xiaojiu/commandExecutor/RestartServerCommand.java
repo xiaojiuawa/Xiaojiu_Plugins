@@ -1,15 +1,15 @@
 package com.github.xiaojiu.commandExecutor;
 
-import com.github.xiaojiu.tools.Utils;
-import org.bukkit.ChatColor;
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandSender;
 import com.github.xiaojiu.Handles.Help.HelpMapHandler;
 import com.github.xiaojiu.Handles.Restart.RestartTools;
 import com.github.xiaojiu.api.HelpMap;
 import com.github.xiaojiu.api.XiaojiuCommandExecutor;
 import com.github.xiaojiu.tools.MessageHelper;
 import com.github.xiaojiu.tools.PermissionHelper;
+import com.github.xiaojiu.tools.Utils;
+import org.bukkit.ChatColor;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandSender;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -57,7 +57,7 @@ public class RestartServerCommand implements XiaojiuCommandExecutor {
             if (PermissionHelper.isHasPermission(commandSender, true, PermissionCommonNode, "cancel")) {
                 if (RestartTools.isRestart) {
                     RestartTools.cancel();
-                    MessageHelper.SendMessageAllPlayer(MessageHelper.InitMessage(ChatColor.LIGHT_PURPLE + String.format(Utils.getMessageCompletion("ReloadServer.cancel.success"),ChatColor.WHITE + commandSender.getName() + ChatColor.LIGHT_PURPLE)));
+                    MessageHelper.SendMessageAllPlayer(MessageHelper.InitMessage(ChatColor.LIGHT_PURPLE + String.format(Utils.getMessageCompletion("ReloadServer.cancel.success"), ChatColor.WHITE + commandSender.getName() + ChatColor.LIGHT_PURPLE)));
                 } else {
                     commandSender.sendMessage(MessageHelper.InitMessage(ChatColor.LIGHT_PURPLE + Utils.getMessageCompletion("ReloadServer.noTask")));
                 }
@@ -79,7 +79,7 @@ public class RestartServerCommand implements XiaojiuCommandExecutor {
                 if (RestartTools.isRestart) {
                     RestartTools.cancel();
                     RestartTools.Restart(Integer.parseInt(strings[1]));
-                    MessageHelper.SendMessageAllPlayer(MessageHelper.InitMessage(ChatColor.LIGHT_PURPLE + String.format(Utils.getMessageCompletion("ReloadServer.reset.success"),ChatColor.WHITE + commandSender.getName() + ChatColor.LIGHT_PURPLE,ChatColor.WHITE + strings[1] + ChatColor.LIGHT_PURPLE)));
+                    MessageHelper.SendMessageAllPlayer(MessageHelper.InitMessage(ChatColor.LIGHT_PURPLE + String.format(Utils.getMessageCompletion("ReloadServer.reset.success"), ChatColor.WHITE + commandSender.getName() + ChatColor.LIGHT_PURPLE, ChatColor.WHITE + strings[1] + ChatColor.LIGHT_PURPLE)));
                 } else {
                     commandSender.sendMessage(MessageHelper.InitMessage(ChatColor.LIGHT_PURPLE + Utils.getMessageCompletion("ReloadServer.noTask")));
                 }

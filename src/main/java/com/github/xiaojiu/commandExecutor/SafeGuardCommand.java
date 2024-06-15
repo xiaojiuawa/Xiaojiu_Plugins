@@ -1,8 +1,5 @@
 package com.github.xiaojiu.commandExecutor;
 
-import org.bukkit.ChatColor;
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandSender;
 import com.github.xiaojiu.Handles.Help.HelpMapHandler;
 import com.github.xiaojiu.Handles.Restart.RestartTools;
 import com.github.xiaojiu.Handles.SafeGuard.SafeGuardHelper;
@@ -11,6 +8,9 @@ import com.github.xiaojiu.api.XiaojiuCommandExecutor;
 import com.github.xiaojiu.tools.MessageHelper;
 import com.github.xiaojiu.tools.PermissionHelper;
 import com.github.xiaojiu.tools.Utils;
+import org.bukkit.ChatColor;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandSender;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -60,7 +60,7 @@ public class SafeGuardCommand implements XiaojiuCommandExecutor {
                         commandSender.sendMessage(MessageHelper.InitMessage(ChatColor.LIGHT_PURPLE + Utils.getMessageCompletion("SafeGuard.noTask")));
                     } else {
                         SafeGuardHelper.cancel();
-                        MessageHelper.SendMessageAllPlayer(MessageHelper.InitMessage(ChatColor.LIGHT_PURPLE + String.format(Utils.getMessageCompletion("SafeGuard.cancel.success"),ChatColor.WHITE + commandSender.getName() + ChatColor.LIGHT_PURPLE)));
+                        MessageHelper.SendMessageAllPlayer(MessageHelper.InitMessage(ChatColor.LIGHT_PURPLE + String.format(Utils.getMessageCompletion("SafeGuard.cancel.success"), ChatColor.WHITE + commandSender.getName() + ChatColor.LIGHT_PURPLE)));
                     }
                 } else {
                     commandSender.sendMessage(MessageHelper.InitMessage(Utils.getMessageCompletion("SafeGuard.cancel.noPermission")));

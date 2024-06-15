@@ -1,7 +1,5 @@
 package com.github.xiaojiu.commandExecutor;
 
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandSender;
 import com.github.xiaojiu.Handles.Help.HelpCommandHandle;
 import com.github.xiaojiu.Handles.Help.HelpMapHandler;
 import com.github.xiaojiu.api.HelpMap;
@@ -9,6 +7,8 @@ import com.github.xiaojiu.api.XiaojiuCommandExecutor;
 import com.github.xiaojiu.tools.MessageHelper;
 import com.github.xiaojiu.tools.PermissionHelper;
 import com.github.xiaojiu.tools.Utils;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandSender;
 
 import java.util.HashMap;
 import java.util.List;

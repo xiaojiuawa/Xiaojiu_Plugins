@@ -1,8 +1,8 @@
 package com.github.xiaojiu.config.Savecfg;
 
+import com.github.xiaojiu.Xiaojiu;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.configuration.serialization.ConfigurationSerializable;
-import com.github.xiaojiu.Xiaojiu;
 
 import java.util.*;
 
@@ -13,18 +13,18 @@ public class SaveTask implements ConfigurationSerializable {
     private final UUID playerUUID;
     private final String[] args;
     private final OfflinePlayer player;
-    private boolean Asynchronously = false;
     private final Date date;
+    private boolean Asynchronously = false;
 
-    public SaveTask(String name, int timer, int delay, UUID playerUUID, boolean isAsynchronously, String[] args , Date date) {
+    public SaveTask(String name, int timer, int delay, UUID playerUUID, boolean isAsynchronously, String[] args, Date date) {
         this.name = name;
         this.timer = timer;
         this.delay = delay;
         this.playerUUID = playerUUID;
-        this.args=args;
+        this.args = args;
         this.Asynchronously = isAsynchronously;
         this.player = Xiaojiu.getInstance().getServer().getOfflinePlayer(playerUUID);
-        this.date=date;
+        this.date = date;
     }
 
     //    public static SaveTask deserialization(Map<String, Object> map) {
@@ -33,16 +33,16 @@ public class SaveTask implements ConfigurationSerializable {
     public static SaveTask deserialize(Map<String, Object> map) {
         List<String> list = (List<String>) map.get("args");
         String[] args;
-        if (list!=null&&!list.isEmpty()){
-            args=new String[list.size()+1];
+        if (list != null && !list.isEmpty()) {
+            args = new String[list.size() + 1];
             for (int i = 0; i < list.size(); i++) {
                 String s = list.get(i);
-                if (s==null) continue;
+                if (s == null) continue;
                 if (s.isEmpty()) continue;
-                args[i]=s;
+                args[i] = s;
             }
-        }else{
-            args=new String[0];
+        } else {
+            args = new String[0];
         }
 
 
@@ -54,7 +54,7 @@ public class SaveTask implements ConfigurationSerializable {
                 new UUID((long) map.get("mostSigBits"), (long) map.get("leastSigBits")),
                 (boolean) map.get("Asynchronously"),
                 args,
-                new Date((long)map.get("date")));
+                new Date((long) map.get("date")));
     }
 
     public OfflinePlayer getPlayer() {
@@ -84,7 +84,8 @@ public class SaveTask implements ConfigurationSerializable {
     public String[] getArgs() {
         return args;
     }
-    public Date getDate(){
+
+    public Date getDate() {
         return date;
     }
 
@@ -99,7 +100,7 @@ public class SaveTask implements ConfigurationSerializable {
 //        map.put("UUID",playerUUID);
         map.put("Asynchronously", Asynchronously);
         map.put("args", args);
-        map.put("date",date.getTime());
+        map.put("date", date.getTime());
         return map;
     }
 

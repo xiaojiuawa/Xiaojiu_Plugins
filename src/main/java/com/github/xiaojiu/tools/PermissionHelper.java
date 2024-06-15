@@ -1,11 +1,11 @@
 package com.github.xiaojiu.tools;
 
 
+import com.github.xiaojiu.Xiaojiu;
+import com.github.xiaojiu.commandExecutor.MainCommand;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
-import com.github.xiaojiu.Xiaojiu;
-import com.github.xiaojiu.commandExecutor.MainCommand;
 
 public class PermissionHelper {
     @Deprecated

@@ -7,12 +7,19 @@ public interface XiaojiuTask extends Runnable {
     boolean isTasking();
 
     String getDescribeName();
+
     void setDescribeName(String name);
-    void setDescribe(String describe);
+
     String getDescribe();
+
+    void setDescribe(String describe);
+
     Date getCreateDate();
+
     Date getRunDate();
+
     Date getLoadDate();
+
     void Cancel();
 
     void RunTaskAsynchronously(long time, int delay);

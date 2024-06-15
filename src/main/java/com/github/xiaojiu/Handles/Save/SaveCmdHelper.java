@@ -1,8 +1,8 @@
 package com.github.xiaojiu.Handles.Save;
 
+import com.github.xiaojiu.tools.MessageHelper;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
-import com.github.xiaojiu.tools.MessageHelper;
 
 import java.util.Arrays;
 
@@ -11,7 +11,7 @@ public class SaveCmdHelper {
         player.sendMessage(MessageHelper.InitMessage(ChatColor.LIGHT_PURPLE + "任务信息"));
         player.sendMessage(MessageHelper.InitMessage(ChatColor.LIGHT_PURPLE + "任务id:" + task.getTaskid()));
         player.sendMessage(MessageHelper.InitMessage(ChatColor.LIGHT_PURPLE + "任务名:" + task.getName()));
-        player.sendMessage(MessageHelper.InitMessage(ChatColor.LIGHT_PURPLE+"是否异步:" + task.isAsynchronouslyTask()));
+        player.sendMessage(MessageHelper.InitMessage(ChatColor.LIGHT_PURPLE + "是否异步:" + task.isAsynchronouslyTask()));
         player.sendMessage(MessageHelper.InitMessage(ChatColor.LIGHT_PURPLE + "任务参数" + (task.getArgs() == null ? "无" : Arrays.toString(task.getArgs()))));
         if (task.getDelay() != 0)
             player.sendMessage(MessageHelper.InitMessage(ChatColor.LIGHT_PURPLE + "延迟时间:" + task.getDelay()));

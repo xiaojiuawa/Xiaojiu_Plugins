@@ -1,10 +1,5 @@
 package com.github.xiaojiu.commandExecutor;
 
-import org.bukkit.ChatColor;
-import org.bukkit.OfflinePlayer;
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Player;
 import com.github.xiaojiu.Handles.Help.HelpMapHandler;
 import com.github.xiaojiu.Handles.Save.BasicSaveHandles;
 import com.github.xiaojiu.Handles.Save.SaveCmdHelper;
@@ -15,6 +10,11 @@ import com.github.xiaojiu.api.XiaojiuCommandExecutor;
 import com.github.xiaojiu.exceptions.parametersExceptions;
 import com.github.xiaojiu.tools.MessageHelper;
 import com.github.xiaojiu.tools.Utils;
+import org.bukkit.ChatColor;
+import org.bukkit.OfflinePlayer;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
 
 import java.util.*;
 
@@ -100,7 +100,7 @@ public class SaveCommand implements XiaojiuCommandExecutor {
                     SaveTaskManager.getInstance().addRecordTask(Instance);
                 }
                 player.sendMessage(MessageHelper.InitMessage(ChatColor.DARK_GREEN + "任务创建成功" + "任务id:" + Instance.getTaskid()));
-            }else if (strings[0].equalsIgnoreCase("show")) {
+            } else if (strings[0].equalsIgnoreCase("show")) {
                 if (SaveTaskManager.getInstance().getTaskList().isEmpty())
                     player.sendMessage(MessageHelper.InitMessage(ChatColor.LIGHT_PURPLE + "目前无任务进行"));
                 if (strings.length > 2) {
@@ -116,37 +116,37 @@ public class SaveCommand implements XiaojiuCommandExecutor {
                 }
             } else if (strings[0].equalsIgnoreCase("cancel")) {
                 //xj save cancel taskid/taskPlayer/taskName
-                BasicSaveHandles task=null;
-                try{
-                    if (Utils.isNumber(strings[1])){
+                BasicSaveHandles task = null;
+                try {
+                    if (Utils.isNumber(strings[1])) {
                         task = SaveTaskManager.getInstance().getTask(Integer.parseInt(strings[1]));
-                    }else{
+                    } else {
                         OfflinePlayer player1 = Xiaojiu.getInstance().getServer().getOfflinePlayer(strings[1]);
-                        if (player1!=null){
+                        if (player1 != null) {
                             for (BasicSaveHandles basicSaveHandles : SaveTaskManager.getInstance().getTaskList()) {
-                                if (basicSaveHandles.getPlayer().equals(player1)){
-                                    task=basicSaveHandles;
+                                if (basicSaveHandles.getPlayer().equals(player1)) {
+                                    task = basicSaveHandles;
                                     break;
                                 }
                             }
-                        }else{
+                        } else {
                             for (BasicSaveHandles basicSaveHandles : SaveTaskManager.getInstance().getTaskList()) {
-                                if (basicSaveHandles.getDescribe().equals(strings[1])){
-                                    task=basicSaveHandles;
+                                if (basicSaveHandles.getDescribe().equals(strings[1])) {
+                                    task = basicSaveHandles;
                                     break;
                                 }
                             }
                         }
                     }
-                }catch (Exception e){
+                } catch (Exception e) {
                     throw new parametersExceptions(Utils.getMessageCompletion("Command.taskGetFail"));
                 }
-                if (task==null) throw new parametersExceptions(Utils.getMessageCompletion("Command.taskGetFail"));
+                if (task == null) throw new parametersExceptions(Utils.getMessageCompletion("Command.taskGetFail"));
                 task.cancel();
-                commandSender.sendMessage(MessageHelper.InitMessage(ChatColor.LIGHT_PURPLE+"任务取消成功"));
+                commandSender.sendMessage(MessageHelper.InitMessage(ChatColor.LIGHT_PURPLE + "任务取消成功"));
                 //todo
             }
-        }catch (Exception exception){
+        } catch (Exception exception) {
             //命令执行失败处理
             commandSender.sendMessage(Utils.getMessageCompletion("Command.FailException"));
             commandSender.sendMessage(Arrays.toString(exception.getStackTrace()));
@@ -163,23 +163,24 @@ public class SaveCommand implements XiaojiuCommandExecutor {
     @Override
     public List<String> onTabComplete(CommandSender commandSender, Command command, String s, String[] strings) {
         List<String> list = new ArrayList<>();
-        if(strings.length==1){
+        if (strings.length == 1) {
             this.GetHelpMap().forEach((string, helpMap) -> {
-                if (string.startsWith(strings[0].toLowerCase())&&!string.equalsIgnoreCase("task")) list.add(string);
-                
+                if (string.startsWith(strings[0].toLowerCase()) && !string.equalsIgnoreCase("task")) list.add(string);
+
             });
-        } else if (strings.length==2||strings.length==3) {
+        } else if (strings.length == 2 || strings.length == 3) {
             list.addAll(addTrueFalse(strings[strings.length - 1]));
         }
 //
         return list;
     }
-    private List<String> addTrueFalse(String s){
-        List<String> list=new ArrayList<>();
-        if ("true".startsWith(s.toLowerCase())){
+
+    private List<String> addTrueFalse(String s) {
+        List<String> list = new ArrayList<>();
+        if ("true".startsWith(s.toLowerCase())) {
             list.add("true");
         }
-        if ("false".startsWith(s.toLowerCase())){
+        if ("false".startsWith(s.toLowerCase())) {
             list.add("false");
         }
         return list;

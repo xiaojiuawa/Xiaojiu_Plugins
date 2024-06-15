@@ -1,19 +1,19 @@
 package com.github.xiaojiu.commandExecutor;
 
-import com.github.xiaojiu.tools.Utils;
-import org.bukkit.ChatColor;
-import org.bukkit.OfflinePlayer;
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandSender;
 import com.github.xiaojiu.Handles.Help.HelpMapHandler;
+import com.github.xiaojiu.Handles.PlayerTime.PlayerJoinTimeTool;
 import com.github.xiaojiu.Handles.Restart.TimeHelper;
 import com.github.xiaojiu.Xiaojiu;
 import com.github.xiaojiu.api.HelpMap;
 import com.github.xiaojiu.api.XiaojiuCommandExecutor;
 import com.github.xiaojiu.config.ConfigManager;
-import com.github.xiaojiu.Handles.PlayerTime.PlayerJoinTimeTool;
 import com.github.xiaojiu.tools.MessageHelper;
 import com.github.xiaojiu.tools.PermissionHelper;
+import com.github.xiaojiu.tools.Utils;
+import org.bukkit.ChatColor;
+import org.bukkit.OfflinePlayer;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandSender;
 
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -54,10 +54,10 @@ public class PlayerTimeCommand implements XiaojiuCommandExecutor {
                     Date date = PlayerJoinTimeTool.GetPlayerLastJoinTime(offlinePlayer.getUniqueId());
                     if (date != null) {
                         String time = format.format(date);
-                        commandSender.sendMessage(MessageHelper.InitMessage(ChatColor.WHITE + String.format(Utils.getMessageCompletion("PlayerTime.info"),strings[1],time)));
-                        commandSender.sendMessage(MessageHelper.InitMessage(ChatColor.WHITE +String.format(Utils.getMessageCompletion("PlayerTime.info2"),TimeHelper.GetTime(date))));
+                        commandSender.sendMessage(MessageHelper.InitMessage(ChatColor.WHITE + String.format(Utils.getMessageCompletion("PlayerTime.info"), strings[1], time)));
+                        commandSender.sendMessage(MessageHelper.InitMessage(ChatColor.WHITE + String.format(Utils.getMessageCompletion("PlayerTime.info2"), TimeHelper.GetTime(date))));
                     } else {
-                        commandSender.sendMessage(MessageHelper.InitMessage(ChatColor.LIGHT_PURPLE + String.format(Utils.getMessageCompletion("PlayerTime.notFind"),ChatColor.WHITE + strings[1] + ChatColor.LIGHT_PURPLE)));
+                        commandSender.sendMessage(MessageHelper.InitMessage(ChatColor.LIGHT_PURPLE + String.format(Utils.getMessageCompletion("PlayerTime.notFind"), ChatColor.WHITE + strings[1] + ChatColor.LIGHT_PURPLE)));
                     }
                 } else {
                     commandSender.sendMessage(MessageHelper.InitMessage(ChatColor.LIGHT_PURPLE + Utils.getMessageCompletion("PlayerTime.noPermission")));

@@ -1,8 +1,8 @@
 package com.github.xiaojiu.Handles.Save;
 
+import com.github.xiaojiu.config.Savecfg.SaveTask;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.plugin.java.JavaPlugin;
-import com.github.xiaojiu.config.Savecfg.SaveTask;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
@@ -43,7 +43,7 @@ public class SaveTaskManager {
     }
 
     public void addRecordTask(BasicSaveHandles task) {
-        saveList.add(new SaveTask(task.getName(), task.getTimerTime(), task.getDelay(), task.getPlayer().getUniqueId(), task.isAsynchronouslyTask(), task.getArgs(),task.getCreateDate()));
+        saveList.add(new SaveTask(task.getName(), task.getTimerTime(), task.getDelay(), task.getPlayer().getUniqueId(), task.isAsynchronouslyTask(), task.getArgs(), task.getCreateDate()));
     }
 
     public void addTaskName(String name, String... names) {

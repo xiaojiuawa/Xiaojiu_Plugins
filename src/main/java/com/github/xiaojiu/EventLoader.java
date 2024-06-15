@@ -1,14 +1,14 @@
 package com.github.xiaojiu;
 
+import com.github.xiaojiu.Handles.PlayerLimit.PlayerLimitTools;
+import com.github.xiaojiu.Handles.PlayerTime.PlayerJoinTimeTool;
+import com.github.xiaojiu.Handles.SafeGuard.SafeGuardHelper;
+import com.github.xiaojiu.Handles.Vanish.Vanish;
 import org.bukkit.ChatColor;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerLoginEvent;
-import com.github.xiaojiu.Handles.PlayerLimit.PlayerLimitTools;
-import com.github.xiaojiu.Handles.SafeGuard.SafeGuardHelper;
-import com.github.xiaojiu.Handles.Vanish.Vanish;
-import com.github.xiaojiu.Handles.PlayerTime.PlayerJoinTimeTool;
 
 public class EventLoader implements Listener {
     public EventLoader() {

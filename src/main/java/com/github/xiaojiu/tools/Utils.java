@@ -1,8 +1,8 @@
 package com.github.xiaojiu.tools;
 
+import com.github.xiaojiu.Xiaojiu;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
-import com.github.xiaojiu.Xiaojiu;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -18,7 +18,7 @@ public class Utils {
     public static final HashMap<Integer, String> VanishMap = new HashMap<>();
 
     /**
-     *  初始化Utils类，初始化各类集合map
+     * 初始化Utils类，初始化各类集合map
      */
     public static void Init() {
         WaitMap.put(0, "down");
@@ -55,7 +55,8 @@ public class Utils {
 
     /**
      * 踢出指定集合类中的玩家
-     * @param list 需要被踢除的玩家列表
+     *
+     * @param list    需要被踢除的玩家列表
      * @param message 踢出时向玩家发送的文字
      */
     public static void KickAllPlayers(Collection<? extends Player> list, String message) {
@@ -66,6 +67,7 @@ public class Utils {
 
     /**
      * 踢出当前服务器所有的玩家
+     *
      * @param message 踢出时向玩家发送的文字
      */
     public static void KickAllPlayers(String message) {
@@ -88,7 +90,7 @@ public class Utils {
         }
     }
 
-    public static ArrayList<String> GetOnlinePlayerNames( String a) {
+    public static ArrayList<String> GetOnlinePlayerNames(String a) {
         if (a == null) a = "";
         ArrayList<String> list = new ArrayList<>();
         for (Player player : Xiaojiu.getInstance().getServer().getOnlinePlayers()) {
@@ -113,27 +115,29 @@ public class Utils {
             return false;
         }
     }
-    public static String getMessage(String node){
+
+    public static String getMessage(String node) {
         return Xiaojiu.getMessage().getMessage(node);
     }
 
-    public static String getMessageCompletion(String node){
-        if (!node.startsWith("message")){
-            node = "message."+node;
+    public static String getMessageCompletion(String node) {
+        if (!node.startsWith("message")) {
+            node = "message." + node;
         }
         return getMessage(node);
     }
+
     @Deprecated
-    public static String getMessageCompletion(String... nodes){
+    public static String getMessageCompletion(String... nodes) {
         StringBuilder builder = new StringBuilder();
-        if (!nodes[0].equalsIgnoreCase("message")){
+        if (!nodes[0].equalsIgnoreCase("message")) {
             builder.append("message.");
         }
         for (String node : nodes) {
             builder.append(node);
             builder.append(".");
         }
-        builder.delete(builder.length()-1, builder.length());
+        builder.delete(builder.length() - 1, builder.length());
         return getMessage(builder.toString());
     }
 //    public static String getMessageNode(String )

@@ -142,7 +142,7 @@ public class SaveCommand implements XiaojiuCommandExecutor {
                     throw new parametersExceptions(Utils.getMessageCompletion("Command.taskGetFail"));
                 }
                 if (task == null) throw new parametersExceptions(Utils.getMessageCompletion("Command.taskGetFail"));
-                task.cancel();
+                task.cancelTask();
                 commandSender.sendMessage(MessageHelper.InitMessage(ChatColor.LIGHT_PURPLE + "任务取消成功"));
                 //todo
             }

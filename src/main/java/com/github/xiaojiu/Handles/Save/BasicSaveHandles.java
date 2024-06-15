@@ -62,7 +62,7 @@ public abstract class BasicSaveHandles extends TimerTask implements XiaojiuTask,
     }
 
     @Override
-    public void Cancel() {
+    public void cancelTask() {
         Bukkit.getScheduler().runTaskAsynchronously(plugin, this::CanCel);
     }
 

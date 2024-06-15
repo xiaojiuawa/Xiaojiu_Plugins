@@ -20,7 +20,7 @@ public interface XiaojiuTask extends Runnable {
 
     Date getLoadDate();
 
-    void Cancel();
+    void cancelTask();
 
     void RunTaskAsynchronously(long time, int delay);
 

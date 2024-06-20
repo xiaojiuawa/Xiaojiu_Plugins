@@ -50,10 +50,7 @@ public class RestartServerCommand implements XiaojiuCommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
-        if (strings.length < 2) {
-            commandSender.sendMessage(MessageHelper.InitMessage(ChatColor.LIGHT_PURPLE + Utils.getMessageCompletion("ReloadServer.noParam")));
-            return true;
-        } else if (strings[0].equalsIgnoreCase("cancel")) {
+        if (strings[0].equalsIgnoreCase("cancel")) {
             if (PermissionHelper.isHasPermission(commandSender, true, PermissionCommonNode, "cancel")) {
                 if (RestartTools.isRestart) {
                     RestartTools.cancel();

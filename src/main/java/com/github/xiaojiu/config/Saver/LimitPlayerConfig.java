@@ -36,7 +36,7 @@ public class LimitPlayerConfig implements XiaojiuConfig {
 
     @Override
     public void Load() {
-        FileConfiguration configuration = UtilsBukkit.getConfig(Xiaojiu.getInstance(), "PlayerLimit.yml");
+        FileConfiguration configuration = YamlConfiguration.loadConfiguration(new File(Xiaojiu.getInstance().getDataFolder(), "PlayerLimit.yml"));
         configuration.getKeys(false).forEach(key -> {
             LimitPlayer player = (LimitPlayer) configuration.get(key);
             UUID uuid = new UUID(player.mostSigBits, player.leastSigBits);

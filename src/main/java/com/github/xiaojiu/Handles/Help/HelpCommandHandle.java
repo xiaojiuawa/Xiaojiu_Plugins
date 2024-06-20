@@ -38,7 +38,7 @@ public class HelpCommandHandle {
             commandSender.sendMessage(ChatColor.GOLD + "帮助总列表");
             helpMap.forEach((string, helpmap) -> commandSender.sendMessage(ChatColor.GOLD + string));
         } else {
-            if (helpMap.containsKey(command)) {
+            if (!helpMap.containsKey(command)) {
                 commandSender.sendMessage(MessageHelper.InitMessage(ChatColor.LIGHT_PURPLE + "请输入正确的命令节点"));
                 return;
             }

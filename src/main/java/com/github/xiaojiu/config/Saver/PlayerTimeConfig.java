@@ -36,7 +36,7 @@ public class PlayerTimeConfig implements XiaojiuConfig {
 
     @Override
     public void Load() {
-        FileConfiguration configuration = UtilsBukkit.getConfig(Xiaojiu.getInstance(), "PlayerJoinTime.yml");
+        FileConfiguration configuration = YamlConfiguration.loadConfiguration(new File(Xiaojiu.getInstance().getDataFolder(), "PlayerJoinTime.yml"));
 //        System.out.println(Arrays.toString(configuration.getKeys(false).toArray()));
         configuration.getKeys(false).forEach(key -> {
             JTPlayer player = (JTPlayer) configuration.get(key);

@@ -38,7 +38,7 @@ public class SaveTaskConfig implements XiaojiuConfig {
     @Override
     public void Load() {
 //        StartPlugins.logger.info("123434");
-        FileConfiguration configuration = UtilsBukkit.getConfig(Xiaojiu.getInstance(), "SaveTask.yml");
+        FileConfiguration configuration = YamlConfiguration.loadConfiguration(new File(Xiaojiu.getInstance().getDataFolder(), "SaveTask.yml"));
 //        System.out.println(Arrays.toString(configuration.getKeys(false).toArray()));
         for (String key : configuration.getKeys(false)) {
             SaveTask task = (SaveTask) configuration.get(key);

@@ -10,6 +10,7 @@ import com.github.xiaojiu.tools.Utils;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -63,7 +64,13 @@ public class HelpCommand implements XiaojiuCommandExecutor {
 
     @Override
     public List<String> onTabComplete(CommandSender commandSender, Command command, String s, String[] strings) {
-
-        return null;
+        List<String> list = new ArrayList<>();
+        if (strings.length==1){
+            System.out.println(strings);
+            CommonExecutorLoader.commandExecutorMaps.forEach((string, xiaojiuCommandExecutor) -> {
+                if(string.startsWith(strings[0].toLowerCase())) list.add(string);
+            });
+        }
+        return list;
     }
 }

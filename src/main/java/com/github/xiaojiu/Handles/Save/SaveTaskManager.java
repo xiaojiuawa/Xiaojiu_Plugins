@@ -66,7 +66,7 @@ public class SaveTaskManager {
 
     public BasicSaveHandles newTaskInstance(String taskName, JavaPlugin plugin, OfflinePlayer player, String... args) {
         try {
-            return (BasicSaveHandles) Class.forName("com.github.xiaojiu.xiaojiuMain.Handles.Save." + taskName).getConstructors()[0].newInstance(this.taskList.size() + 1, plugin, player, args);
+            return (BasicSaveHandles) Class.forName("com.github.xiaojiu.Handles.Save." + taskName).getConstructors()[0].newInstance(this.taskList.size() + 1, plugin, player, args);
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException |
                  InvocationTargetException e) {
             return null;

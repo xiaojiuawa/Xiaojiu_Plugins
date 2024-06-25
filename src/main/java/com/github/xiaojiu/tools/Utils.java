@@ -1,5 +1,6 @@
 package com.github.xiaojiu.tools;
 
+import com.github.xiaojiu.Handles.TpsTask.TpsTask;
 import com.github.xiaojiu.Xiaojiu;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
@@ -51,6 +52,7 @@ public class Utils {
         VanishMap.put(10, "%s将在10秒后结束");
         VanishMap.put(60, "%s将在1分钟后结束");
         VanishMap.put(120, "%s将在2分钟后结束");
+        Xiaojiu.getInstance().getServer().getScheduler().runTaskTimerAsynchronously(Xiaojiu.getInstance(),new TpsTask(Xiaojiu.getInstance()),100,1200);
     }
 
     /**
@@ -74,6 +76,10 @@ public class Utils {
         KickAllPlayers(Xiaojiu.getInstance().getServer().getOnlinePlayers(), message);
     }
 
+    /**
+     * 踢出所有玩家中除过op的所有玩家
+     * @param message 踢出时向玩家发送的文字
+     */
     public static void KickAllPlayersNoOp(String message) {
         Collection<? extends Player> list = Xiaojiu.getInstance().getServer().getOnlinePlayers();
         for (Player player : list) {
@@ -81,6 +87,12 @@ public class Utils {
             player.kickPlayer(ChatColor.LIGHT_PURPLE + message);
         }
     }
+
+    /**
+     * 踢出所有玩家中除过含有特定权限节点的玩家
+     * @param node 免踢出的权限节点
+     * @param message 踢出时向玩家发送的文字
+     */
 
     public static void KickAllPlayersUseNode(String node, String message) {
         Collection<? extends Player> list = Xiaojiu.getInstance().getServer().getOnlinePlayers();
@@ -90,6 +102,11 @@ public class Utils {
         }
     }
 
+    /**
+     * 获得有所玩家中名称以{a}开头的玩家
+     * @param a 字符串
+     * @return 匹配的玩家名称列表
+     */
     public static ArrayList<String> GetOnlinePlayerNames(String a) {
         if (a == null) a = "";
         ArrayList<String> list = new ArrayList<>();
@@ -99,9 +116,16 @@ public class Utils {
         return list;
     }
 
-    public static String IntegrateStr(String[] strings) {
+    /**
+     *
+     *
+     * @param strings
+     * @param start
+     * @return
+     */
+    public static String IntegrateString(String[] strings,int start) {
         StringBuilder ans = new StringBuilder();
-        for (int i = 3; i < strings.length; i++) {
+        for (int i = start; i < strings.length; i++) {
             ans.append(strings[i]).append(' ');
         }
         return ans.toString();

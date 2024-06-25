@@ -28,7 +28,7 @@ public class PlayerCommand implements XiaojiuCommandExecutor {
     @Override
     public void InitMap() {
         PlayerCommandMap.put("save", new HelpMapHandler(CommandNode, "/pl save", "xiaojiu.op.PlayerLimit.save", "通过这个方法立即保存玩家限制列表"));
-        PlayerCommandMap.put("add", new HelpMapHandler(CommandNode, "/pl add true/false [玩家名]", "xiaojiu.op.PlayerLimit.add", "通过这个指令来添加一位玩家到达限制列表中 注:其中第二个参数填true则会启用保存，服务器关闭后仍有效，填false则禁用保存，服务器关闭后重置 "));
+        PlayerCommandMap.put("add", new HelpMapHandler(CommandNode, "/pl add [玩家名] true/false(是否保存) [任意一段字符串](选填 踢出玩家时给玩家发送的踢出解释)", "xiaojiu.op.PlayerLimit.add", "通过这个指令来添加一位玩家到达限制列表中 注:其中第二个参数填true则会启用保存，服务器关闭后仍有效，填false则禁用保存，服务器关闭后重置 "));
         PlayerCommandMap.put("remove", new HelpMapHandler(CommandNode, "/pl remove [玩家名]", "xiaojiu.op.PlayerLimit.remove", "通过这个指令来解除对玩家的限制"));
     }
 
@@ -60,7 +60,7 @@ public class PlayerCommand implements XiaojiuCommandExecutor {
                 }
             } else if (strings[0].equalsIgnoreCase("add") || strings[0].equalsIgnoreCase("添加")) {
                 if (PermissionHelper.isHasPermission(commandSender, true, PermissionNode, "add")) {
-                    if (!(strings.length < 2)) {
+                    if (strings.length > 2) {
                         Player player = PlayerTools.GetPlayer(strings[1]);
                         if (commandSender instanceof Player) {
                             Player player1 = (Player) commandSender;
@@ -71,9 +71,9 @@ public class PlayerCommand implements XiaojiuCommandExecutor {
                         if (player != null) {
                             String message;
                             if (strings[2].equalsIgnoreCase("true") || strings[2].equalsIgnoreCase("离线")) {
-                                message = PlayerLimitTools.add(Utils.IntegrateStr(strings), player, true);
+                                message = PlayerLimitTools.add(Utils.IntegrateString(strings,3), player, true);
                             } else if (strings[2].equalsIgnoreCase("false") || strings[2].equalsIgnoreCase("非离线")) {
-                                message = PlayerLimitTools.add(Utils.IntegrateStr(strings), player, false);
+                                message = PlayerLimitTools.add(Utils.IntegrateString(strings,3), player, false);
                             } else {
                                 message = Utils.getMessageCompletion("PlayerLimit.save.set");
                             }

@@ -117,7 +117,7 @@ public class PlayerCommand implements XiaojiuCommandExecutor {
             }
             return true;
         } else {
-            commandSender.sendMessage(MessageHelper.InitMessage(ChatColor.RED + Utils.getMessageCompletion("PlayerLimit.noCommand")));
+            commandSender.sendMessage(MessageHelper.InitMessage(ChatColor.RED + Utils.getMessageCompletion("Command.noCommand")));
         }
         return false;
     }

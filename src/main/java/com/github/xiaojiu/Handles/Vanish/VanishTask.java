@@ -1,7 +1,7 @@
 package com.github.xiaojiu.Handles.Vanish;
 
 import com.github.xiaojiu.Xiaojiu;
-import com.github.xiaojiu.tools.MessageHelper;
+import com.github.xiaojiu.tools.PostHelper;
 import com.github.xiaojiu.tools.Utils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -29,11 +29,11 @@ public class VanishTask {
                     Player player1 = Xiaojiu.getInstance().getServer().getPlayer(uuid);
                     if (integer == 0) {
                         Bukkit.getScheduler().runTask(Instance, () -> {
-                            player1.sendMessage(MessageHelper.InitMessage(ChatColor.LIGHT_PURPLE + "你的隐身时间已到，隐身状态已切换为关闭"));
+                            player1.sendMessage(PostHelper.InitMessage(ChatColor.LIGHT_PURPLE + "你的隐身时间已到，隐身状态已切换为关闭"));
                             Vanish.VanishPlayer(player1, false);
                         });
                     } else {
-                        player1.sendMessage(MessageHelper.InitMessage(ChatColor.LIGHT_PURPLE + String.format(string, "隐身")));
+                        player1.sendMessage(PostHelper.InitMessage(ChatColor.LIGHT_PURPLE + String.format(string, "隐身")));
                     }
                 }
             }, calendar.getTime());

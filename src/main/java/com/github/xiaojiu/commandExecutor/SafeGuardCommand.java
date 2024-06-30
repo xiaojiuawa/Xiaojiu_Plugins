@@ -5,7 +5,8 @@ import com.github.xiaojiu.Handles.Restart.RestartTools;
 import com.github.xiaojiu.Handles.SafeGuard.SafeGuardHelper;
 import com.github.xiaojiu.api.HelpMap;
 import com.github.xiaojiu.api.XiaojiuCommandExecutor;
-import com.github.xiaojiu.tools.MessageHelper;
+import com.github.xiaojiu.message.MessageHelper;
+import com.github.xiaojiu.tools.PostHelper;
 import com.github.xiaojiu.tools.PermissionHelper;
 import com.github.xiaojiu.tools.Utils;
 import org.bukkit.ChatColor;
@@ -52,34 +53,34 @@ public class SafeGuardCommand implements XiaojiuCommandExecutor {
             if (strings[0].equalsIgnoreCase("now") || strings[0].equalsIgnoreCase("现在")) {
                 if (PermissionHelper.isHasPermission(commandSender, true, PermissionNode, "now")) {
                     SafeGuardHelper.done();
-                    commandSender.sendMessage(MessageHelper.InitMessage(ChatColor.LIGHT_PURPLE + Utils.getMessageCompletion("SafeGuard.now.success")));
+                    commandSender.sendMessage(PostHelper.InitMessage(ChatColor.LIGHT_PURPLE + MessageHelper.getMessageCompletion("SafeGuard.now.success")));
                 }
             } else if (strings[0].equalsIgnoreCase("cancel") || strings[0].equalsIgnoreCase("解除")) {
                 if (PermissionHelper.isHasPermission(commandSender, true, PermissionNode, "cancel")) {
                     if (SafeGuardHelper.timer == null) {
-                        commandSender.sendMessage(MessageHelper.InitMessage(ChatColor.LIGHT_PURPLE + Utils.getMessageCompletion("SafeGuard.noTask")));
+                        commandSender.sendMessage(PostHelper.InitMessage(ChatColor.LIGHT_PURPLE + MessageHelper.getMessageCompletion("SafeGuard.noTask")));
                     } else {
                         SafeGuardHelper.cancel();
-                        MessageHelper.SendMessageAllPlayer(MessageHelper.InitMessage(ChatColor.LIGHT_PURPLE + String.format(Utils.getMessageCompletion("SafeGuard.cancel.success"), ChatColor.WHITE + commandSender.getName() + ChatColor.LIGHT_PURPLE)));
+                        PostHelper.SendMessageAllPlayer(PostHelper.InitMessage(ChatColor.LIGHT_PURPLE + String.format(MessageHelper.getMessageCompletion("SafeGuard.cancel.success"), ChatColor.WHITE + commandSender.getName() + ChatColor.LIGHT_PURPLE)));
                     }
                 } else {
-                    commandSender.sendMessage(MessageHelper.InitMessage(Utils.getMessageCompletion("SafeGuard.cancel.noPermission")));
+                    commandSender.sendMessage(PostHelper.InitMessage(MessageHelper.getMessageCompletion("SafeGuard.cancel.noPermission")));
                 }
             } else if (strings[0].equalsIgnoreCase("end") || strings[0].equalsIgnoreCase("结束")) {
                 if (PermissionHelper.isHasPermission(commandSender, true, PermissionNode, "end")) {
                     if (SafeGuardHelper.isSafeGuard) {
                         SafeGuardHelper.SafeGuard();
-                        commandSender.sendMessage(MessageHelper.InitMessage(ChatColor.LIGHT_PURPLE + Utils.getMessageCompletion("SafeGuard.end.success")));
+                        commandSender.sendMessage(PostHelper.InitMessage(ChatColor.LIGHT_PURPLE + MessageHelper.getMessageCompletion("SafeGuard.end.success")));
                     } else {
-                        commandSender.sendMessage(MessageHelper.InitMessage(ChatColor.LIGHT_PURPLE + Utils.getMessageCompletion("SafeGuard.noTask")));
+                        commandSender.sendMessage(PostHelper.InitMessage(ChatColor.LIGHT_PURPLE + MessageHelper.getMessageCompletion("SafeGuard.noTask")));
                     }
                 } else {
-                    commandSender.sendMessage(MessageHelper.InitMessage(ChatColor.RED + Utils.getMessageCompletion("SafeGuard.end.noPermission")));
+                    commandSender.sendMessage(PostHelper.InitMessage(ChatColor.RED + MessageHelper.getMessageCompletion("SafeGuard.end.noPermission")));
                 }
             } else if (Utils.isNumber(strings[0])) {
                 if (PermissionHelper.isHasPermission(commandSender, true, PermissionNode, "start")) {
                     if (SafeGuardHelper.isSafeGuard) {
-                        commandSender.sendMessage(MessageHelper.InitMessage(ChatColor.LIGHT_PURPLE + Utils.getMessageCompletion("SafeGuard.in")));
+                        commandSender.sendMessage(PostHelper.InitMessage(ChatColor.LIGHT_PURPLE + MessageHelper.getMessageCompletion("SafeGuard.in")));
                     } else {
                         SafeGuardHelper.startSafeGuard(Integer.parseInt(strings[0]));
                     }
@@ -87,14 +88,14 @@ public class SafeGuardCommand implements XiaojiuCommandExecutor {
             } else if (strings[0].equalsIgnoreCase("d") || strings[0].equalsIgnoreCase("h") || strings[0].equalsIgnoreCase("m") && strings.length > 1) {
                 int num = RestartTools.ProcessingTime(strings[0], Integer.parseInt(strings[1]));
                 if (num == -1) {
-                    commandSender.sendMessage(MessageHelper.InitMessage(ChatColor.LIGHT_PURPLE + Utils.getMessageCompletion("Command.paramWrong")));
+                    commandSender.sendMessage(PostHelper.InitMessage(ChatColor.LIGHT_PURPLE + MessageHelper.getMessageCompletion("Command.paramWrong")));
                     return true;
                 }
                 if (SafeGuardHelper.isSafeGuard) {
-                    commandSender.sendMessage(MessageHelper.InitMessage(ChatColor.LIGHT_PURPLE + Utils.getMessageCompletion("SafeGuard.in")));
+                    commandSender.sendMessage(PostHelper.InitMessage(ChatColor.LIGHT_PURPLE + MessageHelper.getMessageCompletion("SafeGuard.in")));
                 } else {
                     RestartTools.Restart(num);
-                    commandSender.sendMessage(MessageHelper.InitMessage(ChatColor.LIGHT_PURPLE + Utils.getMessageCompletion("SafeGuard.start.success")));
+                    commandSender.sendMessage(PostHelper.InitMessage(ChatColor.LIGHT_PURPLE + MessageHelper.getMessageCompletion("SafeGuard.start.success")));
                 }
             }
             return true;

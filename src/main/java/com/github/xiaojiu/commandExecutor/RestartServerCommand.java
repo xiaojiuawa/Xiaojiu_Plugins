@@ -4,9 +4,9 @@ import com.github.xiaojiu.Handles.Help.HelpMapHandler;
 import com.github.xiaojiu.Handles.Restart.RestartTools;
 import com.github.xiaojiu.api.HelpMap;
 import com.github.xiaojiu.api.XiaojiuCommandExecutor;
-import com.github.xiaojiu.tools.MessageHelper;
+import com.github.xiaojiu.message.MessageHelper;
+import com.github.xiaojiu.tools.PostHelper;
 import com.github.xiaojiu.tools.PermissionHelper;
-import com.github.xiaojiu.tools.Utils;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -54,62 +54,62 @@ public class RestartServerCommand implements XiaojiuCommandExecutor {
             if (PermissionHelper.isHasPermission(commandSender, true, PermissionCommonNode, "cancel")) {
                 if (RestartTools.isRestart) {
                     RestartTools.cancel();
-                    MessageHelper.SendMessageAllPlayer(MessageHelper.InitMessage(ChatColor.LIGHT_PURPLE + String.format(Utils.getMessageCompletion("ReloadServer.cancel.success"), ChatColor.WHITE + commandSender.getName() + ChatColor.LIGHT_PURPLE)));
+                    PostHelper.SendMessageAllPlayer(PostHelper.InitMessage(ChatColor.LIGHT_PURPLE + String.format(MessageHelper.getMessageCompletion("ReloadServer.cancel.success"), ChatColor.WHITE + commandSender.getName() + ChatColor.LIGHT_PURPLE)));
                 } else {
-                    commandSender.sendMessage(MessageHelper.InitMessage(ChatColor.LIGHT_PURPLE + Utils.getMessageCompletion("ReloadServer.noTask")));
+                    commandSender.sendMessage(PostHelper.InitMessage(ChatColor.LIGHT_PURPLE + MessageHelper.getMessageCompletion("ReloadServer.noTask")));
                 }
             } else {
-                commandSender.sendMessage(MessageHelper.InitMessage(ChatColor.RED + Utils.getMessageCompletion("Command.noPermission")));
+                commandSender.sendMessage(PostHelper.InitMessage(ChatColor.RED + MessageHelper.getMessageCompletion("Command.noPermission")));
             }
         } else if (strings[0].equalsIgnoreCase("now")) {
             if (PermissionHelper.isHasPermission(commandSender, true, PermissionCommonNode, "now")) {
                 if (RestartTools.isRestart) {
                     RestartTools.Done();
                 } else {
-                    commandSender.sendMessage(MessageHelper.InitMessage(ChatColor.LIGHT_PURPLE + Utils.getMessageCompletion("ReloadServer.noTask")));
+                    commandSender.sendMessage(PostHelper.InitMessage(ChatColor.LIGHT_PURPLE + MessageHelper.getMessageCompletion("ReloadServer.noTask")));
                 }
             } else {
-                commandSender.sendMessage(MessageHelper.InitMessage(ChatColor.RED + Utils.getMessageCompletion("Command.noPermission")));
+                commandSender.sendMessage(PostHelper.InitMessage(ChatColor.RED + MessageHelper.getMessageCompletion("Command.noPermission")));
             }
         } else if (strings[0].equalsIgnoreCase("reset")) {
             if (PermissionHelper.isHasPermission(commandSender, true, PermissionCommonNode, "reset")) {
                 if (RestartTools.isRestart) {
                     RestartTools.cancel();
                     RestartTools.Restart(Integer.parseInt(strings[1]));
-                    MessageHelper.SendMessageAllPlayer(MessageHelper.InitMessage(ChatColor.LIGHT_PURPLE + String.format(Utils.getMessageCompletion("ReloadServer.reset.success"), ChatColor.WHITE + commandSender.getName() + ChatColor.LIGHT_PURPLE, ChatColor.WHITE + strings[1] + ChatColor.LIGHT_PURPLE)));
+                    PostHelper.SendMessageAllPlayer(PostHelper.InitMessage(ChatColor.LIGHT_PURPLE + String.format(MessageHelper.getMessageCompletion("ReloadServer.reset.success"), ChatColor.WHITE + commandSender.getName() + ChatColor.LIGHT_PURPLE, ChatColor.WHITE + strings[1] + ChatColor.LIGHT_PURPLE)));
                 } else {
-                    commandSender.sendMessage(MessageHelper.InitMessage(ChatColor.LIGHT_PURPLE + Utils.getMessageCompletion("ReloadServer.noTask")));
+                    commandSender.sendMessage(PostHelper.InitMessage(ChatColor.LIGHT_PURPLE + MessageHelper.getMessageCompletion("ReloadServer.noTask")));
                 }
             } else {
-                commandSender.sendMessage(MessageHelper.InitMessage(ChatColor.RED + Utils.getMessageCompletion("Command.noPermission")));
+                commandSender.sendMessage(PostHelper.InitMessage(ChatColor.RED + MessageHelper.getMessageCompletion("Command.noPermission")));
             }
         } else if (isNumber(strings[0])) {
             int num = Integer.parseInt(strings[0]);
             if (PermissionHelper.isHasPermission(commandSender, true, PermissionCommonNode, "start")) {
                 if (!RestartTools.isRestart) {
                     RestartTools.Restart(num);
-                    commandSender.sendMessage(MessageHelper.InitMessage(ChatColor.LIGHT_PURPLE + Utils.getMessageCompletion("ReloadServer.start.success")));
+                    commandSender.sendMessage(PostHelper.InitMessage(ChatColor.LIGHT_PURPLE + MessageHelper.getMessageCompletion("ReloadServer.start.success")));
                 } else {
-                    commandSender.sendMessage(MessageHelper.InitMessage(ChatColor.LIGHT_PURPLE + Utils.getMessageCompletion("ReloadServer.start.have")));
+                    commandSender.sendMessage(PostHelper.InitMessage(ChatColor.LIGHT_PURPLE + MessageHelper.getMessageCompletion("ReloadServer.start.have")));
                 }
             } else {
-                commandSender.sendMessage(MessageHelper.InitMessage(ChatColor.RED + Utils.getMessageCompletion("Command.noPermission")));
+                commandSender.sendMessage(PostHelper.InitMessage(ChatColor.RED + MessageHelper.getMessageCompletion("Command.noPermission")));
             }
         } else if (strings.length == 2) {
             int num = ProcessingTime(strings[0], Integer.parseInt(strings[1]));
             if (PermissionHelper.isHasPermission(commandSender, true, PermissionCommonNode, "start")) {
                 if (!RestartTools.isRestart) {
                     if (num == -1) {
-                        commandSender.sendMessage(MessageHelper.InitMessage(ChatColor.LIGHT_PURPLE + Utils.getMessageCompletion("Command.paramWrong")));
+                        commandSender.sendMessage(PostHelper.InitMessage(ChatColor.LIGHT_PURPLE + MessageHelper.getMessageCompletion("Command.paramWrong")));
                         return true;
                     }
                     RestartTools.Restart(num);
-                    commandSender.sendMessage(MessageHelper.InitMessage(ChatColor.LIGHT_PURPLE + Utils.getMessageCompletion("ReloadServer.start.success")));
+                    commandSender.sendMessage(PostHelper.InitMessage(ChatColor.LIGHT_PURPLE + MessageHelper.getMessageCompletion("ReloadServer.start.success")));
                 } else {
-                    commandSender.sendMessage(MessageHelper.InitMessage(ChatColor.LIGHT_PURPLE + Utils.getMessageCompletion("ReloadServer.start.have")));
+                    commandSender.sendMessage(PostHelper.InitMessage(ChatColor.LIGHT_PURPLE + MessageHelper.getMessageCompletion("ReloadServer.start.have")));
                 }
             } else {
-                commandSender.sendMessage(MessageHelper.InitMessage(ChatColor.RED + Utils.getMessageCompletion("Command.noPermission")));
+                commandSender.sendMessage(PostHelper.InitMessage(ChatColor.RED + MessageHelper.getMessageCompletion("Command.noPermission")));
             }
         }
         return true;

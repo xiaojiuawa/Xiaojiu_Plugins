@@ -2,7 +2,7 @@ package com.github.xiaojiu.Handles.Help;
 
 import com.github.xiaojiu.api.HelpMap;
 import com.github.xiaojiu.commandExecutor.CommonExecutorLoader;
-import com.github.xiaojiu.tools.MessageHelper;
+import com.github.xiaojiu.tools.PostHelper;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 
@@ -39,7 +39,7 @@ public class HelpCommandHandle {
             helpMap.forEach((string, helpmap) -> commandSender.sendMessage(ChatColor.GOLD + string));
         } else {
             if (!helpMap.containsKey(command)) {
-                commandSender.sendMessage(MessageHelper.InitMessage(ChatColor.LIGHT_PURPLE + "请输入正确的命令节点"));
+                commandSender.sendMessage(PostHelper.InitMessage(ChatColor.LIGHT_PURPLE + "请输入正确的命令节点"));
                 return;
             }
 

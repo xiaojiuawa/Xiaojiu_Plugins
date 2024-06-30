@@ -4,7 +4,7 @@ import com.github.xiaojiu.Handles.Help.HelpCommandHandle;
 import com.github.xiaojiu.Handles.Help.HelpMapHandler;
 import com.github.xiaojiu.api.HelpMap;
 import com.github.xiaojiu.api.XiaojiuCommandExecutor;
-import com.github.xiaojiu.tools.MessageHelper;
+import com.github.xiaojiu.tools.PostHelper;
 import com.github.xiaojiu.tools.PermissionHelper;
 import com.github.xiaojiu.tools.Utils;
 import org.bukkit.command.Command;
@@ -47,7 +47,7 @@ public class HelpCommand implements XiaojiuCommandExecutor {
     @Override
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
         if (!PermissionHelper.isHasPermission(commandSender, false, CommandNode, "use")) {
-            MessageHelper.SendNoPermissionMessage(commandSender);
+            PostHelper.SendNoPermissionMessage(commandSender);
             return true;
         }
         if (strings.length == 0) {

@@ -1,7 +1,7 @@
 package com.github.xiaojiu.Handles.SafeGuard;
 
 import com.github.xiaojiu.Xiaojiu;
-import com.github.xiaojiu.tools.MessageHelper;
+import com.github.xiaojiu.tools.PostHelper;
 import com.github.xiaojiu.tools.Utils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -51,7 +51,7 @@ public class SafeGuardHelper {
                     if (entry.getValue().equalsIgnoreCase("down")) {
                         Bukkit.getScheduler().runTask(Xiaojiu.getInstance(), SafeGuardHelper::done);
                     } else {
-                        MessageHelper.SendMessageAllPlayer(ChatColor.LIGHT_PURPLE + String.format(entry.getValue(), "维护"));
+                        PostHelper.SendMessageAllPlayer(ChatColor.LIGHT_PURPLE + String.format(entry.getValue(), "维护"));
                     }
 
                 }

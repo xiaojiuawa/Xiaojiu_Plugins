@@ -1,7 +1,7 @@
 package com.github.xiaojiu.Handles.Restart;
 
 import com.github.xiaojiu.Xiaojiu;
-import com.github.xiaojiu.tools.MessageHelper;
+import com.github.xiaojiu.tools.PostHelper;
 import com.github.xiaojiu.tools.Utils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -26,7 +26,7 @@ public class RestartServerUseTimer {
                         Bukkit.getScheduler().runTask(Xiaojiu.getInstance(), RestartTools::Done);
                         //                        RestartHelper.Done();
                     } else {
-                        MessageHelper.SendMessageAllPlayer(ChatColor.LIGHT_PURPLE + String.format(entry.getValue(), "重启"));
+                        PostHelper.SendMessageAllPlayer(ChatColor.LIGHT_PURPLE + String.format(entry.getValue(), "重启"));
                     }
 
                 }

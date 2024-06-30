@@ -2,7 +2,7 @@ package com.github.xiaojiu.commandExecutor;
 
 import com.github.xiaojiu.api.HelpMap;
 import com.github.xiaojiu.api.XiaojiuCommandExecutor;
-import com.github.xiaojiu.tools.MessageHelper;
+import com.github.xiaojiu.tools.PostHelper;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -33,7 +33,7 @@ public class NoCommandCMD implements XiaojiuCommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
-        commandSender.sendMessage(MessageHelper.InitMessage(ChatColor.RED + "指令名输入错误"));
+        commandSender.sendMessage(PostHelper.InitMessage(ChatColor.RED + "指令名输入错误"));
         return true;
     }
 

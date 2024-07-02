@@ -117,11 +117,10 @@ public class Utils {
     }
 
     /**
-     *
-     *
-     * @param strings
-     * @param start
-     * @return
+     * 获得字符串数组任意下标之后的所有值的字符串,(使用' '分隔)
+     * @param strings 需要的字符串数组
+     * @param start 开始的下标
+     * @return 处理之后的字符串
      */
     public static String IntegrateString(String[] strings,int start) {
         StringBuilder ans = new StringBuilder();
@@ -131,6 +130,11 @@ public class Utils {
         return ans.toString();
     }
 
+    /**
+     * 判断任意一个字符串是否为数字
+     * @param str 输入字符串
+     * @return 是否为数字
+     */
     public static boolean isNumber(String str) {
         try {
             Integer.parseInt(str);
@@ -140,29 +144,4 @@ public class Utils {
         }
     }
 
-    public static String getMessage(String node) {
-        return Xiaojiu.getMessage().getMessage(node);
-    }
-
-    public static String getMessageCompletion(String node) {
-        if (!node.startsWith("message")) {
-            node = "message." + node;
-        }
-        return getMessage(node);
-    }
-
-    @Deprecated
-    public static String getMessageCompletion(String... nodes) {
-        StringBuilder builder = new StringBuilder();
-        if (!nodes[0].equalsIgnoreCase("message")) {
-            builder.append("message.");
-        }
-        for (String node : nodes) {
-            builder.append(node);
-            builder.append(".");
-        }
-        builder.delete(builder.length() - 1, builder.length());
-        return getMessage(builder.toString());
-    }
-//    public static String getMessageNode(String )
 }

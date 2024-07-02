@@ -6,9 +6,9 @@ import com.github.xiaojiu.Handles.Vanish.VanishTask;
 import com.github.xiaojiu.Xiaojiu;
 import com.github.xiaojiu.api.HelpMap;
 import com.github.xiaojiu.api.XiaojiuCommandExecutor;
-import com.github.xiaojiu.tools.MessageHelper;
+import com.github.xiaojiu.message.MessageHelper;
+import com.github.xiaojiu.tools.PostHelper;
 import com.github.xiaojiu.tools.PermissionHelper;
-import com.github.xiaojiu.tools.Utils;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -54,21 +54,21 @@ public class VanishCommand implements XiaojiuCommandExecutor {
                     if (PermissionHelper.isHasPermission(commandSender, true, PermissionNode, "otherPlayer")) {
                         Player player1 = Xiaojiu.getInstance().getServer().getPlayer(strings[0]);
                         if (player1 == null) {
-                            commandSender.sendMessage(MessageHelper.InitMessage(ChatColor.LIGHT_PURPLE + String.format(Utils.getMessageCompletion("Vanish.start.noPlayer"), strings[0])));
+                            commandSender.sendMessage(PostHelper.InitMessage(ChatColor.LIGHT_PURPLE + String.format(MessageHelper.getMessageCompletion("Vanish.start.noPlayer"), strings[0])));
                             return true;
                         }
                         VanishTask.AddPlayerVanishTime(Xiaojiu.getInstance(), player1, Integer.parseInt(strings[1]));
-                        player.sendMessage(MessageHelper.InitMessage(ChatColor.LIGHT_PURPLE + String.format(Utils.getMessageCompletion("Vanish.start.other.success"), commandSender.getName(), strings[1])));
-                        commandSender.sendMessage(MessageHelper.InitMessage(ChatColor.LIGHT_PURPLE + String.format(Utils.getMessageCompletion("Vanish.start.other.success2"), player.getName())));
+                        player.sendMessage(PostHelper.InitMessage(ChatColor.LIGHT_PURPLE + String.format(MessageHelper.getMessageCompletion("Vanish.start.other.success"), commandSender.getName(), strings[1])));
+                        commandSender.sendMessage(PostHelper.InitMessage(ChatColor.LIGHT_PURPLE + String.format(MessageHelper.getMessageCompletion("Vanish.start.other.success2"), player.getName())));
                     } else {
-                        commandSender.sendMessage(MessageHelper.InitMessage(ChatColor.RED + Utils.getMessageCompletion("Command.noPermission")));
+                        commandSender.sendMessage(PostHelper.InitMessage(ChatColor.RED + MessageHelper.getMessageCompletion("Command.noPermission")));
                     }
                 } else {
                     if (PermissionHelper.isHasPermission(commandSender, true, PermissionNode, "self")) {
                         VanishTask.AddPlayerVanishTime(Xiaojiu.getInstance(), player, Integer.parseInt(strings[1]));
-                        player.sendMessage(MessageHelper.InitMessage(ChatColor.LIGHT_PURPLE + String.format(Utils.getMessageCompletion("Vanish.start.self.success"), strings[1])));
+                        player.sendMessage(PostHelper.InitMessage(ChatColor.LIGHT_PURPLE + String.format(MessageHelper.getMessageCompletion("Vanish.start.self.success"), strings[1])));
                     } else {
-                        commandSender.sendMessage(MessageHelper.InitMessage(ChatColor.LIGHT_PURPLE + Utils.getMessageCompletion("Command.noPermission")));
+                        commandSender.sendMessage(PostHelper.InitMessage(ChatColor.LIGHT_PURPLE + MessageHelper.getMessageCompletion("Command.noPermission")));
                     }
                 }
 
@@ -76,43 +76,43 @@ public class VanishCommand implements XiaojiuCommandExecutor {
                 if (!strings[0].equalsIgnoreCase(player.getName())) {
                     player = Xiaojiu.getInstance().getServer().getPlayer(strings[0]);
                     if (player == null) {
-                        commandSender.sendMessage(MessageHelper.InitMessage(ChatColor.LIGHT_PURPLE + String.format(Utils.getMessageCompletion("Vanish.start.noPlayer"), ChatColor.WHITE + strings[0] + ChatColor.LIGHT_PURPLE)));
+                        commandSender.sendMessage(PostHelper.InitMessage(ChatColor.LIGHT_PURPLE + String.format(MessageHelper.getMessageCompletion("Vanish.start.noPlayer"), ChatColor.WHITE + strings[0] + ChatColor.LIGHT_PURPLE)));
                         return true;
                     } else if (PermissionHelper.isHasPermission(commandSender, true, PermissionNode, "otherPlayer")) {
                         Vanish.VanishPlayer(player, !Vanish.VanishPlayers.contains(player.getUniqueId()));
                         if (Vanish.VanishPlayers.contains(player.getUniqueId())) {
-                            player.sendMessage(MessageHelper.InitMessage(ChatColor.LIGHT_PURPLE + String.format(Utils.getMessageCompletion("Vanish.start.other.success"), commandSender.getName(), "永久")));
-                            commandSender.sendMessage(MessageHelper.InitMessage(ChatColor.LIGHT_PURPLE + String.format("Vanish.start.other.success2", player.getName())));
+                            player.sendMessage(PostHelper.InitMessage(ChatColor.LIGHT_PURPLE + String.format(MessageHelper.getMessageCompletion("Vanish.start.other.success"), commandSender.getName(), "永久")));
+                            commandSender.sendMessage(PostHelper.InitMessage(ChatColor.LIGHT_PURPLE + String.format("Vanish.start.other.success2", player.getName())));
                         } else {
-                            player.sendMessage(MessageHelper.InitMessage(ChatColor.LIGHT_PURPLE + String.format(Utils.getMessageCompletion("Vanish.end.other.success"), commandSender.getName())));
-                            commandSender.sendMessage(MessageHelper.InitMessage(ChatColor.LIGHT_PURPLE + String.format(Utils.getMessageCompletion("Vanish.end.other.success2"), player.getName())));
+                            player.sendMessage(PostHelper.InitMessage(ChatColor.LIGHT_PURPLE + String.format(MessageHelper.getMessageCompletion("Vanish.end.other.success"), commandSender.getName())));
+                            commandSender.sendMessage(PostHelper.InitMessage(ChatColor.LIGHT_PURPLE + String.format(MessageHelper.getMessageCompletion("Vanish.end.other.success2"), player.getName())));
                         }
 
                     } else {
-                        commandSender.sendMessage(MessageHelper.InitMessage(ChatColor.RED + Utils.getMessageCompletion("Command.noPermission")));
+                        commandSender.sendMessage(PostHelper.InitMessage(ChatColor.RED + MessageHelper.getMessageCompletion("Command.noPermission")));
                     }
                 } else {
                     if (PermissionHelper.isHasPermission(commandSender, true, PermissionNode, "self")) {
                         Vanish.VanishPlayer(player, !Vanish.VanishPlayers.contains(player.getUniqueId()));
                         if (Vanish.VanishPlayers.contains(player.getUniqueId())) {
-                            player.sendMessage(MessageHelper.InitMessage(ChatColor.LIGHT_PURPLE + String.format(Utils.getMessageCompletion("Vanish.start.self.success"), "永久")));
+                            player.sendMessage(PostHelper.InitMessage(ChatColor.LIGHT_PURPLE + String.format(MessageHelper.getMessageCompletion("Vanish.start.self.success"), "永久")));
                         } else {
-                            player.sendMessage(MessageHelper.InitMessage(ChatColor.LIGHT_PURPLE + Utils.getMessageCompletion("Vanish.end.self.success")));
+                            player.sendMessage(PostHelper.InitMessage(ChatColor.LIGHT_PURPLE + MessageHelper.getMessageCompletion("Vanish.end.self.success")));
                         }
                     } else {
-                        commandSender.sendMessage(MessageHelper.InitMessage(ChatColor.RED + Utils.getMessageCompletion("Command.noPermission")));
+                        commandSender.sendMessage(PostHelper.InitMessage(ChatColor.RED + MessageHelper.getMessageCompletion("Command.noPermission")));
                     }
                 }
             } else if (strings.length == 0) {
                 if (PermissionHelper.isHasPermission(commandSender, true, PermissionNode, "self")) {
                     Vanish.VanishPlayer(player, !Vanish.VanishPlayers.contains(player.getUniqueId()));
                     if (Vanish.VanishPlayers.contains(player.getUniqueId())) {
-                        player.sendMessage(MessageHelper.InitMessage(ChatColor.LIGHT_PURPLE + String.format(Utils.getMessageCompletion("Vanish.start.self.success"), "永久")));
+                        player.sendMessage(PostHelper.InitMessage(ChatColor.LIGHT_PURPLE + String.format(MessageHelper.getMessageCompletion("Vanish.start.self.success"), "永久")));
                     } else {
-                        player.sendMessage(MessageHelper.InitMessage(ChatColor.LIGHT_PURPLE + Utils.getMessageCompletion("Vanish.end.self.success")));
+                        player.sendMessage(PostHelper.InitMessage(ChatColor.LIGHT_PURPLE + MessageHelper.getMessageCompletion("Vanish.end.self.success")));
                     }
                 } else {
-                    commandSender.sendMessage(MessageHelper.InitMessage(ChatColor.RED + Utils.getMessageCompletion("Command.noPermission")));
+                    commandSender.sendMessage(PostHelper.InitMessage(ChatColor.RED + MessageHelper.getMessageCompletion("Command.noPermission")));
                 }
             }
         }

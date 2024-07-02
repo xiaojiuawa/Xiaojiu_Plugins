@@ -2,7 +2,7 @@ package com.github.xiaojiu.Handles.Restart;
 
 import com.github.xiaojiu.Handles.Suggest.SuggestHelper;
 import com.github.xiaojiu.Xiaojiu;
-import com.github.xiaojiu.tools.MessageHelper;
+import com.github.xiaojiu.tools.PostHelper;
 import com.github.xiaojiu.tools.Utils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -33,11 +33,11 @@ public class ReloadTask {
                             down();
 
                         } else {
-                            MessageHelper.SendMessageAllPlayer(MessageHelper.InitMessage(ChatColor.LIGHT_PURPLE + String.format(entry.getValue(), "重启")));
-                            MessageHelper.SendMessageAllPlayer(MessageHelper.InitMessage(ChatColor.LIGHT_PURPLE + String.format("投票情况:同意人数%s人 拒绝人数%s人",
+                            PostHelper.SendMessageAllPlayer(PostHelper.InitMessage(ChatColor.LIGHT_PURPLE + String.format(entry.getValue(), "重启")));
+                            PostHelper.SendMessageAllPlayer(PostHelper.InitMessage(ChatColor.LIGHT_PURPLE + String.format("投票情况:同意人数%s人 拒绝人数%s人",
                                     suggestHelper.Approve.size(),
                                     suggestHelper.Refuse.size())));
-                            MessageHelper.SendMessageAllPlayer(MessageHelper.InitMessage(ChatColor.LIGHT_PURPLE + "使用/sug 同意 同意投票,使用/sug 拒绝 拒绝投票"));
+                            PostHelper.SendMessageAllPlayer(PostHelper.InitMessage(ChatColor.LIGHT_PURPLE + "使用/sug 同意 同意投票,使用/sug 拒绝 拒绝投票"));
                         }
 
 
@@ -51,10 +51,10 @@ public class ReloadTask {
     public static void down() {
         isSuggesting = false;
         if ((double) suggestHelper.Approve.size() / Xiaojiu.getInstance().getServer().getOnlinePlayers().size() > 0.7) {
-            MessageHelper.SendMessageAllPlayer(ChatColor.DARK_AQUA + "投票结束,服务器投票情况符合条件,即将进行重启");
+            PostHelper.SendMessageAllPlayer(ChatColor.DARK_AQUA + "投票结束,服务器投票情况符合条件,即将进行重启");
             RestartTools.Restart(30);
         } else {
-            MessageHelper.SendMessageAllPlayer(ChatColor.DARK_AQUA + "投票结束,服务器投票情况不符合条件(70%的在线玩家同意)");
+            PostHelper.SendMessageAllPlayer(ChatColor.DARK_AQUA + "投票结束,服务器投票情况不符合条件(70%的在线玩家同意)");
         }
         suggestHelper.SuggestEnd();
     }

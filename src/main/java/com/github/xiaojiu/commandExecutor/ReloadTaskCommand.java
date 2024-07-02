@@ -5,9 +5,9 @@ import com.github.xiaojiu.Handles.Restart.ReloadTask;
 import com.github.xiaojiu.Xiaojiu;
 import com.github.xiaojiu.api.HelpMap;
 import com.github.xiaojiu.api.XiaojiuCommandExecutor;
-import com.github.xiaojiu.tools.MessageHelper;
+import com.github.xiaojiu.message.MessageHelper;
+import com.github.xiaojiu.tools.PostHelper;
 import com.github.xiaojiu.tools.PermissionHelper;
-import com.github.xiaojiu.tools.Utils;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -54,66 +54,66 @@ public class ReloadTaskCommand implements XiaojiuCommandExecutor {
             if (strings[0].equalsIgnoreCase("start")) {
                 if (PermissionHelper.isHasPermission(commandSender, false, PermissionNode, "start")) {
                     if (ReloadTask.isSuggesting) {
-                        commandSender.sendMessage(MessageHelper.InitMessage(ChatColor.LIGHT_PURPLE + Utils.getMessageCompletion("ReloadTask.start.have")));
+                        commandSender.sendMessage(PostHelper.InitMessage(ChatColor.LIGHT_PURPLE + MessageHelper.getMessageCompletion("ReloadTask.start.have")));
                     } else {
                         ReloadTask.RunTask(Xiaojiu.getInstance(), ((Player) commandSender).getUniqueId());
                     }
                 } else {
-                    commandSender.sendMessage(MessageHelper.InitMessage(ChatColor.RED + Utils.getMessageCompletion("ReloadTask.noPermission")));
+                    commandSender.sendMessage(PostHelper.InitMessage(ChatColor.RED + MessageHelper.getMessageCompletion("ReloadTask.noPermission")));
                 }
             } else if (ReloadTask.isSuggesting) {
                 if (strings[0].equalsIgnoreCase("revoke") || strings[0].equalsIgnoreCase("撤销")) {
                     if (PermissionHelper.isHasPermission(commandSender, false, PermissionNode, "revoke")) {
                         if (!ReloadTask.suggestHelper.isSuggested(((Player) commandSender).getUniqueId())) {
-                            commandSender.sendMessage(MessageHelper.InitMessage(ChatColor.LIGHT_PURPLE + Utils.getMessageCompletion("ReloadTask.suggest.noVote")));
+                            commandSender.sendMessage(PostHelper.InitMessage(ChatColor.LIGHT_PURPLE + MessageHelper.getMessageCompletion("ReloadTask.suggest.noVote")));
                         } else {
                             ReloadTask.suggestHelper.delSuggest(((Player) commandSender).getUniqueId());
-                            commandSender.sendMessage(MessageHelper.InitMessage(ChatColor.LIGHT_PURPLE + Utils.getMessageCompletion("ReloadTask.suggest.revoke.success")));
+                            commandSender.sendMessage(PostHelper.InitMessage(ChatColor.LIGHT_PURPLE + MessageHelper.getMessageCompletion("ReloadTask.suggest.revoke.success")));
                         }
                     } else {
-                        commandSender.sendMessage(MessageHelper.InitMessage(ChatColor.RED + Utils.getMessageCompletion("ReloadTask.noPermission")));
+                        commandSender.sendMessage(PostHelper.InitMessage(ChatColor.RED + MessageHelper.getMessageCompletion("ReloadTask.noPermission")));
                     }
                 } else if (strings[0].equalsIgnoreCase("agree") || strings[0].equalsIgnoreCase("同意")) {
                     if (PermissionHelper.isHasPermission(commandSender, false, PermissionNode, "agree")) {
                         if (ReloadTask.suggestHelper.isSuggested(((Player) commandSender).getUniqueId())) {
-                            commandSender.sendMessage(MessageHelper.InitMessage(ChatColor.LIGHT_PURPLE + Utils.getMessageCompletion("ReloadTask.suggest.voted")));
-                            commandSender.sendMessage(MessageHelper.InitMessage(ChatColor.LIGHT_PURPLE + Utils.getMessageCompletion("ReloadTask.suggest.revoke.remind")));
+                            commandSender.sendMessage(PostHelper.InitMessage(ChatColor.LIGHT_PURPLE + MessageHelper.getMessageCompletion("ReloadTask.suggest.voted")));
+                            commandSender.sendMessage(PostHelper.InitMessage(ChatColor.LIGHT_PURPLE + MessageHelper.getMessageCompletion("ReloadTask.suggest.revoke.remind")));
                         } else {
                             ReloadTask.suggestHelper.Approve.add(((Player) commandSender).getUniqueId());
-                            commandSender.sendMessage(MessageHelper.InitMessage(ChatColor.LIGHT_PURPLE + Utils.getMessageCompletion("ReloadTask.suggest.agree.success")));
+                            commandSender.sendMessage(PostHelper.InitMessage(ChatColor.LIGHT_PURPLE + MessageHelper.getMessageCompletion("ReloadTask.suggest.agree.success")));
                         }
                     } else {
-                        commandSender.sendMessage(ChatColor.RED + Utils.getMessageCompletion("ReloadTask.noPermission"));
+                        commandSender.sendMessage(ChatColor.RED + MessageHelper.getMessageCompletion("ReloadTask.noPermission"));
                     }
                 } else if (strings[0].equalsIgnoreCase("refuse") || strings[0].equalsIgnoreCase("拒绝")) {
                     if (PermissionHelper.isHasPermission(commandSender, false, PermissionNode, "refuse")) {
                         if (ReloadTask.suggestHelper.isSuggested(((Player) commandSender).getUniqueId())) {
-                            commandSender.sendMessage(MessageHelper.InitMessage(ChatColor.LIGHT_PURPLE + Utils.getMessageCompletion("ReloadTask.suggest.voted")));
-                            commandSender.sendMessage(MessageHelper.InitMessage(ChatColor.LIGHT_PURPLE + Utils.getMessageCompletion("ReloadTask.suggest.revoke.remind")));
+                            commandSender.sendMessage(PostHelper.InitMessage(ChatColor.LIGHT_PURPLE + MessageHelper.getMessageCompletion("ReloadTask.suggest.voted")));
+                            commandSender.sendMessage(PostHelper.InitMessage(ChatColor.LIGHT_PURPLE + MessageHelper.getMessageCompletion("ReloadTask.suggest.revoke.remind")));
                         } else {
                             ReloadTask.suggestHelper.Refuse.add(((Player) commandSender).getUniqueId());
-                            commandSender.sendMessage(MessageHelper.InitMessage(ChatColor.LIGHT_PURPLE + Utils.getMessageCompletion("ReloadTask.suggest.refuse.success")));
+                            commandSender.sendMessage(PostHelper.InitMessage(ChatColor.LIGHT_PURPLE + MessageHelper.getMessageCompletion("ReloadTask.suggest.refuse.success")));
                         }
                     } else {
-                        commandSender.sendMessage(MessageHelper.InitMessage(ChatColor.RED + Utils.getMessageCompletion("ReloadTask.noPermission")));
+                        commandSender.sendMessage(PostHelper.InitMessage(ChatColor.RED + MessageHelper.getMessageCompletion("ReloadTask.noPermission")));
                     }
                 } else if (strings[0].equalsIgnoreCase("cancel") || strings[0].equalsIgnoreCase("取消")) {
                     if (PermissionHelper.isHasPermission(commandSender, true, PermissionNode, "cancel") || ReloadTask.suggestHelper.sponsor.equals(((Player) commandSender).getUniqueId())) {
                         ReloadTask.cancel();
-                        MessageHelper.SendMessageAllPlayer(MessageHelper.InitMessage(ChatColor.LIGHT_PURPLE + String.format(Utils.getMessageCompletion("ReloadTask.cancel.success"), ChatColor.WHITE + commandSender.getName() + ChatColor.LIGHT_PURPLE)));
+                        PostHelper.SendMessageAllPlayer(PostHelper.InitMessage(ChatColor.LIGHT_PURPLE + String.format(MessageHelper.getMessageCompletion("ReloadTask.cancel.success"), ChatColor.WHITE + commandSender.getName() + ChatColor.LIGHT_PURPLE)));
                     } else {
-                        commandSender.sendMessage(MessageHelper.InitMessage(ChatColor.RED + Utils.getMessageCompletion("ReloadTask.cancel.noPermission")));
+                        commandSender.sendMessage(PostHelper.InitMessage(ChatColor.RED + MessageHelper.getMessageCompletion("ReloadTask.cancel.noPermission")));
                     }
                 } else if (strings[0].equalsIgnoreCase("down")) {
                     if (PermissionHelper.isHasPermission(commandSender, true, "ReloadTask", "down")) {
                         ReloadTask.down();
-                        MessageHelper.SendMessageAllPlayer(MessageHelper.InitMessage(ChatColor.LIGHT_PURPLE + String.format(Utils.getMessageCompletion("ReloadTask.down.success"), ChatColor.WHITE + commandSender.getName() + ChatColor.LIGHT_PURPLE)));
+                        PostHelper.SendMessageAllPlayer(PostHelper.InitMessage(ChatColor.LIGHT_PURPLE + String.format(MessageHelper.getMessageCompletion("ReloadTask.down.success"), ChatColor.WHITE + commandSender.getName() + ChatColor.LIGHT_PURPLE)));
                     } else {
-                        commandSender.sendMessage(MessageHelper.InitMessage(ChatColor.RED + Utils.getMessageCompletion("ReloadTask.down.noPermission")));
+                        commandSender.sendMessage(PostHelper.InitMessage(ChatColor.RED + MessageHelper.getMessageCompletion("ReloadTask.down.noPermission")));
                     }
                 }
             } else {
-                commandSender.sendMessage(MessageHelper.InitMessage(ChatColor.RED + Utils.getMessageCompletion("ReloadTask.noSuggest")));
+                commandSender.sendMessage(PostHelper.InitMessage(ChatColor.RED + MessageHelper.getMessageCompletion("ReloadTask.noSuggest")));
             }
             return true;
         }

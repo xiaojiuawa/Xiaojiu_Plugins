@@ -4,14 +4,16 @@ import com.github.xiaojiu.Xiaojiu;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 
-public class MessageHelper {
+public class PostHelper {
     //    public
     public static int SendMessageAllPlayer(String message) {
-        return Xiaojiu.getInstance().getServer().broadcastMessage(message);
+        final int[] ret = {0};
+        Xiaojiu.getInstance().getServer().getScheduler().runTask(Xiaojiu.getInstance(), () -> ret[0] = Xiaojiu.getInstance().getServer().broadcastMessage(message));
+        return ret[0];
     }
 
     public static void SendNoPermissionMessage(CommandSender commandSender) {
-        commandSender.sendMessage(MessageHelper.InitMessage(ChatColor.RED + "你没有权限使用这个指令"));
+        commandSender.sendMessage(PostHelper.InitMessage(ChatColor.RED + "你没有权限使用这个指令"));
     }
 
     public static String InitMessage(String message) {

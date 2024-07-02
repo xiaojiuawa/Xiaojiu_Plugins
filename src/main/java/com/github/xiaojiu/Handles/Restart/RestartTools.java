@@ -1,6 +1,7 @@
 package com.github.xiaojiu.Handles.Restart;
 
 import com.github.xiaojiu.Xiaojiu;
+import com.github.xiaojiu.message.MessageHelper;
 import com.github.xiaojiu.tools.Utils;
 
 public class RestartTools {
@@ -39,7 +40,7 @@ public class RestartTools {
     }
 
     public static void Done() {
-        Utils.KickAllPlayers(Xiaojiu.getInstance().getServer().getOnlinePlayers(), Utils.getMessageCompletion("Reload.Kick"));
+        Utils.KickAllPlayers(Xiaojiu.getInstance().getServer().getOnlinePlayers(), MessageHelper.getMessageCompletion("Reload.Kick"));
         ShutdownServer();
     }
 

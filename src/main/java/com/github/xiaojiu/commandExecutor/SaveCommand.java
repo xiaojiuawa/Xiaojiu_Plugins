@@ -8,7 +8,8 @@ import com.github.xiaojiu.Xiaojiu;
 import com.github.xiaojiu.api.HelpMap;
 import com.github.xiaojiu.api.XiaojiuCommandExecutor;
 import com.github.xiaojiu.exceptions.parametersExceptions;
-import com.github.xiaojiu.tools.MessageHelper;
+import com.github.xiaojiu.message.MessageHelper;
+import com.github.xiaojiu.tools.PostHelper;
 import com.github.xiaojiu.tools.Utils;
 import org.bukkit.ChatColor;
 import org.bukkit.OfflinePlayer;
@@ -56,12 +57,12 @@ public class SaveCommand implements XiaojiuCommandExecutor {
 //        commandSender.sendMessage("1");
         try {
             if (strings.length < 1) {
-                commandSender.sendMessage(MessageHelper.InitMessage(ChatColor.LIGHT_PURPLE + "请输入正确的命令格式"));
+                commandSender.sendMessage(PostHelper.InitMessage(ChatColor.LIGHT_PURPLE + "请输入正确的命令格式"));
                 return true;
             }
             if (!(commandSender instanceof Player)) {
-                commandSender.sendMessage(MessageHelper.InitMessage("控制台还是不要用这个指令比较好，你有啥需求你为啥不能自己干"));
-                commandSender.sendMessage(MessageHelper.InitMessage("主要还是因为我这个指令需要有发起人，底层写的是玩家，改起来比较麻烦"));
+                commandSender.sendMessage(PostHelper.InitMessage("控制台还是不要用这个指令比较好，你有啥需求你为啥不能自己干"));
+                commandSender.sendMessage(PostHelper.InitMessage("主要还是因为我这个指令需要有发起人，底层写的是玩家，改起来比较麻烦"));
 //            StartPlugins.logger.info(commandSender.getClass().toString());
                 return true;
             }
@@ -86,7 +87,7 @@ public class SaveCommand implements XiaojiuCommandExecutor {
                     timer = Integer.parseInt(strings[5]);
                 } catch (RuntimeException exception) {
 //                    exception.getCause()
-                    throw new parametersExceptions(Utils.getMessageCompletion("Command.parametersException"));
+                    throw new parametersExceptions(MessageHelper.getMessageCompletion("Command.parametersException"));
                 }
 
                 BasicSaveHandles Instance = manager.newTaskInstance(taskName, Xiaojiu.getInstance(), player, taskArgs);
@@ -99,10 +100,10 @@ public class SaveCommand implements XiaojiuCommandExecutor {
                 if (Record) {
                     SaveTaskManager.getInstance().addRecordTask(Instance);
                 }
-                player.sendMessage(MessageHelper.InitMessage(ChatColor.DARK_GREEN + "任务创建成功" + "任务id:" + Instance.getTaskid()));
+                player.sendMessage(PostHelper.InitMessage(ChatColor.DARK_GREEN + "任务创建成功" + "任务id:" + Instance.getTaskid()));
             } else if (strings[0].equalsIgnoreCase("show")) {
                 if (SaveTaskManager.getInstance().getTaskList().isEmpty())
-                    player.sendMessage(MessageHelper.InitMessage(ChatColor.LIGHT_PURPLE + "目前无任务进行"));
+                    player.sendMessage(PostHelper.InitMessage(ChatColor.LIGHT_PURPLE + "目前无任务进行"));
                 if (strings.length > 2) {
                     if (Utils.isNumber(strings[1])) {
                         BasicSaveHandles task = SaveTaskManager.getInstance().getTask(Integer.parseInt(strings[1]));
@@ -139,19 +140,19 @@ public class SaveCommand implements XiaojiuCommandExecutor {
                         }
                     }
                 } catch (Exception e) {
-                    throw new parametersExceptions(Utils.getMessageCompletion("Command.taskGetFail"));
+                    throw new parametersExceptions(MessageHelper.getMessageCompletion("Command.taskGetFail"));
                 }
-                if (task == null) throw new parametersExceptions(Utils.getMessageCompletion("Command.taskGetFail"));
+                if (task == null) throw new parametersExceptions(MessageHelper.getMessageCompletion("Command.taskGetFail"));
                 task.cancelTask();
-                commandSender.sendMessage(MessageHelper.InitMessage(ChatColor.LIGHT_PURPLE + "任务取消成功"));
+                commandSender.sendMessage(PostHelper.InitMessage(ChatColor.LIGHT_PURPLE + "任务取消成功"));
                 //todo
             }
         } catch (Exception exception) {
             //命令执行失败处理
-            commandSender.sendMessage(Utils.getMessageCompletion("Command.FailException"));
+            commandSender.sendMessage(MessageHelper.getMessageCompletion("Command.FailException"));
             commandSender.sendMessage(Arrays.toString(exception.getStackTrace()));
 //            commandSender.sendMessage(String.valueOf(exceptions.getStackTrace()[0]));
-            commandSender.sendMessage(Utils.getMessageCompletion("Command.Fail"));
+            commandSender.sendMessage(MessageHelper.getMessageCompletion("Command.Fail"));
             commandSender.sendMessage(exception.getMessage());
         }
 

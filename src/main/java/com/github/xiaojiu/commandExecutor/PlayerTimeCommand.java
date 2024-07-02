@@ -7,9 +7,9 @@ import com.github.xiaojiu.Xiaojiu;
 import com.github.xiaojiu.api.HelpMap;
 import com.github.xiaojiu.api.XiaojiuCommandExecutor;
 import com.github.xiaojiu.config.ConfigManager;
-import com.github.xiaojiu.tools.MessageHelper;
+import com.github.xiaojiu.message.MessageHelper;
+import com.github.xiaojiu.tools.PostHelper;
 import com.github.xiaojiu.tools.PermissionHelper;
-import com.github.xiaojiu.tools.Utils;
 import org.bukkit.ChatColor;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.command.Command;
@@ -54,21 +54,21 @@ public class PlayerTimeCommand implements XiaojiuCommandExecutor {
                     Date date = PlayerJoinTimeTool.GetPlayerLastJoinTime(offlinePlayer.getUniqueId());
                     if (date != null) {
                         String time = format.format(date);
-                        commandSender.sendMessage(MessageHelper.InitMessage(ChatColor.WHITE + String.format(Utils.getMessageCompletion("PlayerTime.info"), strings[1], time)));
-                        commandSender.sendMessage(MessageHelper.InitMessage(ChatColor.WHITE + String.format(Utils.getMessageCompletion("PlayerTime.info2"), TimeHelper.GetTime(date))));
+                        commandSender.sendMessage(PostHelper.InitMessage(ChatColor.WHITE + String.format(MessageHelper.getMessageCompletion("PlayerTime.info"), strings[1], time)));
+                        commandSender.sendMessage(PostHelper.InitMessage(ChatColor.WHITE + String.format(MessageHelper.getMessageCompletion("PlayerTime.info2"), TimeHelper.GetTime(date))));
                     } else {
-                        commandSender.sendMessage(MessageHelper.InitMessage(ChatColor.LIGHT_PURPLE + String.format(Utils.getMessageCompletion("PlayerTime.notFind"), ChatColor.WHITE + strings[1] + ChatColor.LIGHT_PURPLE)));
+                        commandSender.sendMessage(PostHelper.InitMessage(ChatColor.LIGHT_PURPLE + String.format(MessageHelper.getMessageCompletion("PlayerTime.notFind"), ChatColor.WHITE + strings[1] + ChatColor.LIGHT_PURPLE)));
                     }
                 } else {
-                    commandSender.sendMessage(MessageHelper.InitMessage(ChatColor.LIGHT_PURPLE + Utils.getMessageCompletion("PlayerTime.noPermission")));
+                    commandSender.sendMessage(PostHelper.InitMessage(ChatColor.LIGHT_PURPLE + MessageHelper.getMessageCompletion("PlayerTime.noPermission")));
                 }
             } else if (strings[0].equalsIgnoreCase("save") || strings[0].equalsIgnoreCase("保存")) {
                 if (PermissionHelper.isHasPermission(commandSender, true, PermissionNode, "save")) {
                     ConfigManager.getConfigMap().get("PlayerTime").Save();
 //                    SaveConfig.SavePlayerTime();
-                    commandSender.sendMessage(MessageHelper.InitMessage(ChatColor.LIGHT_PURPLE + Utils.getMessageCompletion("PlayerTime.save.success")));
+                    commandSender.sendMessage(PostHelper.InitMessage(ChatColor.LIGHT_PURPLE + MessageHelper.getMessageCompletion("PlayerTime.save.success")));
                 } else {
-                    commandSender.sendMessage(MessageHelper.InitMessage(ChatColor.RED + Utils.getMessageCompletion("PlayerTime.save.noPermission")));
+                    commandSender.sendMessage(PostHelper.InitMessage(ChatColor.RED + MessageHelper.getMessageCompletion("PlayerTime.save.noPermission")));
                 }
             }
             return true;

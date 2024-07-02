@@ -52,7 +52,7 @@ public class PlayerLimitTools {
         if (addToOffer) {
             list.add(limitPlayer);
         }
-        return String.format(Utils.getMessageCompletion("PlayerLimit.add.success"), player.getName());
+        return String.format(Utils.getMessageCompletion("Player.notFind"), player.getName());
 //        return "限制列表添加玩家" + player.getName() + "成功";
     }
 

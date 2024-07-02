@@ -4,7 +4,8 @@ import com.github.xiaojiu.Handles.Help.HelpMapHandler;
 import com.github.xiaojiu.Xiaojiu;
 import com.github.xiaojiu.api.HelpMap;
 import com.github.xiaojiu.api.XiaojiuCommandExecutor;
-import com.github.xiaojiu.tools.MessageHelper;
+import com.github.xiaojiu.message.MessageHelper;
+import com.github.xiaojiu.tools.PostHelper;
 import com.github.xiaojiu.tools.Utils;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -44,19 +45,19 @@ public class XiaojiuEffect implements XiaojiuCommandExecutor {
     @Override
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
         if (strings.length<3){
-            commandSender.sendMessage(MessageHelper.InitMessage(MessageHelper.InitMessage(Utils.getMessageCompletion("Command.noCommand"))));
+            commandSender.sendMessage(PostHelper.InitMessage(PostHelper.InitMessage(MessageHelper.getMessageCompletion("Command.noCommand"))));
         }else{
             Player player = Xiaojiu.getInstance().getServer().getPlayer(strings[1]);
             if (player==null){
-                commandSender.sendMessage(MessageHelper.InitMessage(Utils.getMessageCompletion("Player.notFind")));
+                commandSender.sendMessage(PostHelper.InitMessage(MessageHelper.getMessageCompletion("Player.notFind")));
                 return true;
             }
             if (strings[0].equalsIgnoreCase("add")){
                 player.addPotionEffect(new PotionEffect(PotionEffectType.getByName(strings[2]),Integer.MAX_VALUE,1,true));
-                player.sendMessage(MessageHelper.InitMessage(String.format(Utils.getMessageCompletion("Effect.add.success"),strings[2],"永久")));
+                player.sendMessage(PostHelper.InitMessage(String.format(MessageHelper.getMessageCompletion("Effect.add.success"),strings[2],"永久")));
             } else if (strings[0].equalsIgnoreCase("remove")) {
                 player.removePotionEffect(PotionEffectType.getByName(strings[2]));
-                player.sendMessage(MessageHelper.InitMessage(String.format(Utils.getMessageCompletion("Effect.remove.success"),strings[2])));
+                player.sendMessage(PostHelper.InitMessage(String.format(MessageHelper.getMessageCompletion("Effect.remove.success"),strings[2])));
             }
         }
 //        UUID

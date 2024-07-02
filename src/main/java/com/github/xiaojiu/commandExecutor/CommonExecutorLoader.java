@@ -41,6 +41,7 @@ public class CommonExecutorLoader {
         commandExecutorMaps.put("save", new SaveCommand());
         commandExecutorMaps.put("help", new HelpCommand());
         commandExecutorMaps.put("no", new NoCommandCMD());
+        commandExecutorMaps.put("effect",new XiaojiuEffect());
     }
 
     public static XiaojiuCommandExecutor GetExecutor(String name) {

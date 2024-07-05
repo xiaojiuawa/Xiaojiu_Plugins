@@ -220,15 +220,15 @@ public abstract class BasicSaveHandles extends TimerTask implements XiaojiuTask,
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof BasicSaveHandles)) return false;
+        if (o == null || getClass() != o.getClass()) return false;
         BasicSaveHandles that = (BasicSaveHandles) o;
-        return taskid == that.taskid && isTasking() == that.isTasking() && canAsynchronously == that.canAsynchronously && Objects.equals(timer, that.timer) && Objects.equals(name, that.name) && Arrays.equals(args, that.args) && Objects.equals(plugin, that.plugin);
+        return getTaskid() == that.getTaskid() && getDelay() == that.getDelay() && getTimerTime() == that.getTimerTime() && isTasking() == that.isTasking() && canAsynchronously == that.canAsynchronously && Asynchronously == that.Asynchronously && Objects.equals(getName(), that.getName()) && Objects.equals(getPlayerUUID(), that.getPlayerUUID()) && Objects.equals(getTimer(), that.getTimer()) && Objects.equals(getDescribeName(), that.getDescribeName()) && Objects.equals(getDescribe(), that.getDescribe()) && Arrays.equals(getArgs(), that.getArgs()) && Objects.equals(plugin, that.plugin) && Objects.equals(task, that.task) && Objects.equals(getPlayer(), that.getPlayer()) && Objects.equals(getCreateDate(), that.getCreateDate()) && Objects.equals(getLoadDate(), that.getLoadDate()) && Objects.equals(getRunDate(), that.getRunDate());
     }
 
     @Override
     public int hashCode() {
-        int result = Objects.hash(taskid, timer, name, isTasking(), canAsynchronously, plugin);
-        result = 31 * result + Arrays.hashCode(args);
+        int result = Objects.hash(getTaskid(), getName(), getPlayerUUID(), getTimer(), getDescribeName(), getDescribe(), getDelay(), getTimerTime(), isTasking(), canAsynchronously, Asynchronously, plugin, task, getPlayer(), getCreateDate(), getLoadDate(), getRunDate());
+        result = 31 * result + Arrays.hashCode(getArgs());
         return result;
     }
 }

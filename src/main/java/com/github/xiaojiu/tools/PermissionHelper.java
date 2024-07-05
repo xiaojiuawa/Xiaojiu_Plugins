@@ -8,6 +8,13 @@ import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
 
 public class PermissionHelper {
+    /**
+     * 通过节点字符串判断某个用户是否拥有权限
+     * @param commandSender 用户
+     * @param node 权限节点子节点
+     * @return 是否拥有相应权限
+     * @deprecated
+     */
     @Deprecated
     public static boolean isHasPermission(CommandSender commandSender, String... node) {
         String PermissionNode;
@@ -34,7 +41,15 @@ public class PermissionHelper {
         }
     }
 
-    //
+    /**
+     * 通过节点信息判断某个用户是否拥有某项权限节点
+     * 此方法会在日志中输出某用户缺少的权限节点
+     * @param commandSender 用户
+     * @param isOp 节点是否为op节点
+     * @param CommandNode 主命令节点
+     * @param nodes 子节点
+     * @return 是否有权限
+     */
     public static boolean isHasPermission(CommandSender commandSender, boolean isOp, String CommandNode, String... nodes) {
         String PermissionNode;
         PermissionNode = GetPermissionNode(MainCommand.CommonNode, isOp, CommandNode, nodes);
@@ -55,6 +70,12 @@ public class PermissionHelper {
         }
     }
 
+    /**
+     *
+     * @param commandSender
+     * @param nodes
+     * @return
+     */
     public static boolean isHasPermissionNoLog(CommandSender commandSender, String... nodes) {
         String PermissionNode;
         if (!nodes[0].startsWith("xiaojiu")) {

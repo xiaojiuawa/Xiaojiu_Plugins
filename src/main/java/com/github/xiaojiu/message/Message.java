@@ -30,7 +30,11 @@ public class Message {
         return messageMap;
     }
 
-
+    /**
+     * 使用完全语言节点获取语言，如果未找到，则返回语言节点
+     * @param key 语言节点
+     * @return 语言
+     */
     public String getMessage(String key) {
         if (messageMap.get(key) != null) {
             return messageMap.get(key);

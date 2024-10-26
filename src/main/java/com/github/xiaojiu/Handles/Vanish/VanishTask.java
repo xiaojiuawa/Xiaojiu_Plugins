@@ -14,6 +14,12 @@ public class VanishTask {
 
     public static final Timer timer = new Timer();
 
+    /**
+     * 添加一个玩家的影身任务
+     * @param Instance
+     * @param player
+     * @param Time
+     */
     public static void AddPlayerVanishTime(JavaPlugin Instance, Player player, int Time) {
         UUID uuid = player.getUniqueId();
         Vanish.VanishPlayer(player, true);
@@ -27,6 +33,8 @@ public class VanishTask {
                 public void run() {
                     if (!Vanish.VanishPlayers.contains(uuid) || integer > Time) return;
                     Player player1 = Xiaojiu.getInstance().getServer().getPlayer(uuid);
+                    if (player1==null) return;
+                    // 如果玩家不在线则跳过
                     if (integer == 0) {
                         Bukkit.getScheduler().runTask(Instance, () -> {
                             player1.sendMessage(PostHelper.InitMessage(ChatColor.LIGHT_PURPLE + "你的隐身时间已到，隐身状态已切换为关闭"));

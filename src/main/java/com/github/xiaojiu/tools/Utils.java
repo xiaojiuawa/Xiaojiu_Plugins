@@ -52,7 +52,7 @@ public class Utils {
         VanishMap.put(10, "%s将在10秒后结束");
         VanishMap.put(60, "%s将在1分钟后结束");
         VanishMap.put(120, "%s将在2分钟后结束");
-        Xiaojiu.getInstance().getServer().getScheduler().runTaskTimerAsynchronously(Xiaojiu.getInstance(),new TpsTask(Xiaojiu.getInstance()),100,1200);
+//        Xiaojiu.getInstance().getServer().getScheduler().runTaskTimerAsynchronously(Xiaojiu.getInstance(),new TpsTask(Xiaojiu.getInstance()),100,1200);
     }
 
     /**

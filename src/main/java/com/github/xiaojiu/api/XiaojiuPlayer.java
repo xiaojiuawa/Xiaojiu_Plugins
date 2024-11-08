@@ -1,19 +1,13 @@
 package com.github.xiaojiu.api;
 
-import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 
-import java.util.UUID;
+import java.util.List;
 
 public interface XiaojiuPlayer {
-    UUID getPlayerUUID();
+    List<PlayerHome> getHomeList();
 
-    OfflinePlayer getPlayer();
+    Player getPlayer();
 
-    void setPlayer(Player player);
-
-    void setPlayer(String playerName);
-
-    void setPlayer(UUID uuid);
-
+    List<XiaojiuPlayer> getPlayerList();
 }

@@ -1,7 +1,7 @@
 package com.github.xiaojiu.Handles.Save;
 
 import com.github.xiaojiu.Xiaojiu;
-import com.github.xiaojiu.api.XiaojiuPlayer;
+import com.github.xiaojiu.api.XiaojiuTaskPlayer;
 import com.github.xiaojiu.api.XiaojiuTask;
 import com.github.xiaojiu.config.Savecfg.SaveTask;
 import org.bukkit.Bukkit;
@@ -12,7 +12,7 @@ import org.bukkit.scheduler.BukkitTask;
 
 import java.util.*;
 
-public abstract class BasicSaveHandles extends TimerTask implements XiaojiuTask, XiaojiuPlayer {
+public abstract class BasicSaveHandles extends TimerTask implements XiaojiuTask, XiaojiuTaskPlayer {
     protected final int taskid;
     protected final String name;
     protected final UUID playerUUID;

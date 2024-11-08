@@ -40,7 +40,15 @@ public class RestartTools {
     }
 
     public static void Done() {
-        Utils.KickAllPlayers(Xiaojiu.getInstance().getServer().getOnlinePlayers(), MessageHelper.getMessageCompletion("Reload.Kick"));
+        int n=0;
+        while (n<3){
+            try {
+                Utils.KickAllPlayers(Xiaojiu.getInstance().getServer().getOnlinePlayers(), MessageHelper.getMessageCompletion("Reload.Kick"));
+            }catch (Exception ignored){
+            }
+            n++;
+            if (Xiaojiu.getInstance().getServer().getOnlinePlayers().isEmpty()) n+=3;
+        }
         ShutdownServer();
     }
 

@@ -66,7 +66,7 @@ public class HelpCommand implements XiaojiuCommandExecutor {
     public List<String> onTabComplete(CommandSender commandSender, Command command, String s, String[] strings) {
         List<String> list = new ArrayList<>();
         if (strings.length==1){
-            System.out.println(strings);
+//            System.out.println(strings);
             CommonExecutorLoader.commandExecutorMaps.forEach((string, xiaojiuCommandExecutor) -> {
                 if(string.startsWith(strings[0].toLowerCase())) list.add(string);
             });

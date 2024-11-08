@@ -15,7 +15,7 @@ message.SuggestMap.down: "服务器投票%s已结束"        #%s表示项目名
 message.SuggestMap.message: "服务器投票%s已开始,投票将在%s秒后结束" #第一个%s表示项目名 第二个表示时间
 message.VanishMap.down: "%s已经结束"         #%s表示项目名
 message.VanishMap.message: "%s将在%s秒后结束" #第一个%s表示项目名 第二个表示时间
-# LimitPlayer 中如果没有特殊著名，则%s代表玩家名
+# LimitPlayer 中如果没有特殊注明，则%s代表玩家名
 message.PlayerLimit.add.have: "限制列表中已经有这位玩家了"
 message.PlayerLimit.add.success: "限制列表中添加玩家 %s 成功"
 message.PlayerLimit.add.self: "你不能添加自己进入限制列表"

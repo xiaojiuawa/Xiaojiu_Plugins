@@ -60,7 +60,6 @@ public class XiaojiuEffect implements XiaojiuCommandExecutor {
                 player.sendMessage(PostHelper.InitMessage(String.format(MessageHelper.getMessageCompletion("Effect.remove.success"),strings[2])));
             }
         }
-//        UUID
 
         return true;
     }

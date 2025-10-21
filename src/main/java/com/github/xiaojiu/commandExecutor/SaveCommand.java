@@ -1,9 +1,7 @@
 package com.github.xiaojiu.commandExecutor;
 
 import com.github.xiaojiu.Handles.Help.HelpMapHandler;
-import com.github.xiaojiu.Handles.Save.BasicSaveHandles;
-import com.github.xiaojiu.Handles.Save.SaveCmdHelper;
-import com.github.xiaojiu.Handles.Save.SaveTaskManager;
+import com.github.xiaojiu.Handles.Save.*;
 import com.github.xiaojiu.Xiaojiu;
 import com.github.xiaojiu.api.HelpMap;
 import com.github.xiaojiu.api.XiaojiuCommandExecutor;
@@ -91,6 +89,7 @@ public class SaveCommand implements XiaojiuCommandExecutor {
                 }
 
                 BasicSaveHandles Instance = manager.newTaskInstance(taskName, Xiaojiu.getInstance(), player, taskArgs);
+//                Instance = manager.newTaskInstance(SavePlayerTask.class, Xiaojiu.getInstance(), player, taskArgs);
                 manager.addTask(Instance);
                 if (Asynchronously) {
                     Instance.RunTaskAsynchronously(timer, delay);

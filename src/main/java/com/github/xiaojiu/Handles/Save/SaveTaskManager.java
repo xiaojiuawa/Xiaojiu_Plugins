@@ -16,6 +16,22 @@ public class SaveTaskManager {
     protected final Map<String, String[]> TaskNameMap = new HashMap<>();
     private final List<SaveTask> saveList = new ArrayList<>();
 
+    public final static Map<String,Class<? extends BasicSaveHandles>> HANDLES=new HashMap<>();
+
+    static {
+        addTask(SaveConfigTask.class,"SaveConfigTask");
+        addTask(SavePlayerTask.class,"SavePlayerTask");
+        addTask(SaveWorldTask.class,"SaveWorldTask");
+    }
+
+    public static void addTask(Class<? extends BasicSaveHandles> taskName,String name){
+        HANDLES.put(name,taskName);
+    }
+
+    public static Class<? extends BasicSaveHandles> getTask(String name){
+        return HANDLES.get(name);
+    }
+
     public SaveTaskManager() {
         addTaskName("SaveConfigTask", "Config", "config");
         addTaskName("SavePlayerTask", "Player", "player");
@@ -66,11 +82,27 @@ public class SaveTaskManager {
 
     public BasicSaveHandles newTaskInstance(String taskName, JavaPlugin plugin, OfflinePlayer player, String... args) {
         try {
-            return (BasicSaveHandles) Class.forName("com.github.xiaojiu.Handles.Save." + taskName).getConstructors()[0].newInstance(this.taskList.size() + 1, plugin, player, args);
-        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException |
+            return (BasicSaveHandles)
+                   getTask(taskName)
+                    .getConstructors()[0]
+                    .newInstance(this.taskList.size() + 1, plugin, player, args);
+        } catch (InstantiationException | IllegalAccessException |
                  InvocationTargetException e) {
             return null;
         }
 
     }
+
+    public BasicSaveHandles newTaskInstance(Class<? extends BasicSaveHandles> taskName, JavaPlugin plugin, OfflinePlayer player, String... args) {
+        try {
+            return (BasicSaveHandles)
+                    taskName.getConstructors()[0]
+                            .newInstance(this.taskList.size() + 1, plugin, player, args);
+        } catch (InstantiationException | IllegalAccessException |
+                 InvocationTargetException e) {
+            return null;
+        }
+
+    }
+
 }
